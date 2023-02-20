@@ -1,0 +1,16 @@
+{
+	"extends": [
+		"stylelint-config-standard",
+		"stylelint-order-config-standard"
+	],
+	"plugins": [
+		"stylelint-order"
+	],
+	"rules": {
+		"max-nesting-depth": 3,
+        "color-named": "never",
+        "color-no-invalid-hex": true,
+        "block-no-empty": true,
+        "no-duplicate-selectors": true
+	}
+}
