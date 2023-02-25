@@ -3,10 +3,13 @@ import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import { Header } from '@/components/header/header';
 import { themeChange } from 'theme-change';
+import { useEffect } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
+    
+
     return (
         <>
             <Head>
@@ -19,10 +22,15 @@ export default function Home() {
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/logo.svg" />
             </Head>
             <Header />
-            <main></main>
+            <main>
+                <button className='btn btn-primary' data-set-theme="light" data-act-class="ACTIVECLASS"></button>
+            </main>
+            <main>
+                <button className='btn btn-primary' data-set-theme="dark" data-act-class="ACTIVECLASS"></button>
+            </main>
         </>
     );
 }
