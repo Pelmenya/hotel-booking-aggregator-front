@@ -1,14 +1,21 @@
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { getThemeState } from '@/redux/controllers/theme';
+import { setTheme } from '@/redux/slices/theme';
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { themeChange } from 'theme-change';
 
 export const ThemeToggle = () => {
+    const dispatch = useAppDispatch();
     const [isChecked, setIsChecked] = useState(false);
-    let theme = 'light';
+    const { theme } = useSelector(getThemeState);
 
     useEffect(() => {
         themeChange(false);
-        theme = localStorage.getItem('theme') || 'light';
-    }, []);
+        const localStorageTheme = localStorage.getItem('theme') 
+        if (localStorageTheme)
+            dispatch(setTheme(localStorageTheme));
+    }, [dispatch]);
 
     useEffect(() => {
         if (theme) {
@@ -27,9 +34,9 @@ export const ThemeToggle = () => {
     );
 
     return (
-        <div className="form-control w-full items-end">
-            <label className="cursor-pointer label w-20">
-                <span className="label-text mr-2">
+        <div className="form-control items-end">
+            <label className="cursor-pointer label">
+                <span className="label-text">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -47,7 +54,7 @@ export const ThemeToggle = () => {
                 </span>
                 <input
                     type="checkbox"
-                    className="toggle toggle-primary toggle-sm"
+                    className="toggle toggle-primary toggle-sm hidden"
                     checked={isChecked}
                     data-toggle-theme="dark,light"
                     data-act-class="ACTIVECLASS"
