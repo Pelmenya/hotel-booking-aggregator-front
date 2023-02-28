@@ -1,6 +1,0 @@
-/* stylelint-disable at-rule-no-unknown */
-
-/* В корне должна быть папка styles для  tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

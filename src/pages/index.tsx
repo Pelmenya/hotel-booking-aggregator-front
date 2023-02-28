@@ -17,10 +17,12 @@ export default function Home() {
                 <link rel="icon" href="/logo.svg" />
             </Head>
             <Header />
-            <main className="grid">
-                <div className="bg-base-300 dotted">
-                    <div className="preview border-base-300 bg-base-200 rounded-b-box rounded-tr-box flex min-h-[6rem] min-w-[18rem] max-w-4xl flex-wrap items-center justify-center gap-2 overflow-x-hidden border bg-cover bg-top p-4 undefined"></div>
-
+            <main className="container mx-auto px-6">
+                {/* Remove class [ h-64 ] when adding a card block */}
+                {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
+                <div className="w-full min-h-screen">
+                    {/* Place your content here */}
+                    fffsdfsdf
                 </div>
             </main>
         </>
