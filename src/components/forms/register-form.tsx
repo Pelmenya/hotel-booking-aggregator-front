@@ -4,17 +4,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaRegisterForm } from './schemas/yup.schemas';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { ListBox } from '../list-box/list-box';
+import { roles } from '../list-box/constants';
+import { useCallback } from 'react';
+import { TRole } from '@/redux/types/t-role';
 
 export const RegisterForm = () => {
     const router = useRouter();
-    const [role] = useState(router.asPath.split('/')[1]);
-
-
+    const isAdmin = router.asPath.split('/').includes('admin');
     const {
         handleSubmit,
         control,
         formState: { errors },
+        setValue,
     } = useForm({
         resolver: yupResolver(schemaRegisterForm),
         reValidateMode: 'onChange',
@@ -22,8 +24,16 @@ export const RegisterForm = () => {
 
     const onSubmit = (data: any) => {
         if (data) {
+            console.log(data);
         }
     };
+
+    const handlerSetRole = useCallback(
+        (value: TRole) => {
+            setValue('role', value);
+        },
+        [setValue]
+    );
 
     return (
         <div className="flex min-h-full items-center justify-center py-20 px-4 sm:px-6 lg:px-8">
@@ -62,6 +72,7 @@ export const RegisterForm = () => {
                         name="password"
                         error={!!errors.password}
                         control={control}
+                        autoComplete="new-password"
                     />
                     <Input
                         type="tel"
@@ -72,19 +83,26 @@ export const RegisterForm = () => {
                         error={!!errors.contactPhone}
                         control={control}
                     />
-                    {role === 'admin' && (
-                        <Input
-                            type="text"
-                            id="UserRole"
-                            placeholder="Role"
-                            label="Роль"
-                            name="role"
-                            error={!!errors.role}
-                            control={control}
-                        />
+                    {isAdmin && (
+                        <>
+                            <ListBox
+                                items={roles}
+                                handlerSetItem={handlerSetRole}
+                                activeIdx={2}
+                            />
+                            <Input
+                                hidden={true}
+                                type="text"
+                                id="UserRole"
+                                placeholder="Role"
+                                label="Роль"
+                                name="role"
+                                error={!!errors.role}
+                                control={control}
+                            />
+                        </>
                     )}
-                    <></>
-                    <button onClick={() => console.log(errors)} className="group relative flex w-full justify-center py-2 px-4 font-medium btn btn-primary">
+                    <button className="group relative flex w-full justify-center py-2 px-4 font-medium btn btn-primary">
                         Войти
                     </button>
                     <FormLink

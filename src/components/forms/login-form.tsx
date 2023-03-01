@@ -47,6 +47,7 @@ export const LoginForm = () => {
                         control={control}
                         error={!!errors.password}
                         name="password"
+                        autoComplete="new-password"
                     />
                     <button
                         className="group relative flex w-full justify-center btn btn-primary"

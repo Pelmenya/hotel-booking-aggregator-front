@@ -10,28 +10,30 @@ export interface IInputProps {
     control: Control<FieldValues, any> | undefined;
     type: 'text' | 'password' | 'email' | 'tel';
     placeholder: string;
-    className?: string;
+    hidden?: boolean;
     label: string;
     disabled?: boolean;
     defaultValue?: string;
+    autoComplete?: string;
 }
 
 export const Input = ({
     type,
     id,
     placeholder,
-    className,
+    hidden = false,
     label,
     name,
     control,
     error,
+    autoComplete = 'off',
 }: IInputProps) => {
     return (
         <Controller
             name={name}
             control={control}
             render={({ field: { onChange, onBlur, value, ref } }) => (
-                <div className="relative">
+                <div className={cn('relative', hidden && 'hidden')}>
                     <label
                         htmlFor={id}
                         className={cn(
@@ -46,13 +48,11 @@ export const Input = ({
                             type={type}
                             id={id}
                             placeholder={placeholder}
-                            className={cn(
-                                'peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm',
-                                className
-                            )}
+                            className="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                             onChange={onChange}
                             onBlur={onBlur}
                             value={value ? value : ''}
+                            autoComplete={autoComplete}
                         />
                         <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
                             {label}
@@ -76,7 +76,9 @@ export const Input = ({
                                                 ? ERRORS_FORM.ERROR_PASSWORD
                                                 : name === 'contactPhone'
                                                     ? ERRORS_FORM.ERROR_TEL
-                                                    : ''
+                                                    : name === 'role'
+                                                        ? ERRORS_FORM.ERROR_ROLE
+                                                        : ''
                                 : ERRORS_FORM.ERROR_REQUIRED_FIELD}
                         </span>
                     )}
