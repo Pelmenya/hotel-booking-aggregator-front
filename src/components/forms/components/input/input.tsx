@@ -38,7 +38,7 @@ export const Input = ({
                             'relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm',
                             error
                                 ? 'focus-within:border-error focus-within:ring-1 focus-within:ring-error'
-                                : 'focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600'
+                                : 'focus-within:border-primary focus-within:ring-1 focus-within:ring-primary'
                         )}
                     >
                         <input

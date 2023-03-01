@@ -4,7 +4,7 @@ export const schemaRegisterForm = yup
     .object({
         name: yup.string().min(2).required(),
         email: yup.string().email().required(),
-        password: yup.string().min(6).required(),
+        password: yup.string().min(6).required(), // contactPhone: yup.string().matches()
     })
     .required();
 
