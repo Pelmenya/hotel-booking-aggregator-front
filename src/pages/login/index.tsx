@@ -27,7 +27,7 @@ export default function Login() {
             <main className="container mx-auto px-6">
                 {/* Remove class [ h-64 ] when adding a card block */}
                 {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
-                <div className="w-full min-h-screen lg:py-40">
+                <div className="w-full min-h-screen lg:py-20">
                     <LoginForm />
                 </div>
             </main>

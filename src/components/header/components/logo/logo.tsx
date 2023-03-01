@@ -2,8 +2,7 @@ export const Logo = () => {
     return (
         <div className="flex flex-shrink-0 items-center cursor-pointer">
             <svg
-                className="text-primary"
-                fill="#570DF8"
+                className="fill-primary"
                 width="32"
                 height="32"
                 viewBox="0 0 137 134"

@@ -8,7 +8,7 @@ export interface IInputProps {
     name: 'name' | 'password' | 'email' | 'contactPhone' | 'role' | 'token';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
-    type: 'text' | 'password' | 'email';
+    type: 'text' | 'password' | 'email' | 'tel';
     placeholder: string;
     className?: string;
     label: string;
@@ -31,7 +31,7 @@ export const Input = ({
             name={name}
             control={control}
             render={({ field: { onChange, onBlur, value, ref } }) => (
-                <div className='relative'>
+                <div className="relative">
                     <label
                         htmlFor={id}
                         className={cn(
@@ -59,7 +59,12 @@ export const Input = ({
                         </span>
                     </label>
                     {error && (
-                        <span className={cn('absolute left-3 text-xs text-error', style.error)}>
+                        <span
+                            className={cn(
+                                'absolute left-3 text-xs text-error',
+                                style.error
+                            )}
+                        >
                             {value
                                 ? name === 'name'
                                     ? ERRORS_FORM.ERROR_NAME
@@ -69,7 +74,9 @@ export const Input = ({
                                             ? ERRORS_FORM.ERROR_EMAIL
                                             : name === 'password'
                                                 ? ERRORS_FORM.ERROR_PASSWORD
-                                                : ''
+                                                : name === 'contactPhone'
+                                                    ? ERRORS_FORM.ERROR_TEL
+                                                    : ''
                                 : ERRORS_FORM.ERROR_REQUIRED_FIELD}
                         </span>
                     )}

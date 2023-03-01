@@ -3,8 +3,14 @@ import { Input } from './components/input/input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaRegisterForm } from './schemas/yup.schemas';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 export const RegisterForm = () => {
+    const router = useRouter();
+    const [role] = useState(router.asPath.split('/')[1]);
+
+
     const {
         handleSubmit,
         control,
@@ -25,7 +31,11 @@ export const RegisterForm = () => {
                 <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
                     Регистрация
                 </h2>
-                <form name="register" className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                <form
+                    name="register"
+                    className="mt-8 space-y-6"
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                     <Input
                         type="text"
                         id="UserName"
@@ -53,9 +63,28 @@ export const RegisterForm = () => {
                         error={!!errors.password}
                         control={control}
                     />
-                    <button
-                        className="group relative flex w-full justify-center py-2 px-4 font-medium btn btn-primary"
-                    >
+                    <Input
+                        type="tel"
+                        id="UserTel"
+                        placeholder="Phone"
+                        label="Телефон"
+                        name="contactPhone"
+                        error={!!errors.contactPhone}
+                        control={control}
+                    />
+                    {role === 'admin' && (
+                        <Input
+                            type="text"
+                            id="UserRole"
+                            placeholder="Role"
+                            label="Роль"
+                            name="role"
+                            error={!!errors.role}
+                            control={control}
+                        />
+                    )}
+                    <></>
+                    <button onClick={() => console.log(errors)} className="group relative flex w-full justify-center py-2 px-4 font-medium btn btn-primary">
                         Войти
                     </button>
                     <FormLink
