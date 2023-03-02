@@ -1,14 +1,8 @@
 import Head from 'next/head';
-import Image from 'next/image';
-import { Inter } from '@next/font/google';
 import { Header } from '@/components/header/header';
 import { LoginForm } from '@/components/forms/login-form';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export default function Login() {
-    
-
     return (
         <>
             <Head>
@@ -25,8 +19,6 @@ export default function Login() {
             </Head>
             <Header />
             <main className="container mx-auto px-6">
-                {/* Remove class [ h-64 ] when adding a card block */}
-                {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
                 <div className="w-full min-h-screen lg:py-20">
                     <LoginForm />
                 </div>

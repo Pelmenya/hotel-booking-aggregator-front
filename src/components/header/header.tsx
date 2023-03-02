@@ -3,6 +3,7 @@ import { MenuDropdown } from './components/menu/menu';
 import { ThemeToggle } from './components/theme-toggle/theme-toggle';
 import { Logo } from './components/logo/logo';
 import { useCallback, useState } from 'react';
+import Link from 'next/link';
 
 export const Header = () => {
     const [isOpenMobilMenu, setIsOpenMobilMenu] = useState(false);
@@ -66,7 +67,9 @@ export const Header = () => {
                         <div className="flex flex-1 items-center justify-start sm:items-stretch sm:justify-start">
                             <div className="hidden sm:ml-6 sm:block">
                                 <div className="flex space-x-4">
-                                    <Logo />
+                                    <Link href="/">
+                                        <Logo />
+                                    </Link>
                                     <button
                                         className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
                                         aria-current="page"
