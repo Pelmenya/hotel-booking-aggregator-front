@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { ListBox } from '../list-box/list-box';
 import { roles } from '../list-box/constants';
 import { useCallback } from 'react';
-import { TRole } from '@/redux/types/t-role';
+import { TRole } from '@/types/t-role';
 
 export const RegisterForm = () => {
     const router = useRouter();

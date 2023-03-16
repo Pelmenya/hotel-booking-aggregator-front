@@ -1,9 +1,14 @@
 import cn from 'classnames';
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { Control, FieldValues, Controller } from 'react-hook-form';
 import { ERRORS_FORM } from '../../constants/errors-form';
 import style from './input.module.css';
 
-export interface IInputProps {
+export interface IInputProps
+    extends DetailedHTMLProps<
+        InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+    > {
     id: string;
     name: 'name' | 'password' | 'email' | 'contactPhone' | 'role' | 'token';
     error: boolean;
