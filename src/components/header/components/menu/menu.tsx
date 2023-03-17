@@ -1,14 +1,23 @@
 'use client';
 
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { usePostLogoutMutation } from '@/redux/api/auth';
+import { getUserState } from '@/redux/selectors/user';
+import { removeUser } from '@/redux/slices/user';
 import { Menu, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { MenuLogoutIcon } from './components/components/menu-logout-icon';
 import { MenuProfileIcon } from './components/components/menu-profile-icon';
 import { MenuLink } from './components/menu-link';
-import { menuLinksLogout } from './constants';
+import { menuLinksLogin, menuLinksLogout } from './constants';
 
 export const MenuDropdown = () => {
+    const dispatch = useAppDispatch();
+    const { user } = useAppSelector(getUserState);
+    const [postLogout] = usePostLogoutMutation();
+
     return (
         <Menu as="div" className="relative inline-block text-left">
             <Menu.Button
@@ -40,14 +49,35 @@ export const MenuDropdown = () => {
                     tabIndex={0}
                     className="absolute right-0 mt-2 origin-top-right dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                    {menuLinksLogout.map((link) => (
-                        <MenuLink
-                            key={link.id}
-                            href={link.href}
-                            text={link.text}
-                            icon={link.icon}
-                        />
-                    ))}
+                    {user
+                        ? menuLinksLogin.map((link) => (
+                            <MenuLink
+                                key={link.id}
+                                href={link.href}
+                                text={link.text}
+                                type={link.type}
+                                onClick={
+                                    link.type === 'logout'
+                                        ? async () => {
+                                            const logout = await postLogout(
+                                                null
+                                            ).unwrap();
+                                            console.log(logout)
+                                            if (logout.success)
+                                                dispatch(removeUser());
+                                        }
+                                        : undefined
+                                }
+                            />
+                        ))
+                        : menuLinksLogout.map((link) => (
+                            <MenuLink
+                                key={link.id}
+                                href={link.href}
+                                text={link.text}
+                                type={link.type}
+                            />
+                        ))}
                 </Menu.Items>
             </Transition>
         </Menu>

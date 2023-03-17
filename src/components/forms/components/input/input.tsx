@@ -65,10 +65,7 @@ export const Input = ({
                     </label>
                     {error && (
                         <span
-                            className={cn(
-                                'absolute left-3 text-xs text-error',
-                                style.error
-                            )}
+                            className='absolute left-3 text-xs text-error'
                         >
                             {value
                                 ? name === 'name'

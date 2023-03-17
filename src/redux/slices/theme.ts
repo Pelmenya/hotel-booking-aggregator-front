@@ -1,11 +1,11 @@
 import { createSlice  } from '@reduxjs/toolkit';
 import { HYDRATE  } from 'next-redux-wrapper';
 
-export interface ThemeState {
+export interface IThemeState {
  theme: 'dark' | 'light';
 }
 
-const initialState: ThemeState = {
+const initialState: IThemeState = {
     theme: 'light',
 };
 

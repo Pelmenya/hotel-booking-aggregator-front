@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { getThemeState } from '@/redux/controllers/theme';
+import { getThemeState } from '@/redux/selectors/theme';
 import { setTheme } from '@/redux/slices/theme';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';

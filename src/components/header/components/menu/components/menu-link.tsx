@@ -8,7 +8,7 @@ export type TMenuLinkProps = TBaseProps & {
     id?: string;
     href: string;
     text: string;
-    icon?: 'profile' | 'logout' | 'login';
+    type?: 'profile' | 'logout' | 'login';
     onClick?: () => void;
 };
 
@@ -16,14 +16,14 @@ export const MenuLink = ({
     children,
     href,
     text,
-    icon,
+    type,
     onClick,
 }: TMenuLinkProps) => (
     <li onClick={onClick}>
         <Link href={href}>
-            {icon === 'login' && <MenuLoginIcon />}
-            {icon === 'profile' && <MenuProfileIcon />}
-            {icon === 'logout' && <MenuLogoutIcon />}
+            {type === 'login' && <MenuLoginIcon />}
+            {type === 'profile' && <MenuProfileIcon />}
+            {type === 'logout' && <MenuLogoutIcon />}
             {children}
             {text}
         </Link>
