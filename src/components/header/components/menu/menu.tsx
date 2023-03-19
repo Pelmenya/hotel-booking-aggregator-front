@@ -62,7 +62,6 @@ export const MenuDropdown = () => {
                                             const logout = await postLogout(
                                                 null
                                             ).unwrap();
-                                            console.log(logout)
                                             if (logout.success)
                                                 dispatch(removeUser());
                                         }

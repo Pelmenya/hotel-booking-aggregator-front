@@ -2,7 +2,6 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import logger from 'redux-logger';
 import { authApi } from '../api/auth';
-import { themeSlice } from '../slices/theme';
 import { userSlice } from '../slices/user';
 
 
@@ -12,7 +11,6 @@ const middlewares = isDev ? [logger] : [];
 
 export const store = configureStore({
     reducer: {
-        [themeSlice.name]: themeSlice.reducer,
         [userSlice.name]: userSlice.reducer,
         [authApi.reducerPath]: authApi.reducer,
     },

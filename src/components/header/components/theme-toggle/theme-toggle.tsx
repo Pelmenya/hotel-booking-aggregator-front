@@ -1,32 +1,21 @@
-import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { getThemeState } from '@/redux/selectors/theme';
-import { setTheme } from '@/redux/slices/theme';
 import { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { themeChange } from 'theme-change';
 
 export const ThemeToggle = () => {
-    const dispatch = useAppDispatch();
     const [isChecked, setIsChecked] = useState(false);
-    const { theme } = useSelector(getThemeState);
 
     useEffect(() => {
         themeChange(false);
         const localStorageTheme = localStorage.getItem('theme') 
-        if (localStorageTheme)
-            dispatch(setTheme(localStorageTheme));
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (theme) {
-            if (theme === 'dark') {
+        if (localStorageTheme) {
+            if (localStorageTheme === 'dark') {
                 setIsChecked(true);
             }
-            if (theme === 'light') {
+            if (localStorageTheme === 'light') {
                 setIsChecked(false);
             }
         } else setIsChecked(false);
-    }, [theme]);
+    }, []);
 
     const handlerSetIsChecked = useCallback(
         () => setIsChecked(!isChecked),
