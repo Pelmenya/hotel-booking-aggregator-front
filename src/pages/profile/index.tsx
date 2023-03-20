@@ -1,10 +1,10 @@
 import { LoginForm } from '@/components/forms/login-form';
 import { Layout } from '@/layout/layout';
 
-export default function Login() {
+export default function Profile() {
     return (
-        <Layout title="Hotel Booking Aggregator ~ Вход">
-            <LoginForm />
+        <Layout title="Hotel Booking Aggregator ~ Профиль">
+            
         </Layout>
     );
 }
@@ -12,7 +12,8 @@ export default function Login() {
 export async function getStaticProps() {
     return {
         props: {
-            protectedFromUser: true,
+            protectedAuth: true,
+            role: ['client', 'admin', 'manager'],
         },
     };
 }

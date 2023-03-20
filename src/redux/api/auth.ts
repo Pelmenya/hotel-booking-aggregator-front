@@ -6,7 +6,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 export const authApi = createApi({
     reducerPath: 'auth',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost/api/auth',
+        baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/auth',
         
     }),
     extractRehydrationInfo(action, { reducerPath }) {

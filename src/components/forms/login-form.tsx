@@ -3,7 +3,7 @@ import { FormLink } from './components/form-link/form-link';
 import { Input } from './components/input/input';
 import { useForm } from 'react-hook-form';
 import { schemaLoginForm } from './schemas/yup.schemas';
-import { postLogin, usePostLoginMutation } from '@/redux/api/auth';
+import { usePostLoginMutation } from '@/redux/api/auth';
 import { useRouter } from 'next/router';
 import { TError } from '@/types/t-error';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
 
 export const LoginForm = () => {
-    const  dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const router = useRouter();
 
     const [errorApi, setErrorApi] = useState<TError>();
@@ -31,10 +31,8 @@ export const LoginForm = () => {
     const onSubmit = async (dto: any) => {
         if (dto) {
             const user = await postLogin(dto).unwrap();
-            if (user) {
-                dispatch(setUser(user));
-                router.push('/')
-            };
+            dispatch(setUser(user));
+            router.push('/');
         }
     };
 
@@ -82,7 +80,7 @@ export const LoginForm = () => {
                     >
                         {isError && (
                             <span className="absolute w-full text-xs text-error top-[-20px]">
-                                {errorApi?.data.message}
+                                {errorApi?.data?.message}
                             </span>
                         )}
                         Войти

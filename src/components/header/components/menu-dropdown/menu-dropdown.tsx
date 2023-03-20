@@ -6,10 +6,7 @@ import { usePostLogoutMutation } from '@/redux/api/auth';
 import { getUserState } from '@/redux/selectors/user';
 import { removeUser } from '@/redux/slices/user';
 import { Menu, Transition } from '@headlessui/react';
-import Link from 'next/link';
-import { Fragment, useEffect, useRef, useState } from 'react';
-import { MenuLogoutIcon } from './components/components/menu-logout-icon';
-import { MenuProfileIcon } from './components/components/menu-profile-icon';
+import { Fragment } from 'react';
 import { MenuLink } from './components/menu-link';
 import { menuLinksLogin, menuLinksLogout } from './constants';
 

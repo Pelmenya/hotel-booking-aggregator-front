@@ -1,7 +1,8 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import logger from 'redux-logger';
 import { authApi } from '../api/auth';
+import { commonApi } from '../api/common';
 import { userSlice } from '../slices/user';
 
 
@@ -13,8 +14,9 @@ export const store = configureStore({
     reducer: {
         [userSlice.name]: userSlice.reducer,
         [authApi.reducerPath]: authApi.reducer,
+        [commonApi.reducerPath]: commonApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([...middlewares, authApi.middleware]),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([...middlewares, authApi.middleware, commonApi.middleware]),
     devTools: true,
 });
 
