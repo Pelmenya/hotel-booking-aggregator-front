@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import logger from 'redux-logger';
+import { adminApi } from '../api/admin';
 import { authApi } from '../api/auth';
+import { clientApi } from '../api/client';
 import { commonApi } from '../api/common';
 import { userSlice } from '../slices/user';
 
@@ -15,8 +17,16 @@ export const store = configureStore({
         [userSlice.name]: userSlice.reducer,
         [authApi.reducerPath]: authApi.reducer,
         [commonApi.reducerPath]: commonApi.reducer,
+        [clientApi.reducerPath]: clientApi.reducer,
+        [adminApi.reducerPath]: adminApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([...middlewares, authApi.middleware, commonApi.middleware]),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
+        ...middlewares, 
+        authApi.middleware, 
+        commonApi.middleware, 
+        clientApi.middleware, 
+        adminApi.middleware
+    ]),
     devTools: true,
 });
 

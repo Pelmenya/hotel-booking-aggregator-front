@@ -1,10 +1,12 @@
+import Home from '@/pages';
+import Login from '@/pages/login';
+
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { useGetAuthUserMutation } from '@/redux/api/common';
 import { getUserState } from '@/redux/selectors/user';
 import { setUser } from '@/redux/slices/user';
 import { TBaseProps } from '@/types/t-base-props';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export type TAuthProviderProps = TBaseProps & {
@@ -12,11 +14,10 @@ export type TAuthProviderProps = TBaseProps & {
 };
 
 export const AuthProvider = ({ children, pageProps }: TAuthProviderProps) => {
-    const router = useRouter();
-    const  dispatch = useAppDispatch();    
+    const dispatch = useAppDispatch();
     const { user } = useAppSelector(getUserState);
-    const { protectedFromUser, protectedAuth, role } = pageProps;
-    const [getAuthUser, { data, isLoading }] = useGetAuthUserMutation();
+    const { protectedFromUser, protectedAuth, roles } = pageProps;
+    const [getAuthUser] = useGetAuthUserMutation();
 
     useEffect(() => {
         if (!user) {
@@ -25,21 +26,18 @@ export const AuthProvider = ({ children, pageProps }: TAuthProviderProps) => {
             };
             handler().catch(() => dispatch(setUser(null)));
         }
-    }, [data, getAuthUser, dispatch, user]);
-    
+    }, [getAuthUser, dispatch, user]);
+
     if (protectedFromUser && user) {
-        router.push('/');
-        return <></>;
+        return <Home />;
     }
 
-    if (
-        protectedAuth &&
-        user &&
-        role &&
-        !role.includes(user.role)
-    ) {
-        router.push('/');
-        return null;
+    if (protectedAuth && user && roles && !roles.includes(user.role)) {
+        return <Home />;
+    }
+
+    if (protectedAuth && !user) {
+        return <Login />;
     }
 
     return <>{children}</>;

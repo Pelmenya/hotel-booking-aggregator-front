@@ -2,10 +2,10 @@ import { IUser } from '@/types/i-user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
-export const authApi = createApi({
-    reducerPath: 'auth',
+export const clientApi = createApi({
+    reducerPath: 'client',
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/auth',
+        baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/client',
         
     }),
     extractRehydrationInfo(action, { reducerPath }) {
@@ -15,18 +15,11 @@ export const authApi = createApi({
     },
     tagTypes: [],
     endpoints: (builder) => ({
-        postLogin: builder.mutation<Partial<IUser>, any>({
+        postRegister: builder.mutation<Partial<IUser>, any>({
             query: (body) => ({
-                url: 'login',
+                url: 'register',
                 method: 'POST',
                 body,
-                credentials: 'include'     // обязательно для проставления cookie
-            }),
-        }),
-        postLogout: builder.mutation<{success: boolean}, any>({
-            query: () => ({
-                url: 'logout',
-                method: 'POST',
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
@@ -35,10 +28,9 @@ export const authApi = createApi({
 
 // Export hooks for usage in functional components
 export const {
-    usePostLoginMutation,
-    usePostLogoutMutation,
+    usePostRegisterMutation,
     util: { getRunningQueriesThunk },
-} = authApi;
+} = clientApi;
 
 // export endpoints for use in SSR
-export const { postLogin, postLogout } = authApi.endpoints;
+export const { postRegister } = clientApi.endpoints;

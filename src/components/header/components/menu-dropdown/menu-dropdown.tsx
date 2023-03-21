@@ -6,12 +6,14 @@ import { usePostLogoutMutation } from '@/redux/api/auth';
 import { getUserState } from '@/redux/selectors/user';
 import { removeUser } from '@/redux/slices/user';
 import { Menu, Transition } from '@headlessui/react';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import { MenuLink } from './components/menu-link';
 import { menuLinksLogin, menuLinksLogout } from './constants';
 
 export const MenuDropdown = () => {
     const dispatch = useAppDispatch();
+    const router = useRouter();    
     const { user } = useAppSelector(getUserState);
     const [postLogout] = usePostLogoutMutation();
 
@@ -59,8 +61,9 @@ export const MenuDropdown = () => {
                                             const logout = await postLogout(
                                                 null
                                             ).unwrap();
-                                            if (logout.success)
+                                            if (logout.success) {
                                                 dispatch(removeUser());
+                                            }
                                         }
                                         : undefined
                                 }

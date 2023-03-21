@@ -2,16 +2,42 @@ import { FormLink } from './components/form-link/form-link';
 import { Input } from './components/input/input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaRegisterForm } from './schemas/yup.schemas';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { ListBox } from '../list-box/list-box';
 import { roles } from '../list-box/constants';
 import { useCallback } from 'react';
 import { TRole } from '@/types/t-role';
+import { SubmitBtn } from './components/submit-btn/submit-btn';
+import { usePostAdminUsersMutation } from '@/redux/api/admin';
+import { usePostRegisterMutation } from '@/redux/api/client';
+import { TError } from '@/types/t-error';
+import { IUser } from '@/types/i-user';
+import { usePostLoginMutation } from '@/redux/api/auth';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { setUser } from '@/redux/slices/user';
+import { useGetAuthUserMutation } from '@/redux/api/common';
 
 export const RegisterForm = () => {
+    const dispatch = useAppDispatch();
     const router = useRouter();
     const isAdmin = router.asPath.split('/').includes('admin');
+
+    const [postRegister, { isLoading, isError, error }] =
+        usePostRegisterMutation();
+
+    const [
+        postAdminUsers,
+        { isLoading: isLoadingAdmin, isError: isErrorAdmin, error: errorAdmin },
+    ] = usePostAdminUsersMutation();
+
+    const [
+        postLogin,
+        { isLoading: isLoadingLogin, isError: isErrorLogin, error: errorLogin },
+    ] = usePostLoginMutation();
+
+    const [getAuthUser] = useGetAuthUserMutation();
+
     const {
         handleSubmit,
         control,
@@ -22,9 +48,27 @@ export const RegisterForm = () => {
         reValidateMode: 'onChange',
     });
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data: FieldValues) => {
         if (data) {
-            console.log(data);
+            if (isAdmin) {
+                const user = await postAdminUsers(data).unwrap();
+                if (user) {
+                    const loginUser = await postLogin(data).unwrap();
+                    if (loginUser) {
+                        dispatch(setUser(await getAuthUser('').unwrap()));
+                        router.push('/');
+                    }
+                }
+            } else {
+                const user = await postRegister(data).unwrap();
+                if (user) {
+                    const loginUser = await postLogin(data).unwrap();
+                    if (loginUser) {
+                        dispatch(setUser(await getAuthUser('').unwrap()));
+                        router.push('/');
+                    }
+                }
+            }
         }
     };
 
@@ -102,9 +146,21 @@ export const RegisterForm = () => {
                             />
                         </>
                     )}
-                    <button className="group relative flex w-full justify-center py-2 px-4 font-medium btn btn-primary">
-                        Войти
-                    </button>
+                    <SubmitBtn
+                        text={`Зарегистрировать${isAdmin ? '' : 'ся'}`}
+                        isLoading={
+                            (isAdmin ? isLoadingAdmin : isLoading) ||
+                            isLoadingLogin
+                        }
+                        isError={
+                            (isAdmin ? isErrorAdmin : isError) || isErrorLogin
+                        }
+                        error={
+                            (isAdmin
+                                ? (errorAdmin as TError)
+                                : (error as TError)) || errorLogin
+                        }
+                    />
                     <FormLink
                         label="Уже зарегистрированы?"
                         href="/login"
