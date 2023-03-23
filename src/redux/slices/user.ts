@@ -1,15 +1,11 @@
-import { IUser } from '@/types/i-user';
-import { TNullable } from '@/types/t-nullable';
+import { TUserProps } from '@/types/t-user-props';
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+import { boolean } from 'yup';
 
+export type TUserState = TUserProps;
 
-
-export interface IUserState {
-    user: TNullable<IUser>;
-}
-
-const initialState: IUserState = {
+const initialState: TUserState = {
     user: null,
 };
 
@@ -20,6 +16,7 @@ export const userSlice = createSlice({
         setUser(state, action){
             state.user = action.payload;
         },
+
         removeUser(state){
             state.user = null;
         },

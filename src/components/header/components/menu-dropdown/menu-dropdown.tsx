@@ -1,20 +1,16 @@
-'use client';
-
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { useAppSelector } from '@/hooks/use-app-selector';
 import { usePostLogoutMutation } from '@/redux/api/auth';
-import { getUserState } from '@/redux/selectors/user';
 import { removeUser } from '@/redux/slices/user';
 import { Menu, Transition } from '@headlessui/react';
-import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import { MenuLink } from './components/menu-link';
 import { menuLinksLogin, menuLinksLogout } from './constants';
+import { TUserProps } from '@/types/t-user-props';
+import { useRouter } from 'next/router';
 
-export const MenuDropdown = () => {
+export const MenuDropdown = ({ user }: TUserProps) => {
+    const router = useRouter()
     const dispatch = useAppDispatch();
-    const router = useRouter();    
-    const { user } = useAppSelector(getUserState);
     const [postLogout] = usePostLogoutMutation();
 
     return (

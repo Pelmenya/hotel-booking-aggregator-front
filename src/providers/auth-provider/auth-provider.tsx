@@ -28,6 +28,11 @@ export const AuthProvider = ({ children, pageProps }: TAuthProviderProps) => {
         }
     }, [getAuthUser, dispatch, user]);
 
+    
+    if (protectedAuth && !user) {
+        return <Login />;
+    }
+
     if (protectedFromUser && user) {
         return <Home />;
     }
@@ -36,9 +41,6 @@ export const AuthProvider = ({ children, pageProps }: TAuthProviderProps) => {
         return <Home />;
     }
 
-    if (protectedAuth && !user) {
-        return <Login />;
-    }
 
     return <>{children}</>;
 };

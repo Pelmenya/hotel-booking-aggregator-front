@@ -24,7 +24,7 @@ export const Layout = ({ title, children }) => {
                 <link rel="icon" href="/logo.svg" />
             </Head>
             <Header />
-            <main className="container mx-auto px-6">
+            <main className="container mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="w-full min-h-main">
                     {children}
                 </div>

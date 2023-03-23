@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { RegisterForm } from '@/components/forms/register-form';
+import { RegisterForm } from '@/components/forms/register-form/register-form';
 import { Layout } from '@/layout/layout';
 
 export default function ClientRegister() {

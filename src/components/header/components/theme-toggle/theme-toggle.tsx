@@ -25,7 +25,7 @@ export const ThemeToggle = () => {
     return (
         <div className="form-control items-end">
             <label className="cursor-pointer label">
-                <span className="label-text">
+                <span className="label-text rounded-full bg-neutral p-1 text-neutral-content hover:text-white">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

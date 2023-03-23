@@ -1,0 +1,11 @@
+.start{
+    border-radius: 0 0.375rem 0.375rem;
+}
+
+.tab {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    
+    min-height: calc(100vh - 144px);
+}

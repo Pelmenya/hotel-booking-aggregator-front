@@ -5,8 +5,11 @@ import { MobileNav } from './components/mobil-nav/mobile-nav';
 import { DesktopHeader } from './components/desktop-header/desktop-header';
 import { MenuDropdown } from './components/menu-dropdown/menu-dropdown';
 import { NotificationsLink } from './notifications-link/notifications-link';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { getUserState } from '@/redux/selectors/user';
 
 export const Header = () => {
+    const { user } = useAppSelector(getUserState);
     const [isOpenMobilMenu, setIsOpenMobilMenu] = useState(false);
 
     const handlerIsOpenMobileMenu = useCallback(
@@ -18,8 +21,8 @@ export const Header = () => {
         <header>
             <nav className="bg-base-200">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                    <div className="relative flex h-16 items-center justify-between">
-                        <DesktopHeader />
+                    <div className="relative flex h-16 items-center justify-between sm:px-6 lg:px-8">
+                        <DesktopHeader user={user} />
                         <MobileHeader
                             onClick={handlerIsOpenMobileMenu}
                             isOpen={isOpenMobilMenu}
@@ -28,12 +31,12 @@ export const Header = () => {
                             <ThemeToggle />
                             <NotificationsLink />
                             <div className="ml-3 flex justify-center items-center">
-                                <MenuDropdown />
+                                <MenuDropdown user={user} />
                             </div>
                         </div>
                     </div>
                 </div>
-                <MobileNav isOpen={isOpenMobilMenu} />
+                <MobileNav isOpen={isOpenMobilMenu} user={user} />
             </nav>
         </header>
     );
