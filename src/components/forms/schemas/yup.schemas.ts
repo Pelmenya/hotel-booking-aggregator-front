@@ -7,6 +7,7 @@ export const PATTERNS = {
 }
 
 const regExp = /''/i;
+
 export const schemaRegisterForm = yup
     .object().shape({
         name: yup.string().min(2).required(),
@@ -20,5 +21,12 @@ export const schemaLoginForm = yup
     .object({
         email: yup.string().email().required(),
         password: yup.string().min(6).required(),
+    })
+    .required();
+
+export const schemaHotelForm = yup
+    .object({
+        title: yup.string().min(2).required(),
+        description: yup.string().min(2).required(),
     })
     .required();

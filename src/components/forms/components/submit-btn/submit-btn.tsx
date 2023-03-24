@@ -15,6 +15,7 @@ export const SubmitBtn = ({
     error,
 }: TSubmitBtnProps) => (
     <button
+        disabled={isLoading}
         className={cn(
             'group relative flex w-full justify-center btn btn-primary',
             { ['loading']: isLoading }

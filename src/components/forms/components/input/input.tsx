@@ -2,7 +2,6 @@ import cn from 'classnames';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { Control, FieldValues, Controller } from 'react-hook-form';
 import { ERRORS_FORM } from '../../constants/errors-form';
-import style from './input.module.css';
 
 export interface IInputProps
     extends DetailedHTMLProps<
@@ -10,10 +9,19 @@ export interface IInputProps
         HTMLInputElement
     > {
     id: string;
-    name: 'name' | 'password' | 'email' | 'contactPhone' | 'role' | 'token';
+    name:
+        | 'name'
+        | 'password'
+        | 'email'
+        | 'contactPhone'
+        | 'role'
+        | 'token'
+        | 'title'
+        | 'images'
+        | 'description';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
-    type: 'text' | 'password' | 'email' | 'tel';
+    type: 'text' | 'password' | 'email' | 'tel' | 'file';
     placeholder: string;
     hidden?: boolean;
     label: string;
@@ -64,9 +72,7 @@ export const Input = ({
                         </span>
                     </label>
                     {error && (
-                        <span
-                            className='absolute left-3 text-xs text-error'
-                        >
+                        <span className="absolute left-3 text-xs text-error">
                             {value
                                 ? name === 'name'
                                     ? ERRORS_FORM.ERROR_NAME
@@ -80,7 +86,11 @@ export const Input = ({
                                                     ? ERRORS_FORM.ERROR_TEL
                                                     : name === 'role'
                                                         ? ERRORS_FORM.ERROR_ROLE
-                                                        : ''
+                                                        : name === 'title'
+                                                            ? ERRORS_FORM.ERROR_TITLE
+                                                            : name === 'description'
+                                                                ? ERRORS_FORM.ERROR_DESCRIPTION
+                                                                : ''
                                 : ERRORS_FORM.ERROR_REQUIRED_FIELD}
                         </span>
                     )}

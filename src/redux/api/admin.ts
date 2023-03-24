@@ -1,4 +1,5 @@
-import { IUser } from '@/types/t-user';
+import { THotel } from '@/types/t-hotel';
+import { TUser } from '@/types/t-user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
@@ -15,7 +16,7 @@ export const adminApi = createApi({
     },
     tagTypes: [],
     endpoints: (builder) => ({
-        postAdminUsers: builder.mutation<Partial<IUser>, any>({
+        postAdminUsers: builder.mutation<Partial<TUser>, any>({
             query: (body) => ({
                 url: 'users',
                 method: 'POST',
@@ -23,14 +24,24 @@ export const adminApi = createApi({
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
+        postAdminHotels: builder.mutation<THotel, any>({
+            query: (body) => ({
+                url: 'hotels',
+                method: 'POST',
+                body,
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
+
     }),
 });
 
 // Export hooks for usage in functional components
 export const {
     usePostAdminUsersMutation,
+    usePostAdminHotelsMutation,
     util: { getRunningQueriesThunk },
 } = adminApi;
 
 // export endpoints for use in SSR
-export const { postAdminUsers } = adminApi.endpoints;
+export const { postAdminUsers, postAdminHotels } = adminApi.endpoints;

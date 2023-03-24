@@ -12,7 +12,7 @@ export const TabAdmin = () => {
                 <button
                     onClick={() => setTab('hotels')}
                     className={cn('tab', {
-                        ['tab-lifted tab-active [--tab-bg:hsl(var(--n))] [--tab-color:hsl(var(--nc))] [--tab-border-color:hsl(var(--n))]']:
+                        ['tab-lifted tab-active [--tab-bg:hsl(var(--n))] [--tab-color:hsl(var(--nc))] [--tab-border-color:hsl(var(--n))] font-bold']:
                             tab === 'hotels',
                     })}
                 >
@@ -21,18 +21,18 @@ export const TabAdmin = () => {
                 <button
                     onClick={() => setTab('hotel-rooms')}
                     className={cn('tab', {
-                        ['tab tab-lifted tab-active [--tab-bg:hsl(var(--n))] [--tab-color:hsl(var(--nc))] [--tab-border-color:hsl(var(--n))]']:
+                        ['tab tab-lifted tab-active [--tab-bg:hsl(var(--n))] [--tab-color:hsl(var(--nc))] [--tab-border-color:hsl(var(--n))] font-bold']:
                             tab === 'hotel-rooms',
                     })}
                 >
                     Номера
                 </button>
             </nav>
-            <div className={cn(styles.tab)}>
+            <div className={cn(styles.tab, 'drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]')}>
                 {tab === 'hotels' ? (
                     <div
                         className={cn(
-                            'bg-neutral px-6 py-6 rounded-md text-sm font-medium text-neutral-content',
+                            'bg-neutral px-4 py-4 rounded-md text-sm font-medium text-neutral-content',
                             styles.start
                         )}
                     >
@@ -41,7 +41,7 @@ export const TabAdmin = () => {
                 ) : tab === 'hotel-rooms' ? (
                     <div
                         className={cn(
-                            'bg-neutral px-6 py-6 rounded-md text-sm font-medium text-neutral-content'
+                            'bg-neutral px-4 py-4 rounded-md text-sm font-medium text-neutral-content'
                         )}
                     >
                         <ContentRooms />
