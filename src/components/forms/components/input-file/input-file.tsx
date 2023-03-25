@@ -14,7 +14,7 @@ export const InputFile = ({
     <Controller
         name={name || 'images'}
         control={control}
-        render={({ field: { onChange, onBlur, value, ref } }) => (
+        render={({ field: { onBlur, value, ref } }) => (
             <input
                 ref={ref}
                 type="file"
@@ -24,7 +24,6 @@ export const InputFile = ({
                 value={value}
                 onBlur={onBlur}
                 onChange={(e) => { 
-                    onChange();
                     handlerOnChange && handlerOnChange(e);
                 }}
                 multiple={multiple}

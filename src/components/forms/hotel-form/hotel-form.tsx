@@ -16,6 +16,7 @@ export const HotelForm = () => {
         usePostAdminHotelsMutation();
 
     const [pictures, setPictures] = useState<TNullable<string[]>>(null);
+    const [files, setFiles] = useState<FileList>();
 
     const {
         handleSubmit,
@@ -28,26 +29,30 @@ export const HotelForm = () => {
 
     const onSubmit = async (dto: FieldValues) => {
         if (dto) {
-            console.log(dto);
-            /*             const postHotel = await postAdminHotels(dto).unwrap();
+            const formData = new FormData();
+            formData.append('title', dto.title);
+            formData.append('description', dto.description);
+            if (files) {
+                Array.from(files).forEach((file) => {
+                    formData.append('images', file);
+                });
+            }
+            const postHotel = await postAdminHotels(formData).unwrap();
             if (postHotel) {
                 console.log(postHotel);
             }
- */
         }
     };
 
-    const handlerOnChangePicture = (e: ChangeEvent<HTMLInputElement>) => {
+    const handlerOnChangePictures = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files) {
             const paths = Array.from(files).map((file) =>
                 URL.createObjectURL(file)
             );
             setPictures(paths);
-            console.log(paths)
-
+            setFiles(files);
         }
-
     };
 
     return (
@@ -67,7 +72,7 @@ export const HotelForm = () => {
                     control={control}
                 />
                 <Input
-                    type="text"
+                    type="textarea"
                     id="HotelDescription"
                     placeholder="Описание"
                     label="Описание отеля"
@@ -78,7 +83,7 @@ export const HotelForm = () => {
                 <InputFile
                     name="images"
                     control={control}
-                    handlerOnChange={handlerOnChangePicture}
+                    handlerOnChange={handlerOnChangePictures}
                     multiple={true}
                     accept="image/*"
                     id="HotelImages"
