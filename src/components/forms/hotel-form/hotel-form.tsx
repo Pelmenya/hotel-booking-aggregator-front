@@ -8,6 +8,7 @@ import { Carousel } from '../components/carousel/carousel';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { InputFile } from '../components/input-file/input-file';
 import { Input } from '../components/input/input';
+import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 
@@ -96,7 +97,7 @@ export const HotelForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
-            {pictures ? <Carousel pictures={pictures} /> : <></>}
+            {pictures ? <PicturesGrid pictures={pictures} /> : <></>}
         </>
     );
 };
