@@ -2,18 +2,27 @@ import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 
-export interface IListBoxProps {
+export type TListBoxProps = {
+    id: string;
+    label: string;
     items: string[];
     handlerSetItem: (value: any) => void;
     activeIdx: number;
 }
 
 export const ListBox = ({
+    label, 
     items,
     handlerSetItem,
     activeIdx,
-}: IListBoxProps) => {
-    const [selected, setSelected] = useState(items[activeIdx]);
+}: TListBoxProps) => {
+    const [selected, setSelected] = useState(items[activeIdx || 0]);
+
+    useEffect(() => {
+        if (items){ 
+            setSelected(items[activeIdx])
+        }
+    }, [items, activeIdx]);
 
     useEffect(() => {
         handlerSetItem(selected);
@@ -24,9 +33,9 @@ export const ListBox = ({
             <Listbox value={selected} onChange={setSelected}>
                 <div className="relative mt-1">
                     <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
-                        Роль
+                        {label}
                     </span>
-                    <Listbox.Button className="text-left relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-4 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
+                    <Listbox.Button className="text-left relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
                         <span className="block truncate">{selected}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon
@@ -41,7 +50,7 @@ export const ListBox = ({
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <Listbox.Options className="z-50 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-base-100 py-2 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                        <Listbox.Options className="z-50 absolute mt-1 max-h-60 w-full overflow-auto rounded-md border bg-base-100 py-2 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                             {items.map((item, itemIdx) => (
                                 <Listbox.Option
                                     key={itemIdx}

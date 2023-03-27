@@ -1,10 +1,9 @@
-import { postAdminHotels, usePostAdminHotelsMutation } from '@/redux/api/admin';
+import { usePostAdminHotelsMutation } from '@/redux/api/admin';
 import { TError } from '@/types/t-error';
 import { TNullable } from '@/types/t-nullable';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ChangeEvent, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { Carousel } from '../components/carousel/carousel';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { InputFile } from '../components/input-file/input-file';
 import { Input } from '../components/input/input';
@@ -12,7 +11,7 @@ import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 
-export const HotelForm = () => {
+export const HotelCreateForm = () => {
     const [postAdminHotels, { isLoading, isError, error }] =
         usePostAdminHotelsMutation();
 
@@ -38,10 +37,7 @@ export const HotelForm = () => {
                     formData.append('images', file);
                 });
             }
-            const postHotel = await postAdminHotels(formData).unwrap();
-            if (postHotel) {
-                console.log(postHotel);
-            }
+            await postAdminHotels(formData).unwrap();
         }
     };
 
@@ -61,7 +57,7 @@ export const HotelForm = () => {
             <FormWrapper
                 title="Добавление отеля"
                 onSubmit={handleSubmit(onSubmit)}
-                name="addHotels"
+                name="addHotel"
             >
                 <Input
                     type="text"

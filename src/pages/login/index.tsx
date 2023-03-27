@@ -1,7 +1,7 @@
 import { LoginForm } from '@/components/forms/login-form/login-form';
 import { Layout } from '@/layout/layout';
 
-export default function Login() {
+export default function LoginPage() {
     return (
         <Layout title="Hotel Booking Aggregator ~ Вход">
             <LoginForm />

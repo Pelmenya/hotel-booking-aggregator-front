@@ -128,6 +128,8 @@ export const RegisterForm = () => {
             {isAdmin && (
                 <>
                     <ListBox
+                        id='RegisterListBox'
+                        label='Роль'
                         items={roles}
                         handlerSetItem={handlerSetRole}
                         activeIdx={2}
