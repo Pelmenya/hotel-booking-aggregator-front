@@ -16,16 +16,21 @@ export const ComboBox = ({
     label,
     items,
     handlerSetItem,
+    handlerSearchItem,
     activeIdx,
-}: TListBoxProps) => {
+}: TListBoxProps & { handlerSearchItem: (v: string) => void }) => {
     const [selected, setSelected] = useState(items[activeIdx]);
 
     const [query, setQuery] = useState('');
     const defferedValue = useDeferredValue(query);
 
     useEffect(() => {
-        handlerSetItem(defferedValue);
-    }, [defferedValue, handlerSetItem]);
+        handlerSearchItem(defferedValue);
+    }, [defferedValue, handlerSearchItem]);
+
+    useEffect(() => {
+        handlerSetItem(selected);
+    }, [selected, handlerSetItem]);
 
     const handlerOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -43,6 +48,7 @@ export const ComboBox = ({
                         className="w-full border-none text-sm leading-5 bg-base-100 focus:ring-0"
                         displayValue={(item: string) => item}
                         onChange={handlerOnChange}
+                        autoComplete='off'
                     />
                     <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
                         <ChevronUpDownIcon

@@ -1,40 +1,43 @@
 import { ComboBox } from '@/components/combo-box/combo-box';
-import { ListBox } from '@/components/list-box/list-box';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import {
-    getHotels,
-    getRunningQueriesThunk,
-    useGetHotelsQuery,
-} from '@/redux/api/common';
+import { getCommonHotels, useGetCommonHotelsQuery } from '@/redux/api/common';
 import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';
 import { TNullable } from '@/types/t-nullable';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { url } from 'inspector';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { InputFile } from '../components/input-file/input-file';
 import { Input } from '../components/input/input';
+import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
+
+export type TPicture = {
+    url: string;
+    checked: boolean;
+};
 
 export const HotelEditForm = () => {
     const dispatch = useAppDispatch();
     const [hotelTitle, setHotelTitle] = useState('');
-    const { data } = useGetHotelsQuery(hotelTitle);
-    const [pictures, setPictures] = useState<TNullable<string[]>>(null);
-    const [files, setFiles] = useState<FileList>();
+    const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
+    const { data } = useGetCommonHotelsQuery(hotelTitle);
+    const [picturesFromServer, setPicturesFromServer] =
+        useState<TNullable<TPicture[]>>(null);
+    const [picturesFromDesktop, setPicturesFromDesktop] =
+        useState<TNullable<TPicture[]>>(null);
 
-    useEffect(() => {
-        if (hotelTitle) {
-            dispatch(getHotels.initiate(hotelTitle));
-        }
-    }, [hotelTitle, dispatch]);
+    const [files, setFiles] = useState<FileList>();
 
     const {
         handleSubmit,
         control,
         formState: { errors },
+        setValue,
+        getValues,
     } = useForm({
         resolver: yupResolver(schemaHotelForm),
         reValidateMode: 'onChange',
@@ -57,20 +60,79 @@ export const HotelEditForm = () => {
         }
     };
 
-    const handlerOnChangePictures = (e: ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (files) {
-            const paths = Array.from(files).map((file) =>
-                URL.createObjectURL(file)
-            );
-            setPictures(paths);
-            setFiles(files);
-        }
-    };
+    const handlerOnChangePictures = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            const files = e.target.files;
+            if (files) {
+                const paths = Array.from(files).map((file) =>
+                    URL.createObjectURL(file)
+                );
+                setPicturesFromDesktop(
+                    paths.map((path) => ({ url: path, checked: true }))
+                );
+                setFiles(files);
+            }
+        },
+        []
+    );
 
-    const handlerSearchHotels = (value: string) => {
-        setHotelTitle(value);
-    };
+    const handlerSearchHotels = useCallback((title: string) => {
+        setHotelTitle(title);
+    }, []);
+
+    const handlerSetCurrentHotel = useCallback(
+        (title: string) => {
+            const hotel = data?.find((hotel) => hotel.title === title);
+            if (hotel) {
+                setCurrentHotel(hotel);
+            }
+        },
+        [data]
+    );
+
+    useEffect(() => {
+        if (hotelTitle) {
+            dispatch(getCommonHotels.initiate(hotelTitle));
+        }
+    }, [hotelTitle, dispatch]);
+
+    useEffect(() => {
+        if (currentHotel) {
+            setValue('title', currentHotel.title);
+            setValue('description', currentHotel.description);
+            setPicturesFromDesktop(null);
+            setFiles(undefined);
+            setPicturesFromServer(
+                currentHotel?.images.map((pic) => ({
+                    url: pic,
+                    checked: true,
+                }))
+            );
+        }
+    }, [currentHotel, setValue]);
+
+    const handlerCheckedPictureFromServer = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            if (picturesFromServer) {
+                setPicturesFromServer(
+                    picturesFromServer?.map((item) => {
+                        if (
+                            e.target.id ===
+                            `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${item.url}`
+                        ) {
+                            console.log(e.target.checked);
+                            return {
+                                url: item.url,
+                                checked: e.target.checked,
+                            };
+                        }
+                        return item;
+                    })
+                );
+            }
+        },
+        [picturesFromServer]
+    );
 
     return (
         <>
@@ -84,7 +146,8 @@ export const HotelEditForm = () => {
                     items={data?.map((hotel) => hotel.title) || []}
                     activeIdx={0}
                     label=""
-                    handlerSetItem={handlerSearchHotels}
+                    handlerSearchItem={handlerSearchHotels}
+                    handlerSetItem={handlerSetCurrentHotel}
                 />
                 <Input
                     type="text"
@@ -112,6 +175,7 @@ export const HotelEditForm = () => {
                     accept="image/*"
                     id="HotelImages"
                     placeholder="Фото отеля"
+                    reset={!!!files}
                 />
                 <SubmitBtn
                     text="Добавить"
@@ -120,6 +184,15 @@ export const HotelEditForm = () => {
                     error={{} as TError}
                 />
             </FormWrapper>
+            <PicturesGrid
+                pictures={
+                    currentHotel?.images.map(
+                        (picture) =>
+                            `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${picture}`
+                    ) || []
+                }
+                handlerChecked={handlerCheckedPictureFromServer}
+            />
         </>
     );
 };

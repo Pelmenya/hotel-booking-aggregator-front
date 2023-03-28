@@ -23,7 +23,7 @@ export const commonApi = createApi({
             }),
 
         }),
-        getHotels: builder.query<THotel[], string>({
+        getCommonHotels: builder.query<THotel[], string>({
             query: (title: string) => ({
                 url: `/hotels?title=${title}`,
                 method: 'GET'
@@ -35,9 +35,9 @@ export const commonApi = createApi({
 // Export hooks for usage in functional components
 export const {
     useGetAuthUserMutation,
-    useGetHotelsQuery,
+    useGetCommonHotelsQuery,
     util: { getRunningQueriesThunk },
 } = commonApi;
 
 // export endpoints for use in SSR
-export const { getAuthUser, getHotels } = commonApi.endpoints;
+export const { getAuthUser, getCommonHotels } = commonApi.endpoints;

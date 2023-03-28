@@ -8,3 +8,19 @@
 input:-webkit-autofill {
     transition: background-color 600000s 0s, color 600000s 0s;
 }
+
+/* *::-webkit-scrollbar {
+    width: 6px;
+}
+  
+*::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background: #e5eaf1;
+
+}
+  
+*::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #1976d2;
+
+} */

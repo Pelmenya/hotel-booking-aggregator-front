@@ -1,4 +1,4 @@
-import { IUser } from '@/types/t-user';
+import { TUser } from '@/types/t-user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
@@ -15,7 +15,7 @@ export const authApi = createApi({
     },
     tagTypes: [],
     endpoints: (builder) => ({
-        postLogin: builder.mutation<Partial<IUser>, any>({
+        postLogin: builder.mutation<Partial<TUser>, any>({
             query: (body) => ({
                 url: 'login',
                 method: 'POST',

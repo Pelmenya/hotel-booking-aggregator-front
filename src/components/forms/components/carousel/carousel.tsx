@@ -1,6 +1,8 @@
+import { ChangeEvent } from 'react';
+
 export type TCarouselProps = {
     pictures: string[];
-    handlerChecked?: () => void;
+    handlerChecked?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const Carousel = ({ pictures, handlerChecked }: TCarouselProps) => {
