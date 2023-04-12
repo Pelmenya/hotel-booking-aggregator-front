@@ -35,10 +35,10 @@ export const ComboBox = ({
 
     // инициализация
     useEffect(() => {
-        if (!selected && items[activeIdx]) {
+        if (items[activeIdx]) {
             setSelected(items[activeIdx]);
         }
-    }, [activeIdx, items, selected]);
+    }, [activeIdx, items]);
 
     const handlerOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);

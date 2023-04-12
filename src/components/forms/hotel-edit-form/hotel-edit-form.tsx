@@ -1,6 +1,6 @@
 import { ComboBox } from '@/components/combo-box/combo-box';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { getCommonHotels, useGetCommonHotelsQuery } from '@/redux/api/common';
+import { getCommonHotels, useGetCommonHotelsQuery, useLazyGetCommonHotelsQuery } from '@/redux/api/common';
 import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';
 import { TNullable } from '@/types/t-nullable';
@@ -14,6 +14,7 @@ import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { usePutAdminHotelsMutation } from '@/redux/api/admin';
+import { title } from 'process';
 
 export type TPicture = {
     url: string;
@@ -22,12 +23,12 @@ export type TPicture = {
 
 export const HotelEditForm = () => {
     const dispatch = useAppDispatch();
-    const [hotelTitle, setHotelTitle] = useState('');
+    const [hotelTitle, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
-    const { data } = useGetCommonHotelsQuery(hotelTitle, {
-        refetchOnMountOrArgChange: true,
-        skip: false,
-    });
+    const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
+    const [ trigger, { data }] = useLazyGetCommonHotelsQuery();
+    const [dropDownItems, setDropDownItems] = useState<string[]>([]);
+
     const [putAdminHotels, { error, isError, isLoading }] =
         usePutAdminHotelsMutation();
     const [picturesFromServer, setPicturesFromServer] =
@@ -73,8 +74,10 @@ export const HotelEditForm = () => {
 
             if (updateHotel) {
                 setCurrentHotel(updateHotel);
-                dispatch(getCommonHotels.initiate(updateHotel.title));
-                dispatch(getCommonHotels.initiate(''));
+                const hotelsRes = await trigger('');
+                const idx = hotelsRes.data?.findIndex((item) =>  item.title === updateHotel.title) || 0;
+                setIdxCurrentHotel(idx);
+                setDropDownItems(hotelsRes.data?.map((hotel) => hotel.title) || [])
             }
         }
     };
@@ -108,6 +111,15 @@ export const HotelEditForm = () => {
         },
         [data]
     );
+
+    useEffect(() => {
+        trigger('');
+    }, [data, trigger])
+
+
+    useEffect(() => {
+        setDropDownItems(data?.map((hotel) => hotel.title) || []);
+    }, [data]);
 
 
     useEffect(() => {
@@ -164,8 +176,8 @@ export const HotelEditForm = () => {
             >
                 <ComboBox
                     id="EditComboBox"
-                    items={data?.map((hotel) => hotel.title) || []}
-                    activeIdx={0}
+                    items={dropDownItems}
+                    activeIdx={idxCurrentHotel}
                     label=""
                     handlerSearchItem={handlerSearchHotels}
                     handlerSetItem={handlerSetCurrentHotel}
@@ -206,6 +218,7 @@ export const HotelEditForm = () => {
                 />
             </FormWrapper>
             <PicturesGrid
+                title={'Файлы с cервера'}
                 pictures={
                     currentHotel?.images.map(
                         (picture) =>

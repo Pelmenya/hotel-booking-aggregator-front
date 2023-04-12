@@ -36,6 +36,7 @@ export const commonApi = createApi({
 export const {
     useGetAuthUserMutation,
     useGetCommonHotelsQuery,
+    useLazyGetCommonHotelsQuery,
     util: { getRunningQueriesThunk },
 } = commonApi;
 
