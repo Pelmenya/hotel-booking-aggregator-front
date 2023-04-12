@@ -5,7 +5,6 @@ import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';
 import { TNullable } from '@/types/t-nullable';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { url } from 'inspector';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
@@ -14,6 +13,7 @@ import { Input } from '../components/input/input';
 import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
+import { usePutAdminHotelsMutation } from '@/redux/api/admin';
 
 export type TPicture = {
     url: string;
@@ -24,7 +24,12 @@ export const HotelEditForm = () => {
     const dispatch = useAppDispatch();
     const [hotelTitle, setHotelTitle] = useState('');
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
-    const { data } = useGetCommonHotelsQuery(hotelTitle);
+    const { data } = useGetCommonHotelsQuery(hotelTitle, {
+        refetchOnMountOrArgChange: true,
+        skip: false,
+    });
+    const [putAdminHotels, { error, isError, isLoading }] =
+        usePutAdminHotelsMutation();
     const [picturesFromServer, setPicturesFromServer] =
         useState<TNullable<TPicture[]>>(null);
     const [picturesFromDesktop, setPicturesFromDesktop] =
@@ -53,10 +58,24 @@ export const HotelEditForm = () => {
                     formData.append('images', file);
                 });
             }
-            /*             const postHotel = await postAdminHotels(formData).unwrap();
-            if (postHotel) {
-                console.log(postHotel);
-            } */
+
+            if (picturesFromServer) {
+                picturesFromServer.forEach((picture) => {
+                    if (picture.checked) {
+                        formData.append('images', picture.url);
+                    }
+                });
+            }
+            const updateHotel = await putAdminHotels({
+                body: formData,
+                id: currentHotel?.id,
+            }).unwrap();
+
+            if (updateHotel) {
+                setCurrentHotel(updateHotel);
+                dispatch(getCommonHotels.initiate(updateHotel.title));
+                dispatch(getCommonHotels.initiate(''));
+            }
         }
     };
 
@@ -90,11 +109,6 @@ export const HotelEditForm = () => {
         [data]
     );
 
-    useEffect(() => {
-        if (hotelTitle) {
-            dispatch(getCommonHotels.initiate(hotelTitle));
-        }
-    }, [hotelTitle, dispatch]);
 
     useEffect(() => {
         if (currentHotel) {
@@ -111,6 +125,14 @@ export const HotelEditForm = () => {
         }
     }, [currentHotel, setValue]);
 
+    useEffect(() => {
+        if (data) {
+            if (!currentHotel) {
+                setCurrentHotel(data[0]);
+            }
+        }
+    }, [data, currentHotel]);
+
     const handlerCheckedPictureFromServer = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
             if (picturesFromServer) {
@@ -120,7 +142,6 @@ export const HotelEditForm = () => {
                             e.target.id ===
                             `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${item.url}`
                         ) {
-                            console.log(e.target.checked);
                             return {
                                 url: item.url,
                                 checked: e.target.checked,
@@ -178,10 +199,10 @@ export const HotelEditForm = () => {
                     reset={!!!files}
                 />
                 <SubmitBtn
-                    text="Добавить"
-                    isError={false}
-                    isLoading={false}
-                    error={{} as TError}
+                    text="Редактировать"
+                    isError={isError}
+                    isLoading={isLoading}
+                    error={error as TError}
                 />
             </FormWrapper>
             <PicturesGrid

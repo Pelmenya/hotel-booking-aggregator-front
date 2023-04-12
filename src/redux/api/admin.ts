@@ -32,6 +32,14 @@ export const adminApi = createApi({
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
+        putAdminHotels: builder.mutation<THotel, any>({
+            query: ({ id, body } ) => ({
+                url: `hotels/${id}`,
+                method: 'PUT',
+                body,
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
 
     }),
 });
@@ -40,8 +48,9 @@ export const adminApi = createApi({
 export const {
     usePostAdminUsersMutation,
     usePostAdminHotelsMutation,
+    usePutAdminHotelsMutation,
     util: { getRunningQueriesThunk },
 } = adminApi;
 
 // export endpoints for use in SSR
-export const { postAdminUsers, postAdminHotels } = adminApi.endpoints;
+export const { postAdminUsers, postAdminHotels, putAdminHotels } = adminApi.endpoints;

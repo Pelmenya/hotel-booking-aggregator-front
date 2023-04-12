@@ -10,6 +10,7 @@ import {
 import { Combobox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { TListBoxProps } from '../list-box/list-box';
+import { TNullable } from '@/types/t-nullable';
 
 export const ComboBox = ({
     id,
@@ -19,7 +20,7 @@ export const ComboBox = ({
     handlerSearchItem,
     activeIdx,
 }: TListBoxProps & { handlerSearchItem: (v: string) => void }) => {
-    const [selected, setSelected] = useState(items[activeIdx]);
+    const [selected, setSelected] = useState<TNullable<string>>(null);
 
     const [query, setQuery] = useState('');
     const defferedValue = useDeferredValue(query);
@@ -31,6 +32,13 @@ export const ComboBox = ({
     useEffect(() => {
         handlerSetItem(selected);
     }, [selected, handlerSetItem]);
+
+    // инициализация
+    useEffect(() => {
+        if (!selected && items[activeIdx]) {
+            setSelected(items[activeIdx]);
+        }
+    }, [activeIdx, items, selected]);
 
     const handlerOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
@@ -48,7 +56,7 @@ export const ComboBox = ({
                         className="w-full border-none text-sm leading-5 bg-base-100 focus:ring-0"
                         displayValue={(item: string) => item}
                         onChange={handlerOnChange}
-                        autoComplete='off'
+                        autoComplete="off"
                     />
                     <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
                         <ChevronUpDownIcon
@@ -70,9 +78,9 @@ export const ComboBox = ({
                                 Ничего не найдено.
                             </div>
                         ) : (
-                            items.map((item) => (
+                            items.map((item, idx) => (
                                 <Combobox.Option
-                                    key={item}
+                                    key={item + idx}
                                     className={({ active }) =>
                                         `relative cursor-pointer select-none mx-2 py-2 pl-10 rounded-md ${
                                             active && 'bg-base-300'

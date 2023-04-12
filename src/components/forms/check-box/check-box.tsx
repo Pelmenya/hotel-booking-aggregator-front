@@ -14,9 +14,9 @@ export const CheckBox = ({ id, onChange }: TCheckBoxProps) => {
                     id={id}
                     type="checkbox"
                     checked={checked}
-                    onClick={() => setChecked(!checked)}
+                    onClick={() => onChange ? setChecked(!checked) : ''}
                     className="checkbox checkbox-sm checkbox-primary focus:border-transparent focus:outline-none focus:ring-0"
-                    onChange={onChange}
+                    onChange={onChange ? onChange : () => {}}
                 />
             </label>
         </div>
