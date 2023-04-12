@@ -1,6 +1,10 @@
 import { ComboBox } from '@/components/combo-box/combo-box';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { getCommonHotels, useGetCommonHotelsQuery, useLazyGetCommonHotelsQuery } from '@/redux/api/common';
+import {
+    getCommonHotels,
+    useGetCommonHotelsQuery,
+    useLazyGetCommonHotelsQuery,
+} from '@/redux/api/common';
 import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';
 import { TNullable } from '@/types/t-nullable';
@@ -26,7 +30,7 @@ export const HotelEditForm = () => {
     const [hotelTitle, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
-    const [ trigger, { data }] = useLazyGetCommonHotelsQuery();
+    const [trigger, { data }] = useLazyGetCommonHotelsQuery();
     const [dropDownItems, setDropDownItems] = useState<string[]>([]);
 
     const [putAdminHotels, { error, isError, isLoading }] =
@@ -75,9 +79,14 @@ export const HotelEditForm = () => {
             if (updateHotel) {
                 setCurrentHotel(updateHotel);
                 const hotelsRes = await trigger('');
-                const idx = hotelsRes.data?.findIndex((item) =>  item.title === updateHotel.title) || 0;
+                const idx =
+                    hotelsRes.data?.findIndex(
+                        (item) => item.title === updateHotel.title
+                    ) || 0;
                 setIdxCurrentHotel(idx);
-                setDropDownItems(hotelsRes.data?.map((hotel) => hotel.title) || [])
+                setDropDownItems(
+                    hotelsRes.data?.map((hotel) => hotel.title) || []
+                );
             }
         }
     };
@@ -114,13 +123,11 @@ export const HotelEditForm = () => {
 
     useEffect(() => {
         trigger('');
-    }, [data, trigger])
-
+    }, [data, trigger]);
 
     useEffect(() => {
         setDropDownItems(data?.map((hotel) => hotel.title) || []);
     }, [data]);
-
 
     useEffect(() => {
         if (currentHotel) {
@@ -217,8 +224,20 @@ export const HotelEditForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
+            {picturesFromDesktop?.length && (
+                <>
+                    <PicturesGrid
+                        title={'Выбранные файлы'}
+                        pictures={
+                            picturesFromDesktop?.map((picure) => picure.url) ||
+                            []
+                        }
+                    />
+                    <div className="pb-2"></div>
+                </>
+            )}
             <PicturesGrid
-                title={'Файлы с cервера'}
+                title="Файлы с cервера"
                 pictures={
                     currentHotel?.images.map(
                         (picture) =>
