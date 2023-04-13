@@ -7,6 +7,7 @@ import { MenuDropdown } from './components/menu-dropdown/menu-dropdown';
 import { NotificationsLink } from './notifications-link/notifications-link';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
+import { Toggle } from '../toggle/toggle';
 
 export const Header = () => {
     const { user } = useAppSelector(getUserState);

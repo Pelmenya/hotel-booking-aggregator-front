@@ -1,28 +1,42 @@
+import { Toggle } from '@/components/toggle/toggle';
 import { CheckBox } from '../../check-box/check-box';
 import { TCarouselProps } from '../carousel/carousel';
 
-export type TPicturesGridProps =  TCarouselProps & {
+export type TPicturesGridProps = TCarouselProps & {
     title?: string;
-}
+    handlerCheckedAll?: (isChecked: boolean) => void;
+};
 
 export const PicturesGrid = ({
     pictures,
     handlerChecked,
+    handlerCheckedAll,
     title,
 }: TPicturesGridProps) => (
     <>
-        {title && <h3 className='bg-neutral px-4 py-4 mb-2 rounded-md font-medium text-neutral-content text-xl font-bold tracking-tight' >{title}</h3>}
+        {title && (
+            <div className="bg-neutral px-4 py-4 mb-2 rounded-md font-medium text-neutral-content text-xl font-bold tracking-tight flex justify-between">
+                <h3>{title}</h3>
+                {handlerCheckedAll && (
+                    <Toggle onChange={handlerCheckedAll} text="Выбрать все" />
+                )}
+            </div>
+        )}
         <div className="grid grid-cols-6 gap-2">
-            {pictures.map((picture) => (
+            {pictures.map((picture, idx) => (
                 <div
-                    key={picture}
+                    key={String(idx) + picture}
                     className="bg-base-200 flex rounded-md px-2 py-2 items-center justify-center relative"
                 >
                     <picture>
-                        <img className="h-20" src={picture} alt="" />
+                        <img className="h-20" src={picture.url} alt="" />
                     </picture>
                     {handlerChecked ? (
-                        <CheckBox id={picture} onChange={handlerChecked} />
+                        <CheckBox
+                            id={picture.url}
+                            onChange={handlerChecked}
+                            isChecked={picture.checked}
+                        />
                     ) : (
                         <></>
                     )}

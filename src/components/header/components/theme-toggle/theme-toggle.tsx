@@ -6,7 +6,7 @@ export const ThemeToggle = () => {
 
     useEffect(() => {
         themeChange(false);
-        const localStorageTheme = localStorage.getItem('theme') 
+        const localStorageTheme = localStorage.getItem('theme');
         if (localStorageTheme) {
             if (localStorageTheme === 'dark') {
                 setIsChecked(true);
@@ -42,6 +42,7 @@ export const ThemeToggle = () => {
                     </svg>
                 </span>
                 <input
+                    id="ToggleTheme"
                     type="checkbox"
                     className="toggle toggle-primary toggle-sm hidden"
                     checked={isChecked}

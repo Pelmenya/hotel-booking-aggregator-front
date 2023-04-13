@@ -47,13 +47,13 @@ export const ComboBox = ({
     return (
         <Combobox value={selected} onChange={setSelected}>
             <div className="relative mt-1 text-base-content">
-                <div className="text-left relative w-full block overflow-hidden rounded-md bg-transparent border border-gray-200 pt-1 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
+                <div className="text-left relative w-full block overflow-hidden rounded-lg bg-transparent border border-gray-200 shadow-sm px-3 py-3 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
                     <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
                         {label}
                     </span>
                     <Combobox.Input
                         id={id}
-                        className="w-full border-none text-sm leading-5 bg-base-100 focus:ring-0"
+                        className="peer w-full border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
                         displayValue={(item: string) => item}
                         onChange={handlerOnChange}
                         autoComplete="off"

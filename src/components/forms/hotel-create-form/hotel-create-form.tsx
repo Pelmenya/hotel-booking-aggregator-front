@@ -93,7 +93,16 @@ export const HotelCreateForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
-            {pictures ? <PicturesGrid pictures={pictures} /> : <></>}
+            {pictures ? (
+                <PicturesGrid
+                    pictures={pictures.map((item) => ({
+                        url: item,
+                        checked: false,
+                    }))}
+                />
+            ) : (
+                <></>
+            )}
         </>
     );
 };

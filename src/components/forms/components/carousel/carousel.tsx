@@ -1,7 +1,8 @@
 import { ChangeEvent } from 'react';
+import { TPicture } from '../../hotel-edit-form/hotel-edit-form';
 
 export type TCarouselProps = {
-    pictures: string[];
+    pictures: TPicture[];
     handlerChecked?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -11,12 +12,12 @@ export const Carousel = ({ pictures, handlerChecked }: TCarouselProps) => {
             <div className="carousel w-full">
                 {pictures.map((picture, index, arr) => (
                     <div
-                        key={picture}
+                        key={picture.url}
                         id={`slide${index + 1}`}
                         className="carousel-item relative w-full flex items-center justify-center"
                     >
                         <picture>
-                            <img src={picture} className="h-52" alt="" />
+                            <img src={picture.url} className="h-52" alt="" />
                         </picture>
                         {pictures.length > 1 ? (
                             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

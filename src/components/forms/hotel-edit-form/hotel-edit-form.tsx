@@ -1,10 +1,6 @@
 import { ComboBox } from '@/components/combo-box/combo-box';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import {
-    getCommonHotels,
-    useGetCommonHotelsQuery,
-    useLazyGetCommonHotelsQuery,
-} from '@/redux/api/common';
+import { useLazyGetCommonHotelsQuery } from '@/redux/api/common';
 import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';
 import { TNullable } from '@/types/t-nullable';
@@ -18,7 +14,6 @@ import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { usePutAdminHotelsMutation } from '@/redux/api/admin';
-import { title } from 'process';
 
 export type TPicture = {
     url: string;
@@ -26,7 +21,6 @@ export type TPicture = {
 };
 
 export const HotelEditForm = () => {
-    const dispatch = useAppDispatch();
     const [hotelTitle, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
@@ -47,7 +41,6 @@ export const HotelEditForm = () => {
         control,
         formState: { errors },
         setValue,
-        getValues,
     } = useForm({
         resolver: yupResolver(schemaHotelForm),
         reValidateMode: 'onChange',
@@ -67,7 +60,13 @@ export const HotelEditForm = () => {
             if (picturesFromServer) {
                 picturesFromServer.forEach((picture) => {
                     if (picture.checked) {
-                        formData.append('images', picture.url);
+                        formData.append(
+                            'images',
+                            picture.url.replace(
+                                `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}`,
+                                ''
+                            )
+                        );
                     }
                 });
             }
@@ -137,7 +136,7 @@ export const HotelEditForm = () => {
             setFiles(undefined);
             setPicturesFromServer(
                 currentHotel?.images.map((pic) => ({
-                    url: pic,
+                    url: `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${pic}`,
                     checked: true,
                 }))
             );
@@ -157,10 +156,7 @@ export const HotelEditForm = () => {
             if (picturesFromServer) {
                 setPicturesFromServer(
                     picturesFromServer?.map((item) => {
-                        if (
-                            e.target.id ===
-                            `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${item.url}`
-                        ) {
+                        if (e.target.id === item.url) {
                             return {
                                 url: item.url,
                                 checked: e.target.checked,
@@ -168,6 +164,20 @@ export const HotelEditForm = () => {
                         }
                         return item;
                     })
+                );
+            }
+        },
+        [picturesFromServer]
+    );
+
+    const handlerCheckedAllPictureFromServer = useCallback(
+        (isChecked: boolean) => {
+            if (picturesFromServer) {
+                setPicturesFromServer(
+                    picturesFromServer.map((item) => ({
+                        url: item.url,
+                        checked: isChecked,
+                    }))
                 );
             }
         },
@@ -228,24 +238,19 @@ export const HotelEditForm = () => {
                 <>
                     <PicturesGrid
                         title={'Выбранные файлы'}
-                        pictures={
-                            picturesFromDesktop?.map((picure) => picure.url) ||
-                            []
-                        }
+                        pictures={picturesFromDesktop || []}
                     />
                     <div className="pb-2"></div>
                 </>
             )}
-            <PicturesGrid
-                title="Файлы с cервера"
-                pictures={
-                    currentHotel?.images.map(
-                        (picture) =>
-                            `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${picture}`
-                    ) || []
-                }
-                handlerChecked={handlerCheckedPictureFromServer}
-            />
+            {picturesFromServer?.length && (
+                <PicturesGrid
+                    title="Файлы с cервера"
+                    pictures={picturesFromServer || []}
+                    handlerChecked={handlerCheckedPictureFromServer}
+                    handlerCheckedAll={handlerCheckedAllPictureFromServer}
+                />
+            )}
         </>
     );
 };
