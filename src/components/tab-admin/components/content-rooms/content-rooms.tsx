@@ -1,6 +1,6 @@
 export const ContentRooms = () => {
 
     return <div>
-        fff
+        Здесь будут CRUD операции по вариантам размещения
     </div>
 }

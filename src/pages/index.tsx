@@ -1,7 +1,22 @@
+import { MainPage } from '@/components/main-page/main-page';
 import { Layout } from '@/layout/layout';
+import { getCommonHotels, getRunningQueriesThunk } from '@/redux/api/common';
+import { wrapper } from '@/redux/store/store';
 
-export default function Home() {
+export default function Main() {
     return <Layout title="Hotel Booking Aggregator ~ Главная">
-        <div>HOME PAGE</div>
+        <MainPage />
     </Layout>;
 }
+
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
+    
+    store.dispatch(getCommonHotels.initiate(''));
+
+    await Promise.all(store.dispatch(getRunningQueriesThunk()));
+
+    return {
+        props: {
+        },
+    };
+});

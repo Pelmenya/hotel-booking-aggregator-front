@@ -26,6 +26,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/providers/auth-provider", "src/components/forms/components/form-wrapper"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/providers/auth-provider", "src/components/forms/components/form-wrapper", "src/components/main-page/components/hotel-card"],
   "exclude": ["node_modules"]
 }

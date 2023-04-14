@@ -222,7 +222,7 @@ export const HotelEditForm = () => {
                     control={control}
                     handlerOnChange={handlerOnChangePictures}
                     multiple={true}
-                    accept="image/*"
+                    accept=""
                     id="HotelImages"
                     placeholder="Фото отеля"
                     reset={!!!files}
@@ -234,7 +234,7 @@ export const HotelEditForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
-            {picturesFromDesktop?.length && (
+            {picturesFromDesktop?.length ? (
                 <>
                     <PicturesGrid
                         title={'Выбранные файлы'}
@@ -242,15 +242,15 @@ export const HotelEditForm = () => {
                     />
                     <div className="pb-2"></div>
                 </>
-            )}
-            {picturesFromServer?.length && (
+            ) : null }
+            {picturesFromServer?.length ? (
                 <PicturesGrid
                     title="Файлы с cервера"
                     pictures={picturesFromServer || []}
                     handlerChecked={handlerCheckedPictureFromServer}
                     handlerCheckedAll={handlerCheckedAllPictureFromServer}
                 />
-            )}
+            ) : null}
         </>
     );
 };

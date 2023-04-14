@@ -82,7 +82,7 @@ export const HotelCreateForm = () => {
                     control={control}
                     handlerOnChange={handlerOnChangePictures}
                     multiple={true}
-                    accept="image/*"
+                    accept=""
                     id="HotelImages"
                     placeholder="Фото отеля"
                 />

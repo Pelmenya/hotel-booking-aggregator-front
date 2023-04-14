@@ -1,5 +1,5 @@
 import { Toggle } from '@/components/toggle/toggle';
-import { CheckBox } from '../../check-box/check-box';
+import { CheckBox } from '../check-box/check-box';
 import { TCarouselProps } from '../carousel/carousel';
 
 export type TPicturesGridProps = TCarouselProps & {
