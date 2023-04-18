@@ -1,4 +1,4 @@
-import { MainPage } from '@/components/main-page/main-page';
+import { MainPage } from '@/components/pages/main-page/main-page';
 import { Layout } from '@/layout/layout';
 import { getCommonHotels, getRunningQueriesThunk } from '@/redux/api/common';
 import { wrapper } from '@/redux/store/store';

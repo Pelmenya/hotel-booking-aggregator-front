@@ -3,4 +3,6 @@ export type THotel = {
     title: string;
     description: string;
     images: string[];
+    createAt?: string;
+    updateAt?: string;
 }

@@ -1,9 +1,12 @@
 import { Toggle } from '@/components/toggle/toggle';
 import { CheckBox } from '../check-box/check-box';
-import { TCarouselProps } from '../carousel/carousel';
+import { ChangeEvent } from 'react';
+import { TPicture } from '../../hotel-edit-form/hotel-edit-form';
 
-export type TPicturesGridProps = TCarouselProps & {
+export type TPicturesGridProps = {
     title?: string;
+    pictures: TPicture[];
+    handlerChecked?: (e: ChangeEvent<HTMLInputElement>) => void;
     handlerCheckedAll?: (isChecked: boolean) => void;
 };
 

@@ -1,5 +1,4 @@
 import { ComboBox } from '@/components/combo-box/combo-box';
-import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useLazyGetCommonHotelsQuery } from '@/redux/api/common';
 import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';

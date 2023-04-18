@@ -7,7 +7,6 @@ import { MenuDropdown } from './components/menu-dropdown/menu-dropdown';
 import { NotificationsLink } from './notifications-link/notifications-link';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
-import { Toggle } from '../toggle/toggle';
 
 export const Header = () => {
     const { user } = useAppSelector(getUserState);
@@ -20,7 +19,7 @@ export const Header = () => {
 
     return (
         <header>
-            <nav className="bg-base-200">
+            <nav className="bg-base-200 shadow-xl">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-6">
                     <div className="relative flex h-16 items-center justify-between sm:px-6 lg:px-8">
                         <DesktopHeader user={user} />

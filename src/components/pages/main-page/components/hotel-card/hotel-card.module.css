@@ -1,0 +1,14 @@
+.description {
+    display: -webkit-box;
+
+    overflow: hidden;
+
+    height: 7rem;
+    margin-top: 1rem;
+
+    text-overflow: ellipsis;
+
+    line-height: 1.4rem;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
