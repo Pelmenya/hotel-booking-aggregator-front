@@ -1,10 +1,15 @@
-import { useGetCommonHotelByIdQuery } from '@/redux/api/common';
+import { DataJson } from '@/components/data-json/data-json';
+import { ImagesGrid } from '@/components/images-grid/images-grid';
+import { THotel } from '@/types/t-hotel';
 
-export const HotelPage = ({ id }: { id: string }) => {
-    const { data } = useGetCommonHotelByIdQuery(id);
+export type THotelPageProps = {
+    hotel?: THotel
+}
+export const HotelPage = ({ hotel }: THotelPageProps) => {
     return (
         <>
-            <div><pre>{JSON.stringify(data, null, 2)}</pre></div>
+            {hotel?.images.length ? <ImagesGrid images={hotel.images} /> : null}
+            <DataJson data={hotel} />
         </>
     );
 };

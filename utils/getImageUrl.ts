@@ -1,0 +1,1 @@
+export const getImageUrl = (image: string): string => `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${image}` 

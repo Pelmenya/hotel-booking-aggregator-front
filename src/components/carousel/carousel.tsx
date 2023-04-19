@@ -1,18 +1,20 @@
 import { ChangeEvent, useState } from 'react';
 import cn from 'classnames';
+import { getImageUrl } from 'utils/getImageUrl';
 
 export type TCarouselProps = {
     pictures: string[];
     idx: string;
-    handlerChecked?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Carousel = ({ idx, pictures, handlerChecked }: TCarouselProps) => {
+export const Carousel = ({ idx, pictures }: TCarouselProps) => {
     const [isArrows, setArrows] = useState(false);
+
+
 
     return (
         <div
-            className="carousel max-w-md w-52 rounded-l-3xl bg-gray-800 cursor-pointer"
+            className="carousel max-w-md sm:max-w-none rounded-t-3xl sm:rounded-t-3xl md:w-52 sm:w-full md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer"
             onMouseOver={() => setArrows(true)}
             onMouseOut={() => setArrows(false)}
         >
@@ -20,12 +22,12 @@ export const Carousel = ({ idx, pictures, handlerChecked }: TCarouselProps) => {
                 <div
                     key={picture}
                     id={`slide${idx}${index + 1}`}
-                    className="carousel-item relative max-w-md w-full flex items-center justify-center"
+                    className="carousel-item relative w-full max-w-md sm:max-w-none flex items-center justify-center"
                 >
                     <picture>
                         <img
-                            src={`${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${picture}`}
-                            className="object-cover h-52 w-52"
+                            src={getImageUrl(picture)}
+                            className="object-cover h-52 sm:w-full md:w-52"
                             alt=""
                         />
                     </picture>

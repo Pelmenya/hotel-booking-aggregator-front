@@ -13,6 +13,8 @@ import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { usePutAdminHotelsMutation } from '@/redux/api/admin';
+import { getImageUrl } from 'utils/getImageUrl';
+import { getBaseImageUrl } from 'utils/getBaseImageUrl';
 
 export type TPicture = {
     url: string;
@@ -61,10 +63,7 @@ export const HotelEditForm = () => {
                     if (picture.checked) {
                         formData.append(
                             'images',
-                            picture.url.replace(
-                                `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}`,
-                                ''
-                            )
+                            getBaseImageUrl(picture.url),
                         );
                     }
                 });
@@ -135,7 +134,7 @@ export const HotelEditForm = () => {
             setFiles(undefined);
             setPicturesFromServer(
                 currentHotel?.images.map((pic) => ({
-                    url: `${process.env.NEXT_PUBLIC_BASE_PICTURES_URL}${pic}`,
+                    url: getImageUrl(pic),
                     checked: true,
                 }))
             );

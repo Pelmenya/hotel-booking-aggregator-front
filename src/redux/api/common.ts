@@ -29,7 +29,7 @@ export const commonApi = createApi({
                 method: 'GET'
             })
         }),
-        getCommonHotelById: builder.query<THotel[], string>({
+        getCommonHotelById: builder.query<THotel, string>({
             query: (id: string) => ({
                 url: `/hotels/${id}`,
                 method: 'GET'

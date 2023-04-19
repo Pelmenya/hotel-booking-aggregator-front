@@ -15,7 +15,7 @@ export const HotelsList = () => {
     return (
         <>
             {data ? (
-                <div className='grid grid-cols-2 gap-4 py-4'>
+                <div className='grid gap-4 py-4 sm:grid-cols-1 md:grid-cols-2'>
                     {data.map((hotel) => (
                         <HotelCard key={hotel.id} {...hotel} onClick={handlerOnClickCard}/>
                     ))}
