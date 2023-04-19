@@ -4,11 +4,13 @@ import styles from './images-grid.module.css';
 
 export type TImagesGridProps = {
     images: string[];
-}
+};
 
 export const ImagesGrid = ({ images }: TImagesGridProps) => {
+    const gridItems = [1, 2, 3, 4];
+
     return (
-        <div className="grid grid-cols-2 gap-4 max-h-[400px] min-h-[280px] h-full">
+        <div className="grid grid-cols-2 gap-4 max-h-[400px] min-h-[280px] h-full cursor-pointer">
             {images[0] ? (
                 <picture className="h-full w-full max-h-[400px] min-h-[280px]">
                     <img
@@ -19,18 +21,28 @@ export const ImagesGrid = ({ images }: TImagesGridProps) => {
                 </picture>
             ) : null}
             <div className="flex w-full flex-wrap gap-4 max-h-[400px] min-h-[280px]">
-                {[1, 2, 3, 4].map((num) =>
+                {gridItems.map((num) =>
                     images[num] ? (
-                        <picture
+                        <div
                             key={images[num]}
-                            className={cn('h-[48%]', styles.pic)}
+                            className={cn('h-[48%] relative', styles.pic)}
                         >
-                            <img
-                                className="object-cover w-full h-full rounded-3xl"
-                                src={getImageUrl(images[num])}
-                                alt=""
-                            />
-                        </picture>
+                            <>
+                                <picture>
+                                    <img
+                                        className="object-cover w-full h-full rounded-3xl"
+                                        src={getImageUrl(images[num])}
+                                        alt=""
+                                    />
+                                </picture>
+                                {num === 4 ? ( 
+                                    <>
+                                        <div className="absolute top-0 left-0 flex items-center bg-black opacity-50 justify-center w-full h-full rounded-3xl" />
+                                        <p className={cn('absolute text-white block font-bold text-4xl whitespace-nowrap top-[50%] left-[50%]', styles.num)}>+ {images.length - gridItems.length - 1}</p>
+                                    </>
+                                ) : null}
+                            </>
+                        </div>
                     ) : null
                 )}
             </div>

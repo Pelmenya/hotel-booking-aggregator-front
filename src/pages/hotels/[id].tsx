@@ -1,13 +1,17 @@
 import { HotelPage } from '@/components/pages/hotel-page/hotel-page';
 import { Layout } from '@/layout/layout';
-import { getCommonHotelById, getRunningQueriesThunk, useGetCommonHotelByIdQuery } from '@/redux/api/common';
+import {
+    getCommonHotelById,
+    getRunningQueriesThunk,
+    useGetCommonHotelByIdQuery,
+} from '@/redux/api/common';
 import { wrapper } from '@/redux/store/store';
 
 export default function Hotel({ id }: { id: string }) {
     const { data } = useGetCommonHotelByIdQuery(id);
     return (
         <Layout title={`Hotel Booking Aggregator ~ ${data?.title}`}>
-            <HotelPage hotel={data}/>
+            {data ? <HotelPage hotel={data} /> : null}
         </Layout>
     );
 }

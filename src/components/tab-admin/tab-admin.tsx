@@ -7,7 +7,7 @@ import { ContentRooms } from './components/content-rooms/content-rooms';
 export const TabAdmin = () => {
     const [tab, setTab] = useState<'hotels' | 'hotel-rooms'>('hotels');
     return (
-        <div className="tabs mx-auto max-w-7xl py-6 px-2 sm:px-6 w-full grid">
+        <div className="tabs mx-auto max-w-7xl py-6 w-full grid">
             <nav>
                 <button
                     onClick={() => setTab('hotels')}
