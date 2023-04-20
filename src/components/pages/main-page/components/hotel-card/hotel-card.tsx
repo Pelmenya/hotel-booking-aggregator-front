@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { Carousel } from '@/components/carousel/carousel';
+import { Carousel } from '@/components/pages/main-page/components/hotel-card/components/carousel/carousel';
 import { THotel } from '@/types/t-hotel';
 import styles from './hotel-card.module.css';
 

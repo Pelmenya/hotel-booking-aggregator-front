@@ -4,13 +4,14 @@ import styles from './images-grid.module.css';
 
 export type TImagesGridProps = {
     images: string[];
+    onClick: () => void;
 };
 
-export const ImagesGrid = ({ images }: TImagesGridProps) => {
+export const ImagesGrid = ({ images, onClick }: TImagesGridProps) => {
     const gridItems = [1, 2, 3, 4];
 
     return (
-        <div className="grid grid-cols-2 gap-4 max-h-[400px] min-h-[280px] h-full cursor-pointer">
+        <div onClick={onClick} className="grid grid-cols-2 gap-4 max-h-[400px] min-h-[280px] h-full cursor-pointer">
             {images[0] ? (
                 <picture className="h-full w-full max-h-[400px] min-h-[280px]">
                     <img

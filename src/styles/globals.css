@@ -12,14 +12,18 @@ input:-webkit-autofill {
 *::-webkit-scrollbar {
     width: 6px;
 }
-  
+
 *::-webkit-scrollbar-track {
     border-radius: 4px;
     background: #e5eaf1;
-
 }
-  
+
 *::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background: #570DF8;
+    background: #570df8;
+}
+
+html,
+body {
+    scrollbar-gutter: stable;
 }
