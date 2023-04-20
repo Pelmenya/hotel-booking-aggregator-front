@@ -11,18 +11,20 @@ export const CarouselFullPicPreview = ({ images }: { images: string[] }) => {
                     <div
                         id={url}
                         key={url}
-                        className={cn('carousel-item w-full items-center justify-center max-h-screen', styles.pic) }
+                        className={cn('carousel-item w-full items-center justify-center') }
                     >
                         <picture>
-                            <img src={getImageUrl(url)} alt="" />
+                            <img className={cn('rounded-3xl', styles.pic)} src={getImageUrl(url)} alt="" />
                         </picture>
                     </div>
                 ))}
             </div>
             <div className="flex w-full py-2 gap-2 overflow-x-auto">
                 {images.map((url, idx) => (
-                    <a href={`#${url}`} key={url+idx} className="btn">
-
+                    <a href={`#${url}`} key={url+idx} className="flex shrink-0">
+                        <picture>
+                            <img className='h-12 w-12 rounded' src={getImageUrl(url)} alt="" />
+                        </picture>
                     </a>
                 ))}
             </div>

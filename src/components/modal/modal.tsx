@@ -14,11 +14,14 @@ export const Modal = ({
     handlerClose,
     children,
 }: TModalProps) => {
-
     return (
         <>
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={handlerClose}>
+                <Dialog
+                    as="div"
+                    className="relative z-10"
+                    onClose={handlerClose}
+                >
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -31,7 +34,7 @@ export const Modal = ({
                         <div className="fixed inset-0 bg-black bg-opacity-50" />
                     </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-y-auto">
+                    <div className="fixed inset-0 overflow-y-auto flex items-center justify-center">
                         <div className="flex min-h-full items-center justify-center p-8 text-center">
                             <Transition.Child
                                 as={Fragment}
@@ -42,7 +45,23 @@ export const Modal = ({
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="transform overflow-hidden rounded-3xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all max-w-full max-h-full">
+                                <Dialog.Panel className="transform relative overflow-hidden rounded-3xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all max-w-full max-h-full">
+                                    <button onClick={handlerClose} className="btn btn-circle btn-outline absolute right-4 top-4">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-6 w-6"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
+                                    </button>
                                     <Dialog.Title
                                         as="h3"
                                         className="text-3xl font-bold leading-6"
