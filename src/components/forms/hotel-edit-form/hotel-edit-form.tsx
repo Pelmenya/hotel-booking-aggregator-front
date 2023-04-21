@@ -15,11 +15,7 @@ import { schemaHotelForm } from '../schemas/yup.schemas';
 import { usePutAdminHotelsMutation } from '@/redux/api/admin';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getBaseImageUrl } from 'utils/getBaseImageUrl';
-
-export type TPicture = {
-    url: string;
-    checked: boolean;
-};
+import { TPicture } from '@/types/t-picture';
 
 export const HotelEditForm = () => {
     const [hotelTitle, setHotelTitle] = useState(''); // для поиска в БД
