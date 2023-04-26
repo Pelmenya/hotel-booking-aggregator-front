@@ -7,7 +7,7 @@ export const adminApi = createApi({
     reducerPath: 'admin',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/admin',
-        
+
     }),
     extractRehydrationInfo(action, { reducerPath }) {
         if (action.type === HYDRATE) {
@@ -33,14 +33,21 @@ export const adminApi = createApi({
             }),
         }),
         putAdminHotels: builder.mutation<THotel, any>({
-            query: ({ id, body } ) => ({
+            query: ({ id, body }) => ({
                 url: `hotels/${id}`,
                 method: 'PUT',
                 body,
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
-
+        postAdminHotelRoom: builder.mutation<THotel, any>({
+            query: (body) => ({
+                url: 'hotel-rooms',
+                method: 'POST',
+                body,
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
     }),
 });
 
@@ -49,8 +56,14 @@ export const {
     usePostAdminUsersMutation,
     usePostAdminHotelsMutation,
     usePutAdminHotelsMutation,
+    usePostAdminHotelRoomMutation,
     util: { getRunningQueriesThunk },
 } = adminApi;
 
 // export endpoints for use in SSR
-export const { postAdminUsers, postAdminHotels, putAdminHotels } = adminApi.endpoints;
+export const { 
+    postAdminUsers, 
+    postAdminHotels, 
+    putAdminHotels, 
+    postAdminHotelRoom 
+} = adminApi.endpoints;
