@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { HotelEditForm } from '@/components/forms/hotel-edit-form/hotel-edit-form';
 import { TabMenuLink } from '../tab-menu-link/tab-menu-link';
 import { HotelRoomCreateForm } from '@/components/forms/hotel-room-create-form/hotel-room-create-form';
+import { HotelRoomEditForm } from '@/components/forms/hotel-room-edit-form.tsx/hotel-room-edit-form';
 
 export const ContentRooms = () => {
     const router = useRouter();
@@ -35,7 +36,7 @@ export const ContentRooms = () => {
             </div>
             <div className="col-span-4 bg-base-100 px-4 py-4 rounded-md">
                 {!isEdit && !isDelete && <HotelRoomCreateForm/>}
-                {isEdit && <HotelEditForm />}
+                {isEdit && <HotelRoomEditForm />}
             </div>
         </div>
     );

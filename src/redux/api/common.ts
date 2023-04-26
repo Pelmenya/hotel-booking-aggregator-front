@@ -1,4 +1,6 @@
+import { TSearchBaseParams } from '@/types/t-base-search-params';
 import { THotel } from '@/types/t-hotel';
+import { THotelRoom } from '@/types/t-hotel-room';
 import { TUser } from '@/types/t-user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
@@ -34,7 +36,13 @@ export const commonApi = createApi({
                 url: `/hotels/${id}`,
                 method: 'GET'
             })
-        })
+        }),
+        getCommonHotelRooms: builder.query<THotelRoom[], TSearchBaseParams & { hotel: string }>({
+            query: ({ limit = 20, offset = 0, hotel }: TSearchBaseParams & { hotel: string }) => ({
+                url: `/hotel-rooms?limit=${limit}&offset=${offset}&hotel=${hotel}`,
+                method: 'GET'
+            })
+        }),
     }),
 });
 
@@ -44,8 +52,10 @@ export const {
     useGetCommonHotelsQuery,
     useGetCommonHotelByIdQuery,
     useLazyGetCommonHotelsQuery,
+    useGetCommonHotelRoomsQuery,
+    useLazyGetCommonHotelRoomsQuery,
     util: { getRunningQueriesThunk },
 } = commonApi;
 
 // export endpoints for use in SSR
-export const { getAuthUser, getCommonHotels, getCommonHotelById } = commonApi.endpoints;
+export const { getAuthUser, getCommonHotels, getCommonHotelById, getCommonHotelRooms } = commonApi.endpoints;

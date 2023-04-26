@@ -1,4 +1,4 @@
-import { usePostAdminHotelRoomMutation, usePostAdminHotelsMutation } from '@/redux/api/admin';
+import { usePostAdminHotelRoomsMutation, usePostAdminHotelsMutation } from '@/redux/api/admin';
 import { TError } from '@/types/t-error';
 import { TNullable } from '@/types/t-nullable';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,8 +20,8 @@ export const HotelRoomCreateForm = () => {
     const [trigger, { data }] = useLazyGetCommonHotelsQuery();
     const [dropDownItems, setDropDownItems] = useState<string[]>([]);
 
-    const [postAdminHotelRoom, { isLoading, isError, error }] =
-        usePostAdminHotelRoomMutation();
+    const [postAdminHotelRooms, { isLoading, isError, error }] =
+        usePostAdminHotelRoomsMutation();
 
     const [pictures, setPictures] = useState<TNullable<string[]>>(null);
     const [files, setFiles] = useState<FileList>();
@@ -48,7 +48,7 @@ export const HotelRoomCreateForm = () => {
                     formData.append('images', file);
                 });
             }
-            await postAdminHotelRoom(formData).unwrap();
+            await postAdminHotelRooms(formData).unwrap();
         }
     };
 

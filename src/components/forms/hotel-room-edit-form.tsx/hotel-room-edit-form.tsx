@@ -1,5 +1,8 @@
 import { ComboBox } from '@/components/combo-box/combo-box';
-import { useLazyGetCommonHotelsQuery } from '@/redux/api/common';
+import {
+    useLazyGetCommonHotelRoomsQuery,
+    useLazyGetCommonHotelsQuery,
+} from '@/redux/api/common';
 import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';
 import { TNullable } from '@/types/t-nullable';
@@ -12,20 +15,33 @@ import { Input } from '../components/input/input';
 import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
-import { usePutAdminHotelsMutation } from '@/redux/api/admin';
+import {
+    usePutAdminHotelRoomsMutation,
+    usePutAdminHotelsMutation,
+} from '@/redux/api/admin';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getBaseImageUrl } from 'utils/getBaseImageUrl';
 import { TPicture } from '@/types/t-picture';
+import { THotelRoom } from '@/types/t-hotel-room';
 
 export const HotelRoomEditForm = () => {
     const [hotelTitle, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
-    const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
-    const [trigger, { data }] = useLazyGetCommonHotelsQuery();
-    const [dropDownItems, setDropDownItems] = useState<string[]>([]);
+    const [currentHotelRoom, setCurrentHotelRoom] =
+        useState<TNullable<THotelRoom>>(null);
 
-    const [putAdminHotels, { error, isError, isLoading }] =
-        usePutAdminHotelsMutation();
+    const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
+    const [idxCurrentHotelRoom, setIdxCurrentHotelRoom] = useState(0);
+
+    const [triggerHotel, { data: dataHotels }] = useLazyGetCommonHotelsQuery();
+    const [triggerHotelRoom, { data: dataHotelRooms }] =
+        useLazyGetCommonHotelRoomsQuery();
+
+    const [dropDownItems, setDropDownItems] = useState<string[]>([]);
+    const [dropDownRoomItems, setDropDownRoomItems] = useState<string[]>([]);
+
+    const [putAdminHotelRooms, { error, isError, isLoading }] =
+        usePutAdminHotelRoomsMutation();
     const [picturesFromServer, setPicturesFromServer] =
         useState<TNullable<TPicture[]>>(null);
     const [picturesFromDesktop, setPicturesFromDesktop] =
@@ -46,6 +62,7 @@ export const HotelRoomEditForm = () => {
     const onSubmit = async (dto: FieldValues) => {
         if (dto) {
             const formData = new FormData();
+            formData.append('hotel', currentHotel?.id || '');
             formData.append('title', dto.title);
             formData.append('description', dto.description);
             if (files) {
@@ -57,29 +74,30 @@ export const HotelRoomEditForm = () => {
             if (picturesFromServer) {
                 picturesFromServer.forEach((picture) => {
                     if (picture.checked) {
-                        formData.append(
-                            'images',
-                            getBaseImageUrl(picture.url),
-                        );
+                        formData.append('images', getBaseImageUrl(picture.url));
                     }
                 });
             }
-            const updateHotel = await putAdminHotels({
+            const updateHotelRoom = await putAdminHotelRooms({
                 body: formData,
-                id: currentHotel?.id,
+                id: currentHotelRoom?.id,
             }).unwrap();
 
-            if (updateHotel) {
-                setCurrentHotel(updateHotel);
-                const hotelsRes = await trigger('');
-                const idx =
-                    hotelsRes.data?.findIndex(
-                        (item) => item.title === updateHotel.title
-                    ) || 0;
-                setIdxCurrentHotel(idx);
-                setDropDownItems(
-                    hotelsRes.data?.map((hotel) => hotel.title) || []
-                );
+            if (updateHotelRoom) {
+                setCurrentHotelRoom(updateHotelRoom);
+                if (currentHotel) {
+                    const hotelRoomsRes = await triggerHotelRoom({
+                        hotel: currentHotel.id,
+                    });
+                    const idx =
+                        hotelRoomsRes.data?.findIndex(
+                            (item) => item.title === updateHotelRoom.title
+                        ) || 0;
+                    setIdxCurrentHotelRoom(idx);
+                    setDropDownRoomItems(
+                        hotelRoomsRes.data?.map((hotel) => hotel.title) || []
+                    );
+                }
             }
         }
     };
@@ -106,44 +124,88 @@ export const HotelRoomEditForm = () => {
 
     const handlerSetCurrentHotel = useCallback(
         (title: string) => {
-            const hotel = data?.find((hotel) => hotel.title === title);
+            const hotel = dataHotels?.find((hotel) => hotel.title === title);
             if (hotel) {
                 setCurrentHotel(hotel);
+                triggerHotelRoom({ hotel: hotel.id });
             }
         },
-        [data]
+        [dataHotels, triggerHotelRoom]
     );
 
+    const handlerSetCurrentHotelRoom = useCallback(
+        (title: string) => {
+            const room = dataHotelRooms?.find((room) => room.title === title);
+            if (room) {
+                setCurrentHotelRoom(room);
+            }
+        },
+        [dataHotelRooms]
+    );
     useEffect(() => {
-        trigger('');
-    }, [data, trigger]);
-
-    useEffect(() => {
-        setDropDownItems(data?.map((hotel) => hotel.title) || []);
-    }, [data]);
+        triggerHotel('');
+    }, [dataHotels, triggerHotel]);
 
     useEffect(() => {
         if (currentHotel) {
-            setValue('title', currentHotel.title);
-            setValue('description', currentHotel.description);
+            triggerHotelRoom({ hotel: currentHotel.id });
+        }
+    }, [dataHotelRooms, triggerHotelRoom, currentHotel]);
+
+    useEffect(() => {
+        setDropDownItems(dataHotels?.map((hotel) => hotel.title) || []);
+    }, [dataHotels]);
+
+    useEffect(() => {
+        setDropDownRoomItems(dataHotelRooms?.map((room) => room.title) || []);
+    }, [dataHotelRooms]);
+
+    useEffect(() => {
+        if (currentHotelRoom) {
+            setValue('title', currentHotelRoom.title);
+            setValue('description', currentHotelRoom.description);
             setPicturesFromDesktop(null);
             setFiles(undefined);
             setPicturesFromServer(
-                currentHotel?.images.map((pic) => ({
+                currentHotelRoom?.images.map((pic) => ({
                     url: getImageUrl(pic),
                     checked: true,
                 }))
             );
         }
-    }, [currentHotel, setValue]);
+    }, [currentHotel, currentHotelRoom, setValue]);
 
     useEffect(() => {
-        if (data) {
+        if (dataHotels) {
             if (!currentHotel) {
-                setCurrentHotel(data[0]);
+                setCurrentHotel(dataHotels[0]);
+                triggerHotelRoom({ hotel: dataHotels[0].id });
             }
         }
-    }, [data, currentHotel]);
+    }, [dataHotels, currentHotel, triggerHotelRoom]);
+
+    useEffect(() => {
+        if (dataHotelRooms) {
+            if (!currentHotelRoom) {
+                setCurrentHotelRoom(dataHotelRooms[0]);
+            }
+        }
+    }, [dataHotelRooms, currentHotelRoom, currentHotel, triggerHotelRoom]);
+
+    useEffect(() => {
+        if (currentHotelRoom) {
+            setValue('title', currentHotelRoom.title);
+            setValue('description', currentHotelRoom.description);
+            setPicturesFromDesktop(null);
+            setFiles(undefined);
+            setPicturesFromServer(
+                currentHotelRoom?.images.map((pic) => ({
+                    url: getImageUrl(pic),
+                    checked: true,
+                }))
+            );
+        }
+    }, [currentHotelRoom, setValue, currentHotel]);
 
     const handlerCheckedPictureFromServer = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -181,54 +243,68 @@ export const HotelRoomEditForm = () => {
     return (
         <>
             <FormWrapper
-                title="Редактирования отеля"
+                title="Редактирования номера"
                 onSubmit={handleSubmit(onSubmit)}
                 name="editHotels"
             >
                 <ComboBox
-                    id="EditComboBox"
+                    id="HotelsEditComboBox"
                     items={dropDownItems}
                     activeIdx={idxCurrentHotel}
                     label=""
                     handlerSearchItem={handlerSearchHotels}
                     handlerSetItem={handlerSetCurrentHotel}
                 />
-                <Input
-                    type="text"
-                    id="HotelTitle"
-                    placeholder="Название отеля"
-                    label="Название отеля"
-                    name="title"
-                    error={!!errors.title}
-                    control={control}
-                />
-                <Input
-                    type="textarea"
-                    id="HotelDescription"
-                    placeholder="Описание"
-                    label="Описание отеля"
-                    name="description"
-                    error={!!errors.description}
-                    control={control}
-                />
-                <InputFile
-                    name="images"
-                    control={control}
-                    handlerOnChange={handlerOnChangePictures}
-                    multiple={true}
-                    accept=""
-                    id="HotelImages"
-                    placeholder="Фото отеля"
-                    reset={!!!files}
-                />
-                <SubmitBtn
-                    text="Редактировать"
-                    isError={isError}
-                    isLoading={isLoading}
-                    error={error as TError}
-                />
+                {dataHotelRooms?.length ? (
+                    <>
+                        <ComboBox
+                            id="HotelRoomsEditComboBox"
+                            items={dropDownRoomItems}
+                            activeIdx={idxCurrentHotelRoom}
+                            label=""
+                            handlerSearchItem={() => {}}
+                            handlerSetItem={handlerSetCurrentHotelRoom}
+                        />
+                        <Input
+                            type="text"
+                            id="HotelRoomTitle"
+                            placeholder="Номер"
+                            label="Вариант размещения"
+                            name="title"
+                            error={!!errors.title}
+                            control={control}
+                        />
+                        <Input
+                            type="textarea"
+                            id="HotelDescription"
+                            placeholder="Описание"
+                            label="Описание отеля"
+                            name="description"
+                            error={!!errors.description}
+                            control={control}
+                        />
+                        <InputFile
+                            name="images"
+                            control={control}
+                            handlerOnChange={handlerOnChangePictures}
+                            multiple={true}
+                            accept=""
+                            id="HotelImages"
+                            placeholder="Фото отеля"
+                            reset={!!!files}
+                        />
+                        <SubmitBtn
+                            text="Редактировать"
+                            isError={isError}
+                            isLoading={isLoading}
+                            error={error as TError}
+                        />
+                    </>
+                ) : (
+                    <p>Нет вариантов размещения</p>
+                )}
             </FormWrapper>
-            {picturesFromDesktop?.length ? (
+            {picturesFromDesktop?.length && dataHotelRooms?.length ? (
                 <>
                     <PicturesGrid
                         title={'Выбранные файлы'}
@@ -236,8 +312,8 @@ export const HotelRoomEditForm = () => {
                     />
                     <div className="pb-2"></div>
                 </>
-            ) : null }
-            {picturesFromServer?.length ? (
+            ) : null}
+            {picturesFromServer?.length && dataHotelRooms?.length ? (
                 <PicturesGrid
                     title="Файлы с cервера"
                     pictures={picturesFromServer || []}
