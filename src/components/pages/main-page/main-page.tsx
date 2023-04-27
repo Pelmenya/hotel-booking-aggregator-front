@@ -1,9 +1,7 @@
-import { HotelsList } from './components/hotels-list/hotels-list';
+import { useGetCommonHotelsQuery } from '@/redux/api/common';
+import { List } from '../../list/list';
 
 export const MainPage = () => {
-    return (
-        <>
-            <HotelsList />
-        </>
-    );
+    const { data } = useGetCommonHotelsQuery('');
+    return <> {data ? <List items={data} href='/hotels'/> : null}</>;
 };

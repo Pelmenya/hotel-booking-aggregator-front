@@ -1,14 +1,18 @@
 import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/carousel-full-pic-preview';
+import { DataJson } from '@/components/data-json/data-json';
 import { ImagesGrid } from '@/components/images-grid/images-grid';
+import { List } from '@/components/list/list';
 import { Modal } from '@/components/modal/modal';
 import { THotel } from '@/types/t-hotel';
+import { THotelRoom } from '@/types/t-hotel-room';
 import { useState } from 'react';
 import { boolean } from 'yup';
 
 export type THotelPageProps = {
     hotel: THotel;
+    rooms: THotelRoom[];
 };
-export const HotelPage = ({ hotel }: THotelPageProps) => {
+export const HotelPage = ({ hotel, rooms }: THotelPageProps) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const descriptions: string[] = hotel.description.split('\r\n');
@@ -26,6 +30,10 @@ export const HotelPage = ({ hotel }: THotelPageProps) => {
                     images={hotel.images}
                 />
             ) : null}
+            <h2 className="font-black font-mono text-3xl">
+                {'Варианты размещения'}
+            </h2>
+            <>{rooms.length ? <List items={rooms} href='/hotel-rooms'/> : null}</>
             <article className="prose lg:prose-xl">
                 <h3 className="font-mono">Про отель</h3>
                 {descriptions.map((text, idx) => (
@@ -35,7 +43,7 @@ export const HotelPage = ({ hotel }: THotelPageProps) => {
                 ))}
             </article>
             <Modal isOpen={isOpenModal} handlerClose={handlerToogleModal}>
-                <CarouselFullPicPreview images={hotel.images}/>
+                <CarouselFullPicPreview images={hotel.images} />
             </Modal>
         </div>
     );

@@ -2,16 +2,19 @@ import { HotelPage } from '@/components/pages/hotel-page/hotel-page';
 import { Layout } from '@/layout/layout';
 import {
     getCommonHotelById,
+    getCommonHotelRooms,
     getRunningQueriesThunk,
     useGetCommonHotelByIdQuery,
+    useGetCommonHotelRoomsQuery,
 } from '@/redux/api/common';
 import { wrapper } from '@/redux/store/store';
 
 export default function Hotel({ id }: { id: string }) {
     const { data } = useGetCommonHotelByIdQuery(id);
+    const { data: rooms } = useGetCommonHotelRoomsQuery({ hotel: id });
     return (
         <Layout title={`Hotel Booking Aggregator ~ ${data?.title}`}>
-            {data ? <HotelPage hotel={data} /> : null}
+            {data ? <HotelPage hotel={data} rooms={rooms || []}/> : null}
         </Layout>
     );
 }
@@ -22,6 +25,8 @@ export const getServerSideProps = wrapper.getServerSideProps(
         if (typeof id === 'string') {
             const hotel = getCommonHotelById.initiate(id);
             store.dispatch(hotel);
+            const rooms = getCommonHotelRooms.initiate({ hotel: id });
+            store.dispatch(rooms);
         }
 
         await Promise.all(store.dispatch(getRunningQueriesThunk()));

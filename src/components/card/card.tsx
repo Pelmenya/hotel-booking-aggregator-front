@@ -1,19 +1,19 @@
-import { SyntheticEvent } from 'react';
-import { Carousel } from '@/components/pages/main-page/components/hotel-card/components/carousel/carousel';
+import { Carousel } from '@/components/card/components/carousel/carousel';
 import { THotel } from '@/types/t-hotel';
-import styles from './hotel-card.module.css';
+import styles from './card.module.css';
+import { THotelRoom } from '@/types/t-hotel-room';
 
-export type THotelCardProps = THotel & {
+export type TCardProps = (THotel | THotelRoom) & {
     onClick: (id: string) => void;
 };
 
-export const HotelCard = ({
+export const Card = ({
     title,
     id,
     description,
     images,
     onClick,
-}: THotelCardProps) => {
+}: TCardProps) => {
     return (
         <div
             id={id}
