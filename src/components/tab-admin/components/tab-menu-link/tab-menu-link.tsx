@@ -8,10 +8,7 @@ export type TMenuTabLinkProps = {
 };
 
 export const TabMenuLink = ({ href, active, text }: TMenuTabLinkProps) => (
-    <Link
-        href={href}
-        className={cn('btn', { ['btn-active']: active })}
-    >
+    <Link href={href} className={cn('btn', { ['btn-active']: active })}>
         {text}
     </Link>
 );
