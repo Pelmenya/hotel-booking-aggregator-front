@@ -20,7 +20,7 @@ export const List = ({ items, href }: TListProps) => {
     );
 
     return (
-        <>
+        <div id='gridCarousel'>
             {items ? (
                 <div className="grid gap-4 py-4 sm:grid-cols-1 md:grid-cols-2">
                     {items.map((item: THotel | THotelRoom) => (
@@ -32,6 +32,6 @@ export const List = ({ items, href }: TListProps) => {
                     ))}
                 </div>
             ) : null}
-        </>
+        </div>
     );
 };

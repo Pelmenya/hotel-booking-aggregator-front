@@ -3,5 +3,5 @@ import { List } from '../../list/list';
 
 export const MainPage = () => {
     const { data } = useGetCommonHotelsQuery('');
-    return <> {data ? <List items={data} href='/hotels'/> : null}</>;
+    return <>{data ? <List items={data} href="/hotels" /> : null}</>;
 };

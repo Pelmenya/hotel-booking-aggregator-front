@@ -18,7 +18,7 @@ export const Card = ({
         <div
             id={id}
             onClick={(e) => {
-                if (!(e.target instanceof HTMLAnchorElement)) {
+                if (!(e.target instanceof HTMLButtonElement)) {
                     onClick(id);
                 }
             }}
