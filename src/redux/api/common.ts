@@ -43,6 +43,12 @@ export const commonApi = createApi({
                 method: 'GET'
             })
         }),
+        getCommonHotelRoomById: builder.query<THotelRoom, string>({
+            query: (id: string) => ({
+                url: `/hotel-rooms/${id}`,
+                method: 'GET'
+            })
+        }),
     }),
 });
 
@@ -54,8 +60,9 @@ export const {
     useLazyGetCommonHotelsQuery,
     useGetCommonHotelRoomsQuery,
     useLazyGetCommonHotelRoomsQuery,
+    useGetCommonHotelRoomByIdQuery,
     util: { getRunningQueriesThunk },
 } = commonApi;
 
 // export endpoints for use in SSR
-export const { getAuthUser, getCommonHotels, getCommonHotelById, getCommonHotelRooms } = commonApi.endpoints;
+export const { getAuthUser, getCommonHotels, getCommonHotelById, getCommonHotelRooms, getCommonHotelRoomById } = commonApi.endpoints;
