@@ -1,4 +1,4 @@
-import { usePostAdminHotelRoomsMutation, usePostAdminHotelsMutation } from '@/redux/api/admin';
+import { usePostAdminHotelRoomsMutation } from '@/redux/api/admin';
 import { TError } from '@/types/t-error';
 import { TNullable } from '@/types/t-nullable';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -15,7 +15,7 @@ import { useLazyGetCommonHotelsQuery } from '@/redux/api/common';
 import { THotel } from '@/types/t-hotel';
 
 export const HotelRoomCreateForm = () => {
-    const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
+    const [idxCurrentHotel] = useState(0);
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [trigger, { data }] = useLazyGetCommonHotelsQuery();
     const [dropDownItems, setDropDownItems] = useState<string[]>([]);
@@ -63,9 +63,7 @@ export const HotelRoomCreateForm = () => {
         }
     };
 
-    const handlerSearchHotels = useCallback((title: string) => {
-        
-    }, []);
+    const handlerSearchHotels = useCallback((title: string) => {}, []);
 
     const handlerSetCurrentHotel = useCallback(
         (title: string) => {
@@ -131,7 +129,7 @@ export const HotelRoomCreateForm = () => {
                     control={control}
                     handlerOnChange={handlerOnChangePictures}
                     multiple={true}
-                    accept=""
+                    accept="image/*"
                     id="HotelRoomImages"
                     placeholder="Фото номера"
                 />

@@ -17,7 +17,6 @@ import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import {
     usePutAdminHotelRoomsMutation,
-    usePutAdminHotelsMutation,
 } from '@/redux/api/admin';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getBaseImageUrl } from 'utils/getBaseImageUrl';
@@ -25,12 +24,12 @@ import { TPicture } from '@/types/t-picture';
 import { THotelRoom } from '@/types/t-hotel-room';
 
 export const HotelRoomEditForm = () => {
-    const [hotelTitle, setHotelTitle] = useState(''); // для поиска в БД
+    const [, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [currentHotelRoom, setCurrentHotelRoom] =
         useState<TNullable<THotelRoom>>(null);
 
-    const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
+    const [idxCurrentHotel] = useState(0);
     const [idxCurrentHotelRoom, setIdxCurrentHotelRoom] = useState(0);
 
     const [triggerHotel, { data: dataHotels }] = useLazyGetCommonHotelsQuery();
@@ -288,7 +287,7 @@ export const HotelRoomEditForm = () => {
                             control={control}
                             handlerOnChange={handlerOnChangePictures}
                             multiple={true}
-                            accept=""
+                            accept="image/*"
                             id="HotelImages"
                             placeholder="Фото отеля"
                             reset={!!!files}

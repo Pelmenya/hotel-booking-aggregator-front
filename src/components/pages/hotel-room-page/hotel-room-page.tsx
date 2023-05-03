@@ -1,6 +1,5 @@
 import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/carousel-full-pic-preview';
 import { ImagesGrid } from '@/components/images-grid/images-grid';
-import { List } from '@/components/list/list';
 import { Modal } from '@/components/modal/modal';
 import { THotelRoom } from '@/types/t-hotel-room';
 import { useState } from 'react';

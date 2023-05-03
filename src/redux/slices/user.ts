@@ -1,7 +1,6 @@
 import { TUserProps } from '@/types/t-user-props';
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import { boolean } from 'yup';
 
 export type TUserState = TUserProps;
 

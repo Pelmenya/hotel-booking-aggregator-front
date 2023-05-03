@@ -1,4 +1,3 @@
-import { DataJson } from '@/components/data-json/data-json';
 import { HotelRoomPage } from '@/components/pages/hotel-room-page/hotel-room-page';
 import { Layout } from '@/layout/layout';
 import {

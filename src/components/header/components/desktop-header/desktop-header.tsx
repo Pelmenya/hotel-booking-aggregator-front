@@ -7,7 +7,9 @@ import { useRouter } from 'next/router';
 export const DesktopHeader = ({ user }: TUserProps) => {
     const router = useRouter();
     const paths = router.asPath.split('/');
-    console.log();
+    const isMainPage = paths.every((item) => item === '');
+    const isAdminPage = paths.includes('admin');
+
     return (
         <div className="hidden sm:block">
             <div className="flex space-x-4">
@@ -17,7 +19,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                 <Link
                     href="/"
                     className={cn('btn btn-sm', {
-                        ['btn-primary']: paths.every((item) => item === ''),
+                        ['btn-primary']: isMainPage,
                     })}
                     aria-current="page"
                 >
@@ -41,7 +43,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                     <Link
                         href="/admin/hotels"
                         className={cn('btn btn-sm', {
-                            ['btn-primary']: paths.includes('admin'),
+                            ['btn-primary']: isAdminPage,
                         })}
                     >
                         <svg

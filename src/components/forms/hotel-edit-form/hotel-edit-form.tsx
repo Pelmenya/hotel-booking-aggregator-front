@@ -18,7 +18,7 @@ import { getBaseImageUrl } from 'utils/getBaseImageUrl';
 import { TPicture } from '@/types/t-picture';
 
 export const HotelEditForm = () => {
-    const [hotelTitle, setHotelTitle] = useState(''); // для поиска в БД
+    const [, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
     const [trigger, { data }] = useLazyGetCommonHotelsQuery();
@@ -216,7 +216,7 @@ export const HotelEditForm = () => {
                     control={control}
                     handlerOnChange={handlerOnChangePictures}
                     multiple={true}
-                    accept=""
+                    accept="image/*"
                     id="HotelImages"
                     placeholder="Фото отеля"
                     reset={!!!files}

@@ -18,10 +18,11 @@ export interface IInputProps
         | 'token'
         | 'title'
         | 'images'
-        | 'description';
+        | 'description'
+        | 'avatar';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
-    type: 'text' | 'password' | 'email' | 'tel' | 'file' | 'textarea';
+    type: 'text' | 'password' | 'email' | 'tel' | 'textarea';
     placeholder: string;
     hidden?: boolean;
     label: string;

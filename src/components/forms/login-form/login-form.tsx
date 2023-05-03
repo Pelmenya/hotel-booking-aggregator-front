@@ -4,9 +4,7 @@ import { Input } from '../components/input/input';
 import { useForm } from 'react-hook-form';
 import { schemaLoginForm } from '../schemas/yup.schemas';
 import { usePostLoginMutation } from '@/redux/api/auth';
-import { useRouter } from 'next/router';
 import { TError } from '@/types/t-error';
-import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
 import { useGetAuthUserMutation } from '@/redux/api/common';
@@ -15,8 +13,7 @@ import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
-    const router = useRouter();
-
+    
     const [postLogin, { isLoading, isError, error }] = usePostLoginMutation();
     const [getAuthUser] = useGetAuthUserMutation();
 
@@ -34,7 +31,6 @@ export const LoginForm = () => {
             const postUser = await postLogin(dto).unwrap();
             if (postUser) {
                 dispatch(setUser(await getAuthUser('').unwrap()));
-                router.push('/profile');
             }
         }
     };

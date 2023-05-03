@@ -25,6 +25,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "class-methods-use-this": "off",
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
-    "no-param-reassign": ["error", { "props": false }]
+    "no-param-reassign": ["error", { "props": false }],
+    "no-unused-vars": ["warn",  {"args": "none"} ]
   }
 }

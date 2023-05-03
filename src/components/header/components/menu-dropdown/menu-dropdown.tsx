@@ -6,10 +6,8 @@ import { Fragment } from 'react';
 import { MenuLink } from './components/menu-link';
 import { menuLinksLogin, menuLinksLogout } from './constants';
 import { TUserProps } from '@/types/t-user-props';
-import { useRouter } from 'next/router';
 
 export const MenuDropdown = ({ user }: TUserProps) => {
-    const router = useRouter()
     const dispatch = useAppDispatch();
     const [postLogout] = usePostLogoutMutation();
 

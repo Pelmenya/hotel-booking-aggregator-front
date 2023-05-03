@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { IInputProps } from '../input/input';
+import cn from 'classnames';
 
 export const InputFile = ({
     id,
@@ -11,6 +12,7 @@ export const InputFile = ({
     name,
     control,
     reset,
+    className,
 }: Partial<
     IInputProps & {
         reset?: boolean;
@@ -30,7 +32,7 @@ export const InputFile = ({
             name={name || 'images'}
             control={control}
             render={({ field: { onBlur, value, ref } }) => (
-                <div className="relative">
+                <div className={cn('relative', className)}>
                     <span className="bg-base-100 lg:max-w-[250px] sm:max-w-[48px] max-w-[48px] truncate absolute left-44 top-[50%] translate-y-[-50%]">
                         {display}
                     </span>

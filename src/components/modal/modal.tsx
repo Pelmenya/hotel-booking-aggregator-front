@@ -1,11 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
+import cn from 'classnames';
+
 
 export type TModalProps = {
     title?: string;
     isOpen: boolean;
     handlerClose: () => void;
     children?: JSX.Element;
+    sizeCloseBtn?: 'sm' | 'md' | 'lg' | 'xs' 
 };
 
 export const Modal = ({
@@ -13,6 +16,7 @@ export const Modal = ({
     isOpen,
     handlerClose,
     children,
+    sizeCloseBtn = 'md'
 }: TModalProps) => {
     return (
         <>
@@ -46,7 +50,7 @@ export const Modal = ({
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="transform relative overflow-hidden rounded-3xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all max-w-full max-h-full">
-                                    <button onClick={handlerClose} className="btn btn-circle btn-outline absolute right-4 top-4">
+                                    <button onClick={handlerClose} className={cn('btn btn-circle btn-outline absolute right-4 top-4', `btn-${sizeCloseBtn}`)}>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-6 w-6"

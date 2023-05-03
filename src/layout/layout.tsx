@@ -1,11 +1,5 @@
-import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { useAppSelector } from '@/hooks/use-app-selector';
-import { useGetAuthUserMutation } from '@/redux/api/common';
-import { getUserState } from '@/redux/selectors/user';
-import { setUser } from '@/redux/slices/user';
 import { TBaseProps } from '@/types/t-base-props';
 import Head from 'next/head';
-import { useEffect } from 'react';
 import { Header } from '../components/header/header';
 
 export type ILayoutProps = TBaseProps & {

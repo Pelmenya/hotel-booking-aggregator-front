@@ -6,7 +6,7 @@ export const PATTERNS = {
     'PATTERN_ROLE': '^(admin|client|manager)+$'
 }
 
-const regExp = /''/i;
+export const regExpEmptyString = /''/i;
 
 export const schemaRegisterForm = yup
     .object().shape({
