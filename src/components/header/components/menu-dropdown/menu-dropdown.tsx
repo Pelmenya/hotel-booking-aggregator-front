@@ -6,6 +6,8 @@ import { Fragment } from 'react';
 import { MenuLink } from './components/menu-link';
 import { menuLinksLogin, menuLinksLogout } from './constants';
 import { TUserProps } from '@/types/t-user-props';
+import { getImageUrl } from 'utils/getImageUrl';
+import ProfileIcon from '@/icons/profile-icon.svg';
 
 export const MenuDropdown = ({ user }: TUserProps) => {
     const dispatch = useAppDispatch();
@@ -14,19 +16,25 @@ export const MenuDropdown = ({ user }: TUserProps) => {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <Menu.Button
-                className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                className="flex items-center justify-center rounded-full h-8 w-8 bg-neutral text-sm text-neutral-content focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 id="user-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
             >
                 <span className="sr-only">Open user menu</span>
-                <picture>
-                    <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt="Tommy"
-                    />
-                </picture>
+                <>
+                    {user?.avatars?.length ? (
+                        <picture>
+                            <img
+                                className="h-8 w-8 rounded-full"
+                                src={getImageUrl(user.avatars[0])}
+                                alt={user?.name}
+                            />
+                        </picture>
+                    ) : (
+                        <ProfileIcon />
+                    )}
+                </>
             </Menu.Button>
             <Transition
                 as={Fragment}

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { TBaseProps } from '@/types/t-base-props';
-import { MenuProfileIcon } from './components/menu-profile-icon';
-import { MenuLogoutIcon } from './components/menu-logout-icon';
-import { MenuLoginIcon } from './components/menu-login-icon';
+import  MenuProfileIcon  from '@/icons/profile-icon.svg';
+import  MenuLogoutIcon  from '@/icons/logout-icon.svg';
+import  MenuLoginIcon  from '@/icons/login-icon.svg';
 
 export type TMenuLinkProps = TBaseProps & {
     id?: string;

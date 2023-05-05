@@ -8,7 +8,7 @@ export const ProfilePage = () => {
 
     return (
         <div className='py-12 pl-5 w-full flex flex-col items-center'>
-            <Avatar picture={user?.avatars ? getImageUrl(user?.avatars[0]): null}/>
+            <Avatar picture={user?.avatars?.length ? getImageUrl(user?.avatars[0]): null}/>
         </div>
     );
 };

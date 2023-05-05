@@ -1,31 +1,42 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
+    "compilerOptions": {
+        "target": "es5",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "noImplicitAny": false,
+        "skipLibCheck": true,
+        "strict": true,
+        "strictPropertyInitialization": false,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": [
+        "next-env.d.ts",
+        "next-env-custom.d.ts",
+        "images.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "src/providers/auth-provider",
+        "src/components/forms/components/form-wrapper",
+        "src/components/main-page/components/hotel-card",
+        "src/components/pages/profile-page.tsx"
     ],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/providers/auth-provider", "src/components/forms/components/form-wrapper", "src/components/main-page/components/hotel-card", "src/components/pages/profile-page.tsx"],
-  "exclude": ["node_modules"]
+    "exclude": ["node_modules"]
 }

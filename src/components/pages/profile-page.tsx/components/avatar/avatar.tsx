@@ -27,6 +27,10 @@ export const Avatar = ({ picture }: TAvatarProps) => {
         setBasePicture(picture);
         setIsOpen(false);
     }, [setIsOpen, picture]);
+    
+    const handlerOpenModal = useCallback(() => {
+        setIsOpen(true);
+    }, [setIsOpen]);
 
     const handlerOnSubmitAvatar = useCallback(async () => {
         const formData = new FormData();
@@ -103,7 +107,7 @@ export const Avatar = ({ picture }: TAvatarProps) => {
                 </form>
             </Modal>
             <div
-                onClick={() => setIsOpen(true)}
+                onClick={handlerOpenModal}
                 style={
                     basePicture
                         ? { backgroundImage: `url(${basePicture})` }

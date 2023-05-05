@@ -10,7 +10,7 @@ import { userSlice } from '../slices/user';
 
 
 const isDev = process.env.NODE_ENV !== 'production';
-const middlewares = isDev ? [logger] : [];
+const middlewares = isDev && typeof window === 'object' ? [logger] : [];
 
 export const store = configureStore({
     reducer: {
