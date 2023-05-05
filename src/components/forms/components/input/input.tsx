@@ -19,7 +19,7 @@ export interface IInputProps
         | 'title'
         | 'images'
         | 'description'
-        | 'avatar';
+        | 'avatars';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
     type: 'text' | 'password' | 'email' | 'tel' | 'textarea';

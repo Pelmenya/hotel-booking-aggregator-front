@@ -1,0 +1,11 @@
+.wrapper {
+    position: relative;
+}
+
+.buttons {
+    display: none;
+}
+
+.wrapper:hover > .buttons {
+    display: flex;
+}

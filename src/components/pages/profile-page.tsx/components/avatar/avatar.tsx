@@ -1,26 +1,46 @@
-import { Modal } from '@/components/modal/modal';
-import styles from './avatar.module.css';
-import cn from 'classnames';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { InputFile } from '@/components/forms/components/input-file/input-file';
 import { TNullable } from '@/types/t-nullable';
+import { Modal } from '@/components/modal/modal';
+import cn from 'classnames';
 
-export const Avatar = () => {
+import styles from './avatar.module.css';
+import { useUpdateUserMutation } from '@/redux/api/common';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { setUser } from '@/redux/slices/user';
+
+export type TAvatarProps = {
+    picture: TNullable<string>;
+};
+
+export const Avatar = ({ picture }: TAvatarProps) => {
+    const dispatch = useAppDispatch();
+    const [updateUser] = useUpdateUserMutation();
     const [isOpen, setIsOpen] = useState(false);
-    const [path, setPath] = useState<TNullable<string>>(null);
-    const [file, setFile] = useState<FileList>();
+    const [basePicture, setBasePicture] = useState<TNullable<string>>(picture);
+    const [files, setFiles] = useState<FileList>();
 
     const { handleSubmit, control } = useForm();
 
     const handlerCloseModal = useCallback(() => {
-        setPath(null);
+        setBasePicture(picture);
         setIsOpen(false);
-    }, [setIsOpen]);
+    }, [setIsOpen, picture]);
 
-    const handlerOnSubmitAvatar = useCallback(() => {
-        console.log(file);
-    }, [file]);
+    const handlerOnSubmitAvatar = useCallback(async () => {
+        const formData = new FormData();
+
+        if (files) {
+            formData.append('avatars', files[0]);
+
+            const user = await updateUser({ body: formData }).unwrap();
+            dispatch(setUser(user));
+            if (user){
+                setIsOpen(false)
+            }
+        }
+    }, [files, updateUser, dispatch]);
 
     const handlerOnChangeAvatar = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,32 +49,39 @@ export const Avatar = () => {
                 const paths = Array.from(files).map((file) =>
                     URL.createObjectURL(file)
                 );
-                console.log(files);
-                setPath(paths[0]);
-                setFile(files);
+                setBasePicture(paths[0]);
+                setFiles(files);
             }
         },
         []
     );
     return (
         <>
-            <Modal isOpen={isOpen} handlerClose={handlerCloseModal} sizeCloseBtn='sm'>
+            <Modal
+                isOpen={isOpen}
+                handlerClose={handlerCloseModal}
+                sizeCloseBtn="sm"
+            >
                 <form
                     name="AvatarForm"
-                    className="flex flex-col items-center gap-8 pt-8 min-w-[280px]"
+                    title="Загрузите файл"
+                    className="flex flex-col items-center gap-8 min-w-[280px]"
                     onSubmit={handleSubmit(handlerOnSubmitAvatar)}
                 >
+                    <p className="font-bold text-xl">Загрузите файл</p>
                     <label
-                        htmlFor="avatar"
-                        className="text-primary underline underline-offset-4 cursor-pointer max-w-[120px]"
+                        htmlFor="avatars"
+                        className="text-primary underline underline-offset-4 cursor-pointer max-w-[140px] text-center"
                     >
-                        {!path ? (
+                        {!basePicture ? (
                             <span>Выбрать файл на компьютере</span>
                         ) : (
                             <div
                                 style={
-                                    path
-                                        ? { backgroundImage: `url(${path})` }
+                                    basePicture
+                                        ? {
+                                            backgroundImage: `url(${basePicture})`,
+                                        }
                                         : {}
                                 }
                                 className={cn(
@@ -67,8 +94,8 @@ export const Avatar = () => {
                     <InputFile
                         handlerOnChange={handlerOnChangeAvatar}
                         control={control}
-                        id="avatar"
-                        name="avatar"
+                        id="avatars"
+                        name="avatars"
                         className="hidden"
                         accept="image/*"
                     />
@@ -77,17 +104,30 @@ export const Avatar = () => {
             </Modal>
             <div
                 onClick={() => setIsOpen(true)}
+                style={
+                    basePicture
+                        ? { backgroundImage: `url(${basePicture})` }
+                        : {}
+                }
                 className={cn(
-                    'block relative w-32 h-32 rounded-full bg-base-300 cursor-pointer',
+                    'relative w-32 h-32 rounded-full bg-base-300 cursor-pointer flex items-center justify-center',
                     styles.avatar
                 )}
-                style={path ? { backgroundImage: `url(${path})` } : {}}
             >
-                <div className="absolute w-full h-full flex items-center justify-center opacity-0 bg-black hover:opacity-50 rounded-full">
-                    <span className="absolute text-center text-white">
-                        Поменять аватар
-                    </span>
-                </div>
+                <div
+                    className={cn(
+                        'absolute w-full h-full opacity-0 bg-black hover:opacity-50 rounded-full',
+                        styles.overlay
+                    )}
+                />
+                <span
+                    className={cn(
+                        'absolute w-full h-full text-center text-white hidden',
+                        styles.text
+                    )}
+                >
+                    Поменять аватар
+                </span>
             </div>
         </>
     );

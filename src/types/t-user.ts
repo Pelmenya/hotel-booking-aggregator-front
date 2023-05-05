@@ -7,4 +7,5 @@ export type TUser = TNullable<{
     name: string;
     contactPhone?: string;
     role?: TRole;
+    avatars?: string[];
 }>

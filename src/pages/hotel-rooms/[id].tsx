@@ -10,7 +10,7 @@ import { wrapper } from '@/redux/store/store';
 export default function HotelRooms({ id }: { id: string }) {
     const { data } = useGetCommonHotelRoomByIdQuery(id);
     return (
-        <Layout title={`Hotel Booking Aggregator ~ ${data?.title}`}>
+        <Layout title={`Hotel Booking Aggregator ~ ${data?.hotel.title} : ${data?.title}`}>
             {data ? <HotelRoomPage room={data} /> : null}
         </Layout>
     );

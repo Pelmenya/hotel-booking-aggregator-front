@@ -25,6 +25,14 @@ export const commonApi = createApi({
             }),
 
         }),
+        updateUser: builder.mutation<TUser, any>({
+            query: ({ body }) => ({
+                url: 'user',
+                method: 'PUT',
+                body,
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
         getCommonHotels: builder.query<THotel[], string>({
             query: (title: string) => ({
                 url: `/hotels?title=${title}`,
@@ -55,6 +63,7 @@ export const commonApi = createApi({
 // Export hooks for usage in functional components
 export const {
     useGetAuthUserMutation,
+    useUpdateUserMutation,
     useGetCommonHotelsQuery,
     useGetCommonHotelByIdQuery,
     useLazyGetCommonHotelsQuery,
@@ -65,4 +74,4 @@ export const {
 } = commonApi;
 
 // export endpoints for use in SSR
-export const { getAuthUser, getCommonHotels, getCommonHotelById, getCommonHotelRooms, getCommonHotelRoomById } = commonApi.endpoints;
+export const { getAuthUser, getCommonHotels, getCommonHotelById, getCommonHotelRooms, getCommonHotelRoomById, updateUser } = commonApi.endpoints;
