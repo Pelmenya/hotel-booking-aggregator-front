@@ -10,17 +10,17 @@ input:-webkit-autofill {
 }
 
 *::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 0.375rem;
+    height: 0.375rem;
 }
 
 *::-webkit-scrollbar-track {
-    border-radius: 4px;
+    border-radius: 0.25rem;
     background: #e5eaf1;
 }
 
 *::-webkit-scrollbar-thumb {
-    border-radius: 4px;
+    border-radius: 0.25rem;
     background: #570df8;
 }
 

@@ -38,7 +38,7 @@ export const Modal = ({
                         <div className="fixed inset-0 bg-black bg-opacity-50" />
                     </Transition.Child>
 
-                    <div className="fixed inset-0 overflow-y-auto flex items-center justify-center">
+                    <div className="fixed inset-0 overflow-y-auto flex items-center justify-center mr-1.5">
                         <div className="flex min-h-full items-center justify-center p-8 text-center">
                             <Transition.Child
                                 as={Fragment}
