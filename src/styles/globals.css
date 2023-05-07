@@ -28,3 +28,7 @@ html,
 body {
     scrollbar-gutter: stable;
 }
+
+.tab-lifted.tab-active{
+    background-color: hsl(var(--n));
+}

@@ -1,76 +1,46 @@
-import { useCallback, useState } from 'react';
 import cn from 'classnames';
 import styles from './tab-admin.module.css';
 import { ContentHotels } from './components/content-hotels/content-hotels';
 import { ContentRooms } from './components/content-rooms/content-rooms';
 import { useRouter } from 'next/router';
+import { Tab } from '../tab/tab';
+import { TabHead } from '../tab/components/tab-head/tab-head';
+import { TabHeadLink } from '../tab/components/tab-head/components/tab-head-link/tab-head-link';
+import { TabBody } from '../tab/components/tab-body/tab-body';
+import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
 
 export const TabAdmin = () => {
     const router = useRouter();
     const isHotelRooms = router.pathname.split('/').includes('hotel-rooms');
-    const currentPage = isHotelRooms && 'hotel-rooms' || 'hotels';
-    const [tab, setTab] = useState<'hotels' | 'hotel-rooms'>(currentPage);
-
-    const handlerOnClickHotels = useCallback(() => {
-        setTab('hotels');
-        router.push('/admin/hotels')
-    }
-    ,[router])
-
-    const handlerOnClickHotelRooms = useCallback(() => {
-        setTab('hotel-rooms');
-        router.push('/admin/hotel-rooms')
-    }
-    ,[router])
+    const currentPage = (isHotelRooms && 'hotel-rooms') || 'hotels';
 
     return (
-        <div className="tabs mx-auto max-w-7xl py-6 w-full grid">
-            <nav>
-                <button
-                    onClick={handlerOnClickHotels}
-                    className={cn('tab', {
-                        ['tab-lifted tab-active [--tab-bg:hsl(var(--n))] [--tab-color:hsl(var(--nc))] [--tab-border-color:hsl(var(--n))] font-bold']:
-                            tab === 'hotels',
-                    })}
+        <Tab>
+            <TabHead>
+                <TabHeadLink
+                    href="/admin/hotels"
+                    active={currentPage === 'hotels'}
                 >
                     Отели
-                </button>
-                <button
-                    onClick={handlerOnClickHotelRooms}
-                    className={cn('tab', {
-                        ['tab tab-lifted tab-active [--tab-bg:hsl(var(--n))] [--tab-color:hsl(var(--nc))] [--tab-border-color:hsl(var(--n))] font-bold']:
-                            tab === 'hotel-rooms',
-                    })}
+                </TabHeadLink>
+                <TabHeadLink
+                    href="/admin/hotel-rooms"
+                    active={currentPage === 'hotel-rooms'}
                 >
                     Номера
-                </button>
-            </nav>
-            <div
-                className={cn(
-                    styles.tab,
-                    'drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)]'
-                )}
-            >
-                {tab === 'hotels' ? (
-                    <div
-                        className={cn(
-                            'bg-neutral px-4 py-4 rounded-md text-sm font-medium text-neutral-content',
-                            styles.start
-                        )}
-                    >
-                        <ContentHotels />
-                    </div>
-                ) : tab === 'hotel-rooms' ? (
-                    <div
-                        className={cn(
-                            'bg-neutral px-4 py-4 rounded-md text-sm font-medium text-neutral-content'
-                        )}
-                    >
-                        <ContentRooms />
-                    </div>
-                ) : null}
-                <div></div>
-            </div>
-        </div>
+                </TabHeadLink>
+            </TabHead>
+            <TabBody>
+                <TabBodyItem
+                    active={currentPage === 'hotels'}
+                    firstInTab={true}
+                >
+                    <ContentHotels />
+                </TabBodyItem>
+                <TabBodyItem active={currentPage === 'hotel-rooms'}>
+                    <ContentRooms />
+                </TabBodyItem>
+            </TabBody>
+        </Tab>
     );
 };

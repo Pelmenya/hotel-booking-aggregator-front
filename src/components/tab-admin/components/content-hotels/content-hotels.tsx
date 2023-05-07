@@ -1,7 +1,8 @@
 import { HotelCreateForm } from '@/components/forms/hotel-create-form/hotel-create-form';
 import { useRouter } from 'next/router';
 import { HotelEditForm } from '@/components/forms/hotel-edit-form/hotel-edit-form';
-import { TabMenuLink } from '../tab-menu-link/tab-menu-link';
+import { TabMenu } from '@/components/tab/components/tab-menu/tab-menu';
+import { TabMenuLink } from '@/components/tab/components/tab-menu/components/tab-menu-link/tab-menu-link';
 
 export const ContentHotels = () => {
     const router = useRouter();
@@ -12,7 +13,7 @@ export const ContentHotels = () => {
     return (
         <div className="grid grid-cols-5 grid-row-1 gap-4 h-full">
             <div className="col-span-1">
-                <div className="btn-group btn-group-vertical bg-base-100 px-2 py-2 rounded-md w-full">
+                <TabMenu>
                     <TabMenuLink
                         href="/admin/hotels"
                         active={!isEdit && !isDelete}
@@ -28,7 +29,7 @@ export const ContentHotels = () => {
                         active={isDelete}
                         text="Удалить"
                     />
-                </div>
+                </TabMenu>
             </div>
             <div className="col-span-4 bg-base-100 px-4 py-4 rounded-md">
                 {!isEdit && !isDelete && <HotelCreateForm />}
