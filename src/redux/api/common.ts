@@ -17,17 +17,17 @@ export const commonApi = createApi({
         }
     },
     endpoints: (builder) => ({
-        getAuthUser: builder.mutation<Partial<TUser>, string>({
+        getProfile: builder.mutation<Partial<TUser>, string>({
             query: () => ({
-                url: '/user',
+                url: 'profile',
                 method: 'GET',
                 credentials: 'include'
             }),
 
         }),
-        updateUser: builder.mutation<TUser, any>({
+        updateProfile: builder.mutation<TUser, any>({
             query: ({ body }) => ({
-                url: 'user',
+                url: 'profile',
                 method: 'PUT',
                 body,
                 credentials: 'include'     // обязательно для проставления cookie
@@ -35,25 +35,25 @@ export const commonApi = createApi({
         }),
         getCommonHotels: builder.query<THotel[], string>({
             query: (title: string) => ({
-                url: `/hotels?title=${title}`,
+                url: `hotels?title=${title}`,
                 method: 'GET'
             })
         }),
         getCommonHotelById: builder.query<THotel, string>({
             query: (id: string) => ({
-                url: `/hotels/${id}`,
+                url: `hotels/${id}`,
                 method: 'GET'
             })
         }),
         getCommonHotelRooms: builder.query<THotelRoom[], TSearchBaseParams & { hotel: string }>({
             query: ({ limit = 20, offset = 0, hotel }: TSearchBaseParams & { hotel: string }) => ({
-                url: `/hotel-rooms?limit=${limit}&offset=${offset}&hotel=${hotel}`,
+                url: `hotel-rooms?limit=${limit}&offset=${offset}&hotel=${hotel}`,
                 method: 'GET'
             })
         }),
         getCommonHotelRoomById: builder.query<THotelRoom, string>({
             query: (id: string) => ({
-                url: `/hotel-rooms/${id}`,
+                url: `hotel-rooms/${id}`,
                 method: 'GET'
             })
         }),
@@ -62,8 +62,8 @@ export const commonApi = createApi({
 
 // Export hooks for usage in functional components
 export const {
-    useGetAuthUserMutation,
-    useUpdateUserMutation,
+    useGetProfileMutation,
+    useUpdateProfileMutation,
     useGetCommonHotelsQuery,
     useGetCommonHotelByIdQuery,
     useLazyGetCommonHotelsQuery,
@@ -74,4 +74,4 @@ export const {
 } = commonApi;
 
 // export endpoints for use in SSR
-export const { getAuthUser, getCommonHotels, getCommonHotelById, getCommonHotelRooms, getCommonHotelRoomById, updateUser } = commonApi.endpoints;
+export const { getProfile, getCommonHotels, getCommonHotelById, getCommonHotelRooms, getCommonHotelRoomById, updateProfile } = commonApi.endpoints;

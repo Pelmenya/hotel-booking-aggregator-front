@@ -29,7 +29,7 @@ export const PicturesGrid = ({
             {pictures.map((picture, idx) => (
                 <div
                     key={String(idx) + picture}
-                    className="bg-base-200 flex rounded-md px-2 py-2 items-center justify-center relative"
+                    className="bg-base-300 flex rounded-md px-2 py-2 items-center justify-center relative"
                 >
                     <picture>
                         <img className="h-20" src={picture.url} alt="" />

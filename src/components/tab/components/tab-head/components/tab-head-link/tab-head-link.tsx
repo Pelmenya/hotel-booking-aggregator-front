@@ -11,8 +11,8 @@ export type TTabHeadLinkProps = TBaseProps & {
 export const TabHeadLink = ({ href, children, active }: TTabHeadLinkProps) => (
     <Link
         href={href}
-        className={cn('tab tab-lifted', {
-            ['tab-active [--tab-bg:hsl(var(--n))] [--tab-color:hsl(var(--nc))] [--tab-border-color:hsl(var(--n))] font-bold']:
+        className={cn('tab tab-lifted border-transparent uppercase', {
+            ['tab-active [--tab-bg:hsl(var(--b3))] [--tab-color:hsl(var(--bc))] [--tab-border-color:hsl(var(--b3))] font-bold']:
                 active,
         })}
     >

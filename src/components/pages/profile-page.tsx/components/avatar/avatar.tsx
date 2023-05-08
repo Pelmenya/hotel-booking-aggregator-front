@@ -6,17 +6,20 @@ import { Modal } from '@/components/modal/modal';
 import cn from 'classnames';
 
 import styles from './avatar.module.css';
-import { useUpdateUserMutation } from '@/redux/api/common';
+import { useUpdateProfileMutation } from '@/redux/api/common';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { getUserState } from '@/redux/selectors/user';
+import { getImageUrl } from 'utils/getImageUrl';
 
-export type TAvatarProps = {
-    picture: TNullable<string>;
-};
-
-export const Avatar = ({ picture }: TAvatarProps) => {
+export const Avatar = () => {
+    const { user } = useAppSelector(getUserState);
+    const picture =  user?.avatars?.length ? getImageUrl(user.avatars[0]) : null;
+    
     const dispatch = useAppDispatch();
-    const [updateUser] = useUpdateUserMutation();
+
+    const [updateUser] = useUpdateProfileMutation();
     const [isOpen, setIsOpen] = useState(false);
     const [basePicture, setBasePicture] = useState<TNullable<string>>(picture);
     const [files, setFiles] = useState<FileList>();

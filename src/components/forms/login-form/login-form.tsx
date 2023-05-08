@@ -7,15 +7,15 @@ import { usePostLoginMutation } from '@/redux/api/auth';
 import { TError } from '@/types/t-error';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
-import { useGetAuthUserMutation } from '@/redux/api/common';
+import { useGetProfileMutation } from '@/redux/api/common';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
-    
+
     const [postLogin, { isLoading, isError, error }] = usePostLoginMutation();
-    const [getAuthUser] = useGetAuthUserMutation();
+    const [getProfile] = useGetProfileMutation();
 
     const {
         handleSubmit,
@@ -30,7 +30,7 @@ export const LoginForm = () => {
         if (dto) {
             const postUser = await postLogin(dto).unwrap();
             if (postUser) {
-                dispatch(setUser(await getAuthUser('').unwrap()));
+                dispatch(setUser(await getProfile('').unwrap()));
             }
         }
     };
