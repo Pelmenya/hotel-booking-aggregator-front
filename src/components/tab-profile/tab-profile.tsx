@@ -7,6 +7,7 @@ import { Avatar } from '../pages/profile-page.tsx/components/avatar/avatar';
 import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
 import { UpdateUserForm } from '../forms/update-user-form/update-user-form';
 import { UserInfo } from './components/user-info';
+import { UpdatePasswordForm } from '../forms/update-password-form/update-password-form';
 
 export const TabProfile = () => {
     const router = useRouter();
@@ -20,13 +21,13 @@ export const TabProfile = () => {
         <Tab>
             <TabHead>
                 <TabHeadLink href="/profile" active={isProfile}>
-                    Пользователь
+                    Профиль
                 </TabHeadLink>
                 <TabHeadLink href="/profile/edit" active={isEdit}>
-                    Редактирование
+                    Данные
                 </TabHeadLink>
                 <TabHeadLink href="/profile/password" active={isPassword}>
-                    Смена пароля
+                    Пароль
                 </TabHeadLink>
             </TabHead>
             <TabBody>
@@ -42,7 +43,9 @@ export const TabProfile = () => {
                     </div>
                 </TabBodyItem>
                 <TabBodyItem active={isPassword}>
-                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content"></div>
+                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
+                        <UpdatePasswordForm />
+                    </div>
                 </TabBodyItem>
             </TabBody>
         </Tab>

@@ -1,7 +1,8 @@
 import { TBaseProps } from '@/types/t-base-props';
+import { ReactNode } from 'react';
 
 export type TFormWrapperProps = TBaseProps & {
-    title: string;
+    title: ReactNode;
     name: string;
     onSubmit: () => void;
 };

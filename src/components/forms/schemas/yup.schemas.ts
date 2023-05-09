@@ -37,3 +37,11 @@ export const schemaUpdateProfileForm = yup
         email: yup.string().email().matches(new RegExp(PATTERNS.PATTERN_EMAIL)).required(),
         contactPhone: yup.string().matches(new RegExp(PATTERNS.PATTERN_PHONE)),
     })
+
+export const schemaUpdatePasswordForm = yup.object().shape({
+    oldPassword: yup.string().min(6).required(), 
+    password: yup.string().min(6).required(),
+    confirmPassword: yup.string().min(6)
+        .oneOf([yup.ref('password')])
+        .required()
+});

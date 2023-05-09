@@ -6,6 +6,9 @@ import { removeUser } from '@/redux/slices/user';
 import Link from 'next/link';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getRole } from 'utils/getRole';
+import IdentificationIcon from '@/icons/identification.svg';
+import PasswordIcon from '@/icons/shield-check.svg';
+import LogoutIcon from '@/icons/logout-icon.svg';
 
 export const UserInfo = () => {
     const dispatch = useAppDispatch();
@@ -49,13 +52,19 @@ export const UserInfo = () => {
                     href={'/profile/edit'}
                     className="flex w-full justify-between py-2 text-primary cursor-pointer"
                 >
-                    Изменить данные
+                    <div className="flex gap-2">
+                        <IdentificationIcon />
+                        Изменить данные
+                    </div>
                 </Link>
                 <Link
                     href={'/profile/password'}
                     className="flex w-full justify-between py-2 text-primary cursor-pointer"
                 >
-                    Изменить пароль
+                    <div className="flex gap-2">
+                        <PasswordIcon />
+                        Изменить пароль
+                    </div>
                 </Link>
                 <button
                     className="flex w-full justify-between py-2 text-error cursor-pointer"
@@ -66,7 +75,10 @@ export const UserInfo = () => {
                         }
                     }}
                 >
-                    Выйти
+                    <div className="flex gap-2">
+                        <LogoutIcon />
+                        Выйти
+                    </div>
                 </button>
             </div>
         </>
