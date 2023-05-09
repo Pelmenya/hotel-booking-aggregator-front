@@ -15,7 +15,7 @@ import { TError } from '@/types/t-error';
 import { usePostLoginMutation } from '@/redux/api/auth';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
-import { useGetAuthUserMutation } from '@/redux/api/common';
+import { useGetProfileMutation } from '@/redux/api/common';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 
 export const RegisterForm = () => {
@@ -37,9 +37,9 @@ export const RegisterForm = () => {
     ] = usePostLoginMutation();
 
     const [
-        getAuthUser,
+        getProfile,
         { isLoading: isLoadingUser, isError: isErrorUser, error: errorUser },
-    ] = useGetAuthUserMutation();
+    ] = useGetProfileMutation();
 
     const {
         handleSubmit,
@@ -58,7 +58,7 @@ export const RegisterForm = () => {
                 if (user) {
                     const loginUser = await postLogin(data).unwrap();
                     if (loginUser) {
-                        dispatch(setUser(await getAuthUser('').unwrap()));
+                        dispatch(setUser(await getProfile('').unwrap()));
                         router.push('/');
                     }
                 }
@@ -67,7 +67,7 @@ export const RegisterForm = () => {
                 if (user) {
                     const loginUser = await postLogin(data).unwrap();
                     if (loginUser) {
-                        dispatch(setUser(await getAuthUser('').unwrap()));
+                        dispatch(setUser(await getProfile('').unwrap()));
                         router.push('/');
                     }
                 }

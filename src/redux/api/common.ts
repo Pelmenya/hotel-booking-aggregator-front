@@ -25,8 +25,8 @@ export const commonApi = createApi({
             }),
 
         }),
-        updateProfile: builder.mutation<TUser, any>({
-            query: ({ body }) => ({
+        updateProfile: builder.mutation<TUser, Partial<TUser>>({
+            query: (body) => ({
                 url: 'profile',
                 method: 'PUT',
                 body,

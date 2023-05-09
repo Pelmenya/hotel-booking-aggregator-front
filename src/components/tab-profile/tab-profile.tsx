@@ -6,6 +6,7 @@ import { TabBody } from '../tab/components/tab-body/tab-body';
 import { Avatar } from '../pages/profile-page.tsx/components/avatar/avatar';
 import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
 import { UpdateUserForm } from '../forms/update-user-form/update-user-form';
+import { UserInfo } from './components/user-info';
 
 export const TabProfile = () => {
     const router = useRouter();
@@ -13,8 +14,8 @@ export const TabProfile = () => {
 
     const isEdit = paths.includes('edit');
     const isPassword = paths.includes('password');
-    const isProfile = paths.includes('profile') && !isEdit && !isPassword ;
-    
+    const isProfile = paths.includes('profile') && !isEdit && !isPassword;
+
     return (
         <Tab>
             <TabHead>
@@ -30,13 +31,18 @@ export const TabProfile = () => {
             </TabHead>
             <TabBody>
                 <TabBodyItem active={isProfile} firstInTab={true}>
-                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center">
+                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
+                        <UserInfo /> 
+                    </div>
+                </TabBodyItem>
+                <TabBodyItem active={isEdit}>
+                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
                         <Avatar />
                         <UpdateUserForm />
                     </div>
                 </TabBodyItem>
-                <TabBodyItem active={isEdit}>
-                    <Avatar />
+                <TabBodyItem active={isPassword}>
+                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content"></div>
                 </TabBodyItem>
             </TabBody>
         </Tab>

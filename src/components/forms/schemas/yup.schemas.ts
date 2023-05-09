@@ -30,3 +30,10 @@ export const schemaHotelForm = yup
         description: yup.string().min(2).required(),
     })
     .required();
+
+export const schemaUpdateProfileForm = yup
+    .object().shape({
+        name: yup.string().min(2).required(),
+        email: yup.string().email().matches(new RegExp(PATTERNS.PATTERN_EMAIL)).required(),
+        contactPhone: yup.string().matches(new RegExp(PATTERNS.PATTERN_PHONE)),
+    })

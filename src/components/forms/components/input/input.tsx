@@ -41,6 +41,7 @@ export const Input = ({
     control,
     error,
     autoComplete = 'off',
+    disabled,
 }: IInputProps) => {
     return (
         <Controller
@@ -79,6 +80,7 @@ export const Input = ({
                                 onBlur={onBlur}
                                 value={value ? value : ''}
                                 autoComplete={autoComplete}
+                                disabled={disabled}
                             />
                         )}
                         <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">

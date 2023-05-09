@@ -12,6 +12,7 @@ import { setUser } from '@/redux/slices/user';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
 import { getImageUrl } from 'utils/getImageUrl';
+import { TUser } from '@/types/t-user';
 
 export const Avatar = () => {
     const { user } = useAppSelector(getUserState);
@@ -41,7 +42,7 @@ export const Avatar = () => {
         if (files) {
             formData.append('avatars', files[0]);
 
-            const user = await updateUser({ body: formData }).unwrap();
+            const user = await updateUser(formData as Partial<TUser>).unwrap();
             dispatch(setUser(user));
             if (user){
                 setIsOpen(false)
@@ -117,7 +118,7 @@ export const Avatar = () => {
                         : {}
                 }
                 className={cn(
-                    'relative w-32 h-32 rounded-full bg-base-300 cursor-pointer flex items-center justify-center',
+                    'relative w-36 h-36 rounded-full bg-base-300 cursor-pointer flex items-center justify-center',
                     styles.avatar
                 )}
             >
