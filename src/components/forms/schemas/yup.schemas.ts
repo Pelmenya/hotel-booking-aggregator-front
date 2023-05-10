@@ -40,8 +40,8 @@ export const schemaUpdateProfileForm = yup
 
 export const schemaUpdatePasswordForm = yup.object().shape({
     oldPassword: yup.string().min(6).required(), 
-    password: yup.string().min(6).required(),
+    newPassword: yup.string().min(6).required(),
     confirmPassword: yup.string().min(6)
-        .oneOf([yup.ref('password')])
+        .oneOf([yup.ref('newPassword')])
         .required()
 });

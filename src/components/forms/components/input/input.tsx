@@ -12,6 +12,7 @@ export interface IInputProps
     name:
         | 'name'
         | 'password'
+        | 'newPassword'
         | 'oldPassword'
         | 'confirmPassword'
         | 'email'
@@ -98,21 +99,23 @@ export const Input = ({
                                         ? ERRORS_FORM.ERROR_CODE
                                         : name === 'email'
                                             ? ERRORS_FORM.ERROR_EMAIL
-                                            : name === 'password' 
+                                            : name === 'password'
                                                 ? ERRORS_FORM.ERROR_PASSWORD
-                                                : name === 'oldPassword' 
+                                                : name === 'oldPassword'
                                                     ? ERRORS_FORM.ERROR_PASSWORD
-                                                    : name === 'confirmPassword'
-                                                        ? ERRORS_FORM.ERROR_CONFIRM_PASSWORD
-                                                        : name === 'contactPhone'
-                                                            ? ERRORS_FORM.ERROR_TEL
-                                                            : name === 'role'
-                                                                ? ERRORS_FORM.ERROR_ROLE
-                                                                : name === 'title'
-                                                                    ? ERRORS_FORM.ERROR_TITLE
-                                                                    : name === 'description'
-                                                                        ? ERRORS_FORM.ERROR_DESCRIPTION
-                                                                        : ''
+                                                    : name === 'newPassword'
+                                                        ? ERRORS_FORM.ERROR_PASSWORD
+                                                        : name === 'confirmPassword'
+                                                            ? ERRORS_FORM.ERROR_CONFIRM_PASSWORD
+                                                            : name === 'contactPhone'
+                                                                ? ERRORS_FORM.ERROR_TEL
+                                                                : name === 'role'
+                                                                    ? ERRORS_FORM.ERROR_ROLE
+                                                                    : name === 'title'
+                                                                        ? ERRORS_FORM.ERROR_TITLE
+                                                                        : name === 'description'
+                                                                            ? ERRORS_FORM.ERROR_DESCRIPTION
+                                                                            : ''
                                 : ERRORS_FORM.ERROR_REQUIRED_FIELD}
                         </span>
                     )}

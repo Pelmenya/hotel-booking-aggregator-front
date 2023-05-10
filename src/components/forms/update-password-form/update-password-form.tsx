@@ -8,10 +8,14 @@ import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useState } from 'react';
 import EyeIcon from '@/icons/eye.svg';
 import EyeSlashIcon from '@/icons/eye-slash.svg';
+import { useUpdatePasswordMutation } from '@/redux/api/auth';
+import { TUpdatePasswordDto } from '@/types/t-update-password-dto';
 
 export const UpdatePasswordForm = () => {
     const [typeInput, setTypeInput] = useState<IInputProps['type']>('password');
-
+    const [updatePassword, { isLoading, isError, error }] =
+        useUpdatePasswordMutation();
+    
     const {
         handleSubmit,
         control,
@@ -23,6 +27,7 @@ export const UpdatePasswordForm = () => {
 
     const onSubmit = async (data: FieldValues) => {
         if (data) {
+            await updatePassword(data as TUpdatePasswordDto).unwrap();
         }
     };
 
@@ -60,10 +65,10 @@ export const UpdatePasswordForm = () => {
             />
             <Input
                 type={typeInput}
-                id="password"
-                placeholder="Password"
+                id="NewPassword"
+                placeholder="NewPassword"
                 label="Новый пароль"
-                name="password"
+                name="newPassword"
                 error={!!errors.password}
                 control={control}
             />
@@ -78,9 +83,9 @@ export const UpdatePasswordForm = () => {
             />
             <SubmitBtn
                 text={'Сохранить'}
-                isLoading={false}
-                isError={false}
-                error={{} as TError}
+                isLoading={isLoading}
+                isError={isError}
+                error={error as TError}
             />
         </FormWrapper>
     );

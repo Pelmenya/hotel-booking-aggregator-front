@@ -1,3 +1,4 @@
+import { TUpdatePasswordDto } from '@/types/t-update-password-dto';
 import { TUser } from '@/types/t-user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
@@ -6,7 +7,7 @@ export const authApi = createApi({
     reducerPath: 'auth',
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/auth',
-        
+
     }),
     extractRehydrationInfo(action, { reducerPath }) {
         if (action.type === HYDRATE) {
@@ -23,7 +24,15 @@ export const authApi = createApi({
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
-        postLogout: builder.mutation<{success: boolean}, any>({
+        updatePassword: builder.mutation<{ success: boolean }, TUpdatePasswordDto>({
+            query: (body) => ({
+                url: 'password',
+                method: 'PUT',
+                body,
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
+        postLogout: builder.mutation<{ success: boolean }, any>({
             query: () => ({
                 url: 'logout',
                 method: 'POST',
@@ -37,8 +46,9 @@ export const authApi = createApi({
 export const {
     usePostLoginMutation,
     usePostLogoutMutation,
+    useUpdatePasswordMutation,
     util: { getRunningQueriesThunk },
 } = authApi;
 
 // export endpoints for use in SSR
-export const { postLogin, postLogout } = authApi.endpoints;
+export const { postLogin, postLogout, updatePassword } = authApi.endpoints;
