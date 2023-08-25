@@ -2,13 +2,12 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import cn from 'classnames';
 
-
 export type TModalProps = {
     title?: string;
     isOpen: boolean;
     handlerClose: () => void;
     children?: JSX.Element;
-    sizeCloseBtn?: 'sm' | 'md' | 'lg' | 'xs' 
+    sizeCloseBtn?: 'sm' | 'md' | 'lg' | 'xs';
 };
 
 export const Modal = ({
@@ -16,7 +15,7 @@ export const Modal = ({
     isOpen,
     handlerClose,
     children,
-    sizeCloseBtn = 'md'
+    sizeCloseBtn = 'md',
 }: TModalProps) => {
     return (
         <>
@@ -50,28 +49,40 @@ export const Modal = ({
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="transform relative overflow-hidden rounded-3xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all max-w-full max-h-full">
-                                    <button onClick={handlerClose} className={cn('btn btn-circle btn-outline absolute right-4 top-4', `btn-${sizeCloseBtn}`)}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-6 w-6"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
+                                    <div className={
+                                        cn(
+                                            {'flex justify-beetween items-center gap-2': !!title}, 
+                                            {'flex flex-col items-end': !!!title}
+                                        )}>
+                                        <Dialog.Title
+                                            as="h3"
+                                            className="text-3xl font-bold leading-6"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                d="M6 18L18 6M6 6l12 12"
-                                            />
-                                        </svg>
-                                    </button>
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="text-3xl font-bold leading-6"
-                                    >
-                                        {title}
-                                    </Dialog.Title>
+                                            {title}
+                                        </Dialog.Title>
+                                        <button
+                                            onClick={handlerClose}
+                                            className={cn(
+                                                'btn btn-circle btn-outline',
+                                                `btn-${sizeCloseBtn}`
+                                            )}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-6 w-6"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth="2"
+                                                    d="M6 18L18 6M6 6l12 12"
+                                                />
+                                            </svg>
+                                        </button>
+                                    </div>
                                     <div className="mt-2">{children}</div>
                                 </Dialog.Panel>
                             </Transition.Child>

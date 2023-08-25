@@ -9,6 +9,7 @@ import { getRole } from 'utils/getRole';
 import IdentificationIcon from '@/icons/identification.svg';
 import PasswordIcon from '@/icons/shield-check.svg';
 import LogoutIcon from '@/icons/logout-icon.svg';
+import { ConfirmEmail } from './confirm-email';
 
 export const UserInfo = () => {
     const dispatch = useAppDispatch();
@@ -34,10 +35,14 @@ export const UserInfo = () => {
                     <p>Имя</p>
                     <p>{user?.name}</p>
                 </div>
-                <div className="flex w-full justify-between py-2">
-                    <p>Почта</p>
-                    <p>{user?.email}</p>
-                </div>
+                {user?.emailIsConfirm ? (
+                    <div className="flex w-full justify-between py-2">
+                        <p>Почта</p>
+                        <p>{user?.email}</p>
+                    </div>
+                ) : <ConfirmEmail user={user}/>
+                
+                }
                 <div className="flex w-full justify-between py-2">
                     <p>Контактный телефон</p>
                     <p>{user?.contactPhone}</p>

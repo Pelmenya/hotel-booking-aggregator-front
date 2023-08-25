@@ -24,10 +24,10 @@ export const TabProfile = () => {
                     Профиль
                 </TabHeadLink>
                 <TabHeadLink href="/profile/edit" active={isEdit}>
-                    Данные
+                    Редактирование
                 </TabHeadLink>
                 <TabHeadLink href="/profile/password" active={isPassword}>
-                    Пароль
+                    Смена пароля
                 </TabHeadLink>
             </TabHead>
             <TabBody>
