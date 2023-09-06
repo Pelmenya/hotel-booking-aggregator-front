@@ -28,6 +28,7 @@ export const ContentHotels = () => {
                         href="/admin/hotels/delete"
                         active={isDelete}
                         text="Удалить"
+                        disabled={true}
                     />
                 </TabMenu>
             </div>

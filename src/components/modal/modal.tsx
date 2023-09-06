@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import cn from 'classnames';
+import CrossIcon from '@/icons/cross.svg';
 
 export type TModalProps = {
     title?: string;
@@ -38,7 +39,7 @@ export const Modal = ({
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto flex items-center justify-center mr-1.5">
-                        <div className="flex min-h-full items-center justify-center p-8 text-center">
+                        <div className="flex min-h-full items-center justify-center px-8 text-center">
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -67,20 +68,7 @@ export const Modal = ({
                                                 `btn-${sizeCloseBtn}`
                                             )}
                                         >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-6 w-6"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth="2"
-                                                    d="M6 18L18 6M6 6l12 12"
-                                                />
-                                            </svg>
+                                            <CrossIcon />
                                         </button>
                                     </div>
                                     <div className="mt-2">{children}</div>
