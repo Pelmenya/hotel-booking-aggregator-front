@@ -1,7 +1,7 @@
 import { Toggle } from '@/components/toggle/toggle';
 import { CheckBox } from '../check-box/check-box';
 import { ChangeEvent } from 'react';
-import { TPicture } from '../../hotel-edit-form/hotel-edit-form';
+import { TPicture } from '@/types/t-picture';
 
 export type TPicturesGridProps = {
     title?: string;
