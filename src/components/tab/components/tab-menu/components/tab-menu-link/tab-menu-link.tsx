@@ -16,13 +16,13 @@ export const TabMenuLink = ({
 }: TMenuTabLinkProps) => (
     <>
         {!disabled ? (
-            <Link href={href} className={cn('btn', { ['btn-active']: active })}>
+            <Link href={href} className={cn('btn join-item', { ['btn-active']: active })}>
                 {text}
             </Link>
         ) : (
             <button
                 disabled={disabled}
-                className={cn('btn', { ['btn-active']: active })}
+                className={cn('btn join-item', { ['btn-active']: active })}
             >
                 {text}
             </button>

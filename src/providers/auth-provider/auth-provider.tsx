@@ -14,6 +14,7 @@ export type TAuthProviderProps = TBaseProps & {
 };
 
 export const AuthProvider = ({ children, pageProps }: TAuthProviderProps) => {
+
     const dispatch = useAppDispatch();
     const { user } = useAppSelector(getUserState);
     const { protectedFromUser, protectedAuth, roles } = pageProps;

@@ -10,8 +10,10 @@ import { setUser } from '@/redux/slices/user';
 import { useGetProfileMutation } from '@/redux/api/common';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
+import { useRouter } from 'next/router';
 
 export const LoginForm = () => {
+    const router = useRouter();
     const dispatch = useAppDispatch();
 
     const [postLogin, { isLoading, isError, error }] = usePostLoginMutation();
@@ -30,6 +32,7 @@ export const LoginForm = () => {
         if (dto) {
             const postUser = await postLogin(dto).unwrap();
             if (postUser) {
+                router.push('/profile');
                 dispatch(setUser(await getProfile('').unwrap()));
             }
         }

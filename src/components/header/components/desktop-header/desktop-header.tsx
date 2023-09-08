@@ -1,6 +1,6 @@
 import { TUserProps } from '@/types/t-user-props';
 import Link from 'next/link';
-import { Logo } from '../logo/logo';
+import { Logo } from '../../../logo/logo';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 
