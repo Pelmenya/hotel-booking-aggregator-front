@@ -1,4 +1,4 @@
-import { ProfilePage } from '@/components/pages/profile-page.tsx/profile-page';
+import { ProfilePage } from '@/components/pages/profile-page/profile-page';
 import { Layout } from '@/layout/layout';
 import { TRole } from '@/types/t-role';
 

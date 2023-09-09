@@ -1,0 +1,12 @@
+ol.policy {
+    list-style: none;
+
+    counter-reset: li;
+}
+
+ol.policy > li::before {
+    content: counters(li, '.') '. ';
+    counter-increment: li;
+
+    font-weight: bold;
+}

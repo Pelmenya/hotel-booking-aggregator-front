@@ -3,7 +3,7 @@ import { TabHeadLink } from '../tab/components/tab-head/components/tab-head-link
 import { TabHead } from '../tab/components/tab-head/tab-head';
 import { Tab } from '../tab/tab';
 import { TabBody } from '../tab/components/tab-body/tab-body';
-import { Avatar } from '../pages/profile-page.tsx/components/avatar/avatar';
+import { Avatar } from '../pages/profile-page/components/avatar/avatar';
 import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
 import { UpdateUserForm } from '../forms/update-user-form/update-user-form';
 import { UserInfo } from './components/user-info';
