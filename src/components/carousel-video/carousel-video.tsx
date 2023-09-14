@@ -1,10 +1,35 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
-const videosPaths = ['tropical.mp4', 'forest.mp4', 'agua.mp4'];
+export type TSlide = {
+    url: string;
+    head: string;
+};
 
-export const CarouselVideo = () => {
+export type TCarouselVideoProps = {
+    slides: TSlide[];
+    delay?: number;
+};
+
+export const CarouselVideo = ({ slides, delay }: TCarouselVideoProps) => {
     const [activeSlide, setActiveSlide] = useState<number>(0);
+
+    const handlerSetTimeout = () => {
+        if (slides.length === activeSlide + 1) {
+            setActiveSlide(0);
+            handlerScrollContainerToClick(0);
+        } else {
+            setActiveSlide(activeSlide + 1);
+            handlerScrollContainerToClick(activeSlide + 1);
+        }
+    };
+
+    useEffect(() => {
+        if (delay) {
+            const timeout = setTimeout(handlerSetTimeout, delay);
+            return () => clearTimeout(timeout);
+        }
+    });
 
     const listRef = useRef<HTMLUListElement>(null);
 
@@ -40,10 +65,10 @@ export const CarouselVideo = () => {
                 className="carousel w-full rounded-3xl my-8"
                 onScroll={handlerScrollContainer}
             >
-                {videosPaths.map((path, idx) => (
+                {slides.map((slide, idx) => (
                     <li
                         id={`Slide-${idx}`}
-                        key={path}
+                        key={slide.url}
                         className={cn(
                             'carousel-item relative w-full float-left !transform-none transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none',
                             {
@@ -54,10 +79,15 @@ export const CarouselVideo = () => {
                     >
                         <video className="w-full" autoPlay loop muted>
                             <source
-                                src={`${process.env.NEXT_PUBLIC_BASE_VIDEO_URL}${path}`}
+                                src={`${process.env.NEXT_PUBLIC_BASE_VIDEO_URL}${slide.url}`}
                                 type="video/mp4"
                             />
                         </video>
+                        <div className="absolute w-full h-full flex items-center justify-center">
+                            <h2 className="text-white text-3xl text-center">
+                                {slide.head}
+                            </h2>
+                        </div>
                     </li>
                 ))}
             </ul>
@@ -65,10 +95,10 @@ export const CarouselVideo = () => {
                 className="absolute bottom-8 left-0 right-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
                 data-te-carousel-indicators
             >
-                {videosPaths.map((path, idx) => (
+                {slides.map((slide, idx) => (
                     <button
                         id={`Slide-button-${idx}`}
-                        key={path}
+                        key={slide.head}
                         type="button"
                         className={cn(
                             'mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-white bg-clip-padding p-0 -indent-[999px] transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none',
