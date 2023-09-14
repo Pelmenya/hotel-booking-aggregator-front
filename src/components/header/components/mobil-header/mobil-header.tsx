@@ -48,8 +48,6 @@ export const MobileHeader = ({ isOpen, onClick }: TMobileHeaderProps) => (
                 />
             </svg>
         </button>
-        <Link href="/">
-            <Logo />
-        </Link>
+        <Logo />
     </div>
 );

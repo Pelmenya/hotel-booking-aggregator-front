@@ -10,7 +10,7 @@ export const Footer = () => {
     const currentYear = getYear();
 
     return (
-        <footer className="footer p-10 bg-neutral text-neutral-content">
+        <footer className="footer mt-8 p-10 bg-neutral text-neutral-content">
             <div className="footer mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <aside>
                     <Logo />
@@ -32,7 +32,7 @@ export const Footer = () => {
                         Тел.: +7(916)-619-88-52
                     </a>
                     <a href="mailto:lyapindm@yandex.ru" className="link link-hover">
-                        Email.: lyapindm@yandex.ru
+                        Email: lyapindm@yandex.ru
                     </a>
                 </nav>
                 <nav>

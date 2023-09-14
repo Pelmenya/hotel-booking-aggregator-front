@@ -12,10 +12,8 @@ export const DesktopHeader = ({ user }: TUserProps) => {
 
     return (
         <div className="hidden sm:block">
-            <div className="flex space-x-4">
-                <Link href="/">
-                    <Logo />
-                </Link>
+            <div className="flex items-center space-x-4">
+                <Logo />
                 <Link
                     href="/"
                     className={cn('btn btn-sm', {

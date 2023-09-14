@@ -10,6 +10,7 @@ export type TCarouselProps = {
 };
 
 export const Carousel = ({ idx, pictures }: TCarouselProps) => {
+    const [scrollLength, setScrollLength] = useState<number>(0);
     const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
     const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
 
@@ -19,6 +20,7 @@ export const Carousel = ({ idx, pictures }: TCarouselProps) => {
         const { current } = listRef;
         if (current) {
             const { scrollLeft, scrollWidth, clientWidth } = current;
+            setScrollLength(current.getBoundingClientRect().width);
             setCanScrollLeft(scrollLeft > 0);
             setCanScrollRight(scrollLeft !== scrollWidth - clientWidth);
         }
@@ -46,7 +48,10 @@ export const Carousel = ({ idx, pictures }: TCarouselProps) => {
                     )}
                 >
                     <button
-                        onClick={() => scrollContainerBy(-204)}
+                        onClick={(e) => {
+                            scrollContainerBy(-scrollLength);
+                            e.stopPropagation();
+                        }}
                         className={cn(
                             'btn btn-circle btn-xs opacity-75 hover:btn-sm hover:bg-white hover:text-black',
                             { ['invisible']: !canScrollLeft }
@@ -55,7 +60,10 @@ export const Carousel = ({ idx, pictures }: TCarouselProps) => {
                         ❮
                     </button>
                     <button
-                        onClick={() => scrollContainerBy(204)}
+                        onClick={(e) => {
+                            scrollContainerBy(scrollLength);
+                            e.stopPropagation();
+                        }}
                         className={cn(
                             'btn btn-circle btn-xs opacity-75 hover:btn-sm hover:bg-white hover:text-black',
                             { ['invisible']: !canScrollRight }
@@ -67,7 +75,6 @@ export const Carousel = ({ idx, pictures }: TCarouselProps) => {
             ) : (
                 <></>
             )}
-
             <ul
                 className="carousel max-w-md sm:max-w-none rounded-t-3xl sm:rounded-t-3xl md:w-52 sm:w-full md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer"
                 ref={listRef}

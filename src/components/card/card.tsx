@@ -18,10 +18,8 @@ export const Card = ({
     return (
         <div
             id={id}
-            onClick={(e) => {
-                if (!(e.target instanceof HTMLButtonElement)) {
-                    onClick(id);
-                }
+            onClick={() => {
+                onClick(id);
             }}
             className="card card-side bg-base-300 shadow-xl rounded-3xl gap-4 cursor-pointer flex-col sm:flex-col md:flex-row"
         >
