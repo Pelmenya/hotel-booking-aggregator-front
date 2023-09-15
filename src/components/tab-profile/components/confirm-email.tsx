@@ -10,7 +10,7 @@ export const ConfirmEmail = ({ user }: TUserProps) => {
         <div className="flex w-full py-2 justify-between text-error items-center">
             <p>Почта не подтверждена</p>
             <p>{user?.email}</p>
-            <button onClick={() => setIsOpenConfirmEmailModal(true)} className="btn btn-sm flex gap-2">
+            <button disabled onClick={() => setIsOpenConfirmEmailModal(true)} className="btn btn-sm flex gap-2">
                 <ConfirmIcon />
                 Подтвердить
             </button>
