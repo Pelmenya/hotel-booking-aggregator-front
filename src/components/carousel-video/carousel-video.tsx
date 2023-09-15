@@ -84,7 +84,7 @@ export const CarouselVideo = ({ slides, delay }: TCarouselVideoProps) => {
                             />
                         </video>
                         <div className="absolute w-full h-full flex items-center justify-center">
-                            <h2 className="text-white text-3xl text-center">
+                            <h2 className="text-white text-3xl text-center uppercase">
                                 {slide.head}
                             </h2>
                         </div>
