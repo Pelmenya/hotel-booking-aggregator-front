@@ -18,11 +18,6 @@ export type ILayoutProps = TBaseProps & {
 
 export const Layout = ({ title, children }) => {
     const router = useRouter();
-    const {
-        NEXT_PUBLIC_SITE_URL, 
-        NEXT_PUBLIC_BASE_IMAGES_URL, 
-        NEXT_PUBLIC_YM_ACCOUNT
-    } = process.env;
 
     return (
         <>
@@ -31,13 +26,13 @@ export const Layout = ({ title, children }) => {
                 <link rel="icon" href="logo.svg" />
                 <meta
                     property="og:url"
-                    content={NEXT_PUBLIC_SITE_URL + router.asPath}
+                    content={process.env.NEXT_PUBLIC_SITE_URL + router.asPath}
                 />
                 <meta property="og:locale" content="ru_RU" />
                 <meta
                     property="og:image"
                     content={
-                        NEXT_PUBLIC_BASE_IMAGES_URL + 'og-img.png'
+                        process.env.NEXT_PUBLIC_BASE_IMAGES_URL + 'og-img.png'
                     }
                 />
                 <meta
@@ -50,7 +45,7 @@ export const Layout = ({ title, children }) => {
                 />
             </Head>
             <YMInitializer
-                accounts={[Number(NEXT_PUBLIC_YM_ACCOUNT)]}
+                accounts={[Number(process.env.NEXT_PUBLIC_YM_ACCOUNT)]}
                 options={{ webvisor: true, defer: true }}
                 version="2"
             />
