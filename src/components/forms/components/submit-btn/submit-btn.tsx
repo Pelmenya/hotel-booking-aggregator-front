@@ -18,9 +18,9 @@ export const SubmitBtn = ({
         disabled={isLoading}
         className={cn(
             'group relative flex w-full justify-center btn btn-primary',
-            { ['loading']: isLoading }
         )}
     >
+        {isLoading && <span className="loading loading-spinner"></span>}
         {isError && (
             <span className="absolute w-full text-xs text-error top-[-20px]">
                 {error?.data?.message}
