@@ -3,6 +3,7 @@ module.exports = {
     experimental: {
         appDir: true,
     },
+    // добавляем загрузку svg
     webpack(config, options) {
         config.module.rules.push({
             loader: '@svgr/webpack',
@@ -27,4 +28,16 @@ module.exports = {
 
         return config;
     },
+    // отключаем кеширование
+    headers: () => [
+        {
+            source: '/:path*',
+            headers: [
+                {
+                    key: 'Cache-Control',
+                    value: 'no-store',
+                },
+            ],
+        },
+    ],
 }
