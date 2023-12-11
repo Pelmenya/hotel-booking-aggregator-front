@@ -37,7 +37,7 @@ export const CarouselVideo = ({ slides, delay }: TCarouselVideoProps) => {
         (distance: number) => {
             listRef.current?.scrollTo({
                 left: listRef.current.getBoundingClientRect().width * distance,
-                behavior: 'instant',
+                behavior: 'auto',
             });
         },
         [listRef]
