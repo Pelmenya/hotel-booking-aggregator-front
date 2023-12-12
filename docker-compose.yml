@@ -7,4 +7,4 @@ services:
       - 80:${PORT}
     environment:      
       - PORT=${PORT}
-    command: sh -c "cd /app; rm -rf node_modules; npm install --force; npm run build; npm run start"
+    command: sh -c "cd /app; rm -rf node_modules; rm -rf .next; npm install --force; npm run build; npm run start"
