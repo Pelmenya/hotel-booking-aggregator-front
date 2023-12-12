@@ -13,9 +13,10 @@ export const TabBodyItem = ({
     <>
         {active ? (
             <div
+                role=''
                 className={cn(
-                    'px-4 py-4 rounded text-sm font-medium text-neutral-content bg-base-300 border border-base-300 mt-[-1px] shadow-xl',
-                    { ['rounded-[0_0.375rem_0.375rem]']: firstInTab }
+                    'border border-orange-300 px-4 py-4 text-sm font-medium text-neutral-content shadow-xl mt-[-1px] rounded-[0_0_0.375rem_0.375rem]',
+                    {'block': active }
                 )}
             >
                 {children}
