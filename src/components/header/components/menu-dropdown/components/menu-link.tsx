@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { TBaseProps } from '@/types/t-base-props';
-import  MenuProfileIcon  from '@/icons/profile-icon.svg';
-import  MenuLogoutIcon  from '@/icons/logout-icon.svg';
-import  MenuLoginIcon  from '@/icons/login-icon.svg';
+import MenuProfileIcon from '@/icons/profile-icon.svg';
+import MenuLogoutIcon from '@/icons/logout-icon.svg';
+import MenuLoginIcon from '@/icons/login-icon.svg';
 
 export type TMenuLinkProps = TBaseProps & {
     id?: string;
@@ -21,11 +21,13 @@ export const MenuLink = ({
 }: TMenuLinkProps) => (
     <li onClick={onClick}>
         <Link href={href}>
-            {type === 'login' && <MenuLoginIcon />}
-            {type === 'profile' && <MenuProfileIcon />}
-            {type === 'logout' && <MenuLogoutIcon />}
-            {children}
-            {text}
+            <div className='flex p-1'>
+                {type === 'login' && <MenuLoginIcon />}
+                {type === 'profile' && <MenuProfileIcon />}
+                {type === 'logout' && <MenuLogoutIcon />}
+                {children}
+                <span className='block ml-2'>{text}</span>
+            </div>
         </Link>
     </li>
 );
