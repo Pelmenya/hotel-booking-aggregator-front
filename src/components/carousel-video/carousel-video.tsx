@@ -62,7 +62,7 @@ export const CarouselVideo = ({ slides, delay }: TCarouselVideoProps) => {
         <div className="relative">
             <ul
                 ref={listRef}
-                className="carousel w-full rounded-3xl my-8"
+                className="carousel skeleton w-full rounded-3xl my-8"
                 onScroll={handlerScrollContainer}
             >
                 {slides.map((slide, idx) => (
