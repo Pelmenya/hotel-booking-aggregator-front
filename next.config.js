@@ -31,7 +31,7 @@ module.exports = {
     // отключаем кеширование
     headers: () => [
         {
-            source: '/:path*',
+            source: '/',
             headers: [
                 {
                     key: 'Cache-Control',
@@ -39,5 +39,24 @@ module.exports = {
                 },
             ],
         },
+        {
+            source: '/hotel-rooms/',
+            headers: [
+                {
+                    key: 'Cache-Control',
+                    value: 'no-store',
+                },
+            ],
+        },
+        {
+            source: '/hotels/',
+            headers: [
+                {
+                    key: 'Cache-Control',
+                    value: 'no-store',
+                },
+            ],
+        },
+
     ],
 }
