@@ -28,35 +28,4 @@ module.exports = {
 
         return config;
     },
-    // отключаем кеширование
-    headers: () => [
-        {
-            source: '/',
-            headers: [
-                {
-                    key: 'Cache-Control',
-                    value: 'no-store',
-                },
-            ],
-        },
-        {
-            source: '/hotel-rooms/',
-            headers: [
-                {
-                    key: 'Cache-Control',
-                    value: 'no-store',
-                },
-            ],
-        },
-        {
-            source: '/hotels/',
-            headers: [
-                {
-                    key: 'Cache-Control',
-                    value: 'no-store',
-                },
-            ],
-        },
-
-    ],
 }
