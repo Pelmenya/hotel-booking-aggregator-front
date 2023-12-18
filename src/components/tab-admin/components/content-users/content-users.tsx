@@ -2,6 +2,7 @@ import { useGetAdminUsersQuery } from '@/redux/api/admin';
 import { generateRandomInteger } from 'utils/generateRandomInteger';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
+import cn from 'classnames';
 
 export const ContentUsers = () => {
     const { data } = useGetAdminUsersQuery('');
@@ -25,7 +26,7 @@ export const ContentUsers = () => {
                                 <td>
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
-                                            <div className="mask mask-squircle w-12 h-12">
+                                            <div className="mask mask-squircle w-12 h-12 skeleton">
                                                 <picture>
                                                     <img
                                                         src={
@@ -65,7 +66,7 @@ export const ContentUsers = () => {
                                 <td>
                                     {user?.email}
                                     <br />
-                                    <span className="badge badge-ghost badge-sm">
+                                    <span className={cn('badge badge-sm', user?.emailIsConfirm ? 'badge-ghost':'badge-warning' )}>
                                         {user?.emailIsConfirm
                                             ? 'подтвержден'
                                             : 'не подтвержден'}
