@@ -31,7 +31,7 @@ export const TabProfile = () => {
                 </TabHeadLink>
             </TabHead>
             <TabBody>
-                <TabBodyItem active={isProfile} firstInTab={true}>
+                <TabBodyItem active={isProfile}>
                     <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
                         <UserInfo /> 
                     </div>
