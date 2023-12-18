@@ -2,13 +2,11 @@ import { TBaseProps } from '@/types/t-base-props';
 import cn from 'classnames';
 
 export type TTabBodyItemProps = TBaseProps & {
-    firstInTab?: boolean;
     active: boolean;
 };
 export const TabBodyItem = ({
     children,
     active,
-    firstInTab = false,
 }: TTabBodyItemProps) => (
     <>
         {active ? (

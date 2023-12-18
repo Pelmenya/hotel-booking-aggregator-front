@@ -17,6 +17,13 @@ export const adminApi = createApi({
     },
     tagTypes: [],
     endpoints: (builder) => ({
+        getAdminUsers: builder.query<Partial<TUser[]>, any>({
+            query: () => ({
+                url: 'users',
+                method: 'GET',
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
         postAdminUsers: builder.mutation<Partial<TUser>, any>({
             query: (body) => ({
                 url: 'users',
@@ -67,11 +74,13 @@ export const {
     usePutAdminHotelsMutation,
     usePostAdminHotelRoomsMutation,
     usePutAdminHotelRoomsMutation,
+    useGetAdminUsersQuery,
     util: { getRunningQueriesThunk },
 } = adminApi;
 
 // export endpoints for use in SSR
 export const { 
+    getAdminUsers,
     postAdminUsers, 
     postAdminHotels, 
     putAdminHotels, 

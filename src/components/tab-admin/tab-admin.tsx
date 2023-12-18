@@ -6,12 +6,14 @@ import { TabHead } from '../tab/components/tab-head/tab-head';
 import { TabHeadLink } from '../tab/components/tab-head/components/tab-head-link/tab-head-link';
 import { TabBody } from '../tab/components/tab-body/tab-body';
 import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
+import { ContentUsers } from './components/content-users/content-users';
 
 export const TabAdmin = () => {
     const router = useRouter();
     const paths = router.pathname.split('/');
     const isHotelRooms = paths.includes('hotel-rooms');
     const isHotels = paths.includes('hotels');
+    const isUsers = paths.includes('users');
 
     return (
         <Tab>
@@ -28,16 +30,24 @@ export const TabAdmin = () => {
                 >
                     Номера
                 </TabHeadLink>
+                <TabHeadLink
+                    href="/admin/users"
+                    active={isUsers}
+                >
+                    Пользователи
+                </TabHeadLink>
             </TabHead>
             <TabBody>
                 <TabBodyItem
                     active={isHotels}
-                    firstInTab={true}
                 >
                     <ContentHotels />
                 </TabBodyItem>
                 <TabBodyItem active={isHotelRooms}>
                     <ContentRooms />
+                </TabBodyItem>
+                <TabBodyItem active={isUsers}>
+                    <ContentUsers />
                 </TabBodyItem>
             </TabBody>
         </Tab>
