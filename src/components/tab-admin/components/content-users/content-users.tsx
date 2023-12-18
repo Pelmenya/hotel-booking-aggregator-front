@@ -1,5 +1,7 @@
 import { useGetAdminUsersQuery } from '@/redux/api/admin';
+import { generateRandomInteger } from 'utils/generateRandomInteger';
 import { getImageUrl } from 'utils/getImageUrl';
+import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
 
 export const ContentUsers = () => {
     const { data } = useGetAdminUsersQuery('');
@@ -28,11 +30,29 @@ export const ContentUsers = () => {
                                                     <img
                                                         src={
                                                             user?.avatars
-                                                                ? getImageUrl(
-                                                                    user
-                                                                        ?.avatars[0]
+                                                                ? user
+                                                                    .avatars[0]
+                                                                    ? getImageUrl(
+                                                                        user
+                                                                            ?.avatars[0]
+                                                                    )
+                                                                    : getPublicBaseImagesUrl(
+                                                                        String(
+                                                                            generateRandomInteger(
+                                                                                1,
+                                                                                8
+                                                                            )
+                                                                        ) +
+                                                                              '.png'
+                                                                    )
+                                                                : getPublicBaseImagesUrl(
+                                                                    String(
+                                                                        generateRandomInteger(
+                                                                            1,
+                                                                            8
+                                                                        )
+                                                                    ) + '.png'
                                                                 )
-                                                                : ''
                                                         }
                                                         alt={user?.name}
                                                     />

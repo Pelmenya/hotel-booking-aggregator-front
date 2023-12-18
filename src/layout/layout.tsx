@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer/footer';
 import Router, { useRouter } from 'next/router';
 import ym from 'react-yandex-metrika';
 import { YMInitializer } from 'react-yandex-metrika';
+import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
 
 Router.events.on('routeChangeComplete', (url: string) => {
     if (typeof window !== 'undefined') {
@@ -31,9 +32,7 @@ export const Layout = ({ title, children }) => {
                 <meta property="og:locale" content="ru_RU" />
                 <meta
                     property="og:image"
-                    content={
-                        process.env.NEXT_PUBLIC_BASE_IMAGES_URL + 'og-img.png'
-                    }
+                    content={getPublicBaseImagesUrl('og-img.png')}
                 />
                 <meta
                     property="og:og:title"
