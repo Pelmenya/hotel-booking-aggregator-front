@@ -4,6 +4,7 @@ import { getImageUrl } from 'utils/getImageUrl';
 import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
 import cn from 'classnames';
 import { max, min } from './constants';
+import { getRole } from 'utils/getRole';
 
 export const ContentUsers = () => {
     const { data } = useGetAdminUsersQuery('');
@@ -67,7 +68,7 @@ export const ContentUsers = () => {
                                     <div className="flex flex-col">
                                         {user?.name}
                                         <span className="badge badge-sm badge-ghost">
-                                            {user?.role}
+                                            {getRole(user?.role || 'client')}
                                         </span>
                                     </div>
                                 </td>
