@@ -18,17 +18,20 @@ export const ContentHotels = () => {
                         href="/admin/hotels"
                         active={!isEdit && !isDelete}
                         text="Добавить"
+                        icon='add'
                     />
                     <TabMenuLink
                         href="/admin/hotels/edit"
                         active={isEdit}
                         text="Редактировать"
+                        icon='edit'
                     />
                     <TabMenuLink
                         href="/admin/hotels/delete"
                         active={isDelete}
                         text="Удалить"
                         disabled={true}
+                        icon='delete'
                     />
                 </TabMenu>
             </div>
