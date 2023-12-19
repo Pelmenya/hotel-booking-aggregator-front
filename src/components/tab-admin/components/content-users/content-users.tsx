@@ -63,22 +63,30 @@ export const ContentUsers = () => {
                                         </div>
                                     </div>
                                 </td>
-                                <td>{user?.name}</td>
                                 <td>
-                                    {user?.email}
-                                    <br />
-                                    <span
-                                        className={cn(
-                                            'badge badge-sm',
-                                            user?.emailIsConfirm
-                                                ? 'badge-ghost'
-                                                : 'badge-warning'
-                                        )}
-                                    >
-                                        {user?.emailIsConfirm
-                                            ? 'подтвержден'
-                                            : 'не подтвержден'}
-                                    </span>
+                                    <div className="flex flex-col">
+                                        {user?.name}
+                                        <span className="badge badge-sm badge-ghost">
+                                            {user?.role}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="flex flex-col">
+                                        {user?.email}
+                                        <span
+                                            className={cn(
+                                                'badge badge-sm',
+                                                user?.emailIsConfirm
+                                                    ? 'badge-ghost'
+                                                    : 'badge-warning'
+                                            )}
+                                        >
+                                            {user?.emailIsConfirm
+                                                ? 'подтвержден'
+                                                : 'не подтвержден'}
+                                        </span>
+                                    </div>
                                 </td>
                                 <th>
                                     <button className="btn btn-ghost btn-xs">
