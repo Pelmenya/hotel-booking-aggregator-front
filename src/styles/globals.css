@@ -1,6 +1,6 @@
 
 /* stylelint-disable at-rule-no-unknown */
-@import url(../components/pages/privacy-policy-page/privacy-policy-page.css);
+@import url('../components/pages/privacy-policy-page/privacy-policy-page.css');
 
 /* В корне должна быть папка styles для  tailwind */
 @tailwind base;

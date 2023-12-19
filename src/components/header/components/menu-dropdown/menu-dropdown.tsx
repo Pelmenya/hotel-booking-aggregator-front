@@ -48,7 +48,7 @@ export const MenuDropdown = ({ user }: TUserProps) => {
                 <Menu.Items
                     as="ul"
                     tabIndex={0}
-                    className="absolute z-50 right-0 mt-2 origin-top-right dropdown-content menu p-2 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] bg-base-100 rounded-box w-52"
+                    className="absolute z-50 right-0 mt-2 menu p-2 drop-shadow-[0_10px_10px_rgba(0,0,0,0.2)] bg-base-100 rounded-box w-52"
                 >
                     {user
                         ? menuLinksLogin.map((link) => (

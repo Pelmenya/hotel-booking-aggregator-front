@@ -3,6 +3,7 @@ import { generateRandomInteger } from 'utils/generateRandomInteger';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
 import cn from 'classnames';
+import { max, min } from './constants';
 
 export const ContentUsers = () => {
     const { data } = useGetAdminUsersQuery('');
@@ -40,8 +41,8 @@ export const ContentUsers = () => {
                                                                     : getPublicBaseImagesUrl(
                                                                         String(
                                                                             generateRandomInteger(
-                                                                                1,
-                                                                                8
+                                                                                min,
+                                                                                max
                                                                             )
                                                                         ) +
                                                                               '.png'
@@ -49,8 +50,8 @@ export const ContentUsers = () => {
                                                                 : getPublicBaseImagesUrl(
                                                                     String(
                                                                         generateRandomInteger(
-                                                                            1,
-                                                                            8
+                                                                            min,
+                                                                            max
                                                                         )
                                                                     ) + '.png'
                                                                 )
@@ -66,7 +67,14 @@ export const ContentUsers = () => {
                                 <td>
                                     {user?.email}
                                     <br />
-                                    <span className={cn('badge badge-sm', user?.emailIsConfirm ? 'badge-ghost':'badge-warning' )}>
+                                    <span
+                                        className={cn(
+                                            'badge badge-sm',
+                                            user?.emailIsConfirm
+                                                ? 'badge-ghost'
+                                                : 'badge-warning'
+                                        )}
+                                    >
                                         {user?.emailIsConfirm
                                             ? 'подтвержден'
                                             : 'не подтвержден'}
