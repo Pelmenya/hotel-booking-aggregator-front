@@ -5,6 +5,7 @@ import { List } from '@/components/list/list';
 import { Modal } from '@/components/modal/modal';
 import { THotel } from '@/types/t-hotel';
 import { THotelRoom } from '@/types/t-hotel-room';
+import { Map } from '@/components/map/map';
 
 export type THotelPageProps = {
     hotel: THotel;
@@ -50,6 +51,11 @@ export const HotelPage = ({ hotel, rooms }: THotelPageProps) => {
                     ))}
                 </article>
             </div>
+            {hotel.coordinates.length ? (
+                <Map coordinates={hotel.coordinates} />
+            ) : (
+                <></>
+            )}
         </>
     );
 };
