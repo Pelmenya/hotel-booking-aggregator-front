@@ -53,7 +53,7 @@ export const HotelEditForm = () => {
             formData.append('description', dto.description);
             if (dto.coordinates) {
                 setCoordinates(dto.coordinates);
-                const coordinates = transformCoordinates(dto.coordinates)
+                const coordinates = transformCoordinates(dto.coordinates);
                 formData.append('coordinates', String(coordinates[0]));
                 formData.append('coordinates', String(coordinates[1]));
             }
@@ -134,9 +134,16 @@ export const HotelEditForm = () => {
             setValue('title', currentHotel.title);
             setValue('description', currentHotel.description);
             if (currentHotel.coordinates.length) {
-                setValue('coordinates', `${currentHotel.coordinates[0]},${currentHotel.coordinates[1]}`)
+                setValue(
+                    'coordinates',
+                    `${currentHotel.coordinates[0]},${currentHotel.coordinates[1]}`
+                );
                 setCoordinates(currentHotel.coordinates);
-            } 
+            } else {
+                setValue('coordinates', '');
+                setCoordinates(null);
+            }
+
             setPicturesFromDesktop(null);
             setFiles(undefined);
             setPicturesFromServer(
@@ -249,7 +256,11 @@ export const HotelEditForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
-            {coordinates && <Map coordinates={coordinates} />}
+            {coordinates && (
+                <div className="mb-8">
+                    <Map coordinates={coordinates} />
+                </div>
+            )}
             {picturesFromDesktop?.length ? (
                 <>
                     <PicturesGrid

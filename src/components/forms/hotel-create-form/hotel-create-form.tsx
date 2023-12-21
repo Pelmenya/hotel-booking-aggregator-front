@@ -38,7 +38,7 @@ export const HotelCreateForm = () => {
             formData.append('description', dto.description);
             if (dto.coordinates) {
                 setCoordinates(dto.coordinates);
-                const coordinates = transformCoordinates(dto.coordinates)
+                const coordinates = transformCoordinates(dto.coordinates);
                 formData.append('coordinates', String(coordinates[0]));
                 formData.append('coordinates', String(coordinates[1]));
             }
@@ -112,7 +112,11 @@ export const HotelCreateForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
-            {coordinates && <Map coordinates={transformCoordinates(coordinates)} />}
+            {coordinates && (
+                <div className="mb-8">
+                    <Map coordinates={transformCoordinates(coordinates)} />
+                </div>
+            )}
             {pictures ? (
                 <PicturesGrid
                     pictures={pictures.map((item) => ({
