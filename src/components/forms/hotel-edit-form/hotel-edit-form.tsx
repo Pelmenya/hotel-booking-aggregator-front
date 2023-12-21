@@ -16,8 +16,11 @@ import { usePutAdminHotelsMutation } from '@/redux/api/admin';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getBaseImageUrl } from 'utils/getBaseImageUrl';
 import { TPicture } from '@/types/t-picture';
+import { transformCoordinates } from 'utils/transformCoordinates';
+import { Map } from '@/components/map/map';
 
 export const HotelEditForm = () => {
+    const [coordinates, setCoordinates] = useState<TNullable<number[]>>(null);
     const [, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [idxCurrentHotel, setIdxCurrentHotel] = useState(0);
@@ -48,6 +51,13 @@ export const HotelEditForm = () => {
             const formData = new FormData();
             formData.append('title', dto.title);
             formData.append('description', dto.description);
+            if (dto.coordinates) {
+                setCoordinates(dto.coordinates);
+                const coordinates = transformCoordinates(dto.coordinates)
+                formData.append('coordinates', String(coordinates[0]));
+                formData.append('coordinates', String(coordinates[1]));
+            }
+
             if (files) {
                 Array.from(files).forEach((file) => {
                     formData.append('images', file);
@@ -57,10 +67,7 @@ export const HotelEditForm = () => {
             if (picturesFromServer) {
                 picturesFromServer.forEach((picture) => {
                     if (picture.checked) {
-                        formData.append(
-                            'images',
-                            getBaseImageUrl(picture.url),
-                        );
+                        formData.append('images', getBaseImageUrl(picture.url));
                     }
                 });
             }
@@ -126,6 +133,10 @@ export const HotelEditForm = () => {
         if (currentHotel) {
             setValue('title', currentHotel.title);
             setValue('description', currentHotel.description);
+            if (currentHotel.coordinates.length) {
+                setValue('coordinates', `${currentHotel.coordinates[0]},${currentHotel.coordinates[1]}`)
+                setCoordinates(currentHotel.coordinates);
+            } 
             setPicturesFromDesktop(null);
             setFiles(undefined);
             setPicturesFromServer(
@@ -203,6 +214,16 @@ export const HotelEditForm = () => {
                     control={control}
                 />
                 <Input
+                    type="text"
+                    id="HotelСoordinates"
+                    placeholder="Координаты"
+                    label="Координаты"
+                    name="coordinates"
+                    error={!!errors.coordinates}
+                    control={control}
+                />
+
+                <Input
                     type="textarea"
                     id="HotelDescription"
                     placeholder="Описание"
@@ -228,6 +249,7 @@ export const HotelEditForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
+            {coordinates && <Map coordinates={coordinates} />}
             {picturesFromDesktop?.length ? (
                 <>
                     <PicturesGrid
@@ -236,7 +258,7 @@ export const HotelEditForm = () => {
                     />
                     <div className="pb-2"></div>
                 </>
-            ) : null }
+            ) : null}
             {picturesFromServer?.length ? (
                 <PicturesGrid
                     title="Файлы с cервера"

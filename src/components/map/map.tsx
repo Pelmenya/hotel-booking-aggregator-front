@@ -1,21 +1,17 @@
 import { YMaps, Map as MapComponent, Placemark } from '@pbe/react-yandex-maps';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export type MapProps = {
-    coordinates: string;
+    coordinates: number[];
 };
 
 export const Map = ({ coordinates }: MapProps) => {
     
-    const point = useMemo(() => {
-        return [Number(coordinates.split(',')[0]), Number(coordinates.split(',')[1])];
-    }, [coordinates]);
-
-    const [center, setCenter] = useState(point);
+    const [center, setCenter] = useState(coordinates);
 
     useEffect(() => { 
-        setCenter(point)
-    }, [point]);
+        setCenter(coordinates)
+    }, [coordinates]);
 
     return (
         <YMaps>

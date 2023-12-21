@@ -11,6 +11,7 @@ import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { Map } from '@/components/map/map';
+import { transformCoordinates } from 'utils/transformCoordinates';
 
 export const HotelCreateForm = () => {
     const [coordinates, setCoordinates] = useState<TNullable<string>>(null);
@@ -34,16 +35,19 @@ export const HotelCreateForm = () => {
         if (dto) {
             const formData = new FormData();
             formData.append('title', dto.title);
-            formData.append('coordinates', dto.coordinates);
             formData.append('description', dto.description);
+            if (dto.coordinates) {
+                setCoordinates(dto.coordinates);
+                const coordinates = transformCoordinates(dto.coordinates)
+                formData.append('coordinates', String(coordinates[0]));
+                formData.append('coordinates', String(coordinates[1]));
+            }
             if (files) {
                 Array.from(files).forEach((file) => {
                     formData.append('images', file);
                 });
             }
-            setCoordinates(dto.coordinates);
-            console.log(dto)
-            //await postAdminHotels(formData).unwrap();
+            await postAdminHotels(formData).unwrap();
         }
     };
 
@@ -108,8 +112,7 @@ export const HotelCreateForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
-            {coordinates && <Map coordinates={coordinates} />}
-
+            {coordinates && <Map coordinates={transformCoordinates(coordinates)} />}
             {pictures ? (
                 <PicturesGrid
                     pictures={pictures.map((item) => ({

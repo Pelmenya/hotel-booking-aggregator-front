@@ -3,6 +3,7 @@ export type THotel = {
     title: string;
     description: string;
     images: string[];
+    coordinates: number[];
     createAt?: string;
     updateAt?: string;
 }
