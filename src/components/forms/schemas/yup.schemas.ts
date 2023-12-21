@@ -28,6 +28,7 @@ export const schemaHotelForm = yup
     .object({
         title: yup.string().min(2).required(),
         description: yup.string().min(2).required(),
+        coordinates: yup.string().matches(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)
     })
     .required();
 

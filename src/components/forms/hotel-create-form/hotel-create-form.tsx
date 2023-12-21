@@ -10,8 +10,11 @@ import { Input } from '../components/input/input';
 import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
+import { Map } from '@/components/map/map';
 
 export const HotelCreateForm = () => {
+    const [coordinates, setCoordinates] = useState<TNullable<string>>(null);
+
     const [postAdminHotels, { isLoading, isError, error }] =
         usePostAdminHotelsMutation();
 
@@ -31,13 +34,16 @@ export const HotelCreateForm = () => {
         if (dto) {
             const formData = new FormData();
             formData.append('title', dto.title);
+            formData.append('coordinates', dto.coordinates);
             formData.append('description', dto.description);
             if (files) {
                 Array.from(files).forEach((file) => {
                     formData.append('images', file);
                 });
             }
-            await postAdminHotels(formData).unwrap();
+            setCoordinates(dto.coordinates);
+            console.log(dto)
+            //await postAdminHotels(formData).unwrap();
         }
     };
 
@@ -69,6 +75,15 @@ export const HotelCreateForm = () => {
                     control={control}
                 />
                 <Input
+                    type="text"
+                    id="HotelСoordinates"
+                    placeholder="Координаты"
+                    label="Координаты"
+                    name="coordinates"
+                    error={!!errors.coordinates}
+                    control={control}
+                />
+                <Input
                     type="textarea"
                     id="HotelDescription"
                     placeholder="Описание"
@@ -93,6 +108,8 @@ export const HotelCreateForm = () => {
                     error={error as TError}
                 />
             </FormWrapper>
+            {coordinates && <Map coordinates={coordinates} />}
+
             {pictures ? (
                 <PicturesGrid
                     pictures={pictures.map((item) => ({

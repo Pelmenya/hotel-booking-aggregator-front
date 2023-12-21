@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/carousel-full-pic-preview';
 import { ImagesGrid } from '@/components/images-grid/images-grid';
 import { List } from '@/components/list/list';
 import { Modal } from '@/components/modal/modal';
 import { THotel } from '@/types/t-hotel';
 import { THotelRoom } from '@/types/t-hotel-room';
-import { useState } from 'react';
 
 export type THotelPageProps = {
     hotel: THotel;
@@ -12,7 +12,6 @@ export type THotelPageProps = {
 };
 export const HotelPage = ({ hotel, rooms }: THotelPageProps) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
-
     const descriptions: string[] = hotel.description.split('\r\n');
 
     const handlerToogleModal = () => {
