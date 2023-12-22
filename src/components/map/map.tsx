@@ -17,7 +17,7 @@ export const Map = ({ coordinates }: MapProps) => {
         <YMaps>
             <div className="rounded-3xl p-4 bg-base-300 shadow-xl">
                 <MapComponent
-                    defaultState={{ center, zoom: 17 }}
+                    state={{ center, zoom: 17 }}
                     width={'100%'}
                 >
                     <Placemark geometry={center} />
