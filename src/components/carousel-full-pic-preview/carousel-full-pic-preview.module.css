@@ -1,3 +1,17 @@
+.wrapper {
+    position: relative;
+
+    margin-bottom: -6px;
+}
+
+.buttons {
+    display: none;
+}
+
+.wrapper:hover > .buttons {
+    display: flex;
+}
+
 .pic {
     max-height: calc(100vh - 12rem);
 }
