@@ -1,6 +1,7 @@
-import { useGetCommonHotelsQuery } from '@/redux/api/common';
+import { useLazyGetCommonHotelsQuery } from '@/redux/api/common';
 import { List } from '../../list/list';
 import { CarouselVideo, TSlide } from '@/components/carousel-video/carousel-video';
+import { useEffect } from 'react';
 
 const slides: TSlide[] = [
     { url: 'tropical.mp4', head: 'Окунитесь в мир приключений' },
@@ -9,7 +10,11 @@ const slides: TSlide[] = [
 ];
 
 export const MainPage = () => {
-    const { data } = useGetCommonHotelsQuery('');
+    const [ trigger,  { data }] = useLazyGetCommonHotelsQuery();
+
+    useEffect(() => {
+        trigger('').unwrap();
+    }, [trigger]);
 
     return (
         <>

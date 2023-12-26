@@ -66,10 +66,12 @@ export const {
     useUpdateProfileMutation,
     useGetCommonHotelsQuery,
     useGetCommonHotelByIdQuery,
-    useLazyGetCommonHotelsQuery,
     useGetCommonHotelRoomsQuery,
+    useLazyGetCommonHotelsQuery,
+    useLazyGetCommonHotelByIdQuery,
     useLazyGetCommonHotelRoomsQuery,
     useGetCommonHotelRoomByIdQuery,
+    useLazyGetCommonHotelRoomByIdQuery,
     util: { getRunningQueriesThunk },
 } = commonApi;
 
