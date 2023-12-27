@@ -24,4 +24,6 @@
 - HeadlessUI;
 - DaisyUI;
 - Redux-toolkit;
+- Redux-ToolKit-Query
+- React-Hook-Form
 - WebSocket.
