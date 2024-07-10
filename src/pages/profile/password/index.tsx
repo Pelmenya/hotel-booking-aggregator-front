@@ -5,7 +5,7 @@ import { TRole } from '@/types/t-role';
 export default function Profile() {
 
     return (
-        <Layout title="Hotel Booking Aggregator ~ Профиль : Изменение пароля">
+        <Layout title="Top-Hotels.su ~ Профиль : Изменение пароля">
             <ProfilePage />
         </Layout>
     );

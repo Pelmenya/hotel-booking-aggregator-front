@@ -6,7 +6,7 @@ import { wrapper } from '@/redux/store/store';
 
 export default function HotelsEditPage() {
     return (
-        <Layout title="Hotel Booking Aggregator ~ Админ : Отели : Редактирование">
+        <Layout title="Top-Hotels.su ~ Админ : Отели : Редактирование">
             <TabAdmin />
         </Layout>
     );

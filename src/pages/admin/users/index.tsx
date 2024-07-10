@@ -5,7 +5,7 @@ import { wrapper } from '@/redux/store/store';
 
 export default function UsersPage() {
     return (
-        <Layout title="Hotel Booking Aggregator ~ Админ : Пользователи">
+        <Layout title="Top-Hotels.su ~ Админ : Пользователи">
             <TabAdmin />
         </Layout>
     );

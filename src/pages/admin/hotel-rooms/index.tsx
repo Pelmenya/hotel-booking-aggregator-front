@@ -5,7 +5,7 @@ import { TRole } from '@/types/t-role';
 export default function HotelRoomsPage() {
 
     return (
-        <Layout title="Hotel Booking Aggregator ~ Админ : Вариант размещения : Создание">
+        <Layout title="Top-Hotels.su ~ Админ : Вариант размещения : Создание">
             <TabAdmin />
         </Layout>
     );

@@ -4,7 +4,7 @@ import { getCommonHotels, getRunningQueriesThunk } from '@/redux/api/common';
 import { wrapper } from '@/redux/store/store';
 
 export default function Main() {
-    return <Layout title="Hotel Booking Aggregator ~ Главная">
+    return <Layout title="Top-Hotels.su ~ Главная">
         <MainPage />
     </Layout>;
 }
