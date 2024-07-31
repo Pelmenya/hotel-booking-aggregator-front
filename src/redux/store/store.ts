@@ -5,6 +5,7 @@ import { adminApi } from '../api/admin';
 import { authApi } from '../api/auth';
 import { clientApi } from '../api/client';
 import { commonApi } from '../api/common';
+import { confirmApi } from '../api/confirm';
 import { userSlice } from '../slices/user';
 
 
@@ -19,13 +20,15 @@ export const store = configureStore({
         [commonApi.reducerPath]: commonApi.reducer,
         [clientApi.reducerPath]: clientApi.reducer,
         [adminApi.reducerPath]: adminApi.reducer,
+        [confirmApi.reducerPath]: confirmApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
         ...middlewares, 
         authApi.middleware, 
         commonApi.middleware, 
         clientApi.middleware, 
-        adminApi.middleware
+        adminApi.middleware,
+        confirmApi.middleware,
     ]),
     devTools: true,
 });

@@ -23,7 +23,8 @@ export interface IInputProps
         | 'images'
         | 'description'
         | 'avatars'
-        | 'coordinates';
+        | 'coordinates'
+        | 'code';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
     type: 'text' | 'password' | 'email' | 'tel' | 'textarea';
@@ -118,7 +119,9 @@ export const Input = ({
                                                                             ? ERRORS_FORM.ERROR_DESCRIPTION
                                                                             : name === 'coordinates'
                                                                                 ? ERRORS_FORM.ERROR_COORDINATES
-                                                                                : ''
+                                                                                : name === 'code'
+                                                                                    ? ERRORS_FORM.ERROR_CONFIRM_EMAIL
+                                                                                    : ''
                                 : ERRORS_FORM.ERROR_REQUIRED_FIELD}
                         </span>
                     )}
