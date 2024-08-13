@@ -3,8 +3,11 @@ services:
   hotel-aggregator-front:
     build: ./
     container_name: hotel-aggregator-front
+    volumes:
+      - .:/app
     ports:
       - ${PORT}:${PORT}
     environment:      
       - PORT=${PORT}
+    working_dir: /app
     command: sh -c "cd /app; rm -rf node_modules; rm -rf .next; npm install --force; npm run build; npm run start"
