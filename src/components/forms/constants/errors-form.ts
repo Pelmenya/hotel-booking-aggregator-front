@@ -11,5 +11,5 @@ export const ERRORS_FORM = {
     ERROR_DESCRIPTION: 'Описание отеля не меньше 2 символов',
     ERROR_COORDINATES: 'Действительные числа: -90..90,-180..180',
     ERROR_CONFIRM_EMAIL: 'Только UUID идентификатор',
+    ERROR_FILE_NOT_SELECTED: 'Файл не выбран',
 };
-

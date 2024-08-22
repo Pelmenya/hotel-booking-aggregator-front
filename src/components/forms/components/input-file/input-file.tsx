@@ -1,10 +1,13 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { IInputProps } from '../input/input';
 import cn from 'classnames';
-
-const maxFilesValue = Number(process.env.NEXT_PUBLIC_MAX_FILES) || 4;
-const maxFilesSizeValue = Number(process.env.NEXT_PUBLIC_MAX_FILES_SIZE) || 1048576;
+import { MESSAGES_FORM } from '../../constants/messages-form';
+import {
+    maxFilesSizeValue,
+    maxFilesValue,
+    oneMB,
+} from '../../constants/settings';
 
 export const InputFile = ({
     id,
@@ -14,55 +17,69 @@ export const InputFile = ({
     accept,
     name,
     control,
-    reset,
     className,
-    maxFiles = maxFilesValue , // максимальное количество файлов
+    maxFiles = maxFilesValue, // максимальное количество файлов
     maxFileSize = maxFilesSizeValue, // максимальный размер всех файлов в байтах (по умолчанию 1 МБ) за один раз
 }: Partial<
     IInputProps & {
-        reset?: boolean;
         handlerOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
         maxFiles?: number;
         maxFileSize?: number;
     }
 >) => {
-    const fileNotSelected = 'Файл не выбран'
-    const [display, setDisplay] = useState(fileNotSelected);
-    const [error, setError] = useState('')
-
-    useEffect(() => {
-        if (reset) {
-            setDisplay(fileNotSelected);
-        }
-    }, [reset]);
+    const [display, setDisplay] = useState(
+        MESSAGES_FORM.MESSAGE_FILE_NOT_SELECTED
+    );
+    const [error, setError] = useState('');
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files) {
             if (files.length > maxFiles) {
-                alert(`Можно загрузить не более ${maxFiles} файла(ов).`);
+                setError(`Можно загрузить не более ${maxFiles} файла(ов).`);
                 e.target.value = ''; // сбросить выбор
-                setDisplay(fileNotSelected);
-                return;
+                setDisplay(MESSAGES_FORM.MESSAGE_FILE_NOT_SELECTED);
             }
+            let sizeOfFilles = 0;
             for (let i = 0; i < files.length; i++) {
                 if (files[i].size > maxFileSize) {
-                    alert(`Размер файла ${files[i].name} превышает допустимый лимит в ${maxFileSize / 1048576} МБ.`);
+                    setError(
+                        `Размер файла ${
+                            files[i].name
+                        } превышает допустимый лимит в ${
+                            maxFileSize / oneMB
+                        } МБ.`
+                    );
                     e.target.value = ''; // сбросить выбор
-                    setDisplay(fileNotSelected);
-                    return;
+                    setDisplay(MESSAGES_FORM.MESSAGE_FILE_NOT_SELECTED);
+                }
+                if (files.length > 1) {
+                    sizeOfFilles = sizeOfFilles + files[i].size;
                 }
             }
+            if (sizeOfFilles > maxFileSize) {
+                setError(
+                    `Размер всех файлов превышает допустимый лимит в ${
+                        maxFileSize / oneMB
+                    } МБ.`
+                );
+                e.target.value = ''; // сбросить выбор
+                setDisplay(MESSAGES_FORM.MESSAGE_FILE_NOT_SELECTED);
+            }
+
             if (files.length === 1) {
                 setDisplay(files[0].name);
+                setError('');
             } else if (files.length > 1) {
                 setDisplay(`Число файлов: ${files.length}`);
+                setError('');
             } else {
-                setDisplay(fileNotSelected);
+                setDisplay(MESSAGES_FORM.MESSAGE_FILE_NOT_SELECTED);
             }
         } else {
-            setDisplay(fileNotSelected);
+            setDisplay(MESSAGES_FORM.MESSAGE_FILE_NOT_SELECTED);
         }
+
         handlerOnChange && handlerOnChange(e);
     };
 
@@ -88,6 +105,12 @@ export const InputFile = ({
                         multiple={multiple}
                         accept={accept}
                     />
+                    <></>
+                    {error && (
+                        <span className="absolute left-3 bottom-[-16px] text-xs text-error">
+                            {error}
+                        </span>
+                    )}
                 </div>
             )}
         />
