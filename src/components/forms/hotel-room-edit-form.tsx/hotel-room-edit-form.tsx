@@ -290,7 +290,6 @@ export const HotelRoomEditForm = () => {
                             accept="image/*"
                             id="HotelImages"
                             placeholder="Фото отеля"
-                            reset={!!!files}
                         />
                         <SubmitBtn
                             text="Редактировать"
