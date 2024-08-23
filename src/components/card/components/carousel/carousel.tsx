@@ -79,9 +79,9 @@ export const Carousel = ({ idx, pictures }: TCarouselProps) => {
                 className="carousel max-w-md sm:max-w-none rounded-t-3xl sm:rounded-t-3xl md:w-52 sm:w-full md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer"
                 ref={listRef}
             >
-                {pictures.map((picture) => (
+                {pictures.map((picture, idx) => (
                     <li
-                        key={picture}
+                        key={picture + String(idx)}
                         className="carousel-item scroll-py-10 w-full max-w-md sm:max-w-none flex items-center justify-center"
                     >
                         <picture>
