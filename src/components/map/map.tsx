@@ -7,7 +7,11 @@ export type MapProps = {
 export const Map = ({ coordinates }: MapProps) => {
     
     return (
-        <YMaps>
+        <YMaps
+            query={{
+                apikey: process.env.NEXT_PUBLIC_YM_API_KEY
+            }}
+        >
             <div className="rounded-3xl p-4 bg-base-300 shadow-xl">
                 <MapComponent
                     state={{ center: coordinates, zoom: 17 }}
