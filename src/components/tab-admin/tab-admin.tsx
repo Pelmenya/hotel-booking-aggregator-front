@@ -7,6 +7,7 @@ import { TabHeadLink } from '../tab/components/tab-head/components/tab-head-link
 import { TabBody } from '../tab/components/tab-body/tab-body';
 import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
 import { ContentUsers } from './components/content-users/content-users';
+import { ContentCalendar } from './components/content-calendar/content-calendar';
 
 export const TabAdmin = () => {
     const router = useRouter();
@@ -14,6 +15,7 @@ export const TabAdmin = () => {
     const isHotelRooms = paths.includes('hotel-rooms');
     const isHotels = paths.includes('hotels');
     const isUsers = paths.includes('users');
+    const isCalendar = paths.includes('calendar');
 
     return (
         <Tab>
@@ -31,6 +33,12 @@ export const TabAdmin = () => {
                     Номера
                 </TabHeadLink>
                 <TabHeadLink
+                    href="/admin/calendar"
+                    active={isCalendar}
+                >
+                    Календарь
+                </TabHeadLink>
+                <TabHeadLink
                     href="/admin/users"
                     active={isUsers}
                 >
@@ -45,6 +53,9 @@ export const TabAdmin = () => {
                 </TabBodyItem>
                 <TabBodyItem active={isHotelRooms}>
                     <ContentRooms />
+                </TabBodyItem>
+                <TabBodyItem active={isCalendar}>
+                    <ContentCalendar />
                 </TabBodyItem>
                 <TabBodyItem active={isUsers}>
                     <ContentUsers />
