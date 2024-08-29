@@ -1,3 +1,4 @@
+import { TSuccess } from '@/types/t-success';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
@@ -14,14 +15,14 @@ export const confirmApi = createApi({
     },
     tagTypes: [],
     endpoints: (builder) => ({
-        postEmailCode: builder.mutation<{succes : boolean}, any>({
+        postEmailCode: builder.mutation<TSuccess, any>({
             query: () => ({
                 url: 'email-code',
                 method: 'POST',
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
-        postConfirmEmail: builder.mutation<{succes : boolean}, {code: string}>({
+        putConfirmEmail: builder.mutation<TSuccess, {code: string}>({
             query: (body) => ({
                 body,
                 url: 'email',
@@ -29,16 +30,32 @@ export const confirmApi = createApi({
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
-
+        postSmsCode: builder.mutation<TSuccess, any>({
+            query: () => ({
+                url: 'sms-code',
+                method: 'POST',
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
+        putConfirmPhone: builder.mutation<TSuccess, {code: number}>({
+            query: (body) => ({
+                body,
+                url: 'phone',
+                method: 'PUT',
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
     }),
 });
 
 // Export hooks for usage in functional components
 export const {
     usePostEmailCodeMutation,
-    usePostConfirmEmailMutation,
+    usePutConfirmEmailMutation,
+    usePostSmsCodeMutation,
+    usePutConfirmPhoneMutation,
     util: { getRunningQueriesThunk },
 } = confirmApi;
 
 // export endpoints for use in SSR
-export const { postEmailCode, postConfirmEmail } = confirmApi.endpoints;
+export const { postEmailCode, putConfirmEmail, postSmsCode, putConfirmPhone } = confirmApi.endpoints;

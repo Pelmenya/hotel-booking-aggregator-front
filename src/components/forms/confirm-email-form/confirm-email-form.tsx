@@ -6,14 +6,14 @@ import { TError } from '@/types/t-error';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { TUserProps } from '@/types/t-user-props';
-import { usePostConfirmEmailMutation } from '@/redux/api/confirm';
+import { usePutConfirmEmailMutation } from '@/redux/api/confirm';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useGetProfileMutation } from '@/redux/api/common';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
 
 export const ConfirmEmailForm = ({ user }: TUserProps) => {
-    const [postConfirmEmail, {isLoading, isError, error}] = usePostConfirmEmailMutation();
+    const [putConfirmEmail, {isLoading, isError, error}] = usePutConfirmEmailMutation();
     const [getProfile] = useGetProfileMutation();
     const dispatch = useAppDispatch();
 
@@ -29,8 +29,8 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
 
     const onSubmit = async (dto: FieldValues) => {
         if (dto) {
-            const res = await postConfirmEmail(dto as {code: string}).unwrap();
-            if (res.succes) {
+            const res = await putConfirmEmail(dto as {code: string}).unwrap();
+            if (res.success) {
                 dispatch(setUser(await getProfile('').unwrap()));
             }
         }

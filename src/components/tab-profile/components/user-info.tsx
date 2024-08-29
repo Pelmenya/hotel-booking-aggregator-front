@@ -9,7 +9,7 @@ import { getRole } from 'utils/getRole';
 import IdentificationIcon from '@/icons/identification.svg';
 import PasswordIcon from '@/icons/shield-check.svg';
 import LogoutIcon from '@/icons/logout-icon.svg';
-import { ConfirmEmail } from './confirm-email';
+import { Confirm } from './confirm';
 
 export const UserInfo = () => {
     const dispatch = useAppDispatch();
@@ -40,13 +40,17 @@ export const UserInfo = () => {
                         <p>Почта</p>
                         <p>{user?.email}</p>
                     </div>
-                ) : <ConfirmEmail user={user}/>
-                
-                }
-                <div className="flex w-full justify-between py-2">
-                    <p>Контактный телефон</p>
-                    <p>{user?.contactPhone}</p>
-                </div>
+                ) : (
+                    <Confirm user={user} channel="EMAIL" />
+                )}
+                {user?.phoneIsConfirm ? (
+                    <div className="flex w-full justify-between py-2">
+                        <p>Контактный телефон</p>
+                        <p>{user?.contactPhone}</p>
+                    </div>
+                ) : (
+                    <Confirm user={user} channel="SMS" />
+                )}
                 <div className="flex w-full justify-between py-2">
                     <p>Роль пользователя</p>
                     <p>{user?.role ? getRole(user.role) : ''}</p>
