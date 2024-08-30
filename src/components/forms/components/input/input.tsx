@@ -24,7 +24,8 @@ export interface IInputProps
         | 'description'
         | 'avatars'
         | 'coordinates'
-        | 'code';
+        | 'code'
+        | 'codeSms';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
     type: 'text' | 'password' | 'email' | 'tel' | 'textarea';
@@ -121,7 +122,9 @@ export const Input = ({
                                                                                 ? ERRORS_FORM.ERROR_COORDINATES
                                                                                 : name === 'code'
                                                                                     ? ERRORS_FORM.ERROR_CONFIRM_EMAIL
-                                                                                    : ''
+                                                                                    : name === 'codeSms'
+                                                                                        ? ERRORS_FORM.ERROR_CONFIRM_PHONE
+                                                                                        : ''
                                 : ERRORS_FORM.ERROR_REQUIRED_FIELD}
                         </span>
                     )}

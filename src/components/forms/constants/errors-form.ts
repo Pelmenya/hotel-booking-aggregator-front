@@ -12,4 +12,5 @@ export const ERRORS_FORM = {
     ERROR_COORDINATES: 'Действительные числа: -90..90,-180..180',
     ERROR_CONFIRM_EMAIL: 'Только UUID идентификатор',
     ERROR_FILE_NOT_SELECTED: 'Файл не выбран',
+    ERROR_CONFIRM_PHONE: 'Только 4 цифры'
 };

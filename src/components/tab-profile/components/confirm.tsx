@@ -8,6 +8,7 @@ import {
     usePostSmsCodeMutation,
 } from '@/redux/api/confirm';
 import { TSuccess } from '@/types/t-success';
+import { ConfirmPhoneForm } from '@/components/forms/confirm-phone-form/confirm-phone-form';
 
 export type TConfirmProps = TUserProps & {
     channel: 'SMS' | 'EMAIL';
@@ -62,7 +63,7 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
                 {channel === 'EMAIL' ? (
                     <ConfirmEmailForm user={user} />
                 ) : channel === 'SMS' ? (
-                    <div>PHONE</div>
+                    <ConfirmPhoneForm user={user} />
                 ) : (
                     <></>
                 )}
