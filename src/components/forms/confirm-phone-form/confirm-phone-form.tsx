@@ -13,10 +13,10 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
 
 export const ConfirmPhoneForm = ({ user }: TUserProps) => {
-    const [putConfirmPhone, {isLoading, isError, error}] = usePutConfirmPhoneMutation();
+    const [putConfirmPhone, { isLoading, isError, error }] =
+        usePutConfirmPhoneMutation();
     const [getProfile] = useGetProfileMutation();
     const dispatch = useAppDispatch();
-
 
     const {
         handleSubmit,
@@ -29,7 +29,8 @@ export const ConfirmPhoneForm = ({ user }: TUserProps) => {
 
     const onSubmit = async (dto: FieldValues) => {
         if (dto) {
-            const res = await putConfirmPhone(dto as {code: number}).unwrap();
+            const code = dto.codeSms;
+            const res = await putConfirmPhone({ code }).unwrap();
             if (res.success) {
                 dispatch(setUser(await getProfile('').unwrap()));
             }
@@ -40,25 +41,24 @@ export const ConfirmPhoneForm = ({ user }: TUserProps) => {
         <FormWrapper
             title={'Код из SMS ' + user?.contactPhone}
             name="code"
-            className='py-4'
+            className="py-4"
             onSubmit={handleSubmit(onSubmit)}
         >
             <Input
                 type="text"
                 id="confirmSmsCode"
                 placeholder="ConfirmSmsCode"
-                label='Вставить код'
+                label="Вставить код"
                 control={control}
-                error={!!errors.code}
-                name="code"
+                error={!!errors.codeSms}
+                name="codeSms"
             />
             <SubmitBtn
                 text="Подтвердить"
-                error={error as TError} 
+                error={error as TError}
                 isError={isError}
                 isLoading={isLoading}
             />
-
         </FormWrapper>
     );
 };

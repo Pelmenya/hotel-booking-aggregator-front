@@ -5,7 +5,7 @@ export const PATTERNS = {
     'PATTERN_EMAIL': '^[A-Za-z]((\\.|-)?[A-Za-z0-9]+)+@[A-Za-z0-9](-?[A-Za-z0-9]+)+(\\.[A-Za-z]{2,})+$',
     'PATTERN_ROLE': '^(admin|client|manager)+$',
     'PATTERN_UUID': '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
-    'PATTERN_SMS_CODE': '^[1-9]{4}$'
+    'PATTERN_SMS_CODE': '^[1-9]{4}$' // только 4 цифры
 }
 
 export const regExpEmptyString = /''/i;
@@ -54,5 +54,5 @@ export const schemaConfirmEmailForm = yup.object().shape({
 });
 
 export const schemaConfirmPhoneForm = yup.object().shape({
-    code: yup.string().matches(new RegExp(PATTERNS.PATTERN_SMS_CODE)).required()
+    codeSms: yup.string().matches(new RegExp(PATTERNS.PATTERN_SMS_CODE)).required()
 });
