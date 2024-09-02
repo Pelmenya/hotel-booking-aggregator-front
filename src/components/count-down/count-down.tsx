@@ -1,9 +1,11 @@
 import React, { useEffect, useState, CSSProperties } from 'react';
+import cn from 'classnames';
 
 interface CountdownProps {
     initialMinutes: number;
     initialSeconds: number;
     view: boolean;
+    textSize?: string;
     handlerViewCountDown: () => void;
 }
 
@@ -11,11 +13,12 @@ export const Countdown: React.FC<CountdownProps> = ({
     initialMinutes,
     initialSeconds,
     view,
-    handlerViewCountDown
+    handlerViewCountDown,
+    textSize,
 }) => {
     const [minutes, setMinutes] = useState(initialMinutes);
     const [seconds, setSeconds] = useState(initialSeconds);
-    const [viewCountdown, setViewCountDown ] = useState<boolean>(view);
+    const [viewCountdown, setViewCountDown] = useState<boolean>(view);
 
     useEffect(() => {
         setMinutes(initialMinutes);
@@ -45,15 +48,24 @@ export const Countdown: React.FC<CountdownProps> = ({
 
     return (
         <>
-            {viewCountdown ? 
-                (<span className="countdown font-mono text-2xl">
-                    <span style={{ '--value': minutes } as CSSProperties}></span>:
-                    <span style={{ '--value': seconds } as CSSProperties}></span>        
-                </span>) : 
-                <></> 
-            }
-
+            {viewCountdown ? (
+                <span
+                    className={cn(
+                        'countdown font-mono',
+                        textSize ? textSize : 'text-2xl'
+                    )}
+                >
+                    <span
+                        style={{ '--value': minutes } as CSSProperties}
+                    ></span>
+                    :
+                    <span
+                        style={{ '--value': seconds } as CSSProperties}
+                    ></span>
+                </span>
+            ) : (
+                <></>
+            )}
         </>
     );
 };
-

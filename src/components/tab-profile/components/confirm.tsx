@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Modal } from '@/components/modal/modal';
 import ConfirmIcon from '@/icons/confirm.svg';
+import RepeatRequest from '@/icons/repeat.svg';
+
 import { TUserProps } from '@/types/t-user-props';
 import { ConfirmEmailForm } from '@/components/forms/confirm-email-form/confirm-email-form';
 import {
@@ -51,24 +53,28 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
             {channel === 'EMAIL' ? (
                 <>
                     <p>Почта не подтверждена</p>
-                    <p>{user?.email}</p>
+                    <p>{countdown.view ? '' : user?.email}</p>
                 </>
             ) : channel === 'SMS' ? (
                 <>
                     <p>Телефон не подтвержден</p>
-                    <p>{user?.contactPhone}</p>
+                    <p>{countdown.view ? '' : user?.contactPhone}</p>
                 </>
             ) : (
                 <></>
             )}
             <>
                 {countdown.view ? (
-                    <Countdown
-                        initialMinutes={countdown.minitues}
-                        initialSeconds={countdown.seconds}
-                        view={countdown.view}
-                        handlerViewCountDown={handlerViewCountDown}
-                    />
+                    <div className="flex gap-2 items-center">
+                        <RepeatRequest />
+                        <Countdown
+                            initialMinutes={countdown.minitues}
+                            initialSeconds={countdown.seconds}
+                            view={countdown.view}
+                            handlerViewCountDown={handlerViewCountDown}
+                            textSize="text-base"
+                        />
+                    </div>
                 ) : (
                     <></>
                 )}
