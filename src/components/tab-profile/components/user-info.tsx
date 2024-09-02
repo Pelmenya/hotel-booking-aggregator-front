@@ -10,7 +10,6 @@ import IdentificationIcon from '@/icons/identification.svg';
 import PasswordIcon from '@/icons/shield-check.svg';
 import LogoutIcon from '@/icons/logout-icon.svg';
 import { Confirm } from './confirm';
-import  { Countdown } from '@/components/count-down/count-down';
 
 export const UserInfo = () => {
     const dispatch = useAppDispatch();
@@ -55,9 +54,6 @@ export const UserInfo = () => {
                 <div className="flex w-full justify-between py-2">
                     <p>Роль пользователя</p>
                     <p>{user?.role ? getRole(user.role) : ''}</p>
-                </div>
-                <div className="flex w-full justify-between py-2">
-                    <Countdown initialMinutes={0} initialSeconds={5}/>
                 </div>
             </div>
             <div className="flex flex-col w-full max-w-xl divide-y-2">

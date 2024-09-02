@@ -9,6 +9,8 @@ import {
 } from '@/redux/api/confirm';
 import { TSuccess } from '@/types/t-success';
 import { ConfirmPhoneForm } from '@/components/forms/confirm-phone-form/confirm-phone-form';
+import { Countdown } from '@/components/count-down/count-down';
+import { onceMinutes, onceSeconds } from './confirm.constants';
 
 export type TConfirmProps = TUserProps & {
     channel: 'SMS' | 'EMAIL';
@@ -20,9 +22,23 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
     const [postSmsCode, { isLoading: isLoadingSms }] = usePostSmsCodeMutation();
 
     const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
+    const [countdown, setCountdown] = useState({
+        view: false,
+        minitues: onceMinutes,
+        seconds: onceSeconds,
+    });
+
+    const handlerViewCountDown = () => {
+        setCountdown({ view: false, minitues: 0, seconds: 0 });
+    };
 
     const handlerConfirmModal = async () => {
         let res: TSuccess = { success: false };
+        setCountdown({
+            view: true,
+            minitues: onceMinutes,
+            seconds: onceSeconds,
+        });
 
         if (channel === 'EMAIL') res = await postEmailCode('').unwrap();
         if (channel === 'SMS') res = await postSmsCode('').unwrap();
@@ -45,9 +61,20 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
             ) : (
                 <></>
             )}
-
+            <>
+                {countdown.view ? (
+                    <Countdown
+                        initialMinutes={countdown.minitues}
+                        initialSeconds={countdown.seconds}
+                        view={countdown.view}
+                        handlerViewCountDown={handlerViewCountDown}
+                    />
+                ) : (
+                    <></>
+                )}
+            </>
             <button
-                disabled={isLoadingEmail || isLoadingSms}
+                disabled={isLoadingEmail || isLoadingSms || countdown.view}
                 onClick={handlerConfirmModal}
                 className="btn btn-sm flex gap-2"
             >
