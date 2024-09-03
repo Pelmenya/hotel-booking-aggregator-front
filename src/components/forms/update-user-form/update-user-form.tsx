@@ -12,6 +12,7 @@ import { useUpdateProfileMutation } from '@/redux/api/common';
 import { useEffect } from 'react';
 import { TUser } from '@/types/t-user';
 import { setUser } from '@/redux/slices/user';
+import { toast } from 'react-toastify';
 
 export const UpdateUserForm = () => {
     const { user } = useAppSelector(getUserState);
@@ -40,7 +41,11 @@ export const UpdateUserForm = () => {
             formData.append('contactPhone', data.contactPhone);
             
             const newUser = await updateUser(formData as Partial<TUser>).unwrap()
-            dispatch(setUser(newUser));
+            if (newUser) {
+                dispatch(setUser(newUser))
+                toast.success('Профиль пользователя обновлен')
+            }
+            
         }
     };
 

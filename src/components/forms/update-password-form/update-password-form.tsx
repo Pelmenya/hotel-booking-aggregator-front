@@ -10,12 +10,13 @@ import EyeIcon from '@/icons/eye.svg';
 import EyeSlashIcon from '@/icons/eye-slash.svg';
 import { useUpdatePasswordMutation } from '@/redux/api/auth';
 import { TUpdatePasswordDto } from '@/types/t-update-password-dto';
+import { toast } from 'react-toastify';
 
 export const UpdatePasswordForm = () => {
     const [typeInput, setTypeInput] = useState<IInputProps['type']>('password');
     const [updatePassword, { isLoading, isError, error }] =
         useUpdatePasswordMutation();
-    
+
     const {
         handleSubmit,
         control,
@@ -27,7 +28,10 @@ export const UpdatePasswordForm = () => {
 
     const onSubmit = async (data: FieldValues) => {
         if (data) {
-            await updatePassword(data as TUpdatePasswordDto).unwrap();
+            const res = await updatePassword(
+                data as TUpdatePasswordDto
+            ).unwrap();
+            if (res.success) toast.success('Пароль пользователя обновлен');
         }
     };
 

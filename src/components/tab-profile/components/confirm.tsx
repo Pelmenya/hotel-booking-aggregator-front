@@ -12,7 +12,8 @@ import {
 import { TSuccess } from '@/types/t-success';
 import { ConfirmPhoneForm } from '@/components/forms/confirm-phone-form/confirm-phone-form';
 import { Countdown } from '@/components/count-down/count-down';
-import { onceMinutes, onceSeconds } from './confirm.constants';
+import { confirmToast, onceMinutes, onceSeconds } from './confirm.constants';
+import { toast } from 'react-toastify';
 
 export type TConfirmProps = TUserProps & {
     channel: 'SMS' | 'EMAIL';
@@ -41,10 +42,10 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
             minitues: onceMinutes,
             seconds: onceSeconds,
         });
-
+        
+        toast.info(confirmToast)
         if (channel === 'EMAIL') res = await postEmailCode('').unwrap();
         if (channel === 'SMS') res = await postSmsCode('').unwrap();
-
         if (res.success) setIsOpenConfirmModal(true);
     };
 
