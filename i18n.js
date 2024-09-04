@@ -5,6 +5,7 @@ import nextI18NextConfig from './next-i18next.config';
 
 const isServer = typeof window === 'undefined';
 const loadPath = process.env.NEXT_PUBLIC_I18NEXT_LOAD_PATH || '/locales/{{lng}}/{{ns}}.json';
+const isDev = process.env.NEXT_PUBLIC_NODE_ENV === 'development'
 
 i18n
     .use(HttpApi)
@@ -25,20 +26,22 @@ i18n
         else console.log('i18next initialized successfully');
     });
 
-i18n.on('initialized', (options) => {
-    console.log('i18next initialized with options', options);
-});
+if (isDev) {
+    i18n.on('initialized', (options) => {
+        console.log('i18next initialized with options', options);
+    });
 
-i18n.on('loaded', (loaded) => {
-    console.log('Loaded resources:', loaded);
-});
+    i18n.on('loaded', (loaded) => {
+        console.log('Loaded resources:', loaded);
+    });
 
-i18n.on('failedLoading', (lng, ns, msg) => {
-    console.error(`Loading failed for ${lng}/${ns}: ${msg}`);
-});
+    i18n.on('failedLoading', (lng, ns, msg) => {
+        console.error(`Loading failed for ${lng}/${ns}: ${msg}`);
+    });
 
-i18n.on('languageChanged', (lng) => {
-    console.log('Language changed to', lng);
-});
+    i18n.on('languageChanged', (lng) => {
+        console.log('Language changed to', lng);
+    });
+}
 
 export default i18n;

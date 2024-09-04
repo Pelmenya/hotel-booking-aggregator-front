@@ -26,10 +26,10 @@ export const MenuLink = ({
         <li
             onClick={onClick}
             role="listitem"
-            className="rounded-md hover:bg-base-300"
+            className="rounded-md"
         >
             <Link href={href} role="link" className="rounded-md">
-                <div className="flex p-2 h-full w-full" role="cell">
+                <div className="flex h-full w-full" role="cell">
                     {type === 'login' && <MenuLoginIcon />}
                     {type === 'profile' && <MenuProfileIcon />}
                     {type === 'logout' && <MenuLogoutIcon />}

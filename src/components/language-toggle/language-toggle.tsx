@@ -21,7 +21,7 @@ export const LanguageToggle = () => {
                 aria-haspopup="true"
             >
                 <span className="sr-only">Open languages menu</span>
-                <span className='font-medium'>{language.toUpperCase()}</span>
+                <span className="font-medium">{language.toUpperCase()}</span>
             </Menu.Button>
             <Transition
                 as={Fragment}
@@ -42,7 +42,7 @@ export const LanguageToggle = () => {
                             <button
                                 className={`${
                                     active ? 'bg-gray-100' : ''
-                                } flex items-center justify-between w-full text-left px-2 py-2 text-sm`}
+                                } flex items-center justify-between w-full text-left px-2 py-2 text-sm rounded-md hover:bg-base-300`}
                                 onClick={() => changeLanguage('en')}
                             >
                                 EN
@@ -60,7 +60,7 @@ export const LanguageToggle = () => {
                             <button
                                 className={`${
                                     active ? 'bg-gray-100' : ''
-                                } flex items-center justify-between w-full text-left px-2 py-2 text-sm`}
+                                } flex items-center justify-between w-full text-left px-2 py-2 text-sm rounded-md hover:bg-base-300`}
                                 onClick={() => changeLanguage('ru')}
                             >
                                 RU
