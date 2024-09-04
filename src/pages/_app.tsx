@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import '@/styles/globals.css';
 import '@/styles/toastify.css';
-
+import { AuthRouter } from '@/router/auth-router';
 
 function App({ Component, ...rest }: AppProps) {
     const { store, props } = wrapper.useWrappedStore(rest);
@@ -18,20 +18,22 @@ function App({ Component, ...rest }: AppProps) {
     return (
         <ReduxProvider store={store}>
             <FontsProvider>
-                <AuthProvider pageProps={pageProps}>
-                    <Component {...pageProps} />
-                    <ToastContainer
-                        position="bottom-right"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="colored"
-                    />
+                <AuthProvider>
+                    <AuthRouter {...pageProps}>
+                        <Component {...pageProps} />
+                        <ToastContainer
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="colored"
+                        />
+                    </AuthRouter>
                 </AuthProvider>
             </FontsProvider>
         </ReduxProvider>

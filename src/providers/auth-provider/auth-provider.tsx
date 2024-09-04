@@ -1,47 +1,38 @@
-import Home from '@/pages';
-import Login from '@/pages/login';
-
-import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { useAppSelector } from '@/hooks/use-app-selector';
+import { useEffect, useState } from 'react';
 import { useGetProfileMutation } from '@/redux/api/common';
 import { getUserState } from '@/redux/selectors/user';
 import { setUser } from '@/redux/slices/user';
-import { TBaseProps } from '@/types/t-base-props';
-import { useEffect } from 'react';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
 
-export type TAuthProviderProps = TBaseProps & {
-    pageProps: any;
-};
-
-export const AuthProvider = ({ children, pageProps }: TAuthProviderProps) => {
-
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
     const { user } = useAppSelector(getUserState);
-    const { protectedFromUser, protectedAuth, roles } = pageProps;
     const [getProfile] = useGetProfileMutation();
+    const [loading, setLoading] = useState(true); // Состояние загрузки
 
     useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getProfile('').unwrap();
+                dispatch(setUser(profile));
+            } catch {
+                dispatch(setUser(null));
+            } finally {
+                setLoading(false); // Устанавливаем загрузку в false после завершения запроса
+            }
+        };
+
         if (!user) {
-            const handler = async () => {
-                dispatch(setUser(await getProfile('').unwrap()));
-            };
-            handler().catch(() => dispatch(setUser(null)));
+            fetchProfile();
+        } else {
+            setLoading(false);
         }
-    }, [getProfile, dispatch, user]);
+    }, [dispatch, getProfile, user]);
 
-    
-    if (protectedAuth && !user) {
-        return <Login />;
+    if (loading) {
+        return <div>Loading...</div>; // Показ индикатора загрузки
     }
-
-    if (protectedFromUser && user) {
-        return <Home />;
-    }
-
-    if (protectedAuth && user && roles && !roles.includes(user.role)) {
-        return <Home />;
-    }
-
 
     return <>{children}</>;
 };
