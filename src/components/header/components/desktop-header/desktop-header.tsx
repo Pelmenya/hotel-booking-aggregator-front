@@ -6,10 +6,10 @@ import cn from 'classnames';
 import { useRouter } from 'next/router';
 import MainIcon from '@/icons/main.svg';
 import AdminIcon from '@/icons/admin.svg';
+import { TTranslationFiles } from '@/types/t-translation-files';
 
 export const DesktopHeader = ({ user }: TUserProps) => {
-    const { t, i18n } = useTranslation('common');
-    console.log('Current language:', i18n.language);
+    const { t } = useTranslation<TTranslationFiles>('common');
 
     const router = useRouter();
     const paths = router.asPath.split('/');
@@ -28,7 +28,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                     aria-current="page"
                 >
                     <MainIcon />
-                    {t('welcome')}
+                    {t('main')}
                 </Link>
                 {user?.role === 'admin' && (
                     <Link

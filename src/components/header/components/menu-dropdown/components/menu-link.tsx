@@ -3,6 +3,7 @@ import { TBaseProps } from '@/types/t-base-props';
 import MenuProfileIcon from '@/icons/profile-icon.svg';
 import MenuLogoutIcon from '@/icons/logout-icon.svg';
 import MenuLoginIcon from '@/icons/login-icon.svg';
+import { useTranslation } from 'react-i18next';
 
 export type TMenuLinkProps = TBaseProps & {
     id?: string;
@@ -18,16 +19,26 @@ export const MenuLink = ({
     text,
     type,
     onClick,
-}: TMenuLinkProps) => (
-    <li onClick={onClick} role="listitem" className='rounded-md hover:bg-base-300'>
-        <Link href={href} role="link" className='rounded-md'>
-            <div className='flex p-2 h-full w-full' role="cell">
-                {type === 'login' && <MenuLoginIcon />}
-                {type === 'profile' && <MenuProfileIcon />}
-                {type === 'logout' && <MenuLogoutIcon />}
-                {children}
-                <span className='block ml-2' role="textbox">{text}</span>
-            </div>
-        </Link>
-    </li>
-);
+}: TMenuLinkProps) => {
+    const  { t } = useTranslation('common');
+
+    return (
+        <li
+            onClick={onClick}
+            role="listitem"
+            className="rounded-md hover:bg-base-300"
+        >
+            <Link href={href} role="link" className="rounded-md">
+                <div className="flex p-2 h-full w-full" role="cell">
+                    {type === 'login' && <MenuLoginIcon />}
+                    {type === 'profile' && <MenuProfileIcon />}
+                    {type === 'logout' && <MenuLogoutIcon />}
+                    {children}
+                    <span className="block ml-2" role="textbox">
+                        {t(text)}
+                    </span>
+                </div>
+            </Link>
+        </li>
+    );
+};

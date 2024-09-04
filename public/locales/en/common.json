@@ -1,5 +1,10 @@
 {
     "welcome": "Welcome",
-    "admin": "Admin"
+    "main":"Main page",
+    "admin": "Admin",
+    "profile": "Profile",
+    "exit": "Exit",
+    "enter": "Enter",
+    "hotels": "Hotels"
 }
 
