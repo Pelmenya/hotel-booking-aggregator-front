@@ -6,11 +6,9 @@ services:
     volumes:
       - .:/app
     ports:
-      - ${PORT}:${PORT_IN}
-    working_dir: /app
-    env_file: 
-      - .env.production  # Используем файл .env.production
+      - ${PORT}:${PORT}
     environment:      
       - PORT=${PORT}
+    working_dir: /app
+    command: sh -c "cd /app; rm -rf node_modules; rm -rf .next; npm install --force; npm run build; npm run start"
 
-  command: sh -c "cd /app; rm -rf node_modules; rm -rf .next; npm install --force; npm run build; npm run start"
