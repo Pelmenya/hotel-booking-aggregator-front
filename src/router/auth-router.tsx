@@ -22,7 +22,7 @@ export const AuthRouter = ({
 }: TAuthRouterProps) => {
     const { user } = useAppSelector(getUserState);
     const router = useRouter();
-    const [initialRoute, setInitialRoute] = useState<string | null>(null);
+    const [initialRoute, setInitialRoute] = useState<string>('');
 
     useEffect(() => {
         if (protectedAuth && !user) {
@@ -32,7 +32,7 @@ export const AuthRouter = ({
             router.push('/login');
         } else if (user && initialRoute && !protectedAuth) {
             router.push(initialRoute); // Redirect to the initially requested route
-            setInitialRoute(null); // Clear the initial route after redirect
+            setInitialRoute(''); // Clear the initial route after redirect
         }
     }, [protectedAuth, user, initialRoute, router]);
 

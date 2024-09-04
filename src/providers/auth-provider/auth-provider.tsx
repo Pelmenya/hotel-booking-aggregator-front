@@ -10,17 +10,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
     const { user } = useAppSelector(getUserState);
     const [getProfile] = useGetProfileMutation();
-    const [loading, setLoading] = useState(true); // Состояние загрузки
+    const [loading, setLoading] = useState(true);
+    const [isMounted, setIsMounted] = useState(false); // Флаг для отслеживания состояния монтирования
 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 const profile = await getProfile('').unwrap();
-                dispatch(setUser(profile));
+                if (isMounted) {
+                    dispatch(setUser(profile));
+                }
             } catch {
-                dispatch(setUser(null));
+                if (isMounted) {
+                    dispatch(setUser(null));
+                }
             } finally {
-                setLoading(false); // Устанавливаем загрузку в false после завершения запроса
+                if (isMounted) {
+                    setLoading(false);
+                }
             }
         };
 
@@ -29,7 +36,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } else {
             setLoading(false);
         }
-    }, [dispatch, getProfile, user]);
+
+        setIsMounted(true); // Устанавливаем флаг монтирования
+
+        return () => {
+            setIsMounted(false); // Сбрасываем флаг монтирования при размонтировании компонента
+        };
+    }, [dispatch, getProfile, user, isMounted]);
 
     if (loading) {
         return <Loading color="text-primary" size="loading-xs" type="loading-bars" />; // Показ индикатора загрузки
@@ -37,3 +50,4 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     return <>{children}</>;
 };
+

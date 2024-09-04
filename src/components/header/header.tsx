@@ -4,6 +4,7 @@ import { MobileHeader } from './components/mobil-header/mobil-header';
 import { MobileNav } from './components/mobil-nav/mobile-nav';
 import { DesktopHeader } from './components/desktop-header/desktop-header';
 import { MenuDropdown } from './components/menu-dropdown/menu-dropdown';
+import { LanguageToggle } from '../language-toggle/language-toggle';
 import { NotificationsLink } from './notifications-link/notifications-link';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
@@ -30,6 +31,7 @@ export const Header = () => {
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 gap-3">
                             <ThemeToggle />
                             <NotificationsLink />
+                            <LanguageToggle />
                             <div className="ml-3 flex justify-center items-center">
                                 <MenuDropdown user={user} />
                             </div>

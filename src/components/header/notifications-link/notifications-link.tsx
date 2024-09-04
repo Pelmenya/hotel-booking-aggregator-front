@@ -1,7 +1,6 @@
 export const NotificationsLink = () => (
     <button
-        disabled
-        className="rounded-full bg-neutral p-1 text-neutral-content hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+        className="rounded-full bg-neutral p-1 text-neutral-content hover:text-white focus:outline-none active:ring-2 active:ring-white active:ring-offset-2 active:ring-offset-gray-800"
     >
         <span className="sr-only">View notifications</span>
         <svg

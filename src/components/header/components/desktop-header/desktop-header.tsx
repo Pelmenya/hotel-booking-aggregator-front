@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { TUserProps } from '@/types/t-user-props';
 import Link from 'next/link';
 import { Logo } from '../../../logo/logo';
@@ -7,6 +8,9 @@ import MainIcon from '@/icons/main.svg';
 import AdminIcon from '@/icons/admin.svg';
 
 export const DesktopHeader = ({ user }: TUserProps) => {
+    const { t, i18n } = useTranslation('common');
+    console.log('Current language:', i18n.language);
+
     const router = useRouter();
     const paths = router.asPath.split('/');
     const isMainPage = paths.every((item) => item === '');
@@ -24,7 +28,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                     aria-current="page"
                 >
                     <MainIcon />
-                    Главная
+                    {t('welcome')}
                 </Link>
                 {user?.role === 'admin' && (
                     <Link
@@ -34,7 +38,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                         })}
                     >
                         <AdminIcon />
-                        Админ
+                        {t('admin')}
                     </Link>
                 )}
             </div>

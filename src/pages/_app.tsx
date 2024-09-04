@@ -1,14 +1,17 @@
 import { wrapper } from '@/redux/store/store';
+import { Provider as ReduxProvider } from 'react-redux';
 import { FontsProvider } from '@/providers/fonts-provider/fonts-provider';
 import type { AppProps } from 'next/app';
-import { Provider as ReduxProvider } from 'react-redux';
 import { AuthProvider } from '@/providers/auth-provider/auth-provider';
+import { AuthRouter } from '@/router/auth-router';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import '@/styles/globals.css';
 import '@/styles/toastify.css';
-import { AuthRouter } from '@/router/auth-router';
+
+import { appWithTranslation } from 'next-i18next';
+import '../../i18n';
 
 function App({ Component, ...rest }: AppProps) {
     const { store, props } = wrapper.useWrappedStore(rest);
@@ -40,4 +43,4 @@ function App({ Component, ...rest }: AppProps) {
     );
 }
 
-export default App;
+export default appWithTranslation(App);
