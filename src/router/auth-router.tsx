@@ -5,6 +5,7 @@ import { getUserState } from '@/redux/selectors/user';
 import Home from '@/pages';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { TRole } from '@/types/t-role';
+import { Loading } from '@/components/loading/loading';
 
 type TAuthRouterProps = {
     children: React.ReactNode;
@@ -36,7 +37,7 @@ export const AuthRouter = ({
     }, [protectedAuth, user, initialRoute, router]);
 
     if (protectedAuth && !user) {
-        return null; // Не рендерим ничего, пока идет проверка аутентификации
+        return  <Loading color="text-primary" size="loading-xs" type="loading-bars" />; // Загрузка, пока идет проверка аутентификации
     }
 
     if (protectedFromUser && user) {

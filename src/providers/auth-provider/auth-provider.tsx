@@ -4,6 +4,7 @@ import { getUserState } from '@/redux/selectors/user';
 import { setUser } from '@/redux/slices/user';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
+import { Loading } from '@/components/loading/loading';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [dispatch, getProfile, user]);
 
     if (loading) {
-        return <div>Loading...</div>; // Показ индикатора загрузки
+        return <Loading color="text-primary" size="loading-xs" type="loading-bars" />; // Показ индикатора загрузки
     }
 
     return <>{children}</>;
