@@ -5,9 +5,12 @@ import VKIcon from '@/icons/social/vk.svg';
 import TGIcon from '@/icons/social/tg.svg';
 import GitHubIcon from '@/icons/social/git-hub.svg';
 import WhatsAppIcon from '@/icons/social/whats-app.svg';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
+    const { t } = useTranslation('footer'); 
     const currentYear = getYear();
+
 
     return (
         <footer className="footer mt-8 p-10 bg-neutral text-neutral-content">
@@ -17,7 +20,7 @@ export const Footer = () => {
                     <p>
                         © 2023{' '}
                         {currentYear > 2023 && <span>- {currentYear}</span>}{' '}
-                        Дмитрий Ляпин
+                        {t('owner', 'Дмитрий Ляпин')}
                     </p>
                 </aside>
                 <nav>

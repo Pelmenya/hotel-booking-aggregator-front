@@ -21,6 +21,11 @@ i18n
         interpolation: {
             escapeValue: false,
         },
+        lng: 'ru',
+        saveMissing: true,
+        missingKeyHandler: function(lng, ns, key, fallbackValue) {
+            console.warn(`Missing translation for key: ${key}`);
+        }
     }, (err, t) => {
         if (err) console.error('i18next initialization failed', err);
         else console.log('i18next initialized successfully');

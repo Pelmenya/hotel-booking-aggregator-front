@@ -1,13 +1,12 @@
 {
-    "welcome": "Welcome",
-    "main": "Main",
-    "admin": "Admin",
-    "profile": "Profile",
-    "exit": "Exit",
-    "enter": "Enter",
-    "hotels": "Hotels",
-    
-    "main-page-slide1": "Immerse yourself in the world of applications",
-    "main-page-slide2": "The world of exquisite land",
-    "main-page-slide3": "TOP-HOTELS.SU is your way"
+  "admin": "Admin",
+  "enter": "Enter",
+  "exit": "Exit",
+  "hotels": "Hotels",
+  "main": "Main",
+  "main-page-slide1": "Immerse yourself in the world of applications",
+  "main-page-slide2": "The world of exquisite land",
+  "main-page-slide3": "TOP-HOTELS.SU is your way",
+  "profile": "Profile",
+  "welcome": "Welcome"
 }

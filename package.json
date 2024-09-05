@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" \"npm run watch:extract\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
+    "extract": "i18next --config i18next-parser.config.js",
+    "watch:extract": "chokidar \"src/**/*.{js,jsx,ts,tsx}\" -c \"npm run extract\"",
     "stylelint": "stylelint \"**/*.css\" --fix"
   },
   "dependencies": {
@@ -17,6 +19,7 @@
     "@pbe/react-yandex-maps": "1.2.5",
     "@reduxjs/toolkit": "1.9.3",
     "@tailwindcss/typography": "0.5.9",
+    "caniuse-lite": "1.0.30001657",
     "classnames": "2.3.2",
     "daisyui": "4.12.10",
     "date-fns": "3.6.0",
@@ -47,6 +50,9 @@
     "@types/react-dom": "18.0.11",
     "@types/redux-logger": "3.0.9",
     "autoprefixer": "10.4.13",
+    "chokidar-cli": "3.0.0",
+    "concurrently": "8.2.2",
+    "i18next-parser": "9.0.2",
     "postcss": "8.4.21",
     "stylelint": "15.2.0",
     "stylelint-config-standard": "30.0.1",
