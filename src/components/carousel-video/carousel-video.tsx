@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 export type TSlide = {
     url: string;
@@ -12,6 +13,8 @@ export type TCarouselVideoProps = {
 };
 
 export const CarouselVideo = ({ slides, delay }: TCarouselVideoProps) => {
+    const { t } = useTranslation('common');
+
     const [activeSlide, setActiveSlide] = useState<number>(0);
 
     const handlerSetTimeout = () => {
@@ -85,7 +88,7 @@ export const CarouselVideo = ({ slides, delay }: TCarouselVideoProps) => {
                         </video>
                         <div className="absolute w-full h-full flex items-center justify-center">
                             <h2 className="text-white text-3xl text-center uppercase">
-                                {slide.head}
+                                {t(slide.head)}
                             </h2>
                         </div>
                     </li>
