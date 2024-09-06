@@ -1,3 +1,9 @@
 {
-  "owner": "Dmitry Lyapin"
+  "contacts": "Contacts",
+  "email": "Email: lyapindm@yandex.ru",
+  "information": "Information",
+  "owner": "Dmitry Lyapin",
+  "phone": "Phone: +7(916)-619-88-52",
+  "privacyPolicy": "Privacy policy",
+  "social": "Social"
 }

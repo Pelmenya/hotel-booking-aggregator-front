@@ -24,22 +24,22 @@ export const Footer = () => {
                     </p>
                 </aside>
                 <nav>
-                    <header className="footer-title">Информация</header>
+                    <header className="footer-title">{t('information','Информация')}</header>
                     <Link href="/privacy-policy" className="link link-hover">
-                        Политика конфиденциальности
+                        {t('privacyPolicy', 'Политика конфиденциальности')}
                     </Link>
                 </nav>
                 <nav>
-                    <header className="footer-title">Контакты</header>
+                    <header className="footer-title">{t('contacts','Контакты')}</header>
                     <a href="tel:+79166198852" className="link link-hover">
-                        Тел.: +7(916)-619-88-52
+                        {t('phone','Тел.: +7(916)-619-88-52')}
                     </a>
                     <a href="mailto:lyapindm@yandex.ru" className="link link-hover">
-                        Email: lyapindm@yandex.ru
+                        {t('email','Email: lyapindm@yandex.ru')}
                     </a>
                 </nav>
                 <nav>
-                    <header className="footer-title">Соцсети</header>
+                    <header className="footer-title">{t('social','Соцсети')}</header>
                     <div className="grid grid-flow-col gap-4">
                         <a
                             href="https://vk.com/lyapindm"
