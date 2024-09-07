@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev\" \"npm run watch:extract\"",
+    "dev": "next dev",
+    "dev:extract": "concurrently \"next dev\" \"npm run watch:extract\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",

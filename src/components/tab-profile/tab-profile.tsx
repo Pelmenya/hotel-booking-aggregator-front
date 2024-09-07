@@ -8,8 +8,10 @@ import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item
 import { UpdateUserForm } from '../forms/update-user-form/update-user-form';
 import { UserInfo } from './components/user-info';
 import { UpdatePasswordForm } from '../forms/update-password-form/update-password-form';
+import { useTranslation } from 'react-i18next';
 
 export const TabProfile = () => {
+    const { t } = useTranslation('account');
     const router = useRouter();
     const paths = router.pathname.split('/');
 
@@ -21,19 +23,19 @@ export const TabProfile = () => {
         <Tab>
             <TabHead>
                 <TabHeadLink href="/profile" active={isProfile}>
-                    Профиль
+                    {t('profile', 'Профиль')}
                 </TabHeadLink>
                 <TabHeadLink href="/profile/edit" active={isEdit}>
-                    Редактирование
+                    {t('editing', 'Редактирование')}
                 </TabHeadLink>
                 <TabHeadLink href="/profile/password" active={isPassword}>
-                    Смена пароля
+                    {t('passwordChange', 'Смена пароля')}
                 </TabHeadLink>
             </TabHead>
             <TabBody>
                 <TabBodyItem active={isProfile}>
                     <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
-                        <UserInfo /> 
+                        <UserInfo />
                     </div>
                 </TabBodyItem>
                 <TabBodyItem active={isEdit}>
