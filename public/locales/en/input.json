@@ -12,5 +12,10 @@
   "ERROR_REQUIRED_FIELD": "This field is required",
   "ERROR_ROLE": "Role should be admin, client, manager",
   "ERROR_TEL": "Example: +7(925)900-90-90",
-  "ERROR_TITLE": "The hotel name must be at least 2 characters"
+  "ERROR_TITLE": "The hotel name must be at least 2 characters",
+  "LABEL_CONFIRM_EMAIL": "Вставить код",
+  "LABEL_CONFIRM_SMS": "Вставить код",
+  "LABEL_COORDINATES": "Координаты",
+  "LABEL_HOTEL_DESCRIPTION": "Описание отеля",
+  "LABEL_HOTEL_NAME": "Название отеля"
 }
