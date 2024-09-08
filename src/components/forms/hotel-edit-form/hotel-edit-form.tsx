@@ -18,8 +18,10 @@ import { getBaseImageUrl } from 'utils/getBaseImageUrl';
 import { TPicture } from '@/types/t-picture';
 import { transformCoordinates } from 'utils/transformCoordinates';
 import { Map } from '@/components/map/map';
+import { useTranslation } from 'react-i18next';
 
 export const HotelEditForm = () => {
+    const  { t } = useTranslation('input');
     const [coordinates, setCoordinates] = useState<TNullable<number[]>>(null);
     const [, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
@@ -215,7 +217,7 @@ export const HotelEditForm = () => {
                     type="text"
                     id="HotelTitle"
                     placeholder="Название отеля"
-                    label="Название отеля"
+                    label={t('LABEL_HOTEL_NAME', 'Название отеля')}
                     name="title"
                     error={!!errors.title}
                     control={control}
@@ -224,17 +226,16 @@ export const HotelEditForm = () => {
                     type="text"
                     id="HotelСoordinates"
                     placeholder="Координаты"
-                    label="Координаты"
+                    label={t('LABEL_COORDINATES','Координаты')}
                     name="coordinates"
                     error={!!errors.coordinates}
                     control={control}
                 />
-
                 <Input
                     type="textarea"
                     id="HotelDescription"
                     placeholder="Описание"
-                    label="Описание отеля"
+                    label={t('LABEL_HOTEL_DESCRIPTION','Описание отеля')}
                     name="description"
                     error={!!errors.description}
                     control={control}
