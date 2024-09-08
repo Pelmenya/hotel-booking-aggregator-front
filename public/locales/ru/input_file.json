@@ -1,0 +1,8 @@
+{
+    "MESSAGE_FILE_NOT_SELECTED": "Файл не выбран",
+    "TOO_MANY_FILES": "Вы можете загрузить не более {{maxFiles}} файла(ов).",
+    "FILE_TOO_LARGE": "Файл {{fileName}} превышает допустимый размер в {{maxFileSize}} МБ.",
+    "TOTAL_SIZE_EXCEEDED": "Общий размер всех файлов превышает допустимый лимит в {{maxFileSize}} МБ.",
+    "NUMBER_OF_FILES": "Количество файлов: {{count}}",
+    "SELECT_FILE": "Выбрать файл(ы)"
+}

@@ -1,0 +1,8 @@
+{
+    "MESSAGE_FILE_NOT_SELECTED": "No file selected",
+    "TOO_MANY_FILES": "You can upload no more than {{maxFiles}} file(s).",
+    "FILE_TOO_LARGE": "The file {{fileName}} exceeds the allowable limit of {{maxFileSize}} MB.",
+    "TOTAL_SIZE_EXCEEDED": "The total size of all files exceeds the allowable limit of {{maxFileSize}} MB.",
+    "NUMBER_OF_FILES": "Number of files: {{count}}",
+    "SELECT_FILE": "Select file(s)"
+}

@@ -1,0 +1,16 @@
+{
+    "ERROR_NAME": "Name must be at least 2 characters",
+    "ERROR_CODE": "More than one character",
+    "ERROR_EMAIL": "Invalid email format",
+    "ERROR_PASSWORD": "Password must be at least 6 characters",
+    "ERROR_CONFIRM_PASSWORD": "Passwords do not match",
+    "ERROR_REQUIRED_FIELD": "This field is required",
+    "ERROR_TEL": "Example: +7(925)900-90-90",
+    "ERROR_ROLE": "Role should be admin, client, manager",
+    "ERROR_TITLE": "The hotel name must be at least 2 characters",
+    "ERROR_DESCRIPTION": "The hotel description must be at least 2 characters",
+    "ERROR_COORDINATES": "Valid numbers: -90..90,-180..180",
+    "ERROR_CONFIRM_EMAIL": "Only UUID identifier",
+    "ERROR_FILE_NOT_SELECTED": "File not selected",
+    "ERROR_CONFIRM_PHONE": "Only 4 digits"
+}
