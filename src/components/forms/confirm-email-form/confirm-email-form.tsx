@@ -11,8 +11,10 @@ import { FieldValues } from 'react-hook-form/dist/types/fields';
 import { useGetProfileMutation } from '@/redux/api/common';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
+import { useTranslation } from 'react-i18next';
 
 export const ConfirmEmailForm = ({ user }: TUserProps) => {
+    const { t } = useTranslation('input');
     const [putConfirmEmail, {isLoading, isError, error}] = usePutConfirmEmailMutation();
     const [getProfile] = useGetProfileMutation();
     const dispatch = useAppDispatch();
@@ -47,7 +49,7 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
                 type="text"
                 id="confirmEmail"
                 placeholder="ConfirmEmail"
-                label='Вставить код'
+                label={t('LABEL_CONFIRM_EMAIL', 'Вставить код')}
                 control={control}
                 error={!!errors.code}
                 name="code"

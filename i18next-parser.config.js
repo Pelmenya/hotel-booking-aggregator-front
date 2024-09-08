@@ -20,7 +20,7 @@ module.exports = {
     pluralSeparator: '_',
     input: ['src/**/*.{js,jsx,ts,tsx}'],
     sort: true,
-    useKeysAsDefaultValue: true,
+    useKeysAsDefaultValue: false,
     verbose: false,
     keepRemoved: true // опция, предотвращающая удаление существующих ключей !!!
 };

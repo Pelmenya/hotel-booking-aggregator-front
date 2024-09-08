@@ -3,7 +3,11 @@ import { Controller } from 'react-hook-form';
 import { IInputProps } from '../input/input';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { maxFilesSizeValue, maxFilesValue, oneMB } from '../../constants/settings';
+import {
+    maxFilesSizeValue,
+    maxFilesValue,
+    oneMB,
+} from '../../constants/settings';
 
 export const InputFile = ({
     id,
@@ -130,7 +134,13 @@ export const InputFile = ({
                 // Здесь можно сохранить имя файла в состоянии, если нужно
                 break;
             case 'MULTIPLE_FILES':
-                setDisplay(t('NUMBER_OF_FILES', { count: fileInputRef.current?.files?.length || 0 }));
+                setDisplay(
+                    t('NUMBER_OF_FILES', {
+                        count: fileInputRef.current?.files?.length || 0,
+                        interpolation: { escapeValue: false },
+                        defaultValue: 'Number of files: {{count}}',
+                    })
+                );
                 break;
             default:
                 setDisplay(t('MESSAGE_FILE_NOT_SELECTED'));
@@ -143,7 +153,15 @@ export const InputFile = ({
             name={name || 'images'}
             control={control}
             render={({ field: { onBlur, value, ref } }) => (
-                <div className={cn('relative', className, 'border', 'border-gray-200', 'rounded-lg')}>
+                <div
+                    className={cn(
+                        'relative',
+                        className,
+                        'border',
+                        'border-gray-200',
+                        'rounded-lg'
+                    )}
+                >
                     <span className="bg-base-100 lg:max-w-[250px] sm:max-w-[48px] max-w-[48px] truncate absolute left-44 top-[50%] translate-y-[-50%]">
                         {display}
                     </span>
