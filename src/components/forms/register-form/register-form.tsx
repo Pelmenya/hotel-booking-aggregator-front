@@ -86,7 +86,7 @@ export const RegisterForm = () => {
 
     return (
         <FormWrapper
-            title="Регистрация"
+            title={t('TITLE_FORM_REGISTER', 'Регистрация')}
             name="register"
             onSubmit={handleSubmit(onSubmit)}
         >
@@ -130,8 +130,8 @@ export const RegisterForm = () => {
             {isAdmin && (
                 <>
                     <ListBox
-                        id='RegisterListBox'
-                        label='Роль'
+                        id="RegisterListBox"
+                        label="Роль"
                         items={roles}
                         handlerSetItem={handlerSetRole}
                         activeIdx={2}

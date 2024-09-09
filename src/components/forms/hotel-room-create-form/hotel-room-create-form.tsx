@@ -96,7 +96,7 @@ export const HotelRoomCreateForm = () => {
     return (
         <>
             <FormWrapper
-                title="Добавление варианта размещения"
+                title={t('TITLE_FORM_CREATE_HOTEL_ROOM', 'Добавление варианта размещения')}
                 onSubmit={handleSubmit(onSubmit)}
                 name="addHotelRoom"
             >

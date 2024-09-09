@@ -201,7 +201,7 @@ export const HotelEditForm = () => {
     return (
         <>
             <FormWrapper
-                title="Редактирования отеля"
+                title={t('TITLE_FORM_UPDATE_HOTEL', 'Редактирования отеля')}
                 onSubmit={handleSubmit(onSubmit)}
                 name="editHotels"
             >

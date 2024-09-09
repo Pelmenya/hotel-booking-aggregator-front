@@ -42,7 +42,7 @@ export const LoginForm = () => {
 
     return (
         <FormWrapper
-            title="Вход"
+            title={t('TITLE_FORM_LOGIN', 'Вход')}
             name="login"
             onSubmit={handleSubmit(onSubmit)}
         >

@@ -42,7 +42,7 @@ export const UpdatePasswordForm = () => {
         <FormWrapper
             title={
                 <div className="flex items-center justify-center gap-2">
-                    <span>{t('TITLE_PASWWORD_CHANGE', 'Смена пароля')}</span>
+                    <span>{t('TITLE_FORM_PASSWORD_CHANGE', 'Смена пароля')}</span>
                     <button
                         className="text-primary cursor-pointer"
                         onClick={() => {

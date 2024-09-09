@@ -25,7 +25,7 @@
   "LABEL_INPUT_CONFIRM_NEW_PASSWORD": "Repeat the new password",
   "LABEL_INPUT_CONFIRM_SMS": "Insert code",
   "LABEL_INPUT_COORDINATES": "Coordinates",
-  "LABEL_INPUT_EMAIL": "Mail",
+  "LABEL_INPUT_EMAIL": "Email",
   "LABEL_INPUT_HOTEL_DESCRIPTION": "Description of the hotel",
   "LABEL_INPUT_HOTEL_NAME": "Name of the hotel",
   "LABEL_INPUT_HOTEL_ROOM_DESCRIPTION": "Room description",
@@ -37,5 +37,14 @@
   "LABEL_INPUT_ROLE": "Role",
   "LABEL_INPUT_USER_NAME": "Name",
   "LABEL_PASSWORD": "Password",
-  "TITLE_PASWWORD_CHANGE": "Password change"
+  "TITLE_FORM_CODE_FROM_EMAIL": "Код из письма ",
+  "TITLE_FORM_CODE_FROM_SMS": "Код из SMS ",
+  "TITLE_FORM_CREATE_HOTEL": "Добавление отеля",
+  "TITLE_FORM_CREATE_HOTEL_ROOM": "Добавление варианта размещения",
+  "TITLE_FORM_LOGIN": "Вход",
+  "TITLE_FORM_PASSWORD_CHANGE": "Password change",
+  "TITLE_FORM_REGISTER": "Регистрация",
+  "TITLE_FORM_UPDATE_HOTEL": "Редактирования отеля",
+  "TITLE_FORM_UPDATE_HOTEL_ROOM": "Редактирования номера",
+  "TITLE_FORM_UPDATE_USER": "Редактирование профиля"
 }

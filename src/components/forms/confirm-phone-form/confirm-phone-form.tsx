@@ -41,7 +41,7 @@ export const ConfirmPhoneForm = ({ user }: TUserProps) => {
 
     return (
         <FormWrapper
-            title={'Код из SMS ' + user?.contactPhone}
+            title={t('TITLE_FORM_CODE_FROM_SMS', 'Код из SMS ') + user?.contactPhone}
             name="code"
             className="py-4"
             onSubmit={handleSubmit(onSubmit)}

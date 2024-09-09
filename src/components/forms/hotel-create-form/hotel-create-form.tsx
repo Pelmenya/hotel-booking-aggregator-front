@@ -67,7 +67,7 @@ export const HotelCreateForm = () => {
     return (
         <>
             <FormWrapper
-                title="Добавление отеля"
+                title={t('TITLE_FORM_CREATE_HOTEL', 'Добавление отеля')}
                 onSubmit={handleSubmit(onSubmit)}
                 name="addHotel"
             >
@@ -84,7 +84,7 @@ export const HotelCreateForm = () => {
                     type="text"
                     id="HotelСoordinates"
                     placeholder="Координаты"
-                    label={t('LABEL_INPUT_COORDINATES','Координаты')}
+                    label={t('LABEL_INPUT_COORDINATES', 'Координаты')}
                     name="coordinates"
                     error={!!errors.coordinates}
                     control={control}
@@ -93,7 +93,7 @@ export const HotelCreateForm = () => {
                     type="textarea"
                     id="HotelDescription"
                     placeholder="Описание"
-                    label={t('LABEL_INPUT_HOTEL_DESCRIPTION','Описание отеля')}
+                    label={t('LABEL_INPUT_HOTEL_DESCRIPTION', 'Описание отеля')}
                     name="description"
                     error={!!errors.description}
                     control={control}

@@ -40,7 +40,7 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
 
     return (
         <FormWrapper
-            title={'Код из письма ' + user?.email}
+            title={t('TITLE_FORM_CODE_FROM_EMAIL', 'Код из письма ') + user?.email}
             name="code"
             className='py-4'
             onSubmit={handleSubmit(onSubmit)}
