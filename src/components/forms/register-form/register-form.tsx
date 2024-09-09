@@ -17,8 +17,10 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user';
 import { useGetProfileMutation } from '@/redux/api/common';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
+import { useTranslation } from 'react-i18next';
 
 export const RegisterForm = () => {
+    const { t } = useTranslation('input')
     const dispatch = useAppDispatch();
     const router = useRouter();
     const isAdmin = router.asPath.split('/').includes('admin');
@@ -92,7 +94,7 @@ export const RegisterForm = () => {
                 type="text"
                 id="UserName"
                 placeholder="Name"
-                label="Имя"
+                label={t('LABEL_USER_NAME', 'Имя')}
                 name="name"
                 error={!!errors.name}
                 control={control}
@@ -101,7 +103,7 @@ export const RegisterForm = () => {
                 type="email"
                 id="UserEmail"
                 placeholder="Email"
-                label="Почта"
+                label={t('LABEL_EMAIL', 'Почта')}
                 name="email"
                 error={!!errors.email}
                 control={control}
@@ -110,7 +112,7 @@ export const RegisterForm = () => {
                 type="password"
                 id="UserPassword"
                 placeholder="Password"
-                label="Пароль"
+                label={t('LABEL_PASSWORD', 'Пароль')}
                 name="password"
                 error={!!errors.password}
                 control={control}
@@ -120,7 +122,7 @@ export const RegisterForm = () => {
                 type="tel"
                 id="UserTel"
                 placeholder="Phone"
-                label="Телефон"
+                label={t('LABEL_PHONE', 'Телефон')}
                 name="contactPhone"
                 error={!!errors.contactPhone}
                 control={control}
@@ -139,7 +141,7 @@ export const RegisterForm = () => {
                         type="text"
                         id="UserRole"
                         placeholder="Role"
-                        label="Роль"
+                        label={t('LABEL_ROLE', 'Роль')}
                         name="role"
                         error={!!errors.role}
                         control={control}
