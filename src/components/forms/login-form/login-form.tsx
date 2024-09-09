@@ -11,8 +11,10 @@ import { useGetProfileMutation } from '@/redux/api/common';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
 export const LoginForm = () => {
+    const { t } = useTranslation('input');
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -48,7 +50,7 @@ export const LoginForm = () => {
                 type="email"
                 id="UserEmail"
                 placeholder="Email"
-                label="Почта"
+                label={t('LABEL_EMAIL', 'Почта')}
                 control={control}
                 error={!!errors.email}
                 name="email"
@@ -57,7 +59,7 @@ export const LoginForm = () => {
                 type="password"
                 id="UserPassword"
                 placeholder="Password"
-                label="Пароль"
+                label={t('LABEL_PASSWORD', 'Пароль')}
                 control={control}
                 error={!!errors.password}
                 name="password"

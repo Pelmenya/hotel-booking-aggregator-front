@@ -16,8 +16,10 @@
   "LABEL_CONFIRM_EMAIL": "Вставить код",
   "LABEL_CONFIRM_SMS": "Вставить код",
   "LABEL_COORDINATES": "Координаты",
+  "LABEL_EMAIL": "Почта",
   "LABEL_HOTEL_DESCRIPTION": "Описание отеля",
   "LABEL_HOTEL_NAME": "Название отеля",
   "LABEL_HOTEL_ROOM_DESCRIPTION": "Описание номера",
-  "LABEL_HOTEL_ROOM_NAME": "Название номера"
+  "LABEL_HOTEL_ROOM_NAME": "Название номера",
+  "LABEL_PASSWORD": "Пароль"
 }

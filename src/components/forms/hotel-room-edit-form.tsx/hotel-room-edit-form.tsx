@@ -15,15 +15,15 @@ import { Input } from '../components/input/input';
 import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
-import {
-    usePutAdminHotelRoomsMutation,
-} from '@/redux/api/admin';
+import { usePutAdminHotelRoomsMutation } from '@/redux/api/admin';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getBaseImageUrl } from 'utils/getBaseImageUrl';
 import { TPicture } from '@/types/t-picture';
 import { THotelRoom } from '@/types/t-hotel-room';
+import { useTranslation } from 'react-i18next';
 
 export const HotelRoomEditForm = () => {
+    const { t } = useTranslation('input');
     const [, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [currentHotelRoom, setCurrentHotelRoom] =
@@ -267,17 +267,23 @@ export const HotelRoomEditForm = () => {
                         <Input
                             type="text"
                             id="HotelRoomTitle"
-                            placeholder="Номер"
-                            label="Вариант размещения"
+                            placeholder="Название номера"
+                            label={t(
+                                'LABEL_HOTEL_ROOM_NAME',
+                                'Название номера'
+                            )}
                             name="title"
                             error={!!errors.title}
                             control={control}
                         />
                         <Input
                             type="textarea"
-                            id="HotelDescription"
+                            id="HotelRoomDescription"
                             placeholder="Описание"
-                            label="Описание отеля"
+                            label={t(
+                                'LABEL_HOTEL_ROOM_DESCRIPTION',
+                                'Описание номера'
+                            )}
                             name="description"
                             error={!!errors.description}
                             control={control}
