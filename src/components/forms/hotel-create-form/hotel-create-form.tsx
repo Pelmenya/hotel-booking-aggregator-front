@@ -15,7 +15,7 @@ import { transformCoordinates } from 'utils/transformCoordinates';
 import { useTranslation } from 'react-i18next';
 
 export const HotelCreateForm = () => {
-    const { t } = useTranslation('input');
+    const { t } = useTranslation('form');
     const [coordinates, setCoordinates] = useState<TNullable<string>>(null);
 
     const [postAdminHotels, { isLoading, isError, error }] =
@@ -75,7 +75,7 @@ export const HotelCreateForm = () => {
                     type="text"
                     id="HotelTitle"
                     placeholder="Название отеля"
-                    label={t('LABEL_HOTEL_NAME', 'Название отеля')}
+                    label={t('LABEL_INPUT_HOTEL_NAME', 'Название отеля')}
                     name="title"
                     error={!!errors.title}
                     control={control}
@@ -84,7 +84,7 @@ export const HotelCreateForm = () => {
                     type="text"
                     id="HotelСoordinates"
                     placeholder="Координаты"
-                    label={t('LABEL_COORDINATES','Координаты')}
+                    label={t('LABEL_INPUT_COORDINATES','Координаты')}
                     name="coordinates"
                     error={!!errors.coordinates}
                     control={control}
@@ -93,7 +93,7 @@ export const HotelCreateForm = () => {
                     type="textarea"
                     id="HotelDescription"
                     placeholder="Описание"
-                    label={t('LABEL_HOTEL_DESCRIPTION','Описание отеля')}
+                    label={t('LABEL_INPUT_HOTEL_DESCRIPTION','Описание отеля')}
                     name="description"
                     error={!!errors.description}
                     control={control}

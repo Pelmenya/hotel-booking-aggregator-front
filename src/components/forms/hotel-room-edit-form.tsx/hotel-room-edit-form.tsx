@@ -23,7 +23,7 @@ import { THotelRoom } from '@/types/t-hotel-room';
 import { useTranslation } from 'react-i18next';
 
 export const HotelRoomEditForm = () => {
-    const { t } = useTranslation('input');
+    const { t } = useTranslation('form');
     const [, setHotelTitle] = useState(''); // для поиска в БД
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [currentHotelRoom, setCurrentHotelRoom] =
@@ -269,7 +269,7 @@ export const HotelRoomEditForm = () => {
                             id="HotelRoomTitle"
                             placeholder="Название номера"
                             label={t(
-                                'LABEL_HOTEL_ROOM_NAME',
+                                'LABEL_INPUT_HOTEL_ROOM_NAME',
                                 'Название номера'
                             )}
                             name="title"
@@ -281,7 +281,7 @@ export const HotelRoomEditForm = () => {
                             id="HotelRoomDescription"
                             placeholder="Описание"
                             label={t(
-                                'LABEL_HOTEL_ROOM_DESCRIPTION',
+                                'LABEL_INPUT_HOTEL_ROOM_DESCRIPTION',
                                 'Описание номера'
                             )}
                             name="description"

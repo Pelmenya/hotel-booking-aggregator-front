@@ -16,7 +16,7 @@ import { THotel } from '@/types/t-hotel';
 import { useTranslation } from 'react-i18next';
 
 export const HotelRoomCreateForm = () => {
-    const { t } = useTranslation('input');
+    const { t } = useTranslation('form');
     const [idxCurrentHotel] = useState(0);
     const [currentHotel, setCurrentHotel] = useState<TNullable<THotel>>(null);
     const [trigger, { data }] = useLazyGetCommonHotelsQuery();
@@ -112,7 +112,7 @@ export const HotelRoomCreateForm = () => {
                     type="text"
                     id="HotelRoomTitle"
                     placeholder="Название номера"
-                    label={t('LABEL_HOTEL_ROOM_NAME','Название номера')}
+                    label={t('LABEL_INPUT_HOTEL_ROOM_NAME','Название номера')}
                     name="title"
                     error={!!errors.title}
                     control={control}
@@ -121,7 +121,7 @@ export const HotelRoomCreateForm = () => {
                     type="textarea"
                     id="HotelRoomDescription"
                     placeholder="Описание"
-                    label={t('LABEL_HOTEL_ROOM_DESCRIPTION','Описание номера')}
+                    label={t('LABEL_INPUT_HOTEL_ROOM_DESCRIPTION','Описание номера')}
                     name="description"
                     error={!!errors.description}
                     control={control}

@@ -14,7 +14,7 @@ import { setUser } from '@/redux/slices/user';
 import { useTranslation } from 'react-i18next';
 
 export const ConfirmPhoneForm = ({ user }: TUserProps) => {
-    const { t } = useTranslation('input');
+    const { t } = useTranslation('form');
     const [putConfirmPhone, { isLoading, isError, error }] =
         usePutConfirmPhoneMutation();
     const [getProfile] = useGetProfileMutation();
@@ -50,7 +50,7 @@ export const ConfirmPhoneForm = ({ user }: TUserProps) => {
                 type="text"
                 id="confirmSmsCode"
                 placeholder="ConfirmSmsCode"
-                label={t('LABEL_CONFIRM_SMS','Вставить код')}
+                label={t('LABEL_INPUT_CONFIRM_SMS','Вставить код')}
                 control={control}
                 error={!!errors.codeSms}
                 name="codeSms"

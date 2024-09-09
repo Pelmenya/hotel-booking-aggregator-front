@@ -14,7 +14,7 @@ import { setUser } from '@/redux/slices/user';
 import { useTranslation } from 'react-i18next';
 
 export const ConfirmEmailForm = ({ user }: TUserProps) => {
-    const { t } = useTranslation('input');
+    const { t } = useTranslation('form');
     const [putConfirmEmail, {isLoading, isError, error}] = usePutConfirmEmailMutation();
     const [getProfile] = useGetProfileMutation();
     const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
                 type="text"
                 id="confirmEmail"
                 placeholder="ConfirmEmail"
-                label={t('LABEL_CONFIRM_EMAIL', 'Вставить код')}
+                label={t('LABEL_INPUT_CONFIRM_EMAIL', 'Вставить код')}
                 control={control}
                 error={!!errors.code}
                 name="code"

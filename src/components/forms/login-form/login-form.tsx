@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
 export const LoginForm = () => {
-    const { t } = useTranslation('input');
+    const { t } = useTranslation('form');
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -50,7 +50,7 @@ export const LoginForm = () => {
                 type="email"
                 id="UserEmail"
                 placeholder="Email"
-                label={t('LABEL_EMAIL', 'Почта')}
+                label={t('LABEL_INPUT_EMAIL', 'Почта')}
                 control={control}
                 error={!!errors.email}
                 name="email"
@@ -59,7 +59,7 @@ export const LoginForm = () => {
                 type="password"
                 id="UserPassword"
                 placeholder="Password"
-                label={t('LABEL_PASSWORD', 'Пароль')}
+                label={t('LABEL_INPUT_PASSWORD', 'Пароль')}
                 control={control}
                 error={!!errors.password}
                 name="password"

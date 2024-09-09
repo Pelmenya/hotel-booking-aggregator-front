@@ -21,5 +21,21 @@
   "LABEL_HOTEL_NAME": "Название отеля",
   "LABEL_HOTEL_ROOM_DESCRIPTION": "Описание номера",
   "LABEL_HOTEL_ROOM_NAME": "Название номера",
-  "LABEL_PASSWORD": "Пароль"
+  "LABEL_INPUT_CONFIRM_EMAIL": "Вставить код",
+  "LABEL_INPUT_CONFIRM_NEW_PASSWORD": "Повторите новый пароль",
+  "LABEL_INPUT_CONFIRM_SMS": "Вставить код",
+  "LABEL_INPUT_COORDINATES": "Координаты",
+  "LABEL_INPUT_EMAIL": "Почта",
+  "LABEL_INPUT_HOTEL_DESCRIPTION": "Описание отеля",
+  "LABEL_INPUT_HOTEL_NAME": "Название отеля",
+  "LABEL_INPUT_HOTEL_ROOM_DESCRIPTION": "Описание номера",
+  "LABEL_INPUT_HOTEL_ROOM_NAME": "Название номера",
+  "LABEL_INPUT_NEW_PASSWORD": "Новый пароль",
+  "LABEL_INPUT_OLD_PASSWORD": "Старый пароль",
+  "LABEL_INPUT_PASSWORD": "Пароль",
+  "LABEL_INPUT_PHONE": "Телефон",
+  "LABEL_INPUT_ROLE": "Роль",
+  "LABEL_INPUT_USER_NAME": "Имя",
+  "LABEL_PASSWORD": "Пароль",
+  "TITLE_PASWWORD_CHANGE": "Смена пароля"
 }

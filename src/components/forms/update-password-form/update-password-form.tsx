@@ -11,8 +11,11 @@ import EyeSlashIcon from '@/icons/eye-slash.svg';
 import { useUpdatePasswordMutation } from '@/redux/api/auth';
 import { TUpdatePasswordDto } from '@/types/t-update-password-dto';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export const UpdatePasswordForm = () => {
+    const { t } = useTranslation('form');
+
     const [typeInput, setTypeInput] = useState<IInputProps['type']>('password');
     const [updatePassword, { isLoading, isError, error }] =
         useUpdatePasswordMutation();
@@ -39,7 +42,7 @@ export const UpdatePasswordForm = () => {
         <FormWrapper
             title={
                 <div className="flex items-center justify-center gap-2">
-                    <span>Смена пароля</span>
+                    <span>{t('TITLE_PASWWORD_CHANGE', 'Смена пароля')}</span>
                     <button
                         className="text-primary cursor-pointer"
                         onClick={() => {
@@ -62,7 +65,7 @@ export const UpdatePasswordForm = () => {
                 type={typeInput}
                 id="OldPassword"
                 placeholder="Old Password"
-                label="Старый пароль"
+                label={t('LABEL_INPUT_OLD_PASSWORD', 'Старый пароль')}
                 name="oldPassword"
                 error={!!errors.oldPassword}
                 control={control}
@@ -71,7 +74,7 @@ export const UpdatePasswordForm = () => {
                 type={typeInput}
                 id="NewPassword"
                 placeholder="NewPassword"
-                label="Новый пароль"
+                label={t('LABEL_INPUT_NEW_PASSWORD', 'Новый пароль')}
                 name="newPassword"
                 error={!!errors.password}
                 control={control}
@@ -80,7 +83,7 @@ export const UpdatePasswordForm = () => {
                 type={typeInput}
                 id="confirmPassword"
                 placeholder="ConfirmPassword"
-                label="Повторите новый пароль"
+                label={t('LABEL_INPUT_CONFIRM_NEW_PASSWORD', 'Повторите новый пароль')}
                 name="confirmPassword"
                 error={!!errors.confirmPassword}
                 control={control}

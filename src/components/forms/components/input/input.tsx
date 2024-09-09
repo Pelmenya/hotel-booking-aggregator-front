@@ -38,21 +38,21 @@ export interface IInputProps
 }
 
 const errorMessages = {
-    name: 'ERROR_NAME',
-    token: 'ERROR_CODE',
-    email: 'ERROR_EMAIL',
-    password: 'ERROR_PASSWORD',
-    oldPassword: 'ERROR_PASSWORD',
-    newPassword: 'ERROR_PASSWORD',
-    confirmPassword: 'ERROR_CONFIRM_PASSWORD',
-    contactPhone: 'ERROR_TEL',
-    role: 'ERROR_ROLE',
-    title: 'ERROR_TITLE',
-    description: 'ERROR_DESCRIPTION',
-    coordinates: 'ERROR_COORDINATES',
-    code: 'ERROR_CONFIRM_EMAIL',
-    codeSms: 'ERROR_CONFIRM_PHONE',
-    default: 'ERROR_REQUIRED_FIELD',
+    name: 'ERROR_INPUT_NAME',
+    token: 'ERROR_INPUT_CODE',
+    email: 'ERROR_INPUT_EMAIL',
+    password: 'ERROR_INPUT_PASSWORD',
+    oldPassword: 'ERROR_INPUT_PASSWORD',
+    newPassword: 'ERROR_INPUT_PASSWORD',
+    confirmPassword: 'ERROR_INPUT_CONFIRM_PASSWORD',
+    contactPhone: 'ERROR_INPUT_TEL',
+    role: 'ERROR_INPUT_ROLE',
+    title: 'ERROR_INPUT_TITLE',
+    description: 'ERROR_INPUT_DESCRIPTION',
+    coordinates: 'ERROR_INPUT_COORDINATES',
+    code: 'ERROR_INPUT_CONFIRM_EMAIL',
+    codeSms: 'ERROR_INPUT_CONFIRM_PHONE',
+    default: 'ERROR_INPUT_REQUIRED_FIELD',
 };
 
 export const Input = ({
@@ -67,7 +67,7 @@ export const Input = ({
     autoComplete = 'off',
     disabled,
 }: IInputProps) => {
-    const { t } = useTranslation('input');
+    const { t } = useTranslation('form');
     const commonClasses = 'peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm';
     const labelClasses = cn(
         'relative block overflow-hidden rounded-lg border border-gray-200 px-3 pt-3 shadow-sm',

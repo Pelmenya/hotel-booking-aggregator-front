@@ -20,7 +20,7 @@ import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useTranslation } from 'react-i18next';
 
 export const RegisterForm = () => {
-    const { t } = useTranslation('input')
+    const { t } = useTranslation('form');
     const dispatch = useAppDispatch();
     const router = useRouter();
     const isAdmin = router.asPath.split('/').includes('admin');
@@ -94,7 +94,7 @@ export const RegisterForm = () => {
                 type="text"
                 id="UserName"
                 placeholder="Name"
-                label={t('LABEL_USER_NAME', 'Имя')}
+                label={t('LABEL_INPUT_USER_NAME', 'Имя')}
                 name="name"
                 error={!!errors.name}
                 control={control}
@@ -103,7 +103,7 @@ export const RegisterForm = () => {
                 type="email"
                 id="UserEmail"
                 placeholder="Email"
-                label={t('LABEL_EMAIL', 'Почта')}
+                label={t('LABEL_INPUT_EMAIL', 'Почта')}
                 name="email"
                 error={!!errors.email}
                 control={control}
@@ -112,7 +112,7 @@ export const RegisterForm = () => {
                 type="password"
                 id="UserPassword"
                 placeholder="Password"
-                label={t('LABEL_PASSWORD', 'Пароль')}
+                label={t('LABEL_INPUT_PASSWORD', 'Пароль')}
                 name="password"
                 error={!!errors.password}
                 control={control}
@@ -122,7 +122,7 @@ export const RegisterForm = () => {
                 type="tel"
                 id="UserTel"
                 placeholder="Phone"
-                label={t('LABEL_PHONE', 'Телефон')}
+                label={t('LABEL_INPUT_PHONE', 'Телефон')}
                 name="contactPhone"
                 error={!!errors.contactPhone}
                 control={control}
@@ -141,7 +141,7 @@ export const RegisterForm = () => {
                         type="text"
                         id="UserRole"
                         placeholder="Role"
-                        label={t('LABEL_ROLE', 'Роль')}
+                        label={t('LABEL_INPUT_ROLE', 'Роль')}
                         name="role"
                         error={!!errors.role}
                         control={control}
