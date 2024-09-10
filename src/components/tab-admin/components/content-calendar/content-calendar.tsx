@@ -95,7 +95,7 @@ export const ContentCalendar = () => {
 
     return (
         <div className="grid grid-cols-5 grid-row-1 gap-4 h-full">
-            <div className="col-span-1 border border-orange-300 rounded-[0.375rem]">
+            <div className="col-span-1 border rounded-[0.375rem]">
                 <TabMenu>
                     <TabMenuLink
                         href="/admin/hotels"

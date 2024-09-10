@@ -25,7 +25,9 @@ export interface IInputProps
         | 'avatars'
         | 'coordinates'
         | 'code'
-        | 'codeSms';
+        | 'codeSms'
+        | 'gender'
+        | 'address';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
     type: 'text' | 'password' | 'email' | 'tel' | 'textarea';
@@ -52,6 +54,8 @@ const errorMessages = {
     coordinates: 'ERROR_INPUT_COORDINATES',
     code: 'ERROR_INPUT_CONFIRM_EMAIL',
     codeSms: 'ERROR_INPUT_CONFIRM_PHONE',
+    address: 'ERROR_INPUT_ADDRESS',
+    gender: 'ERROR_INPUT_GENDER',
     default: 'ERROR_INPUT_REQUIRED_FIELD',
 };
 

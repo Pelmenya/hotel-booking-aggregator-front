@@ -37,6 +37,8 @@ export const schemaHotelForm = yup
 export const schemaUpdateProfileForm = yup
     .object().shape({
         name: yup.string().min(2).required(),
+        gender: yup.string().notRequired(),
+        address: yup.string().notRequired(),
         email: yup.string().email().matches(new RegExp(PATTERNS.PATTERN_EMAIL)).required(),
         contactPhone: yup.string().matches(new RegExp(PATTERNS.PATTERN_PHONE)),
     })

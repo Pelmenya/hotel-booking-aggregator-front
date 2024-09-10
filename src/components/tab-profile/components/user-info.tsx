@@ -1,19 +1,10 @@
-import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
-import { usePostLogoutMutation } from '@/redux/api/auth';
 import { getUserState } from '@/redux/selectors/user';
-import { removeUser } from '@/redux/slices/user';
-import Link from 'next/link';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getRole } from 'utils/getRole';
-import IdentificationIcon from '@/icons/identification.svg';
-import PasswordIcon from '@/icons/shield-check.svg';
-import LogoutIcon from '@/icons/logout-icon.svg';
 import { Confirm } from './confirm';
 
 export const UserInfo = () => {
-    const dispatch = useAppDispatch();
-    const [postLogout] = usePostLogoutMutation();
     const { user } = useAppSelector(getUserState);
 
     return (
@@ -55,40 +46,6 @@ export const UserInfo = () => {
                     <p>Роль пользователя</p>
                     <p>{user?.role ? getRole(user.role) : ''}</p>
                 </div>
-            </div>
-            <div className="flex flex-col w-full max-w-xl divide-y-2">
-                <Link
-                    href={'/profile/edit'}
-                    className="flex w-full justify-between py-2 text-primary cursor-pointer"
-                >
-                    <div className="flex gap-2">
-                        <IdentificationIcon />
-                        Изменить данные
-                    </div>
-                </Link>
-                <Link
-                    href={'/profile/password'}
-                    className="flex w-full justify-between py-2 text-primary cursor-pointer"
-                >
-                    <div className="flex gap-2">
-                        <PasswordIcon />
-                        Изменить пароль
-                    </div>
-                </Link>
-                <button
-                    className="flex w-full justify-between py-2 text-error cursor-pointer"
-                    onClick={async () => {
-                        const logout = await postLogout(null).unwrap();
-                        if (logout.success) {
-                            dispatch(removeUser());
-                        }
-                    }}
-                >
-                    <div className="flex gap-2">
-                        <LogoutIcon />
-                        Выйти
-                    </div>
-                </button>
             </div>
         </>
     );

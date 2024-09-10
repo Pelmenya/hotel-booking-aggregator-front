@@ -14,6 +14,7 @@ import { TUser } from '@/types/t-user';
 import { setUser } from '@/redux/slices/user';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { ListBox } from '@/components/list-box/list-box';
 
 export const UpdateUserForm = () => {
     const { t } = useTranslation('form');
@@ -63,41 +64,74 @@ export const UpdateUserForm = () => {
         <FormWrapper
             title={t('TITLE_FORM_UPDATE_USER', 'Редактирование профиля')}
             name="profile"
+            maxWidth="max-w-lg"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <Input
-                type="text"
-                id="UserName"
-                placeholder="Name"
-                label={t('LABEL_INPUT_USER_NAME', 'Имя')}
-                name="name"
-                error={!!errors.name}
-                control={control}
-            />
-            <Input
-                type="email"
-                id="UserEmail"
-                placeholder="Email"
-                label={t('LABEL_INPUT_EMAIL', 'Почта')}
-                name="email"
-                error={!!errors.email}
-                control={control}
-            />
-            <Input
-                type="tel"
-                id="UserTel"
-                placeholder="Phone"
-                label={t('LABEL_INPUT_PHONE', 'Телефон')}
-                name="contactPhone"
-                error={!!errors.contactPhone}
-                control={control}
-            />
-            <SubmitBtn
-                text={'Редактировать'}
-                isLoading={isLoading}
-                isError={isError}
-                error={error as TError}
-            />
+            <div className="w-full flex flex-col gap-4">
+                <Input
+                    type="text"
+                    id="UserName"
+                    placeholder="Name"
+                    label={t('LABEL_INPUT_USER_NAME', 'Имя')}
+                    name="name"
+                    error={!!errors.name}
+                    control={control}
+                />
+                <div className="grid grid-cols-2 gap-4">
+                    <Input
+                        type="email"
+                        id="UserEmail"
+                        placeholder="Email"
+                        label={t('LABEL_INPUT_EMAIL', 'Почта')}
+                        name="email"
+                        error={!!errors.email}
+                        control={control}
+                    />
+                    <Input
+                        type="tel"
+                        id="UserTel"
+                        placeholder="Phone"
+                        label={t('LABEL_INPUT_PHONE', 'Телефон')}
+                        name="contactPhone"
+                        error={!!errors.contactPhone}
+                        control={control}
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <ListBox
+                        id="GenderListBox"
+                        label={t('LABEL_INPUT_GENDER', 'Пол')}
+                        items={['Мужской', 'Женский']}
+                        handlerSetItem={() => {}}
+                        activeIdx={0}
+                    />
+                    <Input
+                        hidden={true}
+                        type="text"
+                        id="UserGender"
+                        placeholder="Gender"
+                        label={t('LABEL_INPUT_GENDER', 'Пол')}
+                        name="gender"
+                        error={!!errors.gender}
+                        control={control}
+                    />
+                    <Input
+                        type="text"
+                        id="UserAddress"
+                        placeholder="Address"
+                        label={t('LABEL_INPUT_ADDRESS', 'Адрес')}
+                        name="address"
+                        error={!!errors.address}
+                        control={control}
+                    />
+                </div>
+                <SubmitBtn
+                    text={'Редактировать'}
+                    isLoading={isLoading}
+                    isError={isError}
+                    error={error as TError}
+                />
+            </div>
         </FormWrapper>
     );
 };
