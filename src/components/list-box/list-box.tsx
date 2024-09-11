@@ -7,7 +7,7 @@ export type TListBoxProps = {
     id: string;
     label: string;
     items: string[];
-    handlerSetItem: (value: TNullable<string>) => void;
+    handlerSetItem: (value: any) => void;
     activeIdx: TNullable<number>;
 };
 

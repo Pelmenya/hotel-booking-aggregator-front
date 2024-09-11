@@ -1,4 +1,5 @@
 {
+  "CAPTION_SUBMIT_BTN_EDIT": "Редактировать",
   "ERROR_INPUT_ADDRESS": "Более одного символа",
   "ERROR_INPUT_CODE": "Более одного символа",
   "ERROR_INPUT_CONFIRM_EMAIL": "Только UUID идентификатор",

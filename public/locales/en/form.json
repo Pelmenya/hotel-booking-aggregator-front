@@ -1,4 +1,5 @@
 {
+  "CAPTION_SUBMIT_BTN_EDIT": "Edit",
   "ERROR_INPUT_ADDRESS": "More than one character",
   "ERROR_INPUT_CODE": "More than one character",
   "ERROR_INPUT_CONFIRM_EMAIL": "Only UUID identifier",

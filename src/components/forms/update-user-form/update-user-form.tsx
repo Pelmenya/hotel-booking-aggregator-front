@@ -179,7 +179,7 @@ export const UpdateUserForm = () => {
                     />
                 </div>
                 <SubmitBtn
-                    text={'Редактировать'}
+                    text={t('CAPTION_SUBMIT_BTN_EDIT','Редактировать')}
                     isLoading={isLoading}
                     isError={isError}
                     error={error as TError}

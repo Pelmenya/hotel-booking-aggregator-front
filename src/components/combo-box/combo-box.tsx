@@ -34,9 +34,10 @@ export const ComboBox = ({
 
     // инициализация
     useEffect(() => {
-        if (items[activeIdx]) {
-            setSelected(items[activeIdx]);
-        }
+        if (activeIdx !== null)
+            if (items[activeIdx]) {
+                setSelected(items[activeIdx]);
+            }
     }, [activeIdx, items]);
 
     const handlerOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
