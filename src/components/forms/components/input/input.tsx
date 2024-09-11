@@ -27,10 +27,12 @@ export interface IInputProps
         | 'code'
         | 'codeSms'
         | 'gender'
-        | 'address';
+        | 'address' 
+        | 'company'
+        | 'birthday';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
-    type: 'text' | 'password' | 'email' | 'tel' | 'textarea';
+    type: 'text' | 'password' | 'email' | 'tel' | 'textarea' | 'date';
     placeholder: string;
     hidden?: boolean;
     label: string;

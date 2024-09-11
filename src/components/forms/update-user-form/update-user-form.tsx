@@ -145,7 +145,6 @@ export const UpdateUserForm = () => {
                         items={[...genders]}
                         handlerSetItem={(value) => {
                             if (value) {
-                                console.log('Selected gender:', value);
                                 setValue(
                                     'gender',
                                     value === 'Male' || value === 'Мужской'
@@ -153,9 +152,10 @@ export const UpdateUserForm = () => {
                                         : 'Female'
                                 );
 
-                                const newActiveGender = value === 'Male' || value === 'Мужской'
-                                    ? 0
-                                    : 1;
+                                const newActiveGender =
+                                    value === 'Male' || value === 'Мужской'
+                                        ? 0
+                                        : 1;
                                 setActiveGender(newActiveGender);
                             }
                         }}
@@ -178,8 +178,28 @@ export const UpdateUserForm = () => {
                         control={control}
                     />
                 </div>
+                <div className="grid grid-cols-2 gap-4">
+                    <Input
+                        type="text"
+                        id="UserCompany"
+                        placeholder="Company"
+                        label={t('LABEL_INPUT_COMPANY', 'Компания')}
+                        name="company"
+                        error={!!errors.company}
+                        control={control}
+                    />
+                    <Input
+                        type="date"
+                        id="UserBirthday"
+                        placeholder="Birthday"
+                        label={t('LABEL_INPUT_BIRTHDAY', 'Дата рождения')}
+                        name="birthday"
+                        error={!!errors.birthday}
+                        control={control}
+                    />
+                </div>
                 <SubmitBtn
-                    text={t('CAPTION_SUBMIT_BTN_EDIT','Редактировать')}
+                    text={t('CAPTION_SUBMIT_BTN_EDIT', 'Редактировать')}
                     isLoading={isLoading}
                     isError={isError}
                     error={error as TError}
