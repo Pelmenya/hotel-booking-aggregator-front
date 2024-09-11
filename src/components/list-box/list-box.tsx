@@ -9,23 +9,28 @@ export type TListBoxProps = {
     items: string[];
     handlerSetItem: (value: TNullable<string>) => void;
     activeIdx: TNullable<number>;
-}
+};
 
 export const ListBox = ({
-    label, 
+    label,
     items,
     handlerSetItem,
     activeIdx,
 }: TListBoxProps) => {
-    const initialSelect = activeIdx !== null ? items[activeIdx] : null;
+    // Инициализация selected с учетом activeIdx
+    const initialSelect = activeIdx !== null && activeIdx >= 0 && activeIdx < items.length ? items[activeIdx] : null;
     const [selected, setSelected] = useState(initialSelect);
 
+    // Обновление selected при изменении items или activeIdx
     useEffect(() => {
-        if (items && activeIdx){ 
-            setSelected(items[activeIdx])
+        if (items && activeIdx !== null && activeIdx >= 0 && activeIdx < items.length) {
+            setSelected(items[activeIdx]);
+        } else {
+            setSelected(null);
         }
     }, [items, activeIdx]);
 
+    // Вызов handlerSetItem при изменении selected
     useEffect(() => {
         handlerSetItem(selected);
     }, [selected, handlerSetItem]);

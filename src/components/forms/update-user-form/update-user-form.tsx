@@ -19,24 +19,6 @@ import { ListBox } from '@/components/list-box/list-box';
 export const UpdateUserForm = () => {
     const { t, i18n } = useTranslation('form');
     const { user } = useAppSelector(getUserState);
-    const genders = useMemo(
-        () => [
-            t('LABEL_INPUT_GENDER_MALE', 'Мужской'),
-            t('LABEL_INPUT_GENDER_FEMALE', 'Женский'),
-        ],
-        [t]
-    );
-
-    const [activeGender, setActiveGender] = useState(
-        user?.gender ? (user?.gender === 'Male' ? 0 : 1) : null
-    );
-
-    useEffect(() => {
-        setActiveGender(
-            user?.gender ? (user?.gender === 'Male' ? 0 : 1) : null
-        );
-    }, [i18n.language, user?.gender, genders]);
-
     const dispatch = useAppDispatch();
 
     const [updateUser, { isLoading, isError, error }] =
@@ -47,10 +29,41 @@ export const UpdateUserForm = () => {
         control,
         formState: { errors },
         setValue,
+        getValues,
+        register,
     } = useForm({
         resolver: yupResolver(schemaUpdateProfileForm),
         reValidateMode: 'onChange',
     });
+
+    const genders = useMemo(
+        () => [
+            t('LABEL_INPUT_GENDER_MALE', 'Мужской'),
+            t('LABEL_INPUT_GENDER_FEMALE', 'Женский'),
+        ],
+        [t]
+    );
+
+    const [activeGender, setActiveGender] = useState(
+        user?.gender
+            ? user?.gender === 'Male'
+                ? 0
+                : user?.gender === 'Female'
+                    ? 1
+                    : null
+            : null
+    );
+
+    useEffect(() => {
+        const gender = getValues().gender;
+        if (gender === 'Male' || gender === 'Мужской') {
+            setActiveGender(0);
+        } else if (gender === 'Female' || gender === 'Женский') {
+            setActiveGender(1);
+        } else {
+            setActiveGender(null);
+        }
+    }, [i18n.language, getValues]);
 
     const onSubmit = async (data: FieldValues) => {
         if (data) {
@@ -62,7 +75,9 @@ export const UpdateUserForm = () => {
             if (data.gender) {
                 formData.append(
                     'gender',
-                    data.gender === 'Male' || data.gender === 'Мужской' ? 'Male' : 'Female'
+                    data.gender === 'Male' || data.gender === 'Мужской'
+                        ? 'Male'
+                        : 'Female'
                 );
             }
             const newUser = await updateUser(
@@ -80,11 +95,11 @@ export const UpdateUserForm = () => {
             setValue('name', user.name);
             setValue('email', user.email);
             setValue('contactPhone', user.contactPhone);
-            if (user.gender) {
+            if (!getValues().gender) {
                 setValue('gender', user.gender);
             }
         }
-    }, [user, setValue]);
+    }, [user, setValue, getValues]);
 
     return (
         <FormWrapper
@@ -129,22 +144,29 @@ export const UpdateUserForm = () => {
                         label={t('LABEL_INPUT_GENDER', 'Пол')}
                         items={[...genders]}
                         handlerSetItem={(value) => {
-                            setValue('gender', value === genders[0] ? 'Male' : 'Female');
-                            setActiveGender(
-                                value === genders[0] ? 0 : 1
-                            );
+                            if (value) {
+                                console.log('Selected gender:', value);
+                                setValue(
+                                    'gender',
+                                    value === 'Male' || value === 'Мужской'
+                                        ? 'Male'
+                                        : 'Female'
+                                );
+
+                                const newActiveGender = value === 'Male' || value === 'Мужской'
+                                    ? 0
+                                    : 1;
+                                setActiveGender(newActiveGender);
+                            }
                         }}
                         activeIdx={activeGender}
                     />
-                    <Input
+                    <input
                         hidden={true}
                         type="text"
                         id="UserGender"
                         placeholder="Gender"
-                        label={t('LABEL_INPUT_GENDER', 'Пол')}
-                        name="gender"
-                        error={!!errors.gender}
-                        control={control}
+                        {...register('gender')}
                     />
                     <Input
                         type="text"
