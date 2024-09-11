@@ -9,16 +9,36 @@ import { removeUser } from '@/redux/slices/user';
 import { Avatar } from '@/components/pages/profile-page/components/avatar/avatar';
 import { UpdateUserForm } from '@/components/forms/update-user-form/update-user-form';
 import { UpdatePasswordForm } from '@/components/forms/update-password-form/update-password-form';
+import { TabContent } from '@/components/tab/components/tab-content/tab-content';
+import { TabMenuWrapper } from '@/components/tab/components/tab-menu/components/tab-menu-wrapper/tab-menu-wrapper';
+import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
 
-export const ContentProfile = () => {
+export const TabContentProfile = () => {
     const dispatch = useAppDispatch();
     const [postLogout] = usePostLogoutMutation();
     const router = useRouter();
-    const pathSegments = useMemo(() => router.asPath.split('/'), [router.asPath]);
+    const pathSegments = useMemo(
+        () => router.asPath.split('/'),
+        [router.asPath]
+    );
 
-    const isProfileEdit = useMemo(() => pathSegments.includes('profile') && pathSegments.includes('edit'), [pathSegments]);
-    const isPasswordChange = useMemo(() => pathSegments.includes('profile') && pathSegments.includes('password'), [pathSegments]);
-    const isProfile = useMemo(() => pathSegments.includes('profile') && !isPasswordChange && !isProfileEdit, [pathSegments, isPasswordChange, isProfileEdit]);
+    const isProfileEdit = useMemo(
+        () => pathSegments.includes('profile') && pathSegments.includes('edit'),
+        [pathSegments]
+    );
+    const isPasswordChange = useMemo(
+        () =>
+            pathSegments.includes('profile') &&
+            pathSegments.includes('password'),
+        [pathSegments]
+    );
+    const isProfile = useMemo(
+        () =>
+            pathSegments.includes('profile') &&
+            !isPasswordChange &&
+            !isProfileEdit,
+        [pathSegments, isPasswordChange, isProfileEdit]
+    );
 
     const handleLogout = useCallback(async () => {
         const logout = await postLogout(null).unwrap();
@@ -28,8 +48,8 @@ export const ContentProfile = () => {
     }, [postLogout, dispatch]);
 
     return (
-        <div className="grid grid-cols-5 grid-row-1 gap-4 h-full">
-            <div className="col-span-1 border border-base-300 rounded-[0.375rem] flex flex-col justify-between">
+        <TabContent>
+            <TabMenuWrapper>
                 <TabMenu>
                     <TabMenuLink
                         href="/profile"
@@ -58,8 +78,8 @@ export const ContentProfile = () => {
                         handlerOnClick={handleLogout}
                     />
                 </TabMenu>
-            </div>
-            <div className="col-span-4 bg-base-100 px-4 py-4 rounded-md h-full w-full flex flex-col items-center justify-center text-base-content">
+            </TabMenuWrapper>
+            <TabContentMain>
                 {isProfile && <UserInfo />}
                 {isProfileEdit && (
                     <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
@@ -67,12 +87,8 @@ export const ContentProfile = () => {
                         <UpdateUserForm />
                     </div>
                 )}
-                {isPasswordChange && (
-                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
-                        <UpdatePasswordForm />
-                    </div>
-                )}
-            </div>
-        </div>
+                {isPasswordChange && <UpdatePasswordForm />}
+            </TabContentMain>
+        </TabContent>
     );
 };
