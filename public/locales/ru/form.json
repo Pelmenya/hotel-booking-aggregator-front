@@ -21,6 +21,8 @@
   "LABEL_INPUT_COORDINATES": "Координаты",
   "LABEL_INPUT_EMAIL": "Почта",
   "LABEL_INPUT_GENDER": "Пол",
+  "LABEL_INPUT_GENDER_FEMALE": "Женский",
+  "LABEL_INPUT_GENDER_MALE": "Мужской",
   "LABEL_INPUT_HOTEL_DESCRIPTION": "Описание отеля",
   "LABEL_INPUT_HOTEL_NAME": "Название отеля",
   "LABEL_INPUT_HOTEL_ROOM_DESCRIPTION": "Описание номера",

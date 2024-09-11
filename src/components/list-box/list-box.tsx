@@ -1,13 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { TNullable } from '@/types/t-nullable';
 
 export type TListBoxProps = {
     id: string;
     label: string;
     items: string[];
-    handlerSetItem: (value: any) => void;
-    activeIdx: number;
+    handlerSetItem: (value: TNullable<string>) => void;
+    activeIdx: TNullable<number>;
 }
 
 export const ListBox = ({
@@ -16,10 +17,11 @@ export const ListBox = ({
     handlerSetItem,
     activeIdx,
 }: TListBoxProps) => {
-    const [selected, setSelected] = useState(items[activeIdx || 0]);
+    const initialSelect = activeIdx !== null ? items[activeIdx] : null;
+    const [selected, setSelected] = useState(initialSelect);
 
     useEffect(() => {
-        if (items){ 
+        if (items && activeIdx){ 
             setSelected(items[activeIdx])
         }
     }, [items, activeIdx]);
@@ -31,11 +33,11 @@ export const ListBox = ({
     return (
         <div className="w-full">
             <Listbox value={selected} onChange={setSelected}>
-                <div className="relative mt-1">
+                <div className="relative">
                     <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
                         {label}
                     </span>
-                    <Listbox.Button className="text-left relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
+                    <Listbox.Button className="text-left relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary min-h-[46px]">
                         <span className="block truncate">{selected}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon

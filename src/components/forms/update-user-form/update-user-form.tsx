@@ -9,7 +9,7 @@ import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
 import { useUpdateProfileMutation } from '@/redux/api/common';
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { TUser } from '@/types/t-user';
 import { setUser } from '@/redux/slices/user';
 import { toast } from 'react-toastify';
@@ -17,8 +17,26 @@ import { useTranslation } from 'react-i18next';
 import { ListBox } from '@/components/list-box/list-box';
 
 export const UpdateUserForm = () => {
-    const { t } = useTranslation('form');
+    const { t, i18n } = useTranslation('form');
     const { user } = useAppSelector(getUserState);
+    const genders = useMemo(
+        () => [
+            t('LABEL_INPUT_GENDER_MALE', 'Мужской'),
+            t('LABEL_INPUT_GENDER_FEMALE', 'Женский'),
+        ],
+        [t]
+    );
+
+    const [activeGender, setActiveGender] = useState(
+        user?.gender ? (user?.gender === 'Male' ? 0 : 1) : null
+    );
+
+    useEffect(() => {
+        setActiveGender(
+            user?.gender ? (user?.gender === 'Male' ? 0 : 1) : null
+        );
+    }, [i18n.language, user?.gender, genders]);
+
     const dispatch = useAppDispatch();
 
     const [updateUser, { isLoading, isError, error }] =
@@ -41,7 +59,12 @@ export const UpdateUserForm = () => {
             formData.append('name', data.name);
             formData.append('email', data.email);
             formData.append('contactPhone', data.contactPhone);
-
+            if (data.gender) {
+                formData.append(
+                    'gender',
+                    data.gender === 'Male' || data.gender === 'Мужской' ? 'Male' : 'Female'
+                );
+            }
             const newUser = await updateUser(
                 formData as Partial<TUser>
             ).unwrap();
@@ -57,6 +80,9 @@ export const UpdateUserForm = () => {
             setValue('name', user.name);
             setValue('email', user.email);
             setValue('contactPhone', user.contactPhone);
+            if (user.gender) {
+                setValue('gender', user.gender);
+            }
         }
     }, [user, setValue]);
 
@@ -101,9 +127,14 @@ export const UpdateUserForm = () => {
                     <ListBox
                         id="GenderListBox"
                         label={t('LABEL_INPUT_GENDER', 'Пол')}
-                        items={['Мужской', 'Женский']}
-                        handlerSetItem={() => {}}
-                        activeIdx={0}
+                        items={[...genders]}
+                        handlerSetItem={(value) => {
+                            setValue('gender', value === genders[0] ? 'Male' : 'Female');
+                            setActiveGender(
+                                value === genders[0] ? 0 : 1
+                            );
+                        }}
+                        activeIdx={activeGender}
                     />
                     <Input
                         hidden={true}

@@ -8,7 +8,7 @@ export type TUser = TNullable<{
     phoneIsConfirm: boolean;
     name: string;
     birthday?: Date;
-    gender?: 'male' | 'female'; 
+    gender?: 'Male' | 'Female'; 
     company? : string;
     address?: string;
     contactPhone?: string;
