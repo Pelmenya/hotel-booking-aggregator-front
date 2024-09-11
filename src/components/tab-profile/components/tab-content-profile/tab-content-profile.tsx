@@ -12,8 +12,10 @@ import { UpdatePasswordForm } from '@/components/forms/update-password-form/upda
 import { TabContent } from '@/components/tab/components/tab-content/tab-content';
 import { TabMenuWrapper } from '@/components/tab/components/tab-menu/components/tab-menu-wrapper/tab-menu-wrapper';
 import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
+import { useTranslation } from 'react-i18next';
 
 export const TabContentProfile = () => {
+    const { t } = useTranslation('account');
     const dispatch = useAppDispatch();
     const [postLogout] = usePostLogoutMutation();
     const router = useRouter();
@@ -54,26 +56,26 @@ export const TabContentProfile = () => {
                     <TabMenuLink
                         href="/profile"
                         active={isProfile}
-                        text="Личный кабинет"
+                        text={t('TAB_MENU_LINK_ACCOUNT', 'Личный кабинет')}
                         icon="profile"
                     />
                     <TabMenuLink
                         href="/profile/edit"
                         active={isProfileEdit}
-                        text="Изменить данные"
+                        text={t('TAB_MENU_LINK_EDIT_DATA', 'Изменить данные')}
                         icon="identification"
                     />
                     <TabMenuLink
                         href="/profile/password"
                         active={isPasswordChange}
-                        text="Изменить пароль"
+                        text={t('TAB_MENU_LINK_SECURE', 'Изменить пароль')}
                         icon="secure"
                     />
                 </TabMenu>
                 <TabMenu>
                     <TabMenuLink
                         active={true}
-                        text="Выйти"
+                        text={t('TAB_MENU_LINK_LOGOUT', 'Выйти')}
                         icon="logout"
                         handlerOnClick={handleLogout}
                     />
@@ -82,10 +84,10 @@ export const TabContentProfile = () => {
             <TabContentMain>
                 {isProfile && <UserInfo />}
                 {isProfileEdit && (
-                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
+                    <>
                         <Avatar />
                         <UpdateUserForm />
-                    </div>
+                    </>
                 )}
                 {isPasswordChange && <UpdatePasswordForm />}
             </TabContentMain>

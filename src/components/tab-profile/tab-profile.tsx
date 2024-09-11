@@ -18,10 +18,10 @@ export const TabProfile = () => {
         <Tab>
             <TabHead>
                 <TabHeadLink href="/profile" active={isProfile}>
-                    {t('profile', 'Профиль')}
+                    {t('TAB_HEAD_LINK_PROFILE', 'Профиль')}
                 </TabHeadLink>
                 <TabHeadLink href="/settings" active={isSettings}>
-                    {t('settings', 'Настройки')}
+                    {t('TAB_HEAD_LINK_SETTINGS', 'Настройки')}
                 </TabHeadLink>
             </TabHead>
             <TabBody>

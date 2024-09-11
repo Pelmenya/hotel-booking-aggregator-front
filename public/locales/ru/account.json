@@ -1,5 +1,8 @@
 {
-  "editing": "Редактирование",
-  "passwordChange": "Смена пароля",
-  "profile": "Профиль"
+  "TAB_HEAD_LINK_PROFILE": "Профиль",
+  "TAB_HEAD_LINK_SETTINGS": "Настройки",
+  "TAB_MENU_LINK_ACCOUNT": "Личный кабинет",
+  "TAB_MENU_LINK_EDIT_DATA": "Изменить данные",
+  "TAB_MENU_LINK_LOGOUT": "Выйти",
+  "TAB_MENU_LINK_SECURE": "Изменить пароль"
 }

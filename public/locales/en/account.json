@@ -1,5 +1,8 @@
 {
-  "editing": "Editing",
-  "passwordChange": "Password change",
-  "profile": "Profile"
+  "TAB_HEAD_LINK_PROFILE": "Profile",
+  "TAB_HEAD_LINK_SETTINGS": "Settings",
+  "TAB_MENU_LINK_ACCOUNT": "Personal account",
+  "TAB_MENU_LINK_EDIT_DATA": "Edit data",
+  "TAB_MENU_LINK_LOGOUT": "Exit",
+  "TAB_MENU_LINK_SECURE": "Edit password"
 }
