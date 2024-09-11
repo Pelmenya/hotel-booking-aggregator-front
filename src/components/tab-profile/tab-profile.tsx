@@ -14,10 +14,8 @@ export const TabProfile = () => {
     const { t } = useTranslation('account');
     const router = useRouter();
     const paths = router.pathname.split('/');
-
-    const isEdit = paths.includes('edit');
-    const isPassword = paths.includes('password');
-    const isProfile = paths.includes('profile') && !isEdit && !isPassword;
+    const isProfile = paths.includes('profile');
+    const isSettings = paths.includes('settings');
 
     return (
         <Tab>
@@ -25,27 +23,16 @@ export const TabProfile = () => {
                 <TabHeadLink href="/profile" active={isProfile}>
                     {t('profile', 'Профиль')}
                 </TabHeadLink>
-                <TabHeadLink href="/profile/edit" active={isEdit}>
-                    {t('editing', 'Редактирование')}
-                </TabHeadLink>
-                <TabHeadLink href="/profile/password" active={isPassword}>
-                    {t('passwordChange', 'Смена пароля')}
+                <TabHeadLink href="/settings" active={isSettings}>
+                    {t('settings', 'Настройки')}
                 </TabHeadLink>
             </TabHead>
             <TabBody>
                 <TabBodyItem active={isProfile}>
                     <ContentProfile />
                 </TabBodyItem>
-                <TabBodyItem active={isEdit}>
-                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
-                        <Avatar />
-                        <UpdateUserForm />
-                    </div>
-                </TabBodyItem>
-                <TabBodyItem active={isPassword}>
-                    <div className="bg-base-100 px-4 py-4 h-full w-full rounded-md flex flex-col items-center justify-center text-base-content">
-                        <UpdatePasswordForm />
-                    </div>
+                <TabBodyItem active={isSettings}>
+                    <div>Здесь будет страница настроек</div>
                 </TabBodyItem>
             </TabBody>
         </Tab>

@@ -6,7 +6,6 @@ import { Confirm } from './confirm';
 
 export const UserInfo = () => {
     const { user } = useAppSelector(getUserState);
-
     return (
         <>
             {user?.avatars?.length ? (
