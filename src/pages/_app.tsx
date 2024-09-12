@@ -6,6 +6,7 @@ import { AuthProvider } from '@/providers/auth-provider/auth-provider';
 import { AuthRouter } from '@/router/auth-router';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import '@/styles/globals.css';
 import '@/styles/toastify.css';
