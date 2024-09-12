@@ -50,5 +50,6 @@
   "TITLE_FORM_UPDATE_HOTEL": "Editing a hotel",
   "TITLE_FORM_UPDATE_HOTEL_ROOM": "Editing rooms",
   "TITLE_FORM_UPDATE_USER": "Profile editing",
-  "TOAST_SUCCESS_PROFILE_UPDATE": "The user's profile has been updated"
+  "TOAST_SUCCESS_PASSWORD_UPDATED": "The user's password has been updated",
+  "TOAST_SUCCESS_PROFILE_UPDATED": "The user's profile has been updated"
 }

@@ -48,5 +48,6 @@
   "TITLE_FORM_UPDATE_HOTEL": "Редактирования отеля",
   "TITLE_FORM_UPDATE_HOTEL_ROOM": "Редактирования номера",
   "TITLE_FORM_UPDATE_USER": "Редактирование профиля",
-  "TOAST_SUCCESS_PROFILE_UPDATE": "Профиль пользователя обновлен"
+  "TOAST_SUCCESS_PASSWORD_UPDATED": "Пароль пользователя обновлен",
+  "TOAST_SUCCESS_PROFILE_UPDATED": "Профиль пользователя обновлен"
 }

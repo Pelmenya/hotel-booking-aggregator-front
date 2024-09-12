@@ -85,7 +85,7 @@ export const UpdateUserForm = () => {
             ).unwrap();
             if (newUser) {
                 dispatch(setUser(newUser));
-                toast.success(t('TOAST_SUCCESS_PROFILE_UPDATE','Профиль пользователя обновлен'));
+                toast.success(t('TOAST_SUCCESS_PROFILE_UPDATED','Профиль пользователя обновлен'));
             }
         }
     };

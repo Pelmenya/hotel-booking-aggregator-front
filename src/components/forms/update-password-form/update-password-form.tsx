@@ -34,7 +34,7 @@ export const UpdatePasswordForm = () => {
             const res = await updatePassword(
                 data as TUpdatePasswordDto
             ).unwrap();
-            if (res.success) toast.success('Пароль пользователя обновлен');
+            if (res.success) toast.success(t('TOAST_SUCCESS_PASSWORD_UPDATED','Пароль пользователя обновлен'));
         }
     };
 
