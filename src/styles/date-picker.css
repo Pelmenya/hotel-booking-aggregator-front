@@ -1,0 +1,19 @@
+/* stylelint-disable selector-class-pattern */
+.react-datepicker {
+    font-family: var(--font-inter), sans-serif;
+
+    @apply text-info bg-base-100;
+}
+
+.react-datepicker__header {
+    @apply bg-base-200 text-primary  p-4 font-sans;
+}
+
+.react-datepicker__day {
+    @apply bg-base-100 text-base-content font-sans;
+
+}
+
+.react-datepicker__day--selected {
+    @apply bg-primary text-base font-sans;
+}

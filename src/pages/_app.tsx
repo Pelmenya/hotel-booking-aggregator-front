@@ -10,6 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import '@/styles/globals.css';
 import '@/styles/toastify.css';
+import '@/styles/date-picker.css';
 
 import { appWithTranslation } from 'next-i18next';
 import '../../i18n';

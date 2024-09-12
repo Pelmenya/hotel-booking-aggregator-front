@@ -93,7 +93,7 @@ export const Input = ({
 
     const labelClasses = useMemo(() => 
         cn(
-            'relative block overflow-hidden rounded-lg border border-gray-200 px-3 pt-3 shadow-sm w-full',
+            'relative block overflow-hidden rounded-lg border border-gray-200 px-3 pt-3 shadow-sm w-full transition duration-300 ease-in-out',
             error
                 ? 'focus-within:border-error focus-within:ring-1 focus-within:ring-error'
                 : 'focus-within:border-primary focus-within:ring-1 focus-within:ring-primary'
@@ -106,15 +106,6 @@ export const Input = ({
         setTimeout(() => {
             datePickerRef.current?.setFocus?.();
         }, 0);
-    };
-
-    const handleBlur = (e: FocusEvent<HTMLLabelElement>) => {
-        if (e.relatedTarget?.className.includes('react-datepicker')) {
-            return;
-        }
-        setTimeout(() => {
-            setIsDatePickerVisible(false);
-        }, 100);
     };
 
     const renderInputField = (
@@ -163,7 +154,7 @@ export const Input = ({
                         type="text"
                         id={id}
                         placeholder={placeholder}
-                        className={commonClasses}
+                        className={commonClasses + ' react-datepicker'}
                         onChange={onChange}
                         onBlur={onBlur}
                         value={value ? format(new Date(value), 'dd-MM-yyyy') : ''}
@@ -199,12 +190,11 @@ export const Input = ({
                         htmlFor={id}
                         className={labelClasses}
                         onFocus={handleFocus}
-                        onBlur={handleBlur}
                     >
                         {renderInputField(onChange, onBlur, value, ref)}
                         <span
                             className={cn(
-                                'absolute left-3 top-3 -translate-y-1/2 text-xs transition-all',
+                                'absolute left-3 top-3 -translate-y-1/2 text-xs transition-all duration-100 ease-in-out',
                                 {
                                     'peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs':
                                         !value,
