@@ -1,5 +1,6 @@
 {
   "CAPTION_SUBMIT_BTN_EDIT": "Edit",
+  "CAPTION_SUBMIT_BTN_SAVE": "Save",
   "ERROR_INPUT_ADDRESS": "More than one character",
   "ERROR_INPUT_CODE": "More than one character",
   "ERROR_INPUT_CONFIRM_EMAIL": "Only UUID identifier",
@@ -19,6 +20,8 @@
   "LABEL_CONFIRM_SMS": "Enter code",
   "LABEL_COORDINATES": "Coordinates",
   "LABEL_INPUT_ADDRESS": "Address",
+  "LABEL_INPUT_BIRTHDAY": "Дата рождения",
+  "LABEL_INPUT_COMPANY": "Компания",
   "LABEL_INPUT_CONFIRM_EMAIL": "Insert code",
   "LABEL_INPUT_CONFIRM_NEW_PASSWORD": "Repeat the new password",
   "LABEL_INPUT_CONFIRM_SMS": "Insert code",
@@ -46,5 +49,6 @@
   "TITLE_FORM_REGISTER": "Registration",
   "TITLE_FORM_UPDATE_HOTEL": "Editing a hotel",
   "TITLE_FORM_UPDATE_HOTEL_ROOM": "Editing rooms",
-  "TITLE_FORM_UPDATE_USER": "Profile editing"
+  "TITLE_FORM_UPDATE_USER": "Profile editing",
+  "TOAST_SUCCESS_PROFILE_UPDATE": "The user's profile has been updated"
 }

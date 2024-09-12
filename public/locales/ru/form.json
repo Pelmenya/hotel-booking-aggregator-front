@@ -1,5 +1,6 @@
 {
   "CAPTION_SUBMIT_BTN_EDIT": "Редактировать",
+  "CAPTION_SUBMIT_BTN_SAVE": "Сохранить",
   "ERROR_INPUT_ADDRESS": "Более одного символа",
   "ERROR_INPUT_CODE": "Более одного символа",
   "ERROR_INPUT_CONFIRM_EMAIL": "Только UUID идентификатор",
@@ -16,6 +17,8 @@
   "ERROR_INPUT_TEL": "Пример: +7(925)900-90-90",
   "ERROR_INPUT_TITLE": "Название отеля не меньше 2 символов",
   "LABEL_INPUT_ADDRESS": "Адрес",
+  "LABEL_INPUT_BIRTHDAY": "Дата рождения",
+  "LABEL_INPUT_COMPANY": "Компания",
   "LABEL_INPUT_CONFIRM_EMAIL": "Вставить код",
   "LABEL_INPUT_CONFIRM_NEW_PASSWORD": "Повторите новый пароль",
   "LABEL_INPUT_CONFIRM_SMS": "Вставить код",
@@ -44,5 +47,6 @@
   "TITLE_FORM_REGISTER": "Регистрация",
   "TITLE_FORM_UPDATE_HOTEL": "Редактирования отеля",
   "TITLE_FORM_UPDATE_HOTEL_ROOM": "Редактирования номера",
-  "TITLE_FORM_UPDATE_USER": "Редактирование профиля"
+  "TITLE_FORM_UPDATE_USER": "Редактирование профиля",
+  "TOAST_SUCCESS_PROFILE_UPDATE": "Профиль пользователя обновлен"
 }

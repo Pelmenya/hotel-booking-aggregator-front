@@ -89,7 +89,7 @@ export const UpdatePasswordForm = () => {
                 control={control}
             />
             <SubmitBtn
-                text={'Сохранить'}
+                text={t('CAPTION_SUBMIT_BTN_SAVE','Сохранить')}
                 isLoading={isLoading}
                 isError={isError}
                 error={error as TError}
