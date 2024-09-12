@@ -67,6 +67,7 @@ const errorMessages = {
     address: 'ERROR_INPUT_ADDRESS',
     gender: 'ERROR_INPUT_GENDER',
     default: 'ERROR_INPUT_REQUIRED_FIELD',
+    birthday: 'ERROR_INPUT_BIRTHDAY'
 };
 
 export const Input = ({

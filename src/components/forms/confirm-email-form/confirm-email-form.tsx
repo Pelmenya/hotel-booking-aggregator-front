@@ -15,10 +15,10 @@ import { useTranslation } from 'react-i18next';
 
 export const ConfirmEmailForm = ({ user }: TUserProps) => {
     const { t } = useTranslation('form');
-    const [putConfirmEmail, {isLoading, isError, error}] = usePutConfirmEmailMutation();
+    const [putConfirmEmail, { isLoading, isError, error }] =
+        usePutConfirmEmailMutation();
     const [getProfile] = useGetProfileMutation();
     const dispatch = useAppDispatch();
-
 
     const {
         handleSubmit,
@@ -31,7 +31,7 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
 
     const onSubmit = async (dto: FieldValues) => {
         if (dto) {
-            const res = await putConfirmEmail(dto as {code: string}).unwrap();
+            const res = await putConfirmEmail(dto as { code: string }).unwrap();
             if (res.success) {
                 dispatch(setUser(await getProfile('').unwrap()));
             }
@@ -40,9 +40,11 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
 
     return (
         <FormWrapper
-            title={t('TITLE_FORM_CODE_FROM_EMAIL', 'Код из письма ') + user?.email}
+            title={
+                t('TITLE_FORM_CODE_FROM_EMAIL', 'Код из письма ') + user?.email
+            }
             name="code"
-            className='py-4'
+            className="py-4"
             onSubmit={handleSubmit(onSubmit)}
         >
             <Input
@@ -55,8 +57,8 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
                 name="code"
             />
             <SubmitBtn
-                text="Подтвердить"
-                error={error as TError} 
+                text={t('CAPTION_SUBMIT_BATN_CONFIRM', 'Подтвердить')}
+                error={error as TError}
                 isError={isError}
                 isLoading={isLoading}
             />

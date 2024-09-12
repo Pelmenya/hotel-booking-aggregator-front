@@ -1,7 +1,9 @@
 {
+  "CAPTION_SUBMIT_BATN_CONFIRM": "Подтвердить",
   "CAPTION_SUBMIT_BTN_EDIT": "Редактировать",
   "CAPTION_SUBMIT_BTN_SAVE": "Сохранить",
   "ERROR_INPUT_ADDRESS": "Более одного символа",
+  "ERROR_INPUT_BIRTHDAY": "Возраст от 18",
   "ERROR_INPUT_CODE": "Более одного символа",
   "ERROR_INPUT_CONFIRM_EMAIL": "Только UUID идентификатор",
   "ERROR_INPUT_CONFIRM_PASSWORD": "Пароли не совпадают",

@@ -1,7 +1,9 @@
 {
+  "CAPTION_SUBMIT_BATN_CONFIRM": "Confirm",
   "CAPTION_SUBMIT_BTN_EDIT": "Edit",
   "CAPTION_SUBMIT_BTN_SAVE": "Save",
   "ERROR_INPUT_ADDRESS": "More than one character",
+  "ERROR_INPUT_BIRTHDAY": "Age from 18",
   "ERROR_INPUT_CODE": "More than one character",
   "ERROR_INPUT_CONFIRM_EMAIL": "Only UUID identifier",
   "ERROR_INPUT_CONFIRM_PASSWORD": "Passwords do not match",
