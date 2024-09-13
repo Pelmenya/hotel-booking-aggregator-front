@@ -162,6 +162,27 @@ export const UpdateUserForm = () => {
                     />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
+                    <Input
+                        type="text"
+                        id="UserCompany"
+                        placeholder="Company"
+                        label={t('LABEL_INPUT_COMPANY', 'Компания')}
+                        name="company"
+                        error={!!errors.company}
+                        control={control}
+                    />
+
+                    <Input
+                        type="text"
+                        id="UserAddress"
+                        placeholder="Address"
+                        label={t('LABEL_INPUT_ADDRESS', 'Адрес')}
+                        name="address"
+                        error={!!errors.address}
+                        control={control}
+                    />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
                     <ListBox
                         id="GenderListBox"
                         label={t('LABEL_INPUT_GENDER', 'Пол')}
@@ -190,26 +211,6 @@ export const UpdateUserForm = () => {
                         id="UserGender"
                         placeholder="Gender"
                         {...register('gender')}
-                    />
-                    <Input
-                        type="text"
-                        id="UserAddress"
-                        placeholder="Address"
-                        label={t('LABEL_INPUT_ADDRESS', 'Адрес')}
-                        name="address"
-                        error={!!errors.address}
-                        control={control}
-                    />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                    <Input
-                        type="text"
-                        id="UserCompany"
-                        placeholder="Company"
-                        label={t('LABEL_INPUT_COMPANY', 'Компания')}
-                        name="company"
-                        error={!!errors.company}
-                        control={control}
                     />
                     <Input
                         type="date"
