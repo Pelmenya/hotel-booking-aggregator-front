@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { ListBox } from '@/components/list-box/list-box';
 import { format } from 'date-fns';
+import { da } from 'date-fns/locale';
 
 export const UpdateUserForm = () => {
     const { t, i18n } = useTranslation('form');
@@ -68,7 +69,7 @@ export const UpdateUserForm = () => {
 
     const onSubmit = async (data: FieldValues) => {
         if (data) {
-            console.log(data)
+            console.log(data);
             const formData = new FormData();
             user?.avatars?.forEach((file) => formData.append('avatars', file));
             formData.append('name', data.name);
@@ -83,9 +84,17 @@ export const UpdateUserForm = () => {
                 );
             }
             if (data.birthday) {
-                console.log(data.birthday)
-                formData.append('birthday', new Date(data.birthday).toISOString());
-            };
+                formData.append(
+                    'birthday',
+                    new Date(data.birthday).toISOString()
+                );
+            }
+            if (data.company) {
+                formData.append('company', data.company);
+            }
+            if (data.address) {
+                formData.append('address', data.address);
+            }
             const newUser = await updateUser(
                 formData as Partial<TUser>
             ).unwrap();
@@ -109,6 +118,9 @@ export const UpdateUserForm = () => {
             if (!getValues().gender) {
                 setValue('gender', user.gender);
             }
+            setValue('birthday', user.birthday);
+            setValue('company', user.company);
+            setValue('address', user.address);
         }
     }, [user, setValue, getValues]);
 
