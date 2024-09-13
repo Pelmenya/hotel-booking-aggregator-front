@@ -15,8 +15,6 @@ import { setUser } from '@/redux/slices/user';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { ListBox } from '@/components/list-box/list-box';
-import { format } from 'date-fns';
-import { da } from 'date-fns/locale';
 
 export const UpdateUserForm = () => {
     const { t, i18n } = useTranslation('form');
