@@ -108,6 +108,17 @@ export const Input = ({
         }, 0);
     };
 
+    
+    const handleBlur = (e: FocusEvent<HTMLLabelElement>) => {
+        if (e.relatedTarget?.className.includes('react-datepicker')) {
+            return;
+        }
+        // отключить для удобства изменения стилей DatePicker
+        setTimeout(() => {
+            setIsDatePickerVisible(false); // при пустом input чтоб срабатывала анимация label
+        }, 0);
+    };
+
     const renderInputField = (
         onChange: (value: any) => void,
         onBlur: (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void,
@@ -190,6 +201,7 @@ export const Input = ({
                         htmlFor={id}
                         className={labelClasses}
                         onFocus={handleFocus}
+                        onBlur={handleBlur}
                     >
                         {renderInputField(onChange, onBlur, value, ref)}
                         <span
