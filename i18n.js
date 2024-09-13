@@ -12,7 +12,7 @@ i18n
     .use(initReactI18next)
     .init({
         ...nextI18NextConfig,
-        ns: ['common'], // Указываем namespace
+        ns: ['common', 'form', 'account', 'footer', 'input_file'], // Указываем namespace
         defaultNS: 'common', // Устанавливаем default namespace
         backend: {
             loadPath: isServer ? loadPath : '/locales/{{lng}}/{{ns}}.json', // Используем переменные окружения

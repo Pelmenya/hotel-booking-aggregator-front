@@ -15,6 +15,7 @@ import { setUser } from '@/redux/slices/user';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { ListBox } from '@/components/list-box/list-box';
+import { format } from 'date-fns';
 
 export const UpdateUserForm = () => {
     const { t, i18n } = useTranslation('form');
@@ -67,6 +68,7 @@ export const UpdateUserForm = () => {
 
     const onSubmit = async (data: FieldValues) => {
         if (data) {
+            console.log(data)
             const formData = new FormData();
             user?.avatars?.forEach((file) => formData.append('avatars', file));
             formData.append('name', data.name);
@@ -80,6 +82,10 @@ export const UpdateUserForm = () => {
                         : 'Female'
                 );
             }
+            if (data.birthday) {
+                console.log(data.birthday)
+                formData.append('birthday', new Date(data.birthday).toISOString());
+            };
             const newUser = await updateUser(
                 formData as Partial<TUser>
             ).unwrap();

@@ -1,11 +1,11 @@
-import React, { useState, useRef, useMemo, FocusEvent } from 'react';
+import React, { useState, useRef, useMemo, FocusEvent} from 'react';
 import cn from 'classnames';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { Control, FieldValues, Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import { enUS, ru } from 'date-fns/locale';
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import 'react-datepicker/dist/react-datepicker.css';
 
 registerLocale('en', enUS);
@@ -83,6 +83,7 @@ export const Input = ({
     disabled,
 }: IInputProps) => {
     const { t, i18n } = useTranslation('form');
+
     const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
     const datePickerRef = useRef<DatePicker>(null);
 
@@ -108,14 +109,12 @@ export const Input = ({
         }, 0);
     };
 
-    
     const handleBlur = (e: FocusEvent<HTMLLabelElement>) => {
         if (e.relatedTarget?.className.includes('react-datepicker')) {
             return;
         }
-        // отключить для удобства изменения стилей DatePicker
         setTimeout(() => {
-            setIsDatePickerVisible(false); // при пустом input чтоб срабатывала анимация label
+            setIsDatePickerVisible(false);
         }, 0);
     };
 
@@ -144,14 +143,14 @@ export const Input = ({
                     <DatePicker
                         ref={datePickerRef}
                         id={id}
-                        selected={value ? new Date(value) : null}
+                        selected={value && isValid(new Date(value)) ? new Date(value) : null}
                         onChange={(date) => onChange(date)}
                         onBlur={onBlur}
                         placeholderText={placeholder}
                         className={commonClasses + ' min-w-[222px]'}
                         autoComplete={autoComplete}
                         disabled={disabled}
-                        dateFormat="dd-MM-yyyy"
+                        dateFormat="ddMMyyyy"
                         locale={i18n.language === 'ru' ? 'ru' : 'en'}
                         portalId="root-portal"
                         showYearDropdown
@@ -168,9 +167,11 @@ export const Input = ({
                         className={commonClasses + ' react-datepicker'}
                         onChange={onChange}
                         onBlur={onBlur}
-                        value={value ? format(new Date(value), 'dd-MM-yyyy') : ''}
-                        autoComplete={autoComplete}
+                        value={value && isValid(new Date(value)) ? format(new Date(value), 'dd-MM-yyyy') : value || ''}
                         disabled={disabled}
+                        autoComplete={autoComplete}
+                        inputMode="numeric"
+                        maxLength={10} // Ограничение максимальной длины ввода
                     />
                 );
             default:
@@ -214,7 +215,7 @@ export const Input = ({
                                 }
                             )}
                         >
-                            {t(label)}
+                            {label}
                         </span>
                     </label>
                     {error && (
