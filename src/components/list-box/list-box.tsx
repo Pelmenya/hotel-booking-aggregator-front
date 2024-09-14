@@ -42,8 +42,8 @@ export const ListBox = ({
                     <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
                         {label}
                     </span>
-                    <Listbox.Button className="text-left relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary min-h-[46px]">
-                        <span className="block truncate">{selected}</span>
+                    <Listbox.Button className="text-left relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
+                        <span className="block truncate text-sm">{selected}</span>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon
                                 className="h-5 w-5 text-gray-400"
