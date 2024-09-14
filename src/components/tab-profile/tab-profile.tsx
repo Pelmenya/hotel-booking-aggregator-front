@@ -1,11 +1,9 @@
 import { useRouter } from 'next/router';
-import { TabHeadLink } from '../tab/components/tab-head/components/tab-head-link/tab-head-link';
-import { TabHead } from '../tab/components/tab-head/tab-head';
 import { Tab } from '../tab/tab';
-import { TabBody } from '../tab/components/tab-body/tab-body';
-import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
 import { useTranslation } from 'react-i18next';
 import { TabContentProfile } from './components/tab-content-profile/tab-content-profile';
+import { TabList } from '../tab/components/tab-list/tab-list';
+import { TabListItem } from '../tab/components/tab-list/components/tab-list-item/tab-list-item';
 
 export const TabProfile = () => {
     const { t } = useTranslation('account');
@@ -16,22 +14,22 @@ export const TabProfile = () => {
 
     return (
         <Tab>
-            <TabHead>
-                <TabHeadLink href="/profile" active={isProfile}>
-                    {t('TAB_HEAD_LINK_PROFILE', 'Профиль')}
-                </TabHeadLink>
-                <TabHeadLink href="/settings" active={isSettings}>
-                    {t('TAB_HEAD_LINK_SETTINGS', 'Настройки')}
-                </TabHeadLink>
-            </TabHead>
-            <TabBody>
-                <TabBodyItem active={isProfile}>
+            <TabList>
+                <TabListItem
+                    href="/profile"
+                    active={isProfile}
+                    tab={t('TAB_HEAD_LINK_PROFILE', 'Профиль')}
+                >
                     <TabContentProfile />
-                </TabBodyItem>
-                <TabBodyItem active={isSettings}>
-                    <div>Здесь будет страница настроек</div>
-                </TabBodyItem>
-            </TabBody>
+                </TabListItem>
+                <TabListItem
+                    href="/settings"
+                    active={isSettings}
+                    tab={t('TAB_HEAD_LINK_SETTINGS', 'Настройки')}
+                >
+                    <TabContentProfile />
+                </TabListItem>
+            </TabList>
         </Tab>
     );
 };

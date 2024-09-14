@@ -2,12 +2,10 @@ import { ContentHotels } from './components/content-hotels/content-hotels';
 import { ContentRooms } from './components/content-rooms/content-rooms';
 import { useRouter } from 'next/router';
 import { Tab } from '../tab/tab';
-import { TabHead } from '../tab/components/tab-head/tab-head';
-import { TabHeadLink } from '../tab/components/tab-head/components/tab-head-link/tab-head-link';
-import { TabBody } from '../tab/components/tab-body/tab-body';
-import { TabBodyItem } from '../tab/components/tab-body/components/tab-body-item.tsx/tab-body-item';
 import { ContentUsers } from './components/content-users/content-users';
 import { ContentCalendar } from './components/content-calendar/content-calendar';
+import { TabList } from '../tab/components/tab-list/tab-list';
+import { TabListItem } from '../tab/components/tab-list/components/tab-list-item/tab-list-item';
 
 export const TabAdmin = () => {
     const router = useRouter();
@@ -19,48 +17,32 @@ export const TabAdmin = () => {
 
     return (
         <Tab>
-            <TabHead>
-                <TabHeadLink
-                    href="/admin/hotels"
-                    active={isHotels}
-                >
-                    Отели
-                </TabHeadLink>
-                <TabHeadLink
+            <TabList>
+                <TabListItem href="/admin/hotels" active={isHotels} tab="Отели">
+                    <ContentHotels />
+                </TabListItem>
+                <TabListItem
                     href="/admin/hotel-rooms"
                     active={isHotelRooms}
+                    tab="Номера"
                 >
-                    Номера
-                </TabHeadLink>
-                <TabHeadLink
+                    <ContentRooms />
+                </TabListItem>
+                <TabListItem
                     href="/admin/calendar"
                     active={isCalendar}
+                    tab="Календарь"
                 >
-                    Календарь
-                </TabHeadLink>
-                <TabHeadLink
+                    <ContentCalendar />
+                </TabListItem>
+                <TabListItem
                     href="/admin/users"
                     active={isUsers}
+                    tab="Пользователи"
                 >
-                    Пользователи
-                </TabHeadLink>
-            </TabHead>
-            <TabBody>
-                <TabBodyItem
-                    active={isHotels}
-                >
-                    <ContentHotels />
-                </TabBodyItem>
-                <TabBodyItem active={isHotelRooms}>
-                    <ContentRooms />
-                </TabBodyItem>
-                <TabBodyItem active={isCalendar}>
-                    <ContentCalendar />
-                </TabBodyItem>
-                <TabBodyItem active={isUsers}>
                     <ContentUsers />
-                </TabBodyItem>
-            </TabBody>
+                </TabListItem>
+            </TabList>
         </Tab>
     );
 };

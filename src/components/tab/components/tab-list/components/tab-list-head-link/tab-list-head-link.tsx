@@ -3,12 +3,12 @@ import { TBaseProps } from '@/types/t-base-props';
 
 import cn from 'classnames';
 
-export type TTabHeadLinkProps = TBaseProps & {
+export type TTabListHeadLinkProps = TBaseProps & {
     href: string;
     active: boolean;
 };
 
-export const TabHeadLink = ({ href, children, active }: TTabHeadLinkProps) => (
+export const TabListHeadLink = ({ href, children, active }: TTabListHeadLinkProps) => (
     <Link
         role="tab"
         href={href}
