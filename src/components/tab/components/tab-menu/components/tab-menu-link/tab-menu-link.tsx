@@ -3,10 +3,10 @@ import cn from 'classnames';
 import EditIcon from '@/icons/edit.svg';
 import AddIcon from '@/icons/add.svg';
 import DeleteIcon from '@/icons/delete.svg';
-import ProfileIcon from '@/icons/profile-icon.svg';
 import IdentificationIcon from '@/icons/identification.svg';
 import SecureIcon from '@/icons/shield-check.svg';
 import LogoutIcon from '@/icons/logout-icon.svg';
+import AccountIcon from '@/icons/account.svg'
 
 export type TMenuTabLinkProps = {
     href?: string;
@@ -18,7 +18,7 @@ export type TMenuTabLinkProps = {
         | 'edit'
         | 'add'
         | 'delete'
-        | 'profile'
+        | 'account'
         | 'identification'
         | 'secure'
         | 'logout';
@@ -43,7 +43,7 @@ export const TabMenuLink = ({
                 {icon === 'edit' && <EditIcon />}
                 {icon === 'add' && <AddIcon />}
                 {icon === 'delete' && <DeleteIcon />}
-                {icon === 'profile' && <ProfileIcon />}
+                {icon === 'account' && <AccountIcon />}
                 {icon === 'secure' && <SecureIcon />}
                 {icon === 'identification' && <IdentificationIcon />}
                 {icon === 'logout' && <LogoutIcon />}
@@ -60,7 +60,7 @@ export const TabMenuLink = ({
                 {icon === 'edit' && <EditIcon />}
                 {icon === 'add' && <AddIcon />}
                 {icon === 'delete' && <DeleteIcon />}
-                {icon === 'profile' && <ProfileIcon />}
+                {icon === 'account' && <AccountIcon />}
                 {icon === 'secure' && <SecureIcon />}
                 {icon === 'identification' && <IdentificationIcon />}
                 {icon === 'logout' && <LogoutIcon />}

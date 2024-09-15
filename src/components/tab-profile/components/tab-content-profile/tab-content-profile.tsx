@@ -57,7 +57,7 @@ export const TabContentProfile = () => {
                         href="/profile"
                         active={isProfile}
                         text={t('TAB_MENU_LINK_ACCOUNT', 'Личный кабинет')}
-                        icon="profile"
+                        icon="account"
                     />
                     <TabMenuLink
                         href="/profile/edit"
