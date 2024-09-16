@@ -18,12 +18,20 @@ export const ListBox = ({
     activeIdx,
 }: TListBoxProps) => {
     // Инициализация selected с учетом activeIdx
-    const initialSelect = activeIdx !== null && activeIdx >= 0 && activeIdx < items.length ? items[activeIdx] : null;
+    const initialSelect =
+        activeIdx !== null && activeIdx >= 0 && activeIdx < items.length
+            ? items[activeIdx]
+            : null;
     const [selected, setSelected] = useState(initialSelect);
 
     // Обновление selected при изменении items или activeIdx
     useEffect(() => {
-        if (items && activeIdx !== null && activeIdx >= 0 && activeIdx < items.length) {
+        if (
+            items &&
+            activeIdx !== null &&
+            activeIdx >= 0 &&
+            activeIdx < items.length
+        ) {
             setSelected(items[activeIdx]);
         } else {
             setSelected(null);
@@ -36,14 +44,22 @@ export const ListBox = ({
     }, [selected, handlerSetItem]);
 
     return (
-        <div className="w-full">
+        <div className="w-full h-full">
             <Listbox value={selected} onChange={setSelected}>
-                <div className="relative">
+                <div className="relative h-full">
                     <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
-                        {label}
+                        {selected && label}
                     </span>
-                    <Listbox.Button className="text-left relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
-                        <span className="block truncate text-sm">{selected}</span>
+                    <Listbox.Button className="text-left h-full relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
+                        {selected ? (
+                            <span className="absolute left-3 top-4 text-sm">
+                                {selected}
+                            </span>
+                        ) : (
+                            <span className="absolute left-3 top-3 text-sm">
+                                {label}
+                            </span>
+                        )}
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon
                                 className="h-5 w-5 text-gray-400"

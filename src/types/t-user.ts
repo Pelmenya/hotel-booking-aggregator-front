@@ -15,3 +15,5 @@ export type TUser = TNullable<{
     role?: TRole;
     avatars?: string[];
 }>
+
+export const userKeysCount = 12;

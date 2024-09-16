@@ -1,34 +1,16 @@
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
-import { CSSProperties, useEffect, useState } from 'react';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getRole } from 'utils/getRole';
 import { Confirm } from './confirm';
+import { FullnessProfile } from './fullness-profile/fullness-profile';
 
 export const UserInfo = () => {
     const { user } = useAppSelector(getUserState);
-    const [ progress, setProgress ] = useState(0);
-    
-    useEffect(() => {
-        if (user) {
-            setProgress(Math.floor(100/11*(Object.keys(user).length - 1)))
-        }
-    }, [user])
 
     return (
         <>
-            <div
-                className="radial-progress  bg-success text-neutral-content border-success border-4 mb-8"
-                style={{
-                    '--value': `${progress}`,
-                    '--size': '4rem',
-                    '--thickness': '3px',
-                }  as CSSProperties}
-                role="progressbar"
-            >
-                {progress}%
-            </div>
-
+            <FullnessProfile user={user || null} />
 
             {user?.avatars?.length ? (
                 <div className="avatar">
