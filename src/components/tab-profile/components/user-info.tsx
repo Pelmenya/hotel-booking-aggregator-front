@@ -8,9 +8,10 @@ import { getRole } from 'utils/getRole';
 import { Confirm } from './confirm';
 import { FullnessProfile } from './fullness-profile/fullness-profile';
 import EditIcon from '@/icons/edit.svg';
+import { getGender } from 'utils/getGender';
 
 export const UserInfo = () => {
-    const { t } = useTranslation('form');
+    const { t, i18n } = useTranslation('form');
     const { user } = useAppSelector(getUserState);
 
     return (
@@ -72,12 +73,24 @@ export const UserInfo = () => {
                 {user?.gender && (
                     <div className="flex w-full justify-between py-2">
                         <p>{t('LABEL_INPUT_GENDER', 'Пол')}</p>
-                        <p>{user?.gender}</p>
+                        <p>
+                            {user?.gender
+                                ? i18n.language === 'ru'
+                                    ? getGender(user.gender)
+                                    : user.gender
+                                : ''}
+                        </p>
                     </div>
                 )}
                 <div className="flex w-full justify-between py-2">
                     <p>{t('LABEL_INPUT_ROLE', 'Роль')}</p>
-                    <p>{user?.role ? getRole(user.role) : ''}</p>
+                    <p>
+                        {user?.role
+                            ? i18n.language === 'ru'
+                                ? getRole(user.role)
+                                : user.role
+                            : ''}
+                    </p>
                 </div>
             </div>
             <div className="flex w-full justify-end max-w-xl">
