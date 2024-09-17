@@ -1,12 +1,13 @@
-import { Base } from '@/components/base/base';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
 import { format } from 'date-fns';
+import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getRole } from 'utils/getRole';
 import { Confirm } from './confirm';
 import { FullnessProfile } from './fullness-profile/fullness-profile';
+import EditIcon from '@/icons/edit.svg';
 
 export const UserInfo = () => {
     const { t } = useTranslation('form');
@@ -36,7 +37,7 @@ export const UserInfo = () => {
                 </div>
                 {user?.emailIsConfirm ? (
                     <div className="flex w-full justify-between py-2">
-                        <p>{t('LABEL_INPUT_', 'Почта')}</p>
+                        <p>{t('LABEL_INPUT_EMAIL', 'Почта')}</p>
                         <p>{user?.email}</p>
                     </div>
                 ) : (
@@ -44,7 +45,7 @@ export const UserInfo = () => {
                 )}
                 {user?.phoneIsConfirm ? (
                     <div className="flex w-full justify-between py-2">
-                        <p>Контактный телефон</p>
+                        <p>{t('LABEL_INPUT_PHONE', 'Телефон')}</p>
                         <p>{user?.contactPhone}</p>
                     </div>
                 ) : (
@@ -52,32 +53,43 @@ export const UserInfo = () => {
                 )}
                 {user?.address && (
                     <div className="flex w-full justify-between py-2">
-                        <p>Адрес</p>
+                        <p>{t('LABEL_INPUT_ADDRESS', 'Адрес')}</p>
                         <p>{user?.address}</p>
                     </div>
                 )}
                 {user?.company && (
                     <div className="flex w-full justify-between py-2">
-                        <p>Компания</p>
+                        <p>{t('LABEL_INPUT_COMPANY', 'Компания')}</p>
                         <p>{user?.company}</p>
                     </div>
                 )}
                 {user?.birthday && (
                     <div className="flex w-full justify-between py-2">
-                        <p>День рождения</p>
+                        <p>{t('LABEL_INPUT_BIRTHDAY', 'Дата рождения')}</p>
                         <p>{format(new Date(user?.birthday), 'dd-MM-yyyy')}</p>
                     </div>
                 )}
                 {user?.gender && (
                     <div className="flex w-full justify-between py-2">
-                        <p>Пол</p>
+                        <p>{t('LABEL_INPUT_GENDER', 'Пол')}</p>
                         <p>{user?.gender}</p>
                     </div>
                 )}
                 <div className="flex w-full justify-between py-2">
-                    <p>Роль пользователя</p>
+                    <p>{t('LABEL_INPUT_ROLE', 'Роль')}</p>
                     <p>{user?.role ? getRole(user.role) : ''}</p>
                 </div>
+            </div>
+            <div className="flex w-full justify-end max-w-xl">
+                <Link
+                    href={'/profile/edit'}
+                    className="flex justify-between py-2 text-primary cursor-pointer text-sm"
+                >
+                    <div className="flex gap-2">
+                        <EditIcon />
+                        {t('CAPTION_SUBMIT_BTN_EDIT', 'Редактировать')}
+                    </div>
+                </Link>
             </div>
         </>
     );

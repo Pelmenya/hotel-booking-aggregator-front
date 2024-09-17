@@ -14,12 +14,14 @@ import { ConfirmPhoneForm } from '@/components/forms/confirm-phone-form/confirm-
 import { Countdown } from '@/components/count-down/count-down';
 import { confirmToast, onceMinutes, onceSeconds } from './confirm.constants';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export type TConfirmProps = TUserProps & {
     channel: 'SMS' | 'EMAIL';
 };
 
 export const Confirm = ({ user, channel }: TConfirmProps) => {
+    const { t } = useTranslation('form');
     const [postEmailCode, { isLoading: isLoadingEmail }] =
         usePostEmailCodeMutation();
     const [postSmsCode, { isLoading: isLoadingSms }] = usePostSmsCodeMutation();
@@ -42,8 +44,8 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
             minitues: onceMinutes,
             seconds: onceSeconds,
         });
-        
-        toast.info(confirmToast)
+
+        toast.info(confirmToast);
         if (channel === 'EMAIL') res = await postEmailCode('').unwrap();
         if (channel === 'SMS') res = await postSmsCode('').unwrap();
         if (res.success) setIsOpenConfirmModal(true);
@@ -53,12 +55,23 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
         <div className="flex w-full py-2 justify-between text-error items-center">
             {channel === 'EMAIL' ? (
                 <>
-                    <p>Почта не подтверждена</p>
+                    <p>
+                        {t(
+                            'ERROR_MESSAGE_EMAIL_NOT_CONFIRM',
+                            'Почта не подтверждена'
+                        )}
+                    </p>
                     <p>{countdown.view ? '' : user?.email}</p>
                 </>
             ) : channel === 'SMS' ? (
                 <>
-                    <p>Телефон не подтвержден</p>
+                    <p>
+                        {t(
+                            'ERROR_MESSAGE_PHONE_NOT_CONFIRM',
+                            'Телефон не подтвержден'
+                        )}
+                    </p>
+
                     <p>{countdown.view ? '' : user?.contactPhone}</p>
                 </>
             ) : (

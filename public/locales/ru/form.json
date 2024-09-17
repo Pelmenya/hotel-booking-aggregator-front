@@ -18,6 +18,8 @@
   "ERROR_INPUT_ROLE": "Роль админ, клиент, менеджер",
   "ERROR_INPUT_TEL": "Пример: +7(925)900-90-90",
   "ERROR_INPUT_TITLE": "Название отеля не меньше 2 символов",
+  "ERROR_MESSAGE_EMAIL_NOT_CONFIRM": "Почта не подтверждена",
+  "ERROR_MESSAGE_PHONE_NOT_CONFIRM": "Телефон не подтвержден",
   "LABEL_INPUT_ADDRESS": "Адрес",
   "LABEL_INPUT_BIRTHDAY": "Дата рождения",
   "LABEL_INPUT_COMPANY": "Компания",
