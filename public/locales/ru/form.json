@@ -1,5 +1,7 @@
 {
+  "CAPTION_BTN_UPLOAD_FILE": "Выбрать файл на компьютере",
   "CAPTION_SUBMIT_BATN_CONFIRM": "Подтвердить",
+  "CAPTION_SUBMIT_BTN_CHANGE": "Поменять",
   "CAPTION_SUBMIT_BTN_EDIT": "Редактировать",
   "CAPTION_SUBMIT_BTN_SAVE": "Сохранить",
   "ERROR_INPUT_ADDRESS": "Более одного символа",
@@ -42,6 +44,7 @@
   "LABEL_INPUT_ROLE": "Роль",
   "LABEL_INPUT_USER_NAME": "Имя",
   "LABEL_PASSWORD": "Пароль",
+  "MESSAGE_CHANGE_AVATAR": "Поменять фото",
   "TITLE_FORM_CODE_FROM_EMAIL": "Код из письма ",
   "TITLE_FORM_CODE_FROM_SMS": "Код из SMS ",
   "TITLE_FORM_CREATE_HOTEL": "Добавление отеля",
@@ -52,6 +55,7 @@
   "TITLE_FORM_UPDATE_HOTEL": "Редактирования отеля",
   "TITLE_FORM_UPDATE_HOTEL_ROOM": "Редактирования номера",
   "TITLE_FORM_UPDATE_USER": "Редактирование профиля",
+  "TITLE_UPLOAD_FILE": "Загрузите файл",
   "TOAST_SUCCESS_PASSWORD_UPDATED": "Пароль пользователя обновлен",
   "TOAST_SUCCESS_PROFILE_UPDATED": "Профиль пользователя обновлен"
 }

@@ -13,8 +13,10 @@ import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
 import { getImageUrl } from 'utils/getImageUrl';
 import { TUser } from '@/types/t-user';
+import { useTranslation } from 'react-i18next';
 
 export const Avatar = () => {
+    const { t } = useTranslation('form')
     const { user } = useAppSelector(getUserState);
     const picture =  user?.avatars?.length ? getImageUrl(user.avatars[0]) : null;
     
@@ -76,13 +78,13 @@ export const Avatar = () => {
                     className="flex flex-col items-center gap-8 min-w-[280px]"
                     onSubmit={handleSubmit(handlerOnSubmitAvatar)}
                 >
-                    <p className="font-bold text-xl">Загрузите файл</p>
+                    <p className="font-bold text-xl">{t('TITLE_UPLOAD_FILE','Загрузите файл')}</p>
                     <label
                         htmlFor="avatars"
                         className="text-primary underline underline-offset-4 cursor-pointer max-w-[140px] text-center"
                     >
                         {!basePicture ? (
-                            <span>Выбрать файл на компьютере</span>
+                            <span>{t('CAPTION_BTN_UPLOAD_FILE','Выбрать файл на компьютере')}</span>
                         ) : (
                             <div
                                 style={
@@ -107,7 +109,7 @@ export const Avatar = () => {
                         className="hidden"
                         accept="image/*"
                     />
-                    <button className="btn btn-primary w-full">Поменять</button>
+                    <button className="btn btn-primary w-full">{t('CAPTION_SUBMIT_BTN_CHANGE','Поменять')}</button>
                 </form>
             </Modal>
             <div
@@ -134,7 +136,7 @@ export const Avatar = () => {
                         styles.text
                     )}
                 >
-                    Поменять аватар
+                    {t('MESSAGE_CHANGE_AVATAR','Поменять фото')}
                 </span>
             </div>
         </>

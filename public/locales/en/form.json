@@ -1,5 +1,7 @@
 {
+  "CAPTION_BTN_UPLOAD_FILE": "Select a file on your computer",
   "CAPTION_SUBMIT_BATN_CONFIRM": "Confirm",
+  "CAPTION_SUBMIT_BTN_CHANGE": "Change",
   "CAPTION_SUBMIT_BTN_EDIT": "Edit",
   "CAPTION_SUBMIT_BTN_SAVE": "Save",
   "ERROR_INPUT_ADDRESS": "More than one character",
@@ -44,6 +46,7 @@
   "LABEL_INPUT_PHONE": "Phone",
   "LABEL_INPUT_ROLE": "Role",
   "LABEL_INPUT_USER_NAME": "Name",
+  "MESSAGE_CHANGE_AVATAR": "Change the photo",
   "TITLE_FORM_CODE_FROM_EMAIL": "Code from the email ",
   "TITLE_FORM_CODE_FROM_SMS": "Code from SMS ",
   "TITLE_FORM_CREATE_HOTEL": "Adding a hotel",
@@ -54,6 +57,7 @@
   "TITLE_FORM_UPDATE_HOTEL": "Editing a hotel",
   "TITLE_FORM_UPDATE_HOTEL_ROOM": "Editing rooms",
   "TITLE_FORM_UPDATE_USER": "Profile editing",
+  "TITLE_UPLOAD_FILE": "Upload the file",
   "TOAST_SUCCESS_PASSWORD_UPDATED": "The user's password has been updated",
   "TOAST_SUCCESS_PROFILE_UPDATED": "The user's profile has been updated"
 }
