@@ -10,7 +10,9 @@
     "lint": "next lint --fix",
     "extract": "i18next --config i18next-parser.config.js",
     "watch:extract": "chokidar \"src/**/*.{js,jsx,ts,tsx}\" -c \"npm run extract\"",
-    "stylelint": "stylelint \"**/*.css\" --fix"
+    "stylelint": "stylelint \"**/*.css\" --fix",
+    "postinstall": "npx husky init && echo npm run lint > .husky/pre-commit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@headlessui/react": "1.7.11",
@@ -53,6 +55,7 @@
     "autoprefixer": "10.4.13",
     "chokidar-cli": "3.0.0",
     "concurrently": "8.2.2",
+    "husky": "9.1.6",
     "i18next-parser": "9.0.2",
     "postcss": "8.4.21",
     "stylelint": "15.2.0",
