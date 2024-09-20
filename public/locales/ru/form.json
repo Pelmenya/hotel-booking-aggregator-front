@@ -1,4 +1,6 @@
 {
+  "ACTION_FORM_LINK_ALREDY_REGISTER": "Войти",
+  "ACTION_FORM_LINK_NEW_USER": "Зарегистрироваться",
   "CAPTION_BTN_UPLOAD_FILE": "Выбрать файл на компьютере",
   "CAPTION_SUBMIT_BATN_CONFIRM": "Подтвердить",
   "CAPTION_SUBMIT_BTN_CHANGE": "Поменять",
@@ -22,6 +24,8 @@
   "ERROR_INPUT_TITLE": "Название отеля не меньше 2 символов",
   "ERROR_MESSAGE_EMAIL_NOT_CONFIRM": "Почта не подтверждена",
   "ERROR_MESSAGE_PHONE_NOT_CONFIRM": "Телефон не подтвержден",
+  "LABEL_FORM_LINK_ALREDY_REGISTER": "Уже зарегистрированы?",
+  "LABEL_FORM_LINK_NEW_USER": "Вы — новый пользователь?",
   "LABEL_INPUT_ADDRESS": "Адрес",
   "LABEL_INPUT_BIRTHDAY": "Дата рождения",
   "LABEL_INPUT_COMPANY": "Компания",

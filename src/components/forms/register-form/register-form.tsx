@@ -167,9 +167,9 @@ export const RegisterForm = () => {
                 }
             />
             <FormLink
-                label="Уже зарегистрированы?"
+                label={t('LABEL_FORM_LINK_ALREDY_REGISTER','Уже зарегистрированы?')}
                 href="/login"
-                text="Войти"
+                text={t('ACTION_FORM_LINK_ALREDY_REGISTER','Войти')}
             />
         </FormWrapper>
     );

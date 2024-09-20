@@ -73,9 +73,9 @@ export const LoginForm = () => {
             />
 
             <FormLink
-                label="Вы — новый пользователь?"
+                label={t('LABEL_FORM_LINK_NEW_USER','Вы — новый пользователь?')}
                 href="/client/register"
-                text="Зарегистрироваться"
+                text={t('ACTION_FORM_LINK_NEW_USER','Зарегистрироваться')}
             />
         </FormWrapper>
     );

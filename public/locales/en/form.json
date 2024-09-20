@@ -1,4 +1,6 @@
 {
+  "ACTION_FORM_LINK_ALREDY_REGISTER": "Login",
+  "ACTION_FORM_LINK_NEW_USER": "Register",
   "CAPTION_BTN_UPLOAD_FILE": "Select a file on your computer",
   "CAPTION_SUBMIT_BATN_CONFIRM": "Confirm",
   "CAPTION_SUBMIT_BTN_CHANGE": "Change",
@@ -25,6 +27,8 @@
   "LABEL_CONFIRM_EMAIL": "Enter code",
   "LABEL_CONFIRM_SMS": "Enter code",
   "LABEL_COORDINATES": "Coordinates",
+  "LABEL_FORM_LINK_ALREDY_REGISTER": "Already registered?",
+  "LABEL_FORM_LINK_NEW_USER": "Are you a new user?",
   "LABEL_INPUT_ADDRESS": "Address",
   "LABEL_INPUT_BIRTHDAY": "Birthday",
   "LABEL_INPUT_COMPANY": "Company",
