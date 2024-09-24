@@ -6,6 +6,7 @@ import { authApi } from '../api/auth';
 import { clientApi } from '../api/client';
 import { commonApi } from '../api/common';
 import { confirmApi } from '../api/confirm';
+import { userSettingsApi } from '../api/user-settings';
 import { userSlice } from '../slices/user';
 
 
@@ -21,6 +22,7 @@ export const store = configureStore({
         [clientApi.reducerPath]: clientApi.reducer,
         [adminApi.reducerPath]: adminApi.reducer,
         [confirmApi.reducerPath]: confirmApi.reducer,
+        [userSettingsApi.reducerPath]: userSettingsApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
         ...middlewares, 
@@ -29,6 +31,7 @@ export const store = configureStore({
         clientApi.middleware, 
         adminApi.middleware,
         confirmApi.middleware,
+        userSettingsApi.middleware,
     ]),
     devTools: true,
 });
