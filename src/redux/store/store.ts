@@ -6,8 +6,9 @@ import { authApi } from '../api/auth';
 import { clientApi } from '../api/client';
 import { commonApi } from '../api/common';
 import { confirmApi } from '../api/confirm';
-import { userSettingsApi } from '../api/user-settings';
+import { userSettingsApi } from '../api/user-settings-api';
 import { userSlice } from '../slices/user';
+import { userSettingsSlice } from '../slices/user-settings';
 
 
 
@@ -17,10 +18,12 @@ const middlewares = isDev && typeof window === 'object' ? [logger] : [];
 export const store = configureStore({
     reducer: {
         [userSlice.name]: userSlice.reducer,
+        [userSettingsSlice.name]: userSettingsSlice.reducer,
         [authApi.reducerPath]: authApi.reducer,
         [commonApi.reducerPath]: commonApi.reducer,
         [clientApi.reducerPath]: clientApi.reducer,
         [adminApi.reducerPath]: adminApi.reducer,
+        [confirmApi.reducerPath]: confirmApi.reducer,
         [confirmApi.reducerPath]: confirmApi.reducer,
         [userSettingsApi.reducerPath]: userSettingsApi.reducer,
     },
