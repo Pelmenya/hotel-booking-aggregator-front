@@ -9,17 +9,21 @@ import { roles } from '../../list-box/constants';
 import { useCallback } from 'react';
 import { TRole } from '@/types/t-role';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
-import { usePostAdminUsersMutation } from '@/redux/api/admin';
-import { usePostRegisterMutation } from '@/redux/api/client';
+import { usePostAdminUsersMutation } from '@/redux/api/admin-api';
+import { usePostRegisterMutation } from '@/redux/api/client-api';
 import { TError } from '@/types/t-error';
-import { usePostLoginMutation } from '@/redux/api/auth';
+import { usePostLoginMutation } from '@/redux/api/auth-api';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { setUser } from '@/redux/slices/user';
-import { useGetProfileMutation } from '@/redux/api/common';
+import { setUser } from '@/redux/slices/user-slice';
+import { useGetProfileMutation, usePostUserSettingsMutation } from '@/redux/api/common-api';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useTranslation } from 'react-i18next';
+import { setUserSettings } from '@/redux/slices/user-settings-slice';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { getUserSettingsState } from '@/redux/selectors/user-settings';
 
 export const RegisterForm = () => {
+    const { userSettings } = useAppSelector(getUserSettingsState);
     const { t } = useTranslation('form');
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -37,6 +41,15 @@ export const RegisterForm = () => {
         postLogin,
         { isLoading: isLoadingLogin, isError: isErrorLogin, error: errorLogin },
     ] = usePostLoginMutation();
+
+    const [
+        postUserSettings,
+        {
+            isLoading: isLoadingUserSettings,
+            isError: isErrorUserSettings,
+            error: errorUserSettings,
+        },
+    ] = usePostUserSettingsMutation();
 
     const [
         getProfile,
@@ -61,6 +74,12 @@ export const RegisterForm = () => {
                     const loginUser = await postLogin(data).unwrap();
                     if (loginUser) {
                         dispatch(setUser(await getProfile('').unwrap()));
+                        const settings = await postUserSettings(
+                            userSettings
+                        ).unwrap();
+                        if (settings) {
+                            dispatch(setUserSettings(settings));
+                        }
                         router.push('/');
                     }
                 }
@@ -70,6 +89,12 @@ export const RegisterForm = () => {
                     const loginUser = await postLogin(data).unwrap();
                     if (loginUser) {
                         dispatch(setUser(await getProfile('').unwrap()));
+                        const settings = await postUserSettings(
+                            userSettings
+                        ).unwrap();
+                        if (settings) {
+                            dispatch(setUserSettings(settings));
+                        }
                         router.push('/');
                     }
                 }
@@ -153,23 +178,29 @@ export const RegisterForm = () => {
                 isLoading={
                     (isAdmin ? isLoadingAdmin : isLoading) ||
                     isLoadingLogin ||
-                    isLoadingUser
+                    isLoadingUser ||
+                    isLoadingUserSettings
                 }
                 isError={
                     (isAdmin ? isErrorAdmin : isError) ||
                     isErrorLogin ||
-                    isErrorUser
+                    isErrorUser ||
+                    isErrorUserSettings
                 }
                 error={
                     (isAdmin ? (errorAdmin as TError) : (error as TError)) ||
                     errorLogin ||
-                    errorUser
+                    errorUser ||
+                    errorUserSettings
                 }
             />
             <FormLink
-                label={t('LABEL_FORM_LINK_ALREDY_REGISTER','Уже зарегистрированы?')}
+                label={t(
+                    'LABEL_FORM_LINK_ALREDY_REGISTER',
+                    'Уже зарегистрированы?'
+                )}
                 href="/login"
-                text={t('ACTION_FORM_LINK_ALREDY_REGISTER','Войти')}
+                text={t('ACTION_FORM_LINK_ALREDY_REGISTER', 'Войти')}
             />
         </FormWrapper>
     );

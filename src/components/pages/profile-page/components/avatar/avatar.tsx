@@ -6,9 +6,9 @@ import { Modal } from '@/components/modal/modal';
 import cn from 'classnames';
 
 import styles from './avatar.module.css';
-import { useUpdateProfileMutation } from '@/redux/api/common';
+import { useUpdateProfileMutation } from '@/redux/api/common-api';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { setUser } from '@/redux/slices/user';
+import { setUser } from '@/redux/slices/user-slice';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
 import { getImageUrl } from 'utils/getImageUrl';

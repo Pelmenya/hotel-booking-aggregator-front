@@ -1,4 +1,4 @@
-import { useGetAdminUsersQuery } from '@/redux/api/admin';
+import { useGetAdminUsersQuery } from '@/redux/api/admin-api';
 import { generateRandomInteger } from 'utils/generateRandomInteger';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';

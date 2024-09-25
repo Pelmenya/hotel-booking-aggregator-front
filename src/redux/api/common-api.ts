@@ -2,6 +2,7 @@ import { TSearchBaseParams } from '@/types/t-base-search-params';
 import { THotel } from '@/types/t-hotel';
 import { THotelRoom } from '@/types/t-hotel-room';
 import { TUser } from '@/types/t-user';
+import { TUserSettings } from '@/types/t-user-settings';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
@@ -24,6 +25,30 @@ export const commonApi = createApi({
                 credentials: 'include'
             }),
 
+        }),
+        getProfileSettings: builder.mutation<Partial<TUserSettings>, string>({
+            query: () => ({
+                url: 'user-settings',
+                method: 'GET',
+                credentials: 'include'
+            }),
+
+        }),
+        postUserSettings: builder.mutation<TUserSettings, TUserSettings>({
+            query: (body) => ({
+                url: 'user-settings',
+                method: 'POST',
+                body,
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
+        }),
+        putUserSettings: builder.mutation<TUserSettings, TUserSettings>({
+            query: (body) => ({
+                url: 'user-settings',
+                method: 'PUT',
+                body,
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
         }),
         updateProfile: builder.mutation<TUser, Partial<TUser>>({
             query: (body) => ({
@@ -64,6 +89,9 @@ export const commonApi = createApi({
 export const {
     useGetProfileMutation,
     useUpdateProfileMutation,
+    useGetProfileSettingsMutation,
+    usePostUserSettingsMutation,
+    usePutUserSettingsMutation,
     useGetCommonHotelsQuery,
     useGetCommonHotelByIdQuery,
     useGetCommonHotelRoomsQuery,
@@ -76,4 +104,13 @@ export const {
 } = commonApi;
 
 // export endpoints for use in SSR
-export const { getProfile, getCommonHotels, getCommonHotelById, getCommonHotelRooms, getCommonHotelRoomById, updateProfile } = commonApi.endpoints;
+export const {
+    getProfile,
+    getCommonHotels,
+    getProfileSettings,
+    postUserSettings, 
+    putUserSettings, 
+    getCommonHotelById, 
+    getCommonHotelRooms, 
+    getCommonHotelRoomById, 
+    updateProfile } = commonApi.endpoints;

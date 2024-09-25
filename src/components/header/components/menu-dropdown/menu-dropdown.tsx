@@ -1,6 +1,6 @@
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { usePostLogoutMutation } from '@/redux/api/auth';
-import { removeUser } from '@/redux/slices/user';
+import { usePostLogoutMutation } from '@/redux/api/auth-api';
+import { removeUser } from '@/redux/slices/user-slice';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { MenuLink } from './components/menu-link';

@@ -8,7 +8,7 @@ import { ConfirmEmailForm } from '@/components/forms/confirm-email-form/confirm-
 import {
     usePostEmailCodeMutation,
     usePostSmsCodeMutation,
-} from '@/redux/api/confirm';
+} from '@/redux/api/confirm-api';
 import { TSuccess } from '@/types/t-success';
 import { ConfirmPhoneForm } from '@/components/forms/confirm-phone-form/confirm-phone-form';
 import { Countdown } from '@/components/count-down/count-down';

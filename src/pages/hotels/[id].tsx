@@ -6,7 +6,7 @@ import {
     getRunningQueriesThunk,
     useGetCommonHotelByIdQuery,
     useGetCommonHotelRoomsQuery,
-} from '@/redux/api/common';
+} from '@/redux/api/common-api';
 import { wrapper } from '@/redux/store/store';
 
 export default function Hotel({ id }: { id: string }) {

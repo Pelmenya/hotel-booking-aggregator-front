@@ -6,11 +6,11 @@ import { TError } from '@/types/t-error';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { TUserProps } from '@/types/t-user-props';
-import { usePutConfirmEmailMutation } from '@/redux/api/confirm';
+import { usePutConfirmEmailMutation } from '@/redux/api/confirm-api';
 import { FieldValues } from 'react-hook-form/dist/types/fields';
-import { useGetProfileMutation } from '@/redux/api/common';
+import { useGetProfileMutation } from '@/redux/api/common-api';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
-import { setUser } from '@/redux/slices/user';
+import { setUser } from '@/redux/slices/user-slice';
 import { useTranslation } from 'react-i18next';
 
 export const ConfirmEmailForm = ({ user }: TUserProps) => {

@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
-import { useGetProfileMutation } from '@/redux/api/common';
+import {
+    useGetProfileMutation,
+    useGetProfileSettingsMutation,
+} from '@/redux/api/common-api';
 import { getUserState } from '@/redux/selectors/user';
-import { setUser } from '@/redux/slices/user';
+import { setUser } from '@/redux/slices/user-slice';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { Loading } from '@/components/loading/loading';
+import { setUserSettings } from '@/redux/slices/user-settings-slice';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
     const { user } = useAppSelector(getUserState);
     const [getProfile] = useGetProfileMutation();
+    const [getProfileSettings] = useGetProfileSettingsMutation();
     const [loading, setLoading] = useState(true);
     const [isMounted, setIsMounted] = useState(false); // Флаг для отслеживания состояния монтирования
 
@@ -17,8 +22,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const fetchProfile = async () => {
             try {
                 const profile = await getProfile('').unwrap();
+                const profileSettings = await getProfileSettings('').unwrap();
                 if (isMounted) {
                     dispatch(setUser(profile));
+                    dispatch(setUserSettings(profileSettings));
                 }
             } catch {
                 if (isMounted) {
@@ -42,12 +49,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return () => {
             setIsMounted(false); // Сбрасываем флаг монтирования при размонтировании компонента
         };
-    }, [dispatch, getProfile, user, isMounted]);
+    }, [dispatch, getProfile, getProfileSettings, user, isMounted]);
 
     if (loading) {
-        return <Loading color="text-primary" size="loading-xs" type="loading-bars" />; // Показ индикатора загрузки
+        return (
+            <Loading
+                color="text-primary"
+                size="loading-xs"
+                type="loading-bars"
+            />
+        ); // Показ индикатора загрузки
     }
 
     return <>{children}</>;
 };
-

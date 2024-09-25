@@ -1,5 +1,5 @@
 import { ComboBox } from '@/components/combo-box/combo-box';
-import { useLazyGetCommonHotelsQuery } from '@/redux/api/common';
+import { useLazyGetCommonHotelsQuery } from '@/redux/api/common-api';
 import { TError } from '@/types/t-error';
 import { THotel } from '@/types/t-hotel';
 import { TNullable } from '@/types/t-nullable';
@@ -12,7 +12,7 @@ import { Input } from '../components/input/input';
 import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
-import { usePutAdminHotelsMutation } from '@/redux/api/admin';
+import { usePutAdminHotelsMutation } from '@/redux/api/admin-api';
 import { getImageUrl } from 'utils/getImageUrl';
 import { getBaseImageUrl } from 'utils/getBaseImageUrl';
 import { TPicture } from '@/types/t-picture';

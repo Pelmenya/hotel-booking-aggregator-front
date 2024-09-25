@@ -1,4 +1,4 @@
-import { useLazyGetCommonHotelsQuery } from '@/redux/api/common';
+import { useLazyGetCommonHotelsQuery } from '@/redux/api/common-api';
 import { List } from '../../list/list';
 import { CarouselVideo} from '@/components/carousel-video/carousel-video';
 import { useEffect } from 'react';

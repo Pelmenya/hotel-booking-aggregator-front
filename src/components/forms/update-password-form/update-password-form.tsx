@@ -8,7 +8,7 @@ import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useState } from 'react';
 import EyeIcon from '@/icons/eye.svg';
 import EyeSlashIcon from '@/icons/eye-slash.svg';
-import { useUpdatePasswordMutation } from '@/redux/api/auth';
+import { useUpdatePasswordMutation } from '@/redux/api/auth-api';
 import { TUpdatePasswordDto } from '@/types/t-update-password-dto';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';

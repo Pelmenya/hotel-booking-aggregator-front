@@ -1,14 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import logger from 'redux-logger';
-import { adminApi } from '../api/admin';
-import { authApi } from '../api/auth';
-import { clientApi } from '../api/client';
-import { commonApi } from '../api/common';
-import { confirmApi } from '../api/confirm';
-import { userSettingsApi } from '../api/user-settings-api';
-import { userSlice } from '../slices/user';
-import { userSettingsSlice } from '../slices/user-settings';
+import { adminApi } from '../api/admin-api';
+import { authApi } from '../api/auth-api';
+import { clientApi } from '../api/client-api';
+import { commonApi } from '../api/common-api';
+import { confirmApi } from '../api/confirm-api';
+import { userSlice } from '../slices/user-slice';
+import { userSettingsSlice } from '../slices/user-settings-slice';
 
 
 
@@ -25,7 +24,6 @@ export const store = configureStore({
         [adminApi.reducerPath]: adminApi.reducer,
         [confirmApi.reducerPath]: confirmApi.reducer,
         [confirmApi.reducerPath]: confirmApi.reducer,
-        [userSettingsApi.reducerPath]: userSettingsApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
         ...middlewares, 
@@ -34,7 +32,6 @@ export const store = configureStore({
         clientApi.middleware, 
         adminApi.middleware,
         confirmApi.middleware,
-        userSettingsApi.middleware,
     ]),
     devTools: true,
 });

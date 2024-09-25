@@ -1,6 +1,6 @@
 import { TabAdmin } from '@/components/tab-admin/tab-admin';
 import { Layout } from '@/layout/layout';
-import { getCommonHotels, getRunningQueriesThunk } from '@/redux/api/common';
+import { getCommonHotels, getRunningQueriesThunk } from '@/redux/api/common-api';
 import { wrapper } from '@/redux/store/store';
 
 

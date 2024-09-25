@@ -1,4 +1,4 @@
-import { usePostAdminHotelsMutation } from '@/redux/api/admin';
+import { usePostAdminHotelsMutation } from '@/redux/api/admin-api';
 import { TError } from '@/types/t-error';
 import { TNullable } from '@/types/t-nullable';
 import { yupResolver } from '@hookform/resolvers/yup';
