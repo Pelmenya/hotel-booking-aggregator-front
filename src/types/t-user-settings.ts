@@ -3,6 +3,7 @@ import { TLanguage } from './t-language';
 import { TTheme } from './t-theme';
 
 export type TUserSettings = {
+    id?: number;
     theme: TTheme;
     language: TLanguage;
     currency: TCurrency;

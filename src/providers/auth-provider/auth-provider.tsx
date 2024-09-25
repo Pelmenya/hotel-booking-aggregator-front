@@ -9,9 +9,11 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { Loading } from '@/components/loading/loading';
 import { setUserSettings } from '@/redux/slices/user-settings-slice';
+import { useTranslation } from 'react-i18next';
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useAppDispatch();
+    const { i18n } = useTranslation();
     const { user } = useAppSelector(getUserState);
     const [getProfile] = useGetProfileMutation();
     const [getProfileSettings] = useGetProfileSettingsMutation();
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 if (isMounted) {
                     dispatch(setUser(profile));
                     dispatch(setUserSettings(profileSettings));
+                    i18n.changeLanguage(profileSettings.language);
                 }
             } catch {
                 if (isMounted) {

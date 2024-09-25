@@ -1,15 +1,26 @@
 import { useTranslation } from 'react-i18next';
-import { useState, Fragment } from 'react';
+import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/20/solid';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { getUserSettingsState } from '@/redux/selectors/user-settings';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { setUserSettings } from '@/redux/slices/user-settings-slice';
+import { usePutUserSettingsMutation } from '@/redux/api/common-api';
+import { TLanguage } from '@/types/t-language';
 
 export const LanguageToggle = () => {
+    const dispatch = useAppDispatch();
+    const { userSettings } = useAppSelector(getUserSettingsState);
+    const [putUserSettings] = usePutUserSettingsMutation();
     const { i18n } = useTranslation();
-    const [language, setLanguage] = useState(i18n.language);
 
-    const changeLanguage = (lng: string) => {
-        i18n.changeLanguage(lng);
-        setLanguage(lng);
+    const changeLanguage = async (language: TLanguage) => {
+        if (userSettings.id) {
+            await putUserSettings({ language }).unwrap();
+        }
+        i18n.changeLanguage(language);
+        dispatch(setUserSettings({ ...userSettings, language }));
     };
 
     return (
@@ -21,7 +32,9 @@ export const LanguageToggle = () => {
                 aria-haspopup="true"
             >
                 <span className="sr-only">Open languages menu</span>
-                <span className="font-medium">{language.toUpperCase()}</span>
+                <span className="font-medium">
+                    {userSettings.language.toUpperCase()}
+                </span>
             </Menu.Button>
             <Transition
                 as={Fragment}
@@ -46,7 +59,7 @@ export const LanguageToggle = () => {
                                 onClick={() => changeLanguage('en')}
                             >
                                 EN
-                                {language === 'en' && (
+                                {userSettings.language === 'en' && (
                                     <CheckIcon
                                         className="h-3 w-3"
                                         aria-hidden="true"
@@ -64,7 +77,7 @@ export const LanguageToggle = () => {
                                 onClick={() => changeLanguage('ru')}
                             >
                                 RU
-                                {language === 'ru' && (
+                                {userSettings.language === 'ru' && (
                                     <CheckIcon
                                         className="h-3 w-3"
                                         aria-hidden="true"

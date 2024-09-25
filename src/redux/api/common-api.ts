@@ -42,7 +42,7 @@ export const commonApi = createApi({
                 credentials: 'include'     // обязательно для проставления cookie
             }),
         }),
-        putUserSettings: builder.mutation<TUserSettings, TUserSettings>({
+        putUserSettings: builder.mutation<TUserSettings, Partial<TUserSettings>>({
             query: (body) => ({
                 url: 'user-settings',
                 method: 'PUT',

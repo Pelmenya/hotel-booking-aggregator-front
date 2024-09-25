@@ -23,7 +23,7 @@ export const userSettingsSlice = createSlice({
             state.userSettings = action.payload;
         },
 
-        removeUserSettings(state){
+        setInitUserSettings(state){
             state.userSettings = initialState.userSettings;
         },
 
@@ -39,4 +39,4 @@ export const userSettingsSlice = createSlice({
 },
 );
 
-export const { setUserSettings, removeUserSettings } = userSettingsSlice.actions;
+export const { setUserSettings, setInitUserSettings } = userSettingsSlice.actions;
