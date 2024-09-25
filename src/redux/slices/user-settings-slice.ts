@@ -6,8 +6,6 @@ export type TUserSettingsState = TUserSettingsProps;
 
 const initialState: TUserSettingsState = {
     userSettings: {
-        id: null,
-        userId: null,
         language: 'ru',
         currency:'₽',
         theme: 'light',
