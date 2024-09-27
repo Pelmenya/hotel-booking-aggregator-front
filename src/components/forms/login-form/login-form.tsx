@@ -7,11 +7,12 @@ import { usePostLoginMutation } from '@/redux/api/auth-api';
 import { TError } from '@/types/t-error';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user-slice';
-import { useGetProfileMutation } from '@/redux/api/common-api';
+import { useGetProfileMutation, useGetProfileSettingsMutation } from '@/redux/api/common-api';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { setUserSettings } from '@/redux/slices/user-settings-slice';
 
 export const LoginForm = () => {
     const { t } = useTranslation('form');
@@ -20,6 +21,7 @@ export const LoginForm = () => {
 
     const [postLogin, { isLoading, isError, error }] = usePostLoginMutation();
     const [getProfile] = useGetProfileMutation();
+    const [getProfileSettings] = useGetProfileSettingsMutation();
 
     const {
         handleSubmit,
@@ -36,6 +38,7 @@ export const LoginForm = () => {
             if (postUser) {
                 router.push('/profile');
                 dispatch(setUser(await getProfile('').unwrap()));
+                dispatch(setUserSettings(await getProfileSettings('').unwrap()));
             }
         }
     };

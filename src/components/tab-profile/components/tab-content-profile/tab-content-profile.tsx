@@ -13,6 +13,7 @@ import { TabContent } from '@/components/tab/components/tab-content/tab-content'
 import { TabMenuWrapper } from '@/components/tab/components/tab-menu/components/tab-menu-wrapper/tab-menu-wrapper';
 import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
 import { useTranslation } from 'react-i18next';
+import { setUndefinedUserSettings } from '@/redux/slices/user-settings-slice';
 
 export const TabContentProfile = () => {
     const { t } = useTranslation('account');
@@ -46,6 +47,7 @@ export const TabContentProfile = () => {
         const logout = await postLogout(null).unwrap();
         if (logout.success) {
             dispatch(removeUser());
+            dispatch(setUndefinedUserSettings());
         }
     }, [postLogout, dispatch]);
 

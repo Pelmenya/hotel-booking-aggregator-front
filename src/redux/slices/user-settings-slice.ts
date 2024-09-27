@@ -23,8 +23,8 @@ export const userSettingsSlice = createSlice({
             state.userSettings = action.payload;
         },
 
-        setInitUserSettings(state){
-            state.userSettings = initialState.userSettings;
+        setUndefinedUserSettings(state){
+            state.userSettings = {...state.userSettings, id: undefined };
         },
 
         // Special reducer for hydrating the state. Special case for next-redux-wrapper 
@@ -39,4 +39,4 @@ export const userSettingsSlice = createSlice({
 },
 );
 
-export const { setUserSettings, setInitUserSettings } = userSettingsSlice.actions;
+export const { setUserSettings, setUndefinedUserSettings } = userSettingsSlice.actions;
