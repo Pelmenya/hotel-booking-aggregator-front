@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     dispatch(setUser(profile));
                     dispatch(setUserSettings(profileSettings));
                     i18n.changeLanguage(profileSettings.language);
+                    localStorage.setItem('theme', profileSettings.theme || 'light');
                 }
             } catch {
                 if (isMounted) {

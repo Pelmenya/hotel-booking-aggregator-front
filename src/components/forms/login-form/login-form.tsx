@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { setUserSettings } from '@/redux/slices/user-settings-slice';
 
 export const LoginForm = () => {
-    const { t } = useTranslation('form');
+    const { t, i18n } = useTranslation('form');
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -38,7 +38,9 @@ export const LoginForm = () => {
             if (postUser) {
                 router.push('/profile');
                 dispatch(setUser(await getProfile('').unwrap()));
-                dispatch(setUserSettings(await getProfileSettings('').unwrap()));
+                const userSettings = await getProfileSettings('').unwrap();
+                dispatch(setUserSettings(userSettings));
+                i18n.changeLanguage(userSettings.language);
             }
         }
     };
