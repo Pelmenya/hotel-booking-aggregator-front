@@ -27,6 +27,7 @@ export const ThemeToggle = () => {
 
         if (userSettings.id) {
             localStorage.setItem('theme', userSettings.theme);
+            setIsChecked(userSettings.theme === 'light' ? true : false)
         }
     }, [userSettings.id, userSettings.theme]);
 
