@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         return () => {
             setIsMounted(false); // Сбрасываем флаг монтирования при размонтировании компонента
         };
-    }, [dispatch, getProfile, getProfileSettings, user, isMounted]);
+    }, [dispatch, getProfile, getProfileSettings, user, isMounted, i18n]);
 
     if (loading) {
         return (
