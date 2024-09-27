@@ -18,7 +18,7 @@ export const LanguageToggle = () => {
     const changeLanguage = async (language: TLanguage) => {
         if (userSettings.id) {
             await putUserSettings({ language }).unwrap();
-        }
+        } 
         i18n.changeLanguage(language);
         dispatch(setUserSettings({ ...userSettings, language }));
     };
