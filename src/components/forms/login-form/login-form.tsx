@@ -39,6 +39,7 @@ export const LoginForm = () => {
                 router.push('/profile');
                 dispatch(setUser(await getProfile('').unwrap()));
                 const userSettings = await getProfileSettings('').unwrap();
+                localStorage.setItem('theme', userSettings.theme || 'light');
                 dispatch(setUserSettings(userSettings));
                 i18n.changeLanguage(userSettings.language);
             }
