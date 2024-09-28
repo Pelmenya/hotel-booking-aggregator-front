@@ -1,6 +1,7 @@
 # «Frontend Hotel Aggregator»
 
-### [TOP-HOTELS.SU](http://top-hotels.su)
+### [Сайт агрегатор](http://top-hotels.su)
+### [Top-hotels.su](http://top-hotels.su)
 
 ## [«Backend Hotel Aggregator»](https://github.com/Pelmenya/hotel-booking-aggregator)
 
