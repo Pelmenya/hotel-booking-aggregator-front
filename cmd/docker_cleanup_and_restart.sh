@@ -37,6 +37,10 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Проверка состояния контейнеров
+echo "Checking container status..." >> deploy.log
+docker ps -a >> deploy.log 2>&1
+
 # Очистка остановленных контейнеров
 echo "Pruning stopped containers..." >> deploy.log
 docker container prune -f >> deploy.log 2>&1
@@ -58,7 +62,7 @@ fi
 # Очистка неиспользуемых томов
 echo "Pruning unused volumes..." >> deploy.log
 docker volume prune -f >> deploy.log 2>&1
-if [ $? -ne 0 ]; then
+if [ $? -ne 0 ];; then
     echo "Failed to prune unused volumes. Exiting." >> deploy.log
     echo "FAILED" > deploy_status.txt
     exit 1
