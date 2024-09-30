@@ -13,5 +13,3 @@
 # Скрипт для подтягивания изменений из папки cmd. Исполнение
 
 * cmd/docker_cleanup_and_restart.sh
-
-* hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh
