@@ -23,4 +23,4 @@ jobs:
 
     - name: Execute remote command
       run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} 'bash -s' < ./cmd/docker_cleanup_and_restart.sh
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} 'bash /home/hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh'
