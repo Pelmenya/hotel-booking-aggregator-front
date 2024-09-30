@@ -21,11 +21,12 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Execute remote command using nohup
+    - name: Execute remote command using tmux
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} '
-          nohup bash /home/hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh > /home/hotel-booking-aggregator-front/deploy.log 2>&1 &
+          tmux new-session -d -s deploy "bash /home/hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh"
           sleep 10
+          tmux attach-session -t deploy
           if [ -f /home/hotel-booking-aggregator-front/deploy_status.txt ]; then
             STATUS=$(cat /home/hotel-booking-aggregator-front/deploy_status.txt)
             if [ "$STATUS" == "FAILED" ]; then
