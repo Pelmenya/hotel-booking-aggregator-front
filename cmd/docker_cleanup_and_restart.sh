@@ -67,7 +67,7 @@ fi
 # Очистка неиспользуемых сетей
 echo "Pruning unused networks..." >> deploy.log
 docker network prune -f >> deploy.log 2>&1
-if [ $? -ne 0 ];ден
+if [ $? -ne 0 ]; then
     echo "Failed to prune unused networks. Exiting." >> deploy.log
     echo "FAILED" > deploy_status.txt
     exit 1
