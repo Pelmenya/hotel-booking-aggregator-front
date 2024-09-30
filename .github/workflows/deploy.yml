@@ -30,13 +30,16 @@ jobs:
             STATUS=$(cat /home/hotel-booking-aggregator-front/deploy_status.txt)
             if [ "$STATUS" == "FAILED" ]; then
               echo "Deployment failed. See deploy.log for details."
+              cat /home/hotel-booking-aggregator-front/deploy.log
               exit 1
             else
               echo "Deployment completed successfully."
+              cat /home/hotel-booking-aggregator-front/deploy.log
               exit 0
             fi
           else
             echo "Deployment status file not found. Assuming failure."
+            cat /home/hotel-booking-aggregator-front/deploy.log
             exit 1
           fi
         '
@@ -47,3 +50,4 @@ jobs:
     - name: Fetch deployment logs
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} 'cat /home/hotel-booking-aggregator-front/deploy.log'
+      continue-on-error: true
