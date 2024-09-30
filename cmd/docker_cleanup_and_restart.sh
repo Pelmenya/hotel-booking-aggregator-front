@@ -90,6 +90,6 @@ if [ $? -ne 0 ]; then
     echo "FAILED" > deploy_status.txt
     exit 1
 fi
-
+sleep 100
 echo "Deployment completed successfully." >> deploy.log
 echo "SUCCESS" > deploy_status.txt
