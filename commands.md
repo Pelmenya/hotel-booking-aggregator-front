@@ -6,7 +6,7 @@
 
 * docker compose -f docker-compose.yml up --build
 
-# Скрипт для подтягивания изменений из папки cmd. Установка от админа.  
+# Скрипт для подтягивания изменений из папки cmd. Установка от админа. Обязательно!!!  
 
 * chmod +x  /home/hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh
 

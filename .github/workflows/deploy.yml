@@ -33,6 +33,7 @@ jobs:
               cat /home/hotel-booking-aggregator-front/deploy.log
               exit 1
             else
+              sleep 120
               echo "Deployment completed successfully."
               cat /home/hotel-booking-aggregator-front/deploy.log
               exit 0
@@ -43,9 +44,6 @@ jobs:
             exit 1
           fi
         '
-
-    - name: Wait for logs to be fully written
-      run: sleep 120
 
     - name: Fetch deployment logs
       run: |
