@@ -25,7 +25,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} '
           nohup bash /home/hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh > /home/hotel-booking-aggregator-front/deploy.log 2>&1 &
-          sleep 10
+          sleep 100
           if [ -f /home/hotel-booking-aggregator-front/deploy_status.txt ]; then
             STATUS=$(cat /home/hotel-booking-aggregator-front/deploy_status.txt)
             if [ "$STATUS" == "FAILED" ]; then
