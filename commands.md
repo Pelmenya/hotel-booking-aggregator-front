@@ -16,3 +16,4 @@
 
 
 * /home/hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh
+* /home/hotel-booking-aggregator-front/cmd/docker_cleanup_and_restart.sh
