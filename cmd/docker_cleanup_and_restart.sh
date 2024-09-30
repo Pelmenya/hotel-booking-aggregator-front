@@ -10,6 +10,10 @@ handle_error() {
 # Установить обработчик ошибок
 trap 'handle_error $LINENO' ERR
 
+# Проверить и создать файлы лога, если они не существуют
+[ ! -f deploy.log ] && touch deploy.log
+[ ! -f deploy_status.txt ] && touch deploy_status.txt
+
 # Очистить старые логи
 > deploy.log
 > deploy_status.txt
@@ -19,7 +23,15 @@ cd "$(dirname "$0")/.." || exit
 
 echo "Starting deployment..." >> deploy.log
 
-# Подтянуть последние изменения из удаленного репозитория
+# Сбросить локальные изменения и подтянуть последние изменения из удаленного репозитория
+echo "Resetting local changes..." >> deploy.log
+git reset --hard >> deploy.log 2>&1
+if [ $? -ne 0 ]; then
+    echo "Git reset failed. Exiting." >> deploy.log
+    echo "FAILED" > deploy_status.txt
+    exit 1
+fi
+
 echo "Pulling latest changes from git..." >> deploy.log
 git pull >> deploy.log 2>&1
 if [ $? -ne 0 ]; then
@@ -62,7 +74,7 @@ fi
 # Очистка неиспользуемых томов
 echo "Pruning unused volumes..." >> deploy.log
 docker volume prune -f >> deploy.log 2>&1
-if [ $? -ne 0 ];; then
+if [ $? -ne 0 ]; then
     echo "Failed to prune unused volumes. Exiting." >> deploy.log
     echo "FAILED" > deploy_status.txt
     exit 1
