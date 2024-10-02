@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { getImageUrl } from 'utils/getImageUrl';
-
 import styles from './carousel.module.css';
 
 export type TCarouselProps = {
@@ -76,18 +75,18 @@ export const Carousel = ({ idx, pictures }: TCarouselProps) => {
                 <></>
             )}
             <ul
-                className="carousel max-w-md sm:max-w-none rounded-t-3xl sm:rounded-t-3xl md:w-52 sm:w-full md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer"
+                className="carousel max-w-full md:w-52 sm:w-full rounded-t-3xl sm:rounded-t-3xl md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer"
                 ref={listRef}
             >
                 {pictures.map((picture, idx) => (
                     <li
                         key={picture + String(idx)}
-                        className="carousel-item scroll-py-10 w-full max-w-md sm:max-w-none flex items-center justify-center"
+                        className="carousel-item scroll-py-10 w-full flex items-center justify-center"
                     >
-                        <picture>
+                        <picture className="w-full h-52">
                             <img
                                 src={getImageUrl(picture)}
-                                className="object-cover h-52 sm:w-full md:w-52"
+                                className="object-cover w-full h-full"
                                 alt=""
                             />
                         </picture>
