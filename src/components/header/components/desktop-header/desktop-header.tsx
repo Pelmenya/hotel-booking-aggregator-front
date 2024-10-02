@@ -28,7 +28,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                     aria-current="page"
                 >
                     <MainIcon />
-                    {t('main')}
+                    <p className="hidden md:block">{t('main')}</p>
                 </Link>
                 {user?.role === 'admin' && (
                     <Link
@@ -38,7 +38,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                         })}
                     >
                         <AdminIcon />
-                        {t('admin')}
+                        <p className="hidden md:block">{t('admin')}</p>
                     </Link>
                 )}
             </div>
