@@ -16,7 +16,7 @@ export const Footer = () => {
         <footer className="footer mt-8 p-10 bg-neutral text-neutral-content">
             <div className="footer mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <aside>
-                    <Logo />
+                    <Logo text={true}/>
                     <p>
                         © 2023{' '}
                         {currentYear > 2023 && <span>- {currentYear}</span>}{' '}
