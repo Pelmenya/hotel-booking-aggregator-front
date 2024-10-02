@@ -73,8 +73,6 @@ export const TabContentProfile = () => {
                         text={t('TAB_MENU_LINK_SECURE', 'Изменить пароль')}
                         icon="secure"
                     />
-                </TabMenu>
-                <TabMenu>
                     <TabMenuLink
                         active={true}
                         text={t('TAB_MENU_LINK_LOGOUT', 'Выйти')}
