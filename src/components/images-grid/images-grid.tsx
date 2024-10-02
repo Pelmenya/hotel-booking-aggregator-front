@@ -11,7 +11,7 @@ export const ImagesGrid = ({ images, onClick }: TImagesGridProps) => {
     const gridItems = [1, 2, 3, 4];
 
     return (
-        <div onClick={onClick} className="grid grid-cols-2 gap-4 max-h-[400px] min-h-[280px] h-full cursor-pointer">
+        <div onClick={onClick} className="grid grid-cols-1 sm:grid-cols-2 gap-4 min-h-[280px] h-full cursor-pointer">
             {images[0] ? (
                 <picture className="h-full w-full max-h-[400px] min-h-[280px]">
                     <img
@@ -36,10 +36,12 @@ export const ImagesGrid = ({ images, onClick }: TImagesGridProps) => {
                                         alt=""
                                     />
                                 </picture>
-                                {num === 4 ? ( 
+                                {num === 4 && images.length > 4 ? (
                                     <>
                                         <div className="absolute top-0 left-0 flex items-center bg-black opacity-50 justify-center w-full h-full rounded-3xl" />
-                                        <p className={cn('absolute text-white block font-bold text-4xl whitespace-nowrap top-[50%] left-[50%]', styles.num)}>+ {images.length - gridItems.length - 1}</p>
+                                        <p className={cn('absolute text-white block font-bold text-4xl whitespace-nowrap top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2', styles.num)}>
+                                            + {images.length - gridItems.length - 1}
+                                        </p>
                                     </>
                                 ) : null}
                             </>
