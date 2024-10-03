@@ -139,7 +139,7 @@ export const UpdateUserForm = () => {
                     error={!!errors.name}
                     control={control}
                 />
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Input
                         type="email"
                         id="UserEmail"
@@ -159,7 +159,7 @@ export const UpdateUserForm = () => {
                         control={control}
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                     <Input
                         type="text"
                         id="UserCompany"
@@ -180,7 +180,7 @@ export const UpdateUserForm = () => {
                         control={control}
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <ListBox
                         id="GenderListBox"
                         label={t('LABEL_INPUT_GENDER', 'Пол')}

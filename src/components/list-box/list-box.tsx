@@ -44,7 +44,7 @@ export const ListBox = ({
     }, [selected, handlerSetItem]);
 
     return (
-        <div className="w-full h-full">
+        <div className="w-full h-full min-h-[46px] max-h-[46px]">
             <Listbox value={selected} onChange={setSelected}>
                 <div className="relative h-full">
                     <span className="absolute left-3 top-3 -translate-y-1/2 text-xs transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
