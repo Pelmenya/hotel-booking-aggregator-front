@@ -180,7 +180,7 @@ export const UpdateUserForm = () => {
                         control={control}
                     />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-2 gap-4">
                     <ListBox
                         id="GenderListBox"
                         label={t('LABEL_INPUT_GENDER', 'Пол')}
@@ -203,24 +203,23 @@ export const UpdateUserForm = () => {
                         }}
                         activeIdx={activeGender}
                     />
-                    <div>
-                        <input
-                            hidden={true}
-                            type="text"
-                            id="UserGender"
-                            placeholder="Gender"
-                            {...register('gender')}
-                        />
-                        <Input
-                            type="date"
-                            id="UserBirthday"
-                            placeholder="Birthday"
-                            label={t('LABEL_INPUT_BIRTHDAY', 'Дата рождения')}
-                            name="birthday"
-                            error={!!errors.birthday}
-                            control={control}
-                        />
-                    </div>
+                    <input
+                        className="hidden"
+                        type="text"
+                        id="UserGender"
+                        placeholder="Gender"
+                        {...register('gender')}
+                    />
+
+                    <Input
+                        type="date"
+                        id="UserBirthday"
+                        placeholder="Birthday"
+                        label={t('LABEL_INPUT_BIRTHDAY', 'Дата рождения')}
+                        name="birthday"
+                        error={!!errors.birthday}
+                        control={control}
+                    />
                 </div>
                 <SubmitBtn
                     text={t('CAPTION_SUBMIT_BTN_EDIT', 'Редактировать')}
