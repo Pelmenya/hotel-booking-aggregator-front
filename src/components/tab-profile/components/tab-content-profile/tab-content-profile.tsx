@@ -74,7 +74,7 @@ export const TabContentProfile = () => {
                         icon="secure"
                     />
                     <TabMenuLink
-                        active={true}
+                        active={false}
                         text={t('TAB_MENU_LINK_LOGOUT', 'Выйти')}
                         icon="logout"
                         handlerOnClick={handleLogout}

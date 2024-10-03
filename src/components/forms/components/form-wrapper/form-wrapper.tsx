@@ -20,7 +20,7 @@ export const FormWrapper = ({
 }: TFormWrapperProps) => (
     <div
         className={cn(
-            'flex min-h-full w-full items-center justify-center py-8 px-4 sm:px-6 lg:px-8 text-base-content',
+            'flex min-h-full w-full items-center justify-center py-8 text-base-content',
             className ? className : ''
         )}
     >

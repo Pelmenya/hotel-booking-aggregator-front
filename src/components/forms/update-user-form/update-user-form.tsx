@@ -203,22 +203,24 @@ export const UpdateUserForm = () => {
                         }}
                         activeIdx={activeGender}
                     />
-                    <input
-                        hidden={true}
-                        type="text"
-                        id="UserGender"
-                        placeholder="Gender"
-                        {...register('gender')}
-                    />
-                    <Input
-                        type="date"
-                        id="UserBirthday"
-                        placeholder="Birthday"
-                        label={t('LABEL_INPUT_BIRTHDAY', 'Дата рождения')}
-                        name="birthday"
-                        error={!!errors.birthday}
-                        control={control}
-                    />
+                    <div>
+                        <input
+                            hidden={true}
+                            type="text"
+                            id="UserGender"
+                            placeholder="Gender"
+                            {...register('gender')}
+                        />
+                        <Input
+                            type="date"
+                            id="UserBirthday"
+                            placeholder="Birthday"
+                            label={t('LABEL_INPUT_BIRTHDAY', 'Дата рождения')}
+                            name="birthday"
+                            error={!!errors.birthday}
+                            control={control}
+                        />
+                    </div>
                 </div>
                 <SubmitBtn
                     text={t('CAPTION_SUBMIT_BTN_EDIT', 'Редактировать')}
