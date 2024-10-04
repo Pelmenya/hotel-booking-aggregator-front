@@ -72,6 +72,7 @@ export const Footer = () => {
                     </div>
                 </nav>
             </div>
+            <code className='hidden'>dub5h95puyi494ad</code>
         </footer>
     );
 };

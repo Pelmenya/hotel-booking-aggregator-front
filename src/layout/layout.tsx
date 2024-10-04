@@ -49,7 +49,7 @@ export const Layout = ({ title, children }) => {
                 version="2"
             />
             <Header />
-            <main className="container mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <main className="container mx-auto max-w-7xl  px-2 sm:px-6 lg:px-8">
                 <div className="w-full min-h-main">{children}</div>
             </main>
             <Footer />

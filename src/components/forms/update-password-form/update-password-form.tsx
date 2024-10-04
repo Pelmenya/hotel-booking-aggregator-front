@@ -41,7 +41,7 @@ export const UpdatePasswordForm = () => {
     return (
         <FormWrapper
             title={
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-center gap-2 w-full">
                     <span>{t('TITLE_FORM_PASSWORD_CHANGE', 'Смена пароля')}</span>
                     <button
                         className="text-primary cursor-pointer"
