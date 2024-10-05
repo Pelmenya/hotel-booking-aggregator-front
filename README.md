@@ -4,6 +4,7 @@
 ### [Top-hotels.su](http://top-hotels.su)
 
 ## [«Backend Hotel Aggregator»](https://github.com/Pelmenya/hotel-booking-aggregator)
+## [«Swagger Hotel Aggregator API 1.0»](https://api.top-hotels.su/api/docs)
 
 ## Описание проекта
 
