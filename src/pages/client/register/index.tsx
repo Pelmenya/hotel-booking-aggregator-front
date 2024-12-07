@@ -3,7 +3,7 @@ import { Layout } from '@/layout/layout';
 
 export default function ClientRegisterPage() {
     return (
-        <Layout title="Top-Hotels.su ~ Регистрация : Клиент">
+        <Layout title="На-День.рф ~ Регистрация : Клиент">
             <RegisterForm />
         </Layout>
     );

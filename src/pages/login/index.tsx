@@ -3,7 +3,7 @@ import { Layout } from '@/layout/layout';
 
 export default function LoginPage() {
     return (
-        <Layout title="Top-Hotels.su ~ Вход">
+        <Layout title="На-День.рф ~ Вход">
             <LoginForm />
         </Layout>
     );

@@ -5,7 +5,7 @@ import { TRole } from '@/types/t-role';
 export default function CalendarPage() {
 
     return (
-        <Layout title="Top-Hotels.su ~ Админ : Календарь">
+        <Layout title="На-День.рф ~ Админ : Календарь">
             <TabAdmin />
         </Layout>
     );

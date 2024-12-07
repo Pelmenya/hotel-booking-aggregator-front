@@ -5,7 +5,7 @@ import { TRole } from '@/types/t-role';
 export default function Profile() {
 
     return (
-        <Layout title="Top-Hotels.su ~ Настройки">
+        <Layout title="На-День.рф ~ Настройки">
             <ProfilePage />
         </Layout>
     );

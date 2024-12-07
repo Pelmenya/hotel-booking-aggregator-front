@@ -3,7 +3,7 @@ import { Layout } from '@/layout/layout';
 
 export default function PrivacyPolicy() {
     return (
-        <Layout title="Top-Hotels.su ~ Политика конфиденциальности">
+        <Layout title="На-День.рф ~ Политика конфиденциальности">
             <PrivacyPolicyPage />
         </Layout>
     );

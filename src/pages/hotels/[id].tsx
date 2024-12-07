@@ -13,7 +13,7 @@ export default function Hotel({ id }: { id: string }) {
     const { data } = useGetCommonHotelByIdQuery(id);
     const { data: rooms } = useGetCommonHotelRoomsQuery({ hotel: id });
     return (
-        <Layout title={`Top-Hotels.su ~ ${data?.title}`}>
+        <Layout title={`На-День.рф ~ ${data?.title}`}>
             {data ? <HotelPage hotel={data} rooms={rooms || []}/> : null}
         </Layout>
     );
