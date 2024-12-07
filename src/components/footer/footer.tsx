@@ -28,9 +28,6 @@ export const Footer = () => {
                     <Link href="/privacy-policy" className="link link-hover">
                         {t('privacyPolicy', 'Политика конфиденциальности')}
                     </Link>
-                    <a target={'_blank'} href='https://travel.yandex.ru/--/BMoN5xX05U8vMh?erid=5jtCeReNx12oajquZwM86e8' rel="noreferrer">
-                        {t('yandexTravel', 'Забронировать')}
-                    </a>
                 </nav>
                 <nav>
                     <header className="footer-title">{t('contacts','Контакты')}</header>
@@ -75,7 +72,6 @@ export const Footer = () => {
                     </div>
                 </nav>
             </div>
-            <code className='hidden'>dub5h95puyi494ad</code>
         </footer>
     );
 };
