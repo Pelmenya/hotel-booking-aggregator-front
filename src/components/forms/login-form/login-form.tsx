@@ -34,14 +34,19 @@ export const LoginForm = () => {
 
     const onSubmit = async (dto: any) => {
         if (dto) {
-            const postUser = await postLogin(dto).unwrap();
-            if (postUser) {
-                router.push('/profile');
-                dispatch(setUser(await getProfile('').unwrap()));
-                const userSettings = await getProfileSettings('').unwrap();
-                localStorage.setItem('theme', userSettings.theme || 'light');
-                dispatch(setUserSettings(userSettings));
-                i18n.changeLanguage(userSettings.language);
+            try {
+                const postUser = await postLogin(dto).unwrap();
+                if (postUser) {
+                    router.push('/profile');
+                    dispatch(setUser(await getProfile('').unwrap()));
+                    const userSettings = await getProfileSettings('').unwrap();
+                    localStorage.setItem('theme', userSettings.theme || 'light');
+                    dispatch(setUserSettings(userSettings));
+                    i18n.changeLanguage(userSettings.language);
+                }
+   
+            } catch(e) {
+                console.log(e)
             }
         }
     };
