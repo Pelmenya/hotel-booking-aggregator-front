@@ -15,3 +15,18 @@
 * cmd/docker_cleanup_and_restart.sh
 
 # Отладка 
+
+# Скрипт партнерский
+
+```s
+
+<script data-noptimize="1" data-cfasync="false" data-wpfc-render="false">
+  (function () {
+      var script = document.createElement("script");
+      script.async = 1;
+      script.src = 'https://emrld.cc/MzcyNjU0.js?t=372654';
+      document.head.appendChild(script);
+  })();
+</script>
+
+```
