@@ -57,7 +57,7 @@ export const ConfirmEmailForm = ({ user }: TUserProps) => {
                 name="code"
             />
             <SubmitBtn
-                text={t('CAPTION_SUBMIT_BATN_CONFIRM', 'Подтвердить')}
+                text={t('CAPTION_SUBMIT_BTN_CONFIRM', 'Подтвердить')}
                 error={error as TError}
                 isError={isError}
                 isLoading={isLoading}

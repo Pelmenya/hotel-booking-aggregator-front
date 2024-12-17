@@ -56,7 +56,7 @@ export const ConfirmPhoneForm = ({ user }: TUserProps) => {
                 name="codeSms"
             />
             <SubmitBtn
-                text= {t('CAPTION_SUBMIT_BATN_CONFIRM','Подтвердить')}
+                text= {t('CAPTION_SUBMIT_BTN_CONFIRM','Подтвердить')}
                 error={error as TError}
                 isError={isError}
                 isLoading={isLoading}

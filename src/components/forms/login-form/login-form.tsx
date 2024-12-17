@@ -77,7 +77,7 @@ export const LoginForm = () => {
                 autoComplete="new-password"
             />
             <SubmitBtn
-                text="Войти"
+                text={t('CAPTION_SUBMIT_BTN_ENTER', 'Войти')}
                 error={error as TError}
                 isError={isError}
                 isLoading={isLoading}
