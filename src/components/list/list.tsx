@@ -6,7 +6,7 @@ import { Card } from '@/components/card/card';
 
 export type TListProps = {
     href: string
-    items:  THotel[] | THotelRoom[]
+    items:  THotel[] | THotelRoom[] | undefined
 }
 
 export const List = ({ items, href }: TListProps) => {
