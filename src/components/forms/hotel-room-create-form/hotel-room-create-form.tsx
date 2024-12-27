@@ -12,7 +12,7 @@ import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { ComboBox } from '@/components/combo-box/combo-box';
 import { useLazyGetCommonHotelsQuery } from '@/redux/api/common-api';
-import { THotel } from '@/types/t-hotel';
+import { THotel } from '@/types/t-hotel-res-data';
 import { useTranslation } from 'react-i18next';
 
 export const HotelRoomCreateForm = () => {

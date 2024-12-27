@@ -1,5 +1,5 @@
 import { TSearchBaseParams } from '@/types/t-base-search-params';
-import { THotel } from '@/types/t-hotel';
+import { THotel, THotelResData } from '@/types/t-hotel-res-data';
 import { THotelRoom } from '@/types/t-hotel-room';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
@@ -16,10 +16,11 @@ export const hotelsApi = createApi({
         }
     },
     endpoints: (builder) => ({
-        searchHotels: builder.query<THotel[], string>({
+        searchHotels: builder.query<THotelResData[], string>({
             query: (q: string) => ({
                 url: `search?q=${q}`,
-                method: 'GET'
+                method: 'GET',
+                credentials: 'include'     // обязательно для проставления cookie
             })
         }),
 
@@ -32,19 +33,22 @@ export const hotelsApi = createApi({
         getCommonHotelById: builder.query<THotel, string>({
             query: (id: string) => ({
                 url: `hotels/${id}`,
-                method: 'GET'
+                method: 'GET',
+                credentials: 'include'     // обязательно для проставления cookie
             })
         }),
         getCommonHotelRooms: builder.query<THotelRoom[], TSearchBaseParams & { hotel: string }>({
             query: ({ limit = 20, offset = 0, hotel }: TSearchBaseParams & { hotel: string }) => ({
                 url: `hotel-rooms?limit=${limit}&offset=${offset}&hotel=${hotel}`,
-                method: 'GET'
+                method: 'GET',
+                credentials: 'include'     // обязательно для проставления cookie
             })
         }),
         getCommonHotelRoomById: builder.query<THotelRoom, string>({
             query: (id: string) => ({
                 url: `hotel-rooms/${id}`,
-                method: 'GET'
+                method: 'GET',
+                credentials: 'include'     // обязательно для проставления cookie
             })
         }),
     }),

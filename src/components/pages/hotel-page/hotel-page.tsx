@@ -3,7 +3,7 @@ import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/c
 import { ImagesGrid } from '@/components/images-grid/images-grid';
 import { List } from '@/components/list/list';
 import { Modal } from '@/components/modal/modal';
-import { THotel } from '@/types/t-hotel';
+import { THotel } from '@/types/t-hotel-res-data';
 import { THotelRoom } from '@/types/t-hotel-room';
 import { Map } from '@/components/map/map';
 
@@ -38,8 +38,8 @@ export const HotelPage = ({ hotel, rooms }: THotelPageProps) => {
                             <h2 className="font-black font-mono text-3xl">
                                 {'Варианты размещения'}
                             </h2>
-                            <List items={rooms} href="/hotel-rooms" />
-                        </>
+                            {/*                             <List items={rooms} href="/hotel-rooms" />
+ */}                        </>
                     ) : null}
                 </>
                 <article className="prose lg:prose-xl">

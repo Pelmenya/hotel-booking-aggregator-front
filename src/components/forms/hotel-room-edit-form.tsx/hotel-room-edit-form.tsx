@@ -4,7 +4,7 @@ import {
     useLazyGetCommonHotelsQuery,
 } from '@/redux/api/common-api';
 import { TError } from '@/types/t-error';
-import { THotel } from '@/types/t-hotel';
+import { THotel } from '@/types/t-hotel-res-data';
 import { TNullable } from '@/types/t-nullable';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';

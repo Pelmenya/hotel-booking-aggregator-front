@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { getImageUrl } from 'utils/getImageUrl';
 import styles from './carousel.module.css';
+import { TImage } from '@/types/t-hotel-res-data';
 
 export type TCarouselProps = {
-    images: string[];
-    idx: string;
+    images: TImage[];
 };
 
 export const Carousel = ({ images }: TCarouselProps) => {
@@ -78,7 +78,7 @@ export const Carousel = ({ images }: TCarouselProps) => {
                 className="carousel max-w-full md:w-52 sm:w-full rounded-t-3xl sm:rounded-t-3xl md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer"
                 ref={listRef}
             >
-                {images.map((img: any) => (
+                {images.map((img: TImage) => (
                     <li
                         key={img.id}
                         className="carousel-item scroll-py-10 w-full flex items-center justify-center"

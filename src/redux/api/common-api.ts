@@ -1,5 +1,5 @@
 import { TSearchBaseParams } from '@/types/t-base-search-params';
-import { THotel } from '@/types/t-hotel';
+import { THotel } from '@/types/t-hotel-res-data';
 import { THotelRoom } from '@/types/t-hotel-room';
 import { TUser } from '@/types/t-user';
 import { TUserSettings } from '@/types/t-user-settings';

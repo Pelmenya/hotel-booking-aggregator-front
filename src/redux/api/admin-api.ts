@@ -1,4 +1,4 @@
-import { THotel } from '@/types/t-hotel';
+import { THotel } from '@/types/t-hotel-res-data';
 import { THotelRoom } from '@/types/t-hotel-room';
 import { TUser } from '@/types/t-user';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';

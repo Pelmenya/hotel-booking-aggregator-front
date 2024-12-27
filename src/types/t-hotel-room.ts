@@ -1,4 +1,4 @@
-import { THotel } from './t-hotel';
+import { THotel } from './t-hotel-res-data';
 
 export type THotelRoom = {
     id: string;
