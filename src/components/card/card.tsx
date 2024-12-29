@@ -24,7 +24,7 @@ export const Card = ({
             onClick={() => {
                 // onClick(id);
             }}
-            className="card card-side bg-base-300 shadow-xl rounded-3xl cursor-pointer flex-col sm:flex-col md:flex-row"
+            className="card card-side bg-base-200 shadow-xl rounded-3xl cursor-pointer flex-col sm:flex-col md:flex-row"
         >
             <Carousel
                 images={images}

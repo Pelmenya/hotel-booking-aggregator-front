@@ -1,6 +1,5 @@
 import { useLazySearchHotelsQuery } from '@/redux/api/hotels-api';
 import { MouseEvent, useState } from 'react';
-import { DataJson } from '../data-json/data-json';
 import { List } from '../list/list';
 
 export const MainSearch = () => {

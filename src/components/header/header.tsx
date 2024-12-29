@@ -8,6 +8,7 @@ import { LanguageToggle } from '../language-toggle/language-toggle';
 import { NotificationsLink } from './notifications-link/notifications-link';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
+import { MainSearch } from '../main-search/main-search';
 
 export const Header = () => {
     const { user } = useAppSelector(getUserState);
@@ -20,7 +21,7 @@ export const Header = () => {
 
     return (
         <header>
-            <nav className="bg-base-300 shadow-xl rounded-b-lg">
+            <nav className="bg-base-200 shadow-xl rounded-b-3xl">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div className="relative flex h-16 items-center justify-between">
                         <DesktopHeader user={user} />
