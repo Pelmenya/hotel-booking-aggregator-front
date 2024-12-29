@@ -20,7 +20,7 @@ export const Header = () => {
 
     return (
         <header>
-            <nav className="bg-base-300 shadow-xl">
+            <nav className="bg-base-300 shadow-xl rounded-b-lg">
                 <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                     <div className="relative flex h-16 items-center justify-between">
                         <DesktopHeader user={user} />

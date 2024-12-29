@@ -6,9 +6,10 @@ import { TImage } from '@/types/t-hotel-res-data';
 
 export type TCarouselProps = {
     images: TImage[];
+    alt?: string;
 };
 
-export const Carousel = ({ images }: TCarouselProps) => {
+export const Carousel = ({ images, alt = '' }: TCarouselProps) => {
     const [scrollLength, setScrollLength] = useState<number>(0);
     const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
     const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
@@ -87,7 +88,7 @@ export const Carousel = ({ images }: TCarouselProps) => {
                             <img
                                 src={getImageUrl(img.path)}
                                 className="object-cover w-full h-full"
-                                alt={img.alt}
+                                alt={alt}
                             />
                         </picture>
                     </li>

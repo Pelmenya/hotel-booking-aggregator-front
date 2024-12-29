@@ -24,7 +24,7 @@ export const List = ({ items, href }: TListProps) => {
                 <div className="grid gap-4 py-4 sm:grid-cols-1 md:grid-cols-2">
                     {items.map((item: THotelResData) => (
                         <Card
-                            key={item.id}
+                            key={item.hotel.id}
                             {...item}
                             onClick={handlerOnClickCard}
                         />
