@@ -17,6 +17,7 @@ export const MainSearch = () => {
     const fetchHotels = useCallback(async () => {
         try {
             const result = await trigger(`${qString}&limit=${limit}&offset=${page * limit}`).unwrap();
+            console.log(`${qString}&limit=${limit}&offset=${page * limit}`, result);
             if (result.length === 0) {
                 setHasMore(false); // Если данные пустые, устанавливаем флаг окончания
             } else {
@@ -40,7 +41,7 @@ export const MainSearch = () => {
     }, [inView, isFetching, hasMore]);
 
     useEffect(() => {
-        if (page > 0 && hasMore) {
+        if (page > -1 && hasMore) {
             fetchHotels();
         }
     }, [page, fetchHotels, hasMore]);
@@ -48,7 +49,7 @@ export const MainSearch = () => {
     const searchHandler = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setHotels([]); // сбросить текущий список отелей
-        setPage(1); // начать с первой страницы
+        setPage(0); // начать с 0 страницы
         setHasMore(true); // сбросить флаг окончания
     };
 
