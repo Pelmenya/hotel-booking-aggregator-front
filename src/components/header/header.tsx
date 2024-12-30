@@ -8,7 +8,6 @@ import { LanguageToggle } from '../language-toggle/language-toggle';
 import { NotificationsLink } from './notifications-link/notifications-link';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
-import { MainSearch } from '../main-search/main-search';
 
 export const Header = () => {
     const { user } = useAppSelector(getUserState);
