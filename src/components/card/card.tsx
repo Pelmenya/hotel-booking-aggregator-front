@@ -103,9 +103,9 @@ export const Card = ({
                     ) : (
                         <></>
                     )}
-                    <a target={'_blank'} href={process.env.NEXT_PUBLIC_BASE_OSTROVOK + hotel.hotel_link_ostrovok} rel="noreferrer">
-                        {'Забронировать на'}
-                        <Ostrovok />
+                    <a className='underline underline-offset-8' target={'_blank'} href={process.env.NEXT_PUBLIC_BASE_OSTROVOK + hotel.hotel_link_ostrovok} rel="noreferrer">
+                        {'-> Забронировать на: '}
+                        <Ostrovok /> {''}
                     </a>
                 </div>
             </div>
