@@ -76,15 +76,15 @@ export const Carousel = ({ images, alt = '' }: TCarouselProps) => {
                 <></>
             )}
             <ul
-                className="carousel max-w-full md:w-52 sm:w-full rounded-t-3xl sm:rounded-t-3xl md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer"
+                className="carousel max-w-full md:w-52 sm:w-full rounded-t-3xl sm:rounded-t-3xl md:rounded-l-3xl md:rounded-r-none bg-gray-800 cursor-pointer h-full"
                 ref={listRef}
             >
                 {images.map((img: TImage) => (
                     <li
                         key={img.id}
-                        className="carousel-item scroll-py-10 w-full flex items-center justify-center"
+                        className="carousel-item scroll-py-10 w-full h-full flex items-center justify-center"
                     >
-                        <picture className="w-full h-52">
+                        <picture className="w-full min-h-52 h-full">
                             <img
                                 src={getImageUrl(img.path)}
                                 className="object-cover w-full h-full"
