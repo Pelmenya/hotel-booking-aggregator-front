@@ -41,6 +41,27 @@ export type TAmenities = {
     amenities_list: TAmenity[];
 }
 
+export type TDistanceMeasurement = 'km' | 'm' | 'км' | 'м';
+
+export type TGeoDataListItem = {
+    idx: number;
+    name: string;
+    category: string;
+    distance_from_hotel: number;
+    measurement: TDistanceMeasurement;
+    geo?: string;
+};
+
+export type TGeoDataList = TGeoDataListItem[];
+
+export type TGeoData = {
+    id: string,
+    title: string,
+    type: TCategory,
+    language: TLanguage,
+    geo_list: TGeoDataList,
+}
+
 export type THotelResData = {
     hotel: {
         id: string;
@@ -52,5 +73,6 @@ export type THotelResData = {
     };
     locations: { ru: TLocation; en: TLocation };
     amenities: { ru: TAmenities; en: TAmenities };
+    geoData: { ru: TGeoData; en: TGeoData };
     images: TImage[];
 };
