@@ -6,6 +6,7 @@ import Router, { useRouter } from 'next/router';
 import ym from 'react-yandex-metrika';
 import { YMInitializer } from 'react-yandex-metrika';
 import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
+import Script from 'next/script';
 
 Router.events.on('routeChangeComplete', (url: string) => {
     if (typeof window !== 'undefined') {
@@ -17,7 +18,7 @@ export type ILayoutProps = TBaseProps & {
     title: string;
 };
 
-export const Layout = ({ title, children }) => {
+export const Layout = ({ title, children }: ILayoutProps) => {
     const router = useRouter();
 
     return (
@@ -35,7 +36,7 @@ export const Layout = ({ title, children }) => {
                     content={getPublicBaseImagesUrl('og-img.png')}
                 />
                 <meta
-                    property="og:og:title"
+                    property="og:title"
                     content={title.split('~')[1].trim()}
                 />
                 <meta
@@ -47,6 +48,21 @@ export const Layout = ({ title, children }) => {
                 accounts={[Number(process.env.NEXT_PUBLIC_YM_ACCOUNT)]}
                 options={{ webvisor: true, defer: true }}
                 version="2"
+            />
+            <Script
+                id="partner-script"
+                data-noptimize="1"
+                data-cfasync="false"
+                data-wpfc-render="false"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `(function () {
+                        var script = document.createElement("script");
+                        script.async = true;
+                        script.src = 'https://emrld.cc/MzcyNjU0.js?t=372654';
+                        document.head.appendChild(script);
+                    })();`,
+                }}
             />
             <Header />
             <main className="container mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

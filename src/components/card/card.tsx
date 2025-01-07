@@ -2,6 +2,7 @@ import { Carousel } from '@/components/card/components/carousel/carousel';
 import { THotelResData } from '@/types/t-hotel-res-data';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
+import Ostrovok from '../../icons/ostrovok/ostrovok.svg';
 
 import styles from './card.module.css';
 
@@ -52,38 +53,47 @@ export const Card = ({
                             ? 'Адрес: ' + locations.ru.address
                             : 'Address: ' + locations.en.address}
                     </p>
-                    {amenities.ru ?
-                        <div className='flex gap-2 flex-wrap'>
-                            {i18n.language === 'ru' 
-                                ? amenities.ru.amenities_list.map(item => 
-                                    <p className="badge badge-sm badge-host text-xs" key={item.idx}>{item.name}</p>
-
-                                )
-
-                                :amenities.en.amenities_list.map(item => 
-                                    <p className="badge badge-sm badge-host text-xs" key={item.idx}>
+                    {amenities.ru ? (
+                        <div className="flex gap-2 flex-wrap">
+                            {i18n.language === 'ru'
+                                ? amenities.ru.amenities_list.map((item) => (
+                                    <p
+                                        className="badge badge-sm badge-host text-xs"
+                                        key={item.idx}
+                                    >
                                         {item.name}
                                     </p>
-                                )
-
-                            
-                            }
+                                ))
+                                : amenities.en.amenities_list.map((item) => (
+                                    <p
+                                        className="badge badge-sm badge-host text-xs"
+                                        key={item.idx}
+                                    >
+                                        {item.name}
+                                    </p>
+                                ))}
                         </div>
-                        :
+                    ) : (
                         <></>
-                    }
+                    )}
                     {geoData ? (
                         <div>
                             {i18n.language === 'ru'
                                 ? geoData.ru.geo_list.map((item) => (
-                                    <p className="text-warning text-xs" key={item.idx}>
+                                    <p
+                                        className="text-warning text-xs"
+                                        key={item.idx}
+                                    >
                                         {item.name} ~{' '}
                                         {item.distance_from_hotel}{' '}
                                         {item.measurement}
                                     </p>
                                 ))
                                 : geoData.en.geo_list.map((item) => (
-                                    <p className="text-warning text-xs" key={item.idx}>
+                                    <p
+                                        className="text-warning text-xs"
+                                        key={item.idx}
+                                    >
                                         {item.name} ~{' '}
                                         {item.distance_from_hotel}{' '}
                                         {item.measurement}
@@ -93,6 +103,10 @@ export const Card = ({
                     ) : (
                         <></>
                     )}
+                    <a target={'_blank'} href={process.env.NEXT_PUBLIC_BASE_OSTROVOK + hotel.hotel_link_ostrovok} rel="noreferrer">
+                        {'Забронировать на'}
+                        <Ostrovok />
+                    </a>
                 </div>
             </div>
         </div>
