@@ -3,6 +3,8 @@ import { THotelResData } from '@/types/t-hotel-res-data';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import Ostrovok from '../../icons/ostrovok/ostrovok.svg';
+import Rating from '../../icons/hand-thumb-up.svg';
+import Star from '../../icons/star.svg';
 
 import styles from './card.module.css';
 
@@ -37,16 +39,22 @@ export const Card = ({
                     <h6 className={cn('font-bold text-lg', styles.title)}>
                         {i18n.language === 'ru' ? hotel.name : hotel.name_en}
                     </h6>
-                    {hotel.stars && hotel.stars > 0 ? (
-                        <p className="text-xs">Звездность: {hotel.stars}*</p>
-                    ) : (
-                        <></>
-                    )}
-                    {hotel.rating && hotel.rating > 0 ? (
-                        <p className="text-xs">Рейтинг: {hotel.rating}</p>
-                    ) : (
-                        <></>
-                    )}
+                    <div className='flex gap-2'>
+                        {hotel.stars && hotel.stars > 0 ? (
+                            <p className="text-xs flex">
+                                <Star /> {hotel.stars}*
+                            </p>
+                        ) : (
+                            <></>
+                        )}
+                        {hotel.rating && hotel.rating > 0 ? (
+                            <p className="text-xs flex">
+                                <Rating /> {'' + hotel.rating}
+                            </p>
+                        ) : (
+                            <></>
+                        )}
+                    </div>
 
                     <p className="text-primary text-xs">
                         {i18n.language === 'ru'
