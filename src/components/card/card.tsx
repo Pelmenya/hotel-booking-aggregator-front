@@ -18,7 +18,7 @@ export const Card = ({
     geoData,
     onClick,
 }: TCardProps) => {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation('common');
 
     return (
         <div
@@ -32,7 +32,7 @@ export const Card = ({
                 images={images}
                 alt={i18n.language === 'ru' ? hotel.name : hotel.name_en}
             />
-            <div className="py-4 px-4 md:max-w-[380px] w-full rounded-3xl">
+            <div className="py-4 px-4 md:max-w-[380px] w-full rounded-3xl flex flex-col justify-between gap-2">
                 <div className="flex flex-col gap-2 h-full">
                     <h6 className={cn('font-bold text-lg', styles.title)}>
                         {i18n.language === 'ru' ? hotel.name : hotel.name_en}
@@ -103,11 +103,19 @@ export const Card = ({
                     ) : (
                         <></>
                     )}
-                    <a className='underline underline-offset-8' target={'_blank'} href={process.env.NEXT_PUBLIC_BASE_OSTROVOK + hotel.hotel_link_ostrovok} rel="noreferrer">
-                        {'-> Забронировать на: '}
-                        <Ostrovok /> {''}
-                    </a>
                 </div>
+                <a
+                    className="underline underline-offset-8"
+                    target={'_blank'}
+                    href={
+                        process.env.NEXT_PUBLIC_BASE_OSTROVOK +
+                        hotel.hotel_link_ostrovok
+                    }
+                    rel="noreferrer"
+                >
+                    {'-> ' + t('BOOKING', 'Забронировать на') + ': '}
+                    <Ostrovok /> {''}
+                </a>
             </div>
         </div>
     );
