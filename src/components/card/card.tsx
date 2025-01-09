@@ -1,5 +1,5 @@
 import { Carousel } from '@/components/card/components/carousel/carousel';
-import { THotelResData } from '@/types/t-hotel-res-data';
+import { TAmenities, TAmenity, THotelResData } from '@/types/t-hotel-res-data';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import Ostrovok from '../../icons/ostrovok/ostrovok.svg';
@@ -7,6 +7,7 @@ import Rating from '../../icons/hand-thumb-up.svg';
 import Star from '../../icons/star.svg';
 
 import styles from './card.module.css';
+import { useCallback } from 'react';
 
 export type TCardProps = THotelResData & {
     onClick: (id: string) => void;
@@ -22,19 +23,24 @@ export const Card = ({
 }: TCardProps) => {
     const { t, i18n } = useTranslation('common');
 
+    const getSortAmenities = useCallback((a: TAmenity[]) => {
+        const sortAmenities = [...a].sort((a,b) => a.name.length - b.name.length)
+        return sortAmenities
+    }, [])
+
     return (
         <div
             id={hotel.id}
             onClick={() => {
                 // onClick(id);
             }}
-            className="card card-side bg-base-200 shadow-xl rounded-3xl cursor-pointer flex-col sm:flex-col md:flex-row"
+            className="card card-side bg-base-200 shadow-xl rounded-3xl cursor-pointer flex-col sm:flex-col lg:flex-row h-full"
         >
             <Carousel
                 images={images}
                 alt={i18n.language === 'ru' ? hotel.name : hotel.name_en}
             />
-            <div className="py-4 px-4 md:max-w-[380px] w-full rounded-3xl flex flex-col justify-between gap-2">
+            <div className="py-4 px-4 lg:max-w-[380px] w-full rounded-3xl flex flex-col justify-between gap-2">
                 <div className="flex flex-col gap-2 h-full">
                     <h6 className={cn('font-bold text-lg', styles.title)}>
                         {i18n.language === 'ru' ? hotel.name : hotel.name_en}
@@ -64,7 +70,7 @@ export const Card = ({
                     {amenities.ru ? (
                         <div className="flex gap-2 flex-wrap">
                             {i18n.language === 'ru'
-                                ? amenities.ru.amenities_list.map((item) => (
+                                ? getSortAmenities(amenities.ru.amenities_list).map((item) => (
                                     <p
                                         className="badge badge-sm badge-host text-xs"
                                         key={item.idx}
@@ -72,7 +78,7 @@ export const Card = ({
                                         {item.name}
                                     </p>
                                 ))
-                                : amenities.en.amenities_list.map((item) => (
+                                : getSortAmenities(amenities.en.amenities_list).map((item) => (
                                     <p
                                         className="badge badge-sm badge-host text-xs"
                                         key={item.idx}

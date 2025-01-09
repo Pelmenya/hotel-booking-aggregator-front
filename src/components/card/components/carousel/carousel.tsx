@@ -76,7 +76,7 @@ export const Carousel = ({ images, alt = '' }: TCarouselProps) => {
                 <></>
             )}
             <ul
-                className="carousel max-w-full md:w-52 sm:w-full rounded-t-3xl sm:rounded-t-3xl md:rounded-l-3xl md:rounded-3xl bg-gray-800 cursor-pointer h-full"
+                className="carousel max-w-full lg:w-52 sm:w-full h-64 sm:h-72 lg:h-full rounded-t-3xl sm:rounded-t-3xl lg:rounded-l-3xl lg:rounded-3xl bg-gray-800 cursor-pointer"
                 ref={listRef}
             >
                 {images.map((img: TImage) => (
