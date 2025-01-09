@@ -52,6 +52,7 @@
   "LABEL_INPUT_ROLE": "Role",
   "LABEL_INPUT_USER_NAME": "Name",
   "MESSAGE_CHANGE_AVATAR": "Change the photo",
+  "PLACEHOLDER_FORM_SEARCH_HOTELS": "Hotel, address",
   "TITLE_FORM_CODE_FROM_EMAIL": "Code from the email ",
   "TITLE_FORM_CODE_FROM_SMS": "Code from SMS ",
   "TITLE_FORM_CREATE_HOTEL": "Adding a hotel",

@@ -4,8 +4,10 @@ import { List } from '../list/list';
 import { useInView } from 'react-intersection-observer';
 import { THotelResData } from '@/types/t-hotel-res-data'; 
 import { Loading } from '../loading/loading';
+import { useTranslation } from 'react-i18next';
 
 export const MainSearch = () => {
+    const { t } = useTranslation('form');
     const [qString, setQString] = useState('Moscow'); // старт
     const [hotels, setHotels] = useState<THotelResData[]>([]);
     const [page, setPage] = useState(0);
@@ -59,20 +61,23 @@ export const MainSearch = () => {
                 <div className="w-full h-full flex items-center justify-center relative pt-64 mb-16">
                     <label
                         htmlFor="MainSearchInput"
-                        className="relative border  w-full max-w-4xl rounded-xl"
+                        className="relative border w-full max-w-4xl rounded-xl"
                     >
                         <input
                             onChange={(e) => setQString(e.target.value)}
                             id="MainSearchInput"
-                            className="input rounded-xl input-lg w-full max-w-4xl focus:outline-none"
+                            className="input rounded-xl sm:input-md md:input-lg w-full max-w-4xl focus:outline-none"
                             type="text"
-                            placeholder="Название или город отеля..."
+                            placeholder={t('PLACEHOLDER_FORM_SEARCH_HOTELS', 'Отель, адрес')}
                         />
                         <button
                             onClick={(e) => searchHandler(e)}
-                            className="btn btn-primary btn-lg absolute right-0 h-16 rounded-xl"
+                            className="btn btn-primary btn-md md:btn-lg  absolute right-0 rounded-xl"
                         >
-                            Поиск
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+
                         </button>
                     </label>
                 </div>

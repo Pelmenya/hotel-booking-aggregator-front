@@ -1,5 +1,5 @@
 import { Carousel } from '@/components/card/components/carousel/carousel';
-import { TAmenities, TAmenity, THotelResData } from '@/types/t-hotel-res-data';
+import { TAmenity, THotelResData } from '@/types/t-hotel-res-data';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import Ostrovok from '../../icons/ostrovok/ostrovok.svg';
