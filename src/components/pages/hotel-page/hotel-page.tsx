@@ -3,7 +3,7 @@ import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/c
 import { ImagesGrid } from '@/components/images-grid/images-grid';
 import { Modal } from '@/components/modal/modal';
 import { THotelResData } from '@/types/t-hotel-res-data';
-import { Map } from '@/components/map/map';
+//import { Map } from '@/components/map/map';
 import { TNullable } from '@/types/t-nullable';
 import { useTranslation } from 'react-i18next';
 
