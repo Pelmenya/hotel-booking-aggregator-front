@@ -21,16 +21,31 @@ export const HotelPage = ({ data }: THotelPageProps) => {
 
     return (
         <>
-            <Modal isOpen={isOpenModal} handlerClose={handlerToogleModal}>
-                <CarouselFullPicPreview images={data?.images || []} />
-            </Modal>
+            {data?.images.length ? (
+                <Modal isOpen={isOpenModal} handlerClose={handlerToogleModal}>
+                    <CarouselFullPicPreview
+                        images={data?.images || []}
+                        name={
+                            i18n.language === 'ru'
+                                ? data.hotel.name
+                                : data.hotel.name_en
+                        }
+                    />
+                </Modal>
+            ) : (
+                null
+            )}
             <div className="flex flex-col gap-16 py-16">
                 <h1 className="font-black text-5xl">{data?.hotel.name}</h1>
                 {data?.images.length ? (
                     <ImagesGrid
                         onClick={handlerToogleModal}
                         images={data.images}
-                        name={i18n.language === 'ru'  ? data.hotel.name : data.hotel.name_en }
+                        name={
+                            i18n.language === 'ru'
+                                ? data.hotel.name
+                                : data.hotel.name_en
+                        }
                     />
                 ) : null}
                 {/*                 <article className="prose lg:prose-xl">
