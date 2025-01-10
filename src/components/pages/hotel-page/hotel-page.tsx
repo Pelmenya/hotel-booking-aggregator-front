@@ -19,9 +19,7 @@ export const HotelPage = ({ data }: THotelPageProps) => {
         setIsOpenModal(!isOpenModal);
     };
 
-    const hotelName = useMemo(() => 
-        data ? i18n.language === 'ru'? data?.hotel.name : data?.hotel.name_en : ''
-    ,[data, i18n])
+    const hotelName = useMemo(() => data ? i18n.language === 'ru'? data?.hotel.name : data?.hotel.name_en : '',[data, i18n.language])
 
     return (
         <>
@@ -36,9 +34,7 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                 null
             )}
             <div className="flex flex-col gap-16 py-16">
-                <h1 className="font-black text-5xl">{i18n.language === 'ru'
-                    ? data?.hotel.name
-                    : data?.hotel.name_en}</h1>
+                <h1 className="font-black text-5xl">{hotelName}</h1>
                 {data?.images.length ? (
                     <ImagesGrid
                         onClick={handlerToogleModal}
