@@ -3,8 +3,14 @@ import cn from 'classnames';
 
 import styles from './carousel-full-pic-preview.module.css';
 import { useEffect, useRef, useState } from 'react';
+import { TImage } from '@/types/t-hotel-res-data';
 
-export const CarouselFullPicPreview = ({ images }: { images: string[] }) => {
+export type TCarouselFullPicPreviewProps = { images: TImage[]; name: string };
+
+export const CarouselFullPicPreview = ({
+    images,
+    name,
+}: TCarouselFullPicPreviewProps) => {
     const [scrollLength, setScrollLength] = useState<number>(0);
     const [canScrollLeft, setCanScrollLeft] = useState<boolean>(false);
     const [canScrollRight, setCanScrollRight] = useState<boolean>(false);
@@ -73,19 +79,22 @@ export const CarouselFullPicPreview = ({ images }: { images: string[] }) => {
                 )}
 
                 <ul ref={listRef} className="carousel">
-                    {images.map((url) => (
+                    {images.map((image, idx) => (
                         <li
-                            id={url}
-                            key={url}
+                            id={image.path}
+                            key={image.id}
                             className={cn(
                                 'carousel-item w-full items-center justify-center'
                             )}
                         >
                             <picture>
                                 <img
-                                    className={cn('rounded-3xl', styles.pic)}
-                                    src={getImageUrl(url)}
-                                    alt=""
+                                    className={cn(
+                                        'rounded-3xl min-h-[35vh] sm:min-h-[60vh] lg:min-h-[70vh]',
+                                        styles.pic
+                                    )}
+                                    src={getImageUrl(image.path)}
+                                    alt={name + ' - ' + idx }
                                 />
                             </picture>
                         </li>
@@ -93,17 +102,17 @@ export const CarouselFullPicPreview = ({ images }: { images: string[] }) => {
                 </ul>
             </div>
             <div className="flex w-full py-2 gap-2 overflow-x-auto">
-                {images.map((url, idx) => (
+                {images.map((image, idx) => (
                     <a
-                        href={`#${url}`}
-                        key={url + idx}
+                        href={`#${image.path}`}
+                        key={image.id}
                         className="flex shrink-0"
                     >
                         <picture>
                             <img
                                 className="h-12 w-12 rounded"
-                                src={getImageUrl(url)}
-                                alt=""
+                                src={getImageUrl(image.path)}
+                                alt={name + ' - ' + idx}
                             />
                         </picture>
                     </a>

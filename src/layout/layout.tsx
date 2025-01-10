@@ -37,7 +37,7 @@ export const Layout = ({ title, children }: ILayoutProps) => {
                 />
                 <meta
                     property="og:title"
-                    content={title.split('~')[1].trim()}
+                    content={title}//.split('~')[1].trim()}
                 />
                 <meta
                     name="viewport"

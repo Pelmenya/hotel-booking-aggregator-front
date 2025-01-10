@@ -67,7 +67,6 @@ export const UpdateUserForm = () => {
 
     const onSubmit = async (data: FieldValues) => {
         if (data) {
-            console.log(data);
             const formData = new FormData();
             user?.avatars?.forEach((file) => formData.append('avatars', file));
             formData.append('name', data.name);

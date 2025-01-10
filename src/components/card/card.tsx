@@ -32,7 +32,7 @@ export const Card = ({
         <div
             id={hotel.id}
             onClick={() => {
-                // onClick(id);
+                onClick(hotel.id);
             }}
             className="card card-side bg-base-200 shadow-xl rounded-3xl cursor-pointer flex-col sm:flex-col lg:flex-row h-full"
         >

@@ -1,13 +1,15 @@
 import { getImageUrl } from 'utils/getImageUrl';
 import cn from 'classnames';
 import styles from './images-grid.module.css';
+import { TImage } from '@/types/t-hotel-res-data';
 
 export type TImagesGridProps = {
-    images: string[];
+    images: TImage[];
+    name: string;
     onClick: () => void;
 };
 
-export const ImagesGrid = ({ images, onClick }: TImagesGridProps) => {
+export const ImagesGrid = ({ images, name, onClick }: TImagesGridProps) => {
     const gridItems = [1, 2, 3, 4];
 
     return (
@@ -16,8 +18,8 @@ export const ImagesGrid = ({ images, onClick }: TImagesGridProps) => {
                 <picture className="h-full w-full max-h-[400px] min-h-[280px]">
                     <img
                         className="object-cover h-full w-full rounded-3xl"
-                        src={getImageUrl(images[0])}
-                        alt=""
+                        src={getImageUrl(images[0].path)}
+                        alt={name + ' - 0'}
                     />
                 </picture>
             ) : null}
@@ -25,15 +27,15 @@ export const ImagesGrid = ({ images, onClick }: TImagesGridProps) => {
                 {gridItems.map((num) =>
                     images[num] ? (
                         <div
-                            key={images[num]}
+                            key={images[num].id}
                             className={cn('h-[48%] relative', styles.pic)}
                         >
                             <>
                                 <picture>
                                     <img
                                         className="object-cover w-full h-full rounded-3xl"
-                                        src={getImageUrl(images[num])}
-                                        alt=""
+                                        src={getImageUrl(images[num].path)}
+                                        alt={name +' - '+ num}
                                     />
                                 </picture>
                                 {num === 4 && images.length > 4 ? (

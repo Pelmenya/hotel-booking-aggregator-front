@@ -1,6 +1,4 @@
-import { TSearchBaseParams } from '@/types/t-base-search-params';
-import { THotel, THotelResData } from '@/types/t-hotel-res-data';
-import { THotelRoom } from '@/types/t-hotel-room';
+import { THotelResData } from '@/types/t-hotel-res-data';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
@@ -16,6 +14,14 @@ export const hotelsApi = createApi({
         }
     },
     endpoints: (builder) => ({
+        getHotelById: builder.query<THotelResData, string>({
+            query: (id: string) => ({
+                url: `hotel/${id}`,
+                method: 'GET',
+                credentials: 'include'     // обязательно для проставления cookie
+            })
+        }),
+
         searchHotels: builder.query<THotelResData[], string>({
             query: (q: string) => ({
                 url: `search?q=${q}`,
@@ -24,54 +30,18 @@ export const hotelsApi = createApi({
             })
         }),
 
-        getHotels: builder.query<THotel[], string>({
-            query: (title: string) => ({
-                url: `hotels?title=${title}`,
-                method: 'GET'
-            })
-        }),
-        getCommonHotelById: builder.query<THotel, string>({
-            query: (id: string) => ({
-                url: `hotels/${id}`,
-                method: 'GET',
-                credentials: 'include'     // обязательно для проставления cookie
-            })
-        }),
-        getCommonHotelRooms: builder.query<THotelRoom[], TSearchBaseParams & { hotel: string }>({
-            query: ({ limit = 20, offset = 0, hotel }: TSearchBaseParams & { hotel: string }) => ({
-                url: `hotel-rooms?limit=${limit}&offset=${offset}&hotel=${hotel}`,
-                method: 'GET',
-                credentials: 'include'     // обязательно для проставления cookie
-            })
-        }),
-        getCommonHotelRoomById: builder.query<THotelRoom, string>({
-            query: (id: string) => ({
-                url: `hotel-rooms/${id}`,
-                method: 'GET',
-                credentials: 'include'     // обязательно для проставления cookie
-            })
-        }),
     }),
 });
 
 // Export hooks for usage in functional components
 export const {
-    useGetHotelsQuery,
-    useGetCommonHotelByIdQuery,
-    useGetCommonHotelRoomsQuery,
+    useGetHotelByIdQuery,
     useLazySearchHotelsQuery,
-    useLazyGetHotelsQuery,
-    useLazyGetCommonHotelByIdQuery,
-    useLazyGetCommonHotelRoomsQuery,
-    useGetCommonHotelRoomByIdQuery,
-    useLazyGetCommonHotelRoomByIdQuery,
     util: { getRunningQueriesThunk },
 } = hotelsApi;
 
 // export endpoints for use in SSR
 export const {
-    getHotels,
-    getCommonHotelById, 
-    getCommonHotelRooms, 
-    getCommonHotelRoomById, 
+    getHotelById,
+    searchHotels,
 } = hotelsApi.endpoints;

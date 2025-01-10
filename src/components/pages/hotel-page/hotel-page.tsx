@@ -2,17 +2,18 @@ import { useState } from 'react';
 import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/carousel-full-pic-preview';
 import { ImagesGrid } from '@/components/images-grid/images-grid';
 import { Modal } from '@/components/modal/modal';
-import { THotel } from '@/types/t-hotel-res-data';
-import { THotelRoom } from '@/types/t-hotel-room';
+import { THotelResData } from '@/types/t-hotel-res-data';
 import { Map } from '@/components/map/map';
+import { TNullable } from '@/types/t-nullable';
+import { useTranslation } from 'react-i18next';
 
 export type THotelPageProps = {
-    hotel: THotel;
-    rooms: THotelRoom[];
+    data: TNullable<THotelResData>;
 };
-export const HotelPage = ({ hotel, rooms }: THotelPageProps) => {
+export const HotelPage = ({ data }: THotelPageProps) => {
+    const { i18n } = useTranslation();
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const descriptions: string[] = hotel.description.split('\r\n');
+    //const descriptions: string[] = hotel.description.split('\r\n');
 
     const handlerToogleModal = () => {
         setIsOpenModal(!isOpenModal);
@@ -21,40 +22,31 @@ export const HotelPage = ({ hotel, rooms }: THotelPageProps) => {
     return (
         <>
             <Modal isOpen={isOpenModal} handlerClose={handlerToogleModal}>
-                <CarouselFullPicPreview images={hotel.images} />
+                <CarouselFullPicPreview images={data?.images || []} />
             </Modal>
             <div className="flex flex-col gap-16 py-16">
-                <h1 className="font-black text-5xl">{hotel.title}</h1>
-                {hotel?.images.length ? (
+                <h1 className="font-black text-5xl">{data?.hotel.name}</h1>
+                {data?.images.length ? (
                     <ImagesGrid
                         onClick={handlerToogleModal}
-                        images={hotel.images}
+                        images={data.images}
+                        name={i18n.language === 'ru'  ? data.hotel.name : data.hotel.name_en }
                     />
                 ) : null}
-                <>
-                    {rooms.length ? (
-                        <>
-                            <h2 className="font-black font-mono text-3xl">
-                                {'Варианты размещения'}
-                            </h2>
-                            {/*                             <List items={rooms} href="/hotel-rooms" />
- */}                        </>
-                    ) : null}
-                </>
-                <article className="prose lg:prose-xl">
+                {/*                 <article className="prose lg:prose-xl">
                     <h3 className="font-mono">Про отель</h3>
                     {descriptions.map((text, idx) => (
                         <p key={text + idx} className="font-mono">
                             {text}
                         </p>
                     ))}
-                </article>
+                </article> */}
             </div>
-            {hotel.coordinates.length ? (
+            {/*             {hotel.coordinates.length ? (
                 <Map coordinates={hotel.coordinates} />
             ) : (
                 <></>
-            )}
+            )} */}
         </>
     );
 };

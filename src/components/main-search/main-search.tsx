@@ -19,7 +19,6 @@ export const MainSearch = () => {
     const fetchHotels = useCallback(async () => {
         try {
             const result = await trigger(`${qString}&limit=${limit}&offset=${page * limit}`).unwrap();
-            console.log(`${qString}&limit=${limit}&offset=${page * limit}`, result);
             if (result.length === 0) {
                 setHasMore(false); // Если данные пустые, устанавливаем флаг окончания
             } else {
