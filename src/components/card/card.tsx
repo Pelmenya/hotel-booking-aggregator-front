@@ -34,7 +34,7 @@ export const Card = ({
             onClick={() => {
                 onClick(hotel.id);
             }}
-            className="card card-side bg-base-200 shadow-xl rounded-3xl cursor-pointer flex-col sm:flex-col lg:flex-row h-full"
+            className="card card-side bg-base-100 rounded-3xl cursor-pointer flex-col sm:flex-col lg:flex-row h-full"
         >
             <Carousel
                 images={images}

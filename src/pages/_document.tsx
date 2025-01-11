@@ -19,7 +19,7 @@ class MyDocument extends Document {
         return (
             <Html lang="ru" data-theme='light'>
                 <Head />
-                <body>
+                <body className='bg-base-200'>
                     <Main />
                     <NextScript />
                     <div id="root-portal"></div>

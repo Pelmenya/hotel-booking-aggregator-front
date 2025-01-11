@@ -1,4 +1,4 @@
-import { DataJson } from '@/components/data-json/data-json';
+//import { DataJson } from '@/components/data-json/data-json';
 import { HotelPage } from '@/components/pages/hotel-page/hotel-page';
 import { Layout } from '@/layout/layout';
 import { getHotelById, getRunningQueriesThunk, useGetHotelByIdQuery } from '@/redux/api/hotels-api';
@@ -11,8 +11,8 @@ export default function Hotel({ id }: { id: string }) {
     return (
         <Layout title={`На-День.рф ~ ${i18n.language === 'ru' ? data?.hotel.name: data?.hotel.name_en}`}>
             <HotelPage data={data ? data : null}/>
-            <DataJson data={data}/>
-        </Layout>
+            {/*             <DataJson data={data}/>
+ */}        </Layout>
     );
 }
 
