@@ -5,7 +5,6 @@ import { useInView } from 'react-intersection-observer';
 import { THotelResData } from '@/types/t-hotel-res-data';
 import { Loading } from '../loading/loading';
 import { useTranslation } from 'react-i18next';
-import { Base } from '../base/base';
 
 export const MainSearch = () => {
     const { t } = useTranslation('form');
