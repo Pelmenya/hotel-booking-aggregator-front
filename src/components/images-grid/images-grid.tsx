@@ -38,7 +38,7 @@ export const ImagesGrid = ({ images, name, onClick }: TImagesGridProps) => {
                                         alt={name +' - '+ num}
                                     />
                                 </picture>
-                                {num === 4 && images.length > 4 ? (
+                                {num === 4 && images.length > 4 && images.length - gridItems.length - 1 > 0 ? (
                                     <>
                                         <div className="absolute top-0 left-0 flex items-center bg-black opacity-50 justify-center w-full h-full rounded-3xl" />
                                         <p className={cn('absolute text-white block font-bold text-4xl whitespace-nowrap top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2', styles.num)}>
