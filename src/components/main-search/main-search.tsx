@@ -59,10 +59,10 @@ export const MainSearch = () => {
     return (
         <>
             <form name="w-full h-full items-center justify-center">
-                <div className="w-full h-full flex border border-base-300 bg-base-100 rounded-box p-12 items-center justify-center relative mt-12 mb-8">
+                <div className="w-full h-full flex border border-base-300 bg-base-100 rounded-box p-4 sm:p-8 md:p-10 lg:p-12 items-center justify-center relative mt-12 mb-8">
                     <label
                         htmlFor="MainSearchInput"
-                        className="relative border w-full max-w-4xl rounded-xl"
+                        className="relative border w-full rounded-xl"
                     >
                         <input
                             onChange={(e) => setQString(e.target.value)}

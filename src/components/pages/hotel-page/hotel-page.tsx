@@ -3,7 +3,7 @@ import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/c
 import { ImagesGrid } from '@/components/images-grid/images-grid';
 import { Modal } from '@/components/modal/modal';
 import { THotelResData } from '@/types/t-hotel-res-data';
-//import { Map } from '@/components/map/map';
+import { Map } from '@/components/map/map';
 import { TNullable } from '@/types/t-nullable';
 import { useTranslation } from 'react-i18next';
 import { Collapse } from '@/components/collapse/collapse';
@@ -125,16 +125,18 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                     ))}
                 </article> */}
                     </div>
-                    {/*             {hotel.coordinates.length ? (
-                <Map coordinates={hotel.coordinates} />
-            ) : (
-                <></>
-            )} */}
+
                 </Base>
+                {
+                    data?.locations.ru.geocode_data.geo_data.mid? (
+                        <Map coordinates={[data.locations.en.geocode_data.geo_data.mid.lat, data.locations.en.geocode_data.geo_data.mid.lon]} />
+                    ) : (
+                        <></>
+                    )} 
                 <>
                     {data && data.abouts?.ru ? (
                         <Collapse title={aboutsTitle} type={'arrow'} fullView={true}>
-                            <div>
+                            <article>
                                 {i18n.language === 'ru' &&
                                     data?.abouts?.ru?.descriptions?.map(
                                         (item) => (
@@ -167,7 +169,7 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                                             </>
                                         )
                                     )}
-                            </div>
+                            </article>
                         </Collapse>
                     ) : null}
                 </>
