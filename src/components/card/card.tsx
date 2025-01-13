@@ -47,15 +47,15 @@ export const Card = ({
                     </h6>
                     <div className='flex gap-2'>
                         {hotel.stars && hotel.stars > 0 ? (
-                            <p className="text-xs flex">
-                                <Star /> {hotel.stars}*
+                            <p className="text-xs flex items-center gap-1">
+                                <Star />{hotel.stars}*
                             </p>
                         ) : (
                             <></>
                         )}
                         {hotel.rating && hotel.rating > 0 ? (
-                            <p className="text-xs flex">
-                                <Rating /> {'' + hotel.rating}
+                            <p className="text-xs flex items-center gap-1">
+                                <Rating />{hotel.rating}
                             </p>
                         ) : (
                             <></>
@@ -72,7 +72,7 @@ export const Card = ({
                             {i18n.language === 'ru'
                                 ? getSortAmenities(amenities.ru.amenities_list).map((item) => (
                                     <p
-                                        className="badge badge-sm badge-host text-xs"
+                                        className="badge badge-sm badge-ghost text-xs"
                                         key={item.idx}
                                     >
                                         {item.name}
@@ -90,7 +90,7 @@ export const Card = ({
                     ) : (
                         <></>
                     )}
-                    {geoData ? (
+                    {geoData && !Array.isArray(geoData.ru) && !Array.isArray(geoData.en) ? (
                         <div>
                             {i18n.language === 'ru'
                                 ? geoData.ru.geo_list.map((item) => (

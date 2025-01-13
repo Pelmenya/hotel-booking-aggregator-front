@@ -62,6 +62,19 @@ export type TGeoData = {
     geo_list: TGeoDataList,
 }
 
+export type TDescription = {
+    idx: number;
+    title: string;
+    paragraph: string;
+};
+
+export type TAbouts = {
+    id: string;
+    title: string;
+    language: TLanguage;
+    descriptions: TDescription[];
+}
+
 export type THotelResData = {
     hotel: {
         id: string;
@@ -73,6 +86,7 @@ export type THotelResData = {
     };
     locations: { ru: TLocation; en: TLocation };
     amenities: { ru: TAmenities; en: TAmenities };
-    geoData: { ru: TGeoData; en: TGeoData };
+    geoData: { ru: TGeoData | TGeoData[] ; en: TGeoData | TGeoData[] };
     images: TImage[];
+    abouts: { ru: TAbouts; en: TAbouts };
 };

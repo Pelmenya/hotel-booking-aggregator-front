@@ -19,8 +19,7 @@ export default function Hotel({ id }: { id: string }) {
             }`}
         >
             <HotelPage data={data ? data : null} />
-            {/*             <DataJson data={data} />
- */}        </Layout>
+        </Layout>
     );
 }
 
