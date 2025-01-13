@@ -67,7 +67,7 @@ export const MainSearch = () => {
                         <input
                             onChange={(e) => setQString(e.target.value)}
                             id="MainSearchInput"
-                            className="input rounded-xl sm:input-md md:input-lg w-full max-w-4xl focus:outline-none"
+                            className="input rounded-xl sm:input-md md:input-lg w-full focus:outline-none"
                             type="text"
                             placeholder={t(
                                 'PLACEHOLDER_FORM_SEARCH_HOTELS',
