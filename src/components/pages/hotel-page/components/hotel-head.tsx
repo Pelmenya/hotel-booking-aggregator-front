@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Base } from '@/components/base/base'
 import { CarouselFullPicPreview } from '@/components/carousel-full-pic-preview/carousel-full-pic-preview';
 import { ImagesGrid } from '@/components/images-grid/images-grid';
@@ -9,16 +9,31 @@ import Rating from '../../../../icons/hand-thumb-up.svg';
 
 export type THotelHeadProps = THotelPageProps & {
     hotelAddress: string;
-    hotelName: string;
 }
 
-export const HotelHead = ({ data, hotelAddress, hotelName }: THotelHeadProps) => {
+export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
     const { i18n } = useTranslation();
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const handlerToogleModal = () => {
         setIsOpenModal(!isOpenModal);
     };
+
+    const hotelName = useMemo(
+        () =>
+            `${
+                data && data.hotel
+                    ? i18n.language === 'ru'
+                        ? data?.hotel.name
+                        : data?.hotel.name_en
+                    : ''
+            }${
+                data?.hotel.stars && data?.hotel.stars > 0
+                    ? ', ' + data?.hotel.stars + '*'
+                    : ''
+            }`,
+        [data, i18n.language]
+    );
 
     return (
         <Base>
