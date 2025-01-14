@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { THotelPageProps } from '../hotel-page';
 
-export const HotelABouts = ({   data }: THotelPageProps ) => {
+export const HotelAbouts = ({   data }: THotelPageProps ) => {
     const { i18n } = useTranslation();
     
     

@@ -12,17 +12,14 @@ import { useTranslation } from 'react-i18next';
 export default function Hotel({ id }: { id: string }) {
     const { i18n } = useTranslation();
     const { data } = useGetHotelByIdQuery(id);
-    
     const isDev = process.env.NODE_ENV !== 'production';
-    
+
+    const hotelTitle = data ? (i18n.language === 'ru' ? data.hotel.name : data.hotel.name_en) : '';
+
     return (
-        <Layout
-            title={`На-День.рф ~ ${
-                i18n.language === 'ru' ? data?.hotel.name : data?.hotel.name_en
-            }`}
-        >
-            <HotelPage data={data ? data : null} />
-            <>{isDev ? <DataJson data={data} />: null}</>
+        <Layout title={`На-День.рф ~ ${hotelTitle}`}>
+            <HotelPage data={data || null} />
+            {isDev && <DataJson data={data} />}
         </Layout>
     );
 }
