@@ -39,7 +39,7 @@ export const Modal = ({
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto flex items-center justify-center mr-1.5">
-                        <div className="flex min-h-full items-center justify-center px-8 text-center">
+                        <div className="flex min-h-full items-center justify-center px-1 sm:px-2 md:px-4 lg:px-8 text-center">
                             <Transition.Child
                                 as={Fragment}
                                 enter="ease-out duration-300"
@@ -49,7 +49,7 @@ export const Modal = ({
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="transform relative overflow-hidden rounded-3xl bg-base-100 p-6 text-left align-middle shadow-xl transition-all max-w-full max-h-full">
+                                <Dialog.Panel className="transform relative overflow-hidden rounded-3xl bg-base-100 p-2 sm:p-2 md:p-4 lg:p-8 text-left align-middle shadow-xl transition-all max-w-full max-h-full">
                                     <div className={
                                         cn(
                                             {'flex justify-beetween items-center gap-2': !!title}, 
@@ -64,7 +64,7 @@ export const Modal = ({
                                         <button
                                             onClick={handlerClose}
                                             className={cn(
-                                                'btn btn-circle btn-outline',
+                                                'btn btn-circle btn-outline btn-sm md:btn-md',
                                                 `btn-${sizeCloseBtn}`
                                             )}
                                         >
