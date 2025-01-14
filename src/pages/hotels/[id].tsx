@@ -12,6 +12,9 @@ import { useTranslation } from 'react-i18next';
 export default function Hotel({ id }: { id: string }) {
     const { i18n } = useTranslation();
     const { data } = useGetHotelByIdQuery(id);
+    
+    const isDev = process.env.NODE_ENV !== 'production';
+    
     return (
         <Layout
             title={`На-День.рф ~ ${
@@ -19,7 +22,7 @@ export default function Hotel({ id }: { id: string }) {
             }`}
         >
             <HotelPage data={data ? data : null} />
-            <DataJson data={data} />
+            <>{isDev ? <DataJson data={data} />: null}</>
         </Layout>
     );
 }
