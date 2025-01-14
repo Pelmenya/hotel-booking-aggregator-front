@@ -1,5 +1,4 @@
 import { YMaps, Map as MapComponent, Placemark } from '@pbe/react-yandex-maps';
-import { Base } from '../base/base';
 
 export type MapProps = {
     coordinates: number[];
