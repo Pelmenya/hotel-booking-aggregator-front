@@ -163,6 +163,7 @@ export type TAmenities = {
     id: string;
     language: TLanguage;
     amenities_list: TAmenity[];
+    type: TCategory;
 }
 
 export type TDistanceMeasurement = 'km' | 'm' | 'км' | 'м';
@@ -209,7 +210,7 @@ export type THotelResData = {
         stars?: number;
     };
     locations: { ru: TLocation; en: TLocation };
-    amenities: { ru: TAmenities; en: TAmenities };
+    amenities: { ru: TAmenities | TAmenities[]; en: TAmenities | TAmenities []};
     geoData: { ru: TGeoData | TGeoData[] ; en: TGeoData | TGeoData[] };
     images: TImage[];
     abouts: { ru: TAbouts; en: TAbouts };

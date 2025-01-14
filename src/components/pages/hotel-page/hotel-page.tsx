@@ -10,8 +10,6 @@ import { Collapse } from '@/components/collapse/collapse';
 import { Base } from '@/components/base/base';
 import Rating from '../../../icons/hand-thumb-up.svg';
 
-
-
 export type THotelPageProps = {
     data: TNullable<THotelResData>;
 };
@@ -26,11 +24,17 @@ export const HotelPage = ({ data }: THotelPageProps) => {
 
     const hotelName = useMemo(
         () =>
-            `${data && data.hotel
-                ? i18n.language === 'ru'
-                    ? data?.hotel.name
-                    : data?.hotel.name_en
-                : ''}${data?.hotel.stars && data?.hotel.stars > 0 ?', '+ data?.hotel.stars+ '*': ''}`,
+            `${
+                data && data.hotel
+                    ? i18n.language === 'ru'
+                        ? data?.hotel.name
+                        : data?.hotel.name_en
+                    : ''
+            }${
+                data?.hotel.stars && data?.hotel.stars > 0
+                    ? ', ' + data?.hotel.stars + '*'
+                    : ''
+            }`,
         [data, i18n.language]
     );
 
@@ -43,7 +47,7 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                 : '',
         [data, i18n.language]
     );
-    
+
     const aboutsTitle = useMemo(
         () =>
             data && data.abouts
@@ -71,15 +75,47 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                     ) : null}
                     <div className="flex flex-col gap-1">
                         <div className="flex flex-col gap-2">
-                            <h1 className="font-black sm:text-xl lg:text-4xl">
+                            <h1 className="font-black text-xl md:text-2xl lg:text-4xl">
                                 {hotelName}
                             </h1>
                             <p className="text-primary">{hotelAddress}</p>
-                            {data?.geoData && Array.isArray(data.geoData.ru) && Array.isArray(data.geoData.en) ? (
+                            {data?.amenities && Array.isArray(data.amenities.ru) && Array.isArray(data.amenities.en) && data.amenities.en.length > 0 ? (
+                                <div className="flex gap-2 flex-wrap">
+                                    {i18n.language === 'ru'
+                                        ? data?.amenities.ru
+                                            .filter(
+                                                (item) => item.type === 'main'
+                                            )[0]
+                                            .amenities_list.map((item) => (
+                                                <p
+                                                    className="badge badge-sm md:badge-md badge-ghost"
+                                                    key={item.idx}
+                                                >
+                                                    {item.name}
+                                                </p>
+                                            ))
+                                        : data?.amenities.en
+                                            .filter(
+                                                (item) => item.type === 'main'
+                                            )[0]
+                                            .amenities_list.map((item) => (
+                                                <p
+                                                    className="badge badge-sm md:badge-md badge-ghost"
+                                                    key={item.idx}
+                                                >
+                                                    {item.name}
+                                                </p>
+                                            ))}
+                                </div>
+                            ) : null}
+                            {data?.geoData && Array.isArray(data.geoData.ru) && Array.isArray(data.geoData.en) && data.geoData.en.length > 0 ? (
                                 <div>
                                     {i18n.language === 'ru'
-                                        ? data?.geoData.ru.filter((item) => item.type === 'head')[0].geo_list.map(
-                                            (item) => (
+                                        ? data?.geoData.ru
+                                            .filter(
+                                                (item) => item.type === 'head'
+                                            )[0]
+                                            .geo_list.map((item) => (
                                                 <p
                                                     className="text-warning text-xs"
                                                     key={item.idx}
@@ -88,10 +124,12 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                                                     {item.distance_from_hotel}{' '}
                                                     {item.measurement}
                                                 </p>
-                                            )
-                                        )
-                                        : data?.geoData.en.filter((item) => item.type === 'head')[0].geo_list.map(
-                                            (item) => (
+                                            ))
+                                        : data?.geoData.en
+                                            .filter(
+                                                (item) => item.type === 'head'
+                                            )[0]
+                                            .geo_list.map((item) => (
                                                 <p
                                                     className="text-warning text-xs"
                                                     key={item.idx}
@@ -100,13 +138,18 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                                                     {item.distance_from_hotel}{' '}
                                                     {item.measurement}
                                                 </p>
-                                            )
-                                        )}
+                                            ))}
                                 </div>
                             ) : (
                                 <></>
                             )}
-                            <>{data?.hotel.rating && data?.hotel.rating > 0 ? <p className='flex items-center gap-1'><Rating /> {data?.hotel.rating}</p> : null}</>
+                            <>
+                                {data?.hotel.rating && data?.hotel.rating > 0 ? (
+                                    <p className="flex items-center gap-1">
+                                        <Rating /> {data?.hotel.rating}
+                                    </p>
+                                ) : null}
+                            </>
                         </div>
                         <div className="divider"></div>
                         {data?.images.length ? (
@@ -125,17 +168,26 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                     ))}
                 </article> */}
                     </div>
-
                 </Base>
-                {
-                    data?.locations.ru.geocode_data.geo_data.mid? (
-                        <Map coordinates={[data.locations.en.geocode_data.geo_data.mid.lat, data.locations.en.geocode_data.geo_data.mid.lon]} />
+                <Collapse title={hotelAddress} type={'arrow'} fullView={true}>
+                    {data?.locations.en.geocode_data.geo_data.mid ? (
+                        <Map
+                            coordinates={[
+                                data.locations.en.geocode_data.geo_data.mid.lat,
+                                data.locations.en.geocode_data.geo_data.mid.lon,
+                            ]}
+                        />
                     ) : (
                         <></>
-                    )} 
+                    )}
+                </Collapse>
                 <>
                     {data && data.abouts?.ru ? (
-                        <Collapse title={aboutsTitle} type={'arrow'} fullView={true}>
+                        <Collapse
+                            title={aboutsTitle}
+                            type={'arrow'}
+                            fullView={true}
+                        >
                             <article>
                                 {i18n.language === 'ru' &&
                                     data?.abouts?.ru?.descriptions?.map(

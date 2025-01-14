@@ -18,9 +18,9 @@ export const Collapse = ({
     const handlerSetIsOpen = useCallback(() => setIsOpen(!isOpen) ,[isOpen])
 
     return (
-        <div className={cn('collapse bg-base-100 border border-base-300 p-4', { 'collapse-arrow': type === 'arrow'})}>
+        <div className={cn('collapse bg-base-100 border border-base-300 sm:p-4', { 'collapse-arrow': type === 'arrow'})}>
             <input type="checkbox" onChange={handlerSetIsOpen} checked={isOpen} />
-            <div className="collapse-title text-2xl font-bold">{title}</div>
+            <div className="collapse-title text-xl lg:text-2xl font-bold">{title}</div>
             <div className="collapse-content text-sm">{children}</div>
         </div>
 

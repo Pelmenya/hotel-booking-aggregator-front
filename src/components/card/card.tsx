@@ -69,7 +69,7 @@ export const Card = ({
                     </p>
                     {amenities.ru ? (
                         <div className="flex gap-2 flex-wrap">
-                            {i18n.language === 'ru'
+                            {i18n.language === 'ru' && !Array.isArray(amenities.ru) && !Array.isArray(amenities.en)
                                 ? getSortAmenities(amenities.ru.amenities_list).map((item) => (
                                     <p
                                         className="badge badge-sm badge-ghost text-xs"
@@ -78,14 +78,14 @@ export const Card = ({
                                         {item.name}
                                     </p>
                                 ))
-                                : getSortAmenities(amenities.en.amenities_list).map((item) => (
+                                : !Array.isArray(amenities.en) ? getSortAmenities(amenities.en.amenities_list).map((item) => (
                                     <p
                                         className="badge badge-sm badge-host text-xs"
                                         key={item.idx}
                                     >
                                         {item.name}
                                     </p>
-                                ))}
+                                )): null}
                         </div>
                     ) : (
                         <></>

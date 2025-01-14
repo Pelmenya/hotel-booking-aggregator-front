@@ -13,7 +13,7 @@ export const Map = ({ coordinates }: MapProps) => {
                 apikey: process.env.NEXT_PUBLIC_YM_API_KEY
             }}
         >
-            <Base>
+            <div className='border border-base-300 bg-base-100 rounded-box p-4'>
                 <MapComponent
                     state={{ center: coordinates, zoom: 17 }}
                     width={'100%'}
@@ -21,7 +21,7 @@ export const Map = ({ coordinates }: MapProps) => {
                 >
                     <Placemark geometry={coordinates} />
                 </MapComponent>
-            </Base>
+            </div>
         </YMaps>
     );
 };
