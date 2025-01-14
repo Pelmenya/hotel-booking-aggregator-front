@@ -36,7 +36,7 @@ export const HotelGeoData = ({ data, hotelAddress }: THotelHeadProps) => {
                         {(i18n.language === 'ru'
                             ? data.geoData.ru
                             : data.geoData.en
-                        ).filter((geoData) => geoData.type === 'additional').sort((a,b) => a.geo_list.length - b.geo_list.length).map((geoData) => (
+                        ).filter((geoData) => geoData.type === 'additional').sort((a,b) =>  b.geo_list.length - a.geo_list.length).map((geoData) => (
                             <div className="flex-auto" key={geoData.id}>
                                 {renderGeoData(geoData.geo_list, geoData.title)}
                             </div>
