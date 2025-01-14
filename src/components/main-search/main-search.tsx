@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 export const MainSearch = () => {
     const { t } = useTranslation('form');
-    const [qString, setQString] = useState('Moscow'); // старт
+    const [qString, setQString] = useState('Моск'); // старт
     const [hotels, setHotels] = useState<THotelResData[]>([]);
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
