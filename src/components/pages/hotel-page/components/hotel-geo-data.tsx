@@ -67,8 +67,8 @@ export const HotelGeoData = ({ data, hotelAddress }: THotelHeadProps) => {
     ];
 
     const renderGeoData = (geoDataList: TGeoDataList, title: string) => (
-        <div className="p-4 rounded-lg border border-base-300 h-full" key={title}>
-            <h4 className="text-lg font-semibold">{title}</h4>
+        <div className="p-4 rounded-xl border border-base-300 h-full" key={title}>
+            <h4 className="text-lg font-semibold mb-2">{title}</h4>
             {geoDataList.map((item) => {
                 const icon = getIconByCategory(item.category);
                 return (
