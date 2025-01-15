@@ -1,5 +1,5 @@
 import { useLazySearchHotelsQuery } from '@/redux/api/hotels-api';
-import { MouseEvent, useState, useCallback, useEffect } from 'react';
+import { MouseEvent, useState, useCallback, useEffect, ChangeEvent } from 'react';
 import { List } from '../list/list';
 import { useInView } from 'react-intersection-observer';
 import { THotelResData } from '@/types/t-hotel-res-data';
@@ -8,11 +8,12 @@ import { useTranslation } from 'react-i18next';
 
 export const MainSearch = () => {
     const { t } = useTranslation('form');
-    const [qString, setQString] = useState('Моск'); // старт
+    const [inputValue, setInputValue] = useState('Моск'); // Новый стейт для ввода
+    const [qString, setQString] = useState('Моск'); // Стейт для запроса
     const [hotels, setHotels] = useState<THotelResData[]>([]);
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
-    const limit = 10; // количество отелей, получаемых за один запрос
+    const limit = 10;
 
     const [trigger, { isFetching }] = useLazySearchHotelsQuery();
 
@@ -22,7 +23,7 @@ export const MainSearch = () => {
                 `${qString}&limit=${limit}&offset=${page * limit}`
             ).unwrap();
             if (result.length === 0) {
-                setHasMore(false); // Если данные пустые, устанавливаем флаг окончания
+                setHasMore(false);
             } else {
                 setHotels((prevHotels) => [...prevHotels, ...result]);
             }
@@ -36,7 +37,6 @@ export const MainSearch = () => {
         rootMargin: '100px',
     });
 
-    // Загружаем новые отели, когда элемент становится видимым
     useEffect(() => {
         if (inView && !isFetching && hasMore) {
             setPage((prevPage) => prevPage + 1);
@@ -51,9 +51,14 @@ export const MainSearch = () => {
 
     const searchHandler = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        setHotels([]); // сбросить текущий список отелей
-        setPage(0); // начать с 0 страницы
-        setHasMore(true); // сбросить флаг окончания
+        setQString(inputValue); // Обновляем qString перед поиском
+        setHotels([]);
+        setPage(0);
+        setHasMore(true);
+    };
+
+    const handlerInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value); // Обновляем только inputValue
     };
 
     return (
@@ -65,7 +70,7 @@ export const MainSearch = () => {
                         className="relative border w-full rounded-xl"
                     >
                         <input
-                            onChange={(e) => setQString(e.target.value)}
+                            onChange={handlerInput}
                             id="MainSearchInput"
                             className="input rounded-xl sm:input-md md:input-lg w-full focus:outline-none"
                             type="text"
@@ -75,7 +80,7 @@ export const MainSearch = () => {
                             )}
                         />
                         <button
-                            onClick={(e) => searchHandler(e)}
+                            onClick={searchHandler}
                             className="btn btn-primary btn-md md:btn-lg  absolute right-0 rounded-xl"
                         >
                             <svg
@@ -98,7 +103,6 @@ export const MainSearch = () => {
             </form>
             <List items={hotels} href="/hotels" />
 
-            {/* Элемент, который будет следить за видимостью */}
             <div
                 ref={ref}
                 style={{ height: '100px', background: 'transparent' }}

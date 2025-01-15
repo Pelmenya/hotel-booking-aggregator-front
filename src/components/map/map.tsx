@@ -16,7 +16,7 @@ export const Map = ({ coordinates }: MapProps) => {
                 <MapComponent
                     state={{ center: coordinates, zoom: 17 }}
                     width={'100%'}
-                    height={'300px'}
+                    height={'315px'}
                 >
                     <Placemark geometry={coordinates} />
                 </MapComponent>
