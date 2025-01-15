@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { HotelHead } from './components/hotel-head';
 import { HotelGeoData } from './components/hotel-geo-data';
 import { HotelAbouts } from './components/hotel-abouts';
+import { HotelAmenities } from './components/hotel-amenities';
 
 export type THotelPageProps = {
     data: TNullable<THotelResData>;
@@ -25,6 +26,7 @@ export const HotelPage = ({ data }: THotelPageProps) => {
             <div className="flex flex-col gap-4">
                 <HotelHead data={data} hotelAddress={hotelAddress} />
                 <HotelGeoData data={data} hotelAddress={hotelAddress} />
+                <HotelAmenities data={data} />
                 <HotelAbouts data={data} />
             </div>
         </>

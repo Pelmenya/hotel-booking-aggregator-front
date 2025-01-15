@@ -161,6 +161,7 @@ export type TAmenity = {
 
 export type TAmenities = {
     id: string;
+    title:string;
     language: TLanguage;
     amenities_list: TAmenity[];
     type: TCategory;

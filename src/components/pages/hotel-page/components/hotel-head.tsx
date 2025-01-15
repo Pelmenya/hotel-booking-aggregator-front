@@ -56,7 +56,7 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
                         </div>
                     )}
                     {data?.hotel.rating && data.hotel.rating > 0 && (
-                        <p className="flex items-center gap-1">
+                        <p className="flex items-center text-sm gap-1">
                             <Rating /> {data.hotel.rating}
                         </p>
                     )}
