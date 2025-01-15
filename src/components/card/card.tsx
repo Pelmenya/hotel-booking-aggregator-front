@@ -119,7 +119,7 @@ export const Card = ({
                     )}
                 </div>
                 <a
-                    className="underline underline-offset-8"
+                    className="underline underline-offset-8 flex flex-col"
                     target={'_blank'}
                     href={
                         process.env.NEXT_PUBLIC_BASE_OSTROVOK +
