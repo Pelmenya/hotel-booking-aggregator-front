@@ -9,6 +9,7 @@ import Rating from '../../../../icons/hand-thumb-up.svg';
 import Ostrovok from '../../../../icons/ostrovok/ostrovok.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIconByGeoDataCategory } from '@/icons/fortawesome/get-icon-by-geo-data-category';
+import { getIconByAmenity } from '@/icons/fortawesome/get-icon-by-amenity';
 
 export type THotelHeadProps = THotelPageProps & {
     hotelAddress: string;
@@ -65,6 +66,7 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
                                             className="badge badge-sm md:badge-md badge-ghost"
                                             key={item.idx}
                                         >
+                                            {<FontAwesomeIcon icon={getIconByAmenity(item.name)} className="mr-1" />}
                                             {item.name}
                                         </p>
                                     ))}

@@ -161,7 +161,7 @@ export type TAmenity = {
 
 export type TAmenities = {
     id: string;
-    title:string;
+    title: string;
     language: TLanguage;
     amenities_list: TAmenity[];
     type: TCategory;
@@ -201,6 +201,20 @@ export type TAbouts = {
     descriptions: TDescription[];
 }
 
+export type TPolicyItem = {
+    id: number;
+    in: string;
+    out: string;
+    name: string;
+}
+
+export type TPolicy = {
+    id: string;
+    title: string;
+    language: TLanguage;
+    policy: TPolicyItem[];
+}
+
 export type THotelResData = {
     hotel: {
         id: string;
@@ -211,8 +225,9 @@ export type THotelResData = {
         stars?: number;
     };
     locations: { ru: TLocation; en: TLocation };
-    amenities: { ru: TAmenities | TAmenities[]; en: TAmenities | TAmenities []};
-    geoData: { ru: TGeoData | TGeoData[] ; en: TGeoData | TGeoData[] };
+    amenities: { ru: TAmenities | TAmenities[]; en: TAmenities | TAmenities[] };
+    geoData: { ru: TGeoData | TGeoData[]; en: TGeoData | TGeoData[] };
     images: TImage[];
     abouts: { ru: TAbouts; en: TAbouts };
+    policies: { ru: TPolicy; en: TPolicy }
 };

@@ -6,6 +6,7 @@ import { HotelHead } from './components/hotel-head';
 import { HotelGeoData } from './components/hotel-geo-data';
 import { HotelAbouts } from './components/hotel-abouts';
 import { HotelAmenities } from './components/hotel-amenities';
+import { HotelPolicies } from './components/hotel-policies';
 
 export type THotelPageProps = {
     data: TNullable<THotelResData>;
@@ -28,6 +29,7 @@ export const HotelPage = ({ data }: THotelPageProps) => {
                 <HotelGeoData data={data} hotelAddress={hotelAddress} />
                 <HotelAmenities data={data} />
                 <HotelAbouts data={data} />
+                <HotelPolicies data={data} />
             </div>
         </>
     );
