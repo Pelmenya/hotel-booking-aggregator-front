@@ -7,7 +7,7 @@ import Rating from '../../icons/hand-thumb-up.svg';
 import Star from '../../icons/star.svg';
 
 import styles from './card.module.css';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIconByGeoDataCategory } from '@/icons/fortawesome/get-icon-by-geo-data-category';
 
@@ -29,6 +29,14 @@ export const Card = ({
         const sortAmenities = [...a].sort((a,b) => a.name.length - b.name.length)
         return sortAmenities
     }, [])
+
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_OSTROVOK || '';
+
+    const linkOstrovok = useMemo(
+        () => baseUrl + hotel.hotel_link_ostrovok,
+        [baseUrl, hotel]
+    );
+
 
     return (
         <div
@@ -121,18 +129,23 @@ export const Card = ({
                         <></>
                     )}
                 </div>
-                <a
-                    className="underline underline-offset-8 flex flex-col"
-                    target={'_blank'}
-                    href={
-                        process.env.NEXT_PUBLIC_BASE_OSTROVOK +
-                        hotel.hotel_link_ostrovok
-                    }
-                    rel="noreferrer"
-                >
-                    {'-> ' + t('BOOKING', 'Забронировать на') + ': '}
-                    <Ostrovok /> {''}
-                </a>
+                <div className='flex flex-col items-center gap-2'>
+                    <a
+                        className="btn btn-primary btn-outline btn-sm"
+                        target={'_blank'}
+                        href={linkOstrovok}
+                        rel="noreferrer"
+                    >
+                        {'-> ' + t('BOOKING', 'Забронировать на') + ': '}
+                    </a>
+                    <a
+                        target={'_blank'}
+                        href={linkOstrovok}
+                        rel="noreferrer"
+                    >
+                        <Ostrovok />
+                    </a>
+                </div>
             </div>
         </div>
     );
