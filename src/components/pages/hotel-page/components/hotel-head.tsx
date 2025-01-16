@@ -23,11 +23,17 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
 
     const hotelName = useMemo(() => {
         if (!data || !data.hotel) return '';
-        const name =
-            i18n.language === 'ru' ? data.hotel.name : data.hotel.name_en;
+    
+        // Получаем имя отеля в зависимости от языка
+        const name = i18n.language === 'ru' ? data.hotel.name || data.hotel.name_en : data.hotel.name_en || data.hotel.name;
+    
+        // Проверка, содержит ли имя отеля звезды, и формирование строки со звездами
+        const cleanedName = name?.replace(new RegExp('\\s?\\d*\\*'), '');
         const stars = data.hotel.stars ? `, ${data.hotel.stars}*` : '';
-        return `${name}${stars}`;
+        
+        return `${cleanedName}${stars}`;
     }, [data, i18n.language]);
+    
 
     
     const baseUrl = process.env.NEXT_PUBLIC_BASE_OSTROVOK || '';

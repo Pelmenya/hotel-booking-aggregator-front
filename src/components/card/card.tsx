@@ -45,7 +45,7 @@ export const Card = ({
             <div className="py-4 px-4 lg:max-w-[380px] w-full rounded-3xl flex flex-col justify-between gap-2">
                 <div className="flex flex-col gap-2 h-full">
                     <h6 className={cn('font-bold text-lg', styles.title)}>
-                        {i18n.language === 'ru' ? hotel.name : hotel.name_en}
+                        {i18n.language === 'ru' ? hotel.name || hotel.name_en : hotel.name_en || hotel.name}
                     </h6>
                     <div className='flex gap-2'>
                         {hotel.stars && hotel.stars > 0 ? (
