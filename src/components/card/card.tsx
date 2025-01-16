@@ -129,7 +129,7 @@ export const Card = ({
                         <></>
                     )}
                 </div>
-                <div className='flex flex-col items-center gap-2'>
+                <div className='mt-2 flex flex-col items-start gap-2'>
                     <a
                         className="btn btn-primary btn-outline btn-sm"
                         target={'_blank'}
