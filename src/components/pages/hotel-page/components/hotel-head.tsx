@@ -7,6 +7,8 @@ import { useTranslation } from 'react-i18next';
 import { THotelPageProps } from '../hotel-page';
 import Rating from '../../../../icons/hand-thumb-up.svg';
 import Ostrovok from '../../../../icons/ostrovok/ostrovok.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getIconByGeoDataCategory } from '@/icons/fortawesome/get-icon-by-geo-data-category';
 
 export type THotelHeadProps = THotelPageProps & {
     hotelAddress: string;
@@ -83,6 +85,7 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
                                             className="text-warning text-xs"
                                             key={item.idx}
                                         >
+                                            <FontAwesomeIcon icon={getIconByGeoDataCategory('')} className="mr-1" />
                                             {item.name} ~{' '}
                                             {item.distance_from_hotel}{' '}
                                             {item.measurement}

@@ -8,6 +8,9 @@ import Star from '../../icons/star.svg';
 
 import styles from './card.module.css';
 import { useCallback } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getIconByAmenity } from '@/icons/fortawesome/get-icon-by-amenity';
+import { getIconByGeoDataCategory } from '@/icons/fortawesome/get-icon-by-geo-data-category';
 
 export type TCardProps = THotelResData & {
     onClick: (id: string) => void;
@@ -98,6 +101,7 @@ export const Card = ({
                                         className="text-warning text-xs"
                                         key={item.idx}
                                     >
+                                        <FontAwesomeIcon icon={getIconByGeoDataCategory('')} className="mr-1" />
                                         {item.name} ~{' '}
                                         {item.distance_from_hotel}{' '}
                                         {item.measurement}
