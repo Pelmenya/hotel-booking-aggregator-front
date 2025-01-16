@@ -9,7 +9,6 @@ import Star from '../../icons/star.svg';
 import styles from './card.module.css';
 import { useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getIconByAmenity } from '@/icons/fortawesome/get-icon-by-amenity';
 import { getIconByGeoDataCategory } from '@/icons/fortawesome/get-icon-by-geo-data-category';
 
 export type TCardProps = THotelResData & {
