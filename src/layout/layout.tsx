@@ -8,6 +8,7 @@ import { YMInitializer } from 'react-yandex-metrika';
 import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
 import Script from 'next/script';
 import { THotelResData } from '@/types/t-hotel-res-data';
+import { getImageUrl } from 'utils/getImageUrl';
 
 Router.events.on('routeChangeComplete', (url: string) => {
     if (typeof window !== 'undefined') {
@@ -23,7 +24,7 @@ export type ILayoutProps = TBaseProps & {
 export const Layout = ({ title, data, children }: ILayoutProps) => {
     const router = useRouter();
     const hotelDescription = data ? data.abouts.ru.descriptions.map(desc => desc.paragraph).join(' ') : 'Сайт для аренды на день';
-    const hotelImage = data?.images.length ? data.images[0].path : getPublicBaseImagesUrl('og-img.png');
+    const hotelImage = data?.images.length ? getImageUrl(data.images[0].path) : getPublicBaseImagesUrl('og-img.png');
 
     return (
         <>
