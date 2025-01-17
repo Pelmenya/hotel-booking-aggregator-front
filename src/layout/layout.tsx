@@ -25,7 +25,11 @@ export const Layout = ({ title, children }: ILayoutProps) => {
         <>
             <Head>
                 <title>{title}</title>
-                <link rel="icon" href="logo.svg" />
+                <meta name="description" content="Сайт для аренды на день" />
+                <meta
+                    name="keywords"
+                    content="Краткосрочная аренда, посуточная аренда, аренда не на долго, на день"
+                />
                 <meta
                     property="og:url"
                     content={process.env.NEXT_PUBLIC_SITE_URL + router.asPath}
@@ -35,15 +39,14 @@ export const Layout = ({ title, children }: ILayoutProps) => {
                     property="og:image"
                     content={getPublicBaseImagesUrl('og-img.png')}
                 />
-                <meta
-                    property="og:title"
-                    content={title}//.split('~')[1].trim()}
-                />
+                <meta property="og:title" content={title} />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
+                <link rel="icon" href={getPublicBaseImagesUrl('logo.svg')} />
             </Head>
+
             <YMInitializer
                 accounts={[Number(process.env.NEXT_PUBLIC_YM_ACCOUNT)]}
                 options={{ webvisor: true, defer: true }}
