@@ -10,6 +10,9 @@
   "main-page-slide2": "The world of exquisite land",
   "main-page-slide3": "На-День.рф is your way",
   "profile": "Profile",
+  "SHARE_BTN_CAPTION": "Share",
   "TITLE_FULLNESS_PROFILE": "Fullness of the profile",
+  "TOAST_ERROR_COPY_TO_CLIPBOARD": "Couldn't copy the link to the page.",
+  "TOAST_SUCCESS_COPY_TO_CLIPBOARD": "The link to the page has been copied to the clipboard!",
   "welcome": "Welcome"
 }

@@ -10,6 +10,8 @@ import Ostrovok from '../../../../icons/ostrovok/ostrovok.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIconByGeoDataCategory } from '@/icons/fortawesome/get-icon-by-geo-data-category';
 import { getIconByAmenity } from '@/icons/fortawesome/get-icon-by-amenity';
+import { toast } from 'react-toastify';
+import { faArrowRightLong, faShare } from '@fortawesome/free-solid-svg-icons';
 
 export type THotelHeadProps = THotelPageProps & {
     hotelAddress: string;
@@ -24,18 +26,28 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
     const hotelName = useMemo(() => {
         if (!data || !data.hotel) return '';
 
-        // Получаем имя отеля в зависимости от языка
-        const name =
-            i18n.language === 'ru'
-                ? data.hotel.name || data.hotel.name_en
-                : data.hotel.name_en || data.hotel.name;
+        const name = i18n.language === 'ru'
+            ? data.hotel.name || data.hotel.name_en
+            : data.hotel.name_en || data.hotel.name;
 
-        // Проверка, содержит ли имя отеля звезды, и формирование строки со звездами
         const cleanedName = name?.replace(new RegExp('\\s?\\d*\\*'), '');
         const stars = data.hotel.stars ? `, ${data.hotel.stars}*` : '';
 
         return `${cleanedName}${stars}`;
     }, [data, i18n.language]);
+
+    const linkCurrentPage = useMemo(() => {
+        return window.location.href;
+    }, []);
+
+    const copyToClipboard = async () => {
+        try {
+            await navigator.clipboard.writeText(linkCurrentPage);
+            toast.success(t('TOAST_SUCCESS_COPY_TO_CLIPBOARD','Ссылка на страницу скопирована в буфер обмена!'));
+        } catch (error) {
+            toast.error(t('TOAST_ERROR_COPY_TO_CLIPBOARD','Не удалось скопировать ссылку на страницу.'));
+        }
+    };
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_OSTROVOK || '';
 
@@ -134,15 +146,23 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
                             href={linkOstrovok}
                             rel="noreferrer"
                         >
-                            {'-> ' + t('BOOKING', 'Забронировать на') + ': '}
+                            <FontAwesomeIcon icon={faArrowRightLong} className="mr-2" />
+                            {t('BOOKING', 'Забронировать на') + ': '}
                         </a>
-                        <a
+                        <a className=''
                             target={'_blank'}
                             href={linkOstrovok}
                             rel="noreferrer"
                         >
                             <Ostrovok />
                         </a>
+                        <button
+                            className="btn btn-secondary btn-outline btn-md lg:btn-lg w-full"
+                            onClick={copyToClipboard}
+                        >
+                            <FontAwesomeIcon icon={faShare} className="mr-2" />
+                            {t('SHARE_BTN_CAPTION', 'Поделиться')}
+                        </button>
                     </div>
                 </div>
                 <div className="divider"></div>

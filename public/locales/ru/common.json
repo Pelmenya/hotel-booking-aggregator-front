@@ -10,6 +10,9 @@
   "main-page-slide2": "Мир изысканной природы",
   "main-page-slide3": "На-День.рф - Ваш путь",
   "profile": "Профиль",
+  "SHARE_BTN_CAPTION": "Поделиться",
   "TITLE_FULLNESS_PROFILE": "Заполненность профиля",
+  "TOAST_ERROR_COPY_TO_CLIPBOARD": "Не удалось скопировать ссылку на страницу.",
+  "TOAST_SUCCESS_COPY_TO_CLIPBOARD": "Ссылка на страницу скопирована в буфер обмена!",
   "welcome": "Добро пожаловать"
 }
