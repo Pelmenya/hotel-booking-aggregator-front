@@ -69,7 +69,7 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                     <div className="flex flex-col gap-2">
-                        <h1 className="font-black text-2xl md:text-2xl lg:text-4xl max-w-[800px]">
+                        <h1 className="font-black text-2xl md:text-3xl lg:text-4xl max-w-[750px]">
                             {hotelName}
                         </h1>
                         <p className="text-primary">{hotelAddress}</p>
@@ -141,7 +141,7 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
                     </div>
                     <div className='flex flex-col items-center gap-2'>
                         <a
-                            className="btn btn-primary btn-outline btn-md lg:btn-lg"
+                            className="btn btn-primary btn-outline btn-sm sm:btn-lg"
                             target={'_blank'}
                             href={linkOstrovok}
                             rel="noreferrer"
@@ -157,7 +157,7 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
                             <Ostrovok />
                         </a>
                         <button
-                            className="btn btn-secondary btn-outline btn-md lg:btn-lg w-full"
+                            className="btn btn-secondary btn-outline btn-sm sm:btn-lg w-full"
                             onClick={copyToClipboard}
                         >
                             <FontAwesomeIcon icon={faShare} className="mr-2" />
