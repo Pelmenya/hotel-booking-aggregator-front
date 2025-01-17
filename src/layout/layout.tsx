@@ -7,6 +7,7 @@ import ym from 'react-yandex-metrika';
 import { YMInitializer } from 'react-yandex-metrika';
 import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
 import Script from 'next/script';
+import { THotelResData } from '@/types/t-hotel-res-data';
 
 Router.events.on('routeChangeComplete', (url: string) => {
     if (typeof window !== 'undefined') {
@@ -16,16 +17,19 @@ Router.events.on('routeChangeComplete', (url: string) => {
 
 export type ILayoutProps = TBaseProps & {
     title: string;
+    data?: THotelResData;
 };
 
-export const Layout = ({ title, children }: ILayoutProps) => {
+export const Layout = ({ title, data, children }: ILayoutProps) => {
     const router = useRouter();
+    const hotelDescription = data ? data.abouts.ru.descriptions.map(desc => desc.paragraph).join(' ') : 'Сайт для аренды на день';
+    const hotelImage = data?.images.length ? data.images[0].path : getPublicBaseImagesUrl('og-img.png');
 
     return (
         <>
             <Head>
                 <title>{title}</title>
-                <meta name="description" content="Сайт для аренды на день" />
+                <meta name="description" content={hotelDescription} />
                 <meta
                     name="keywords"
                     content="Краткосрочная аренда, посуточная аренда, аренда не на долго, на день"
@@ -37,14 +41,36 @@ export const Layout = ({ title, children }: ILayoutProps) => {
                 <meta property="og:locale" content="ru_RU" />
                 <meta
                     property="og:image"
-                    content={getPublicBaseImagesUrl('og-img.png')}
+                    content={hotelImage}
                 />
                 <meta property="og:title" content={title} />
+                <meta property="og:description" content={hotelDescription} />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1"
                 />
                 <link rel="icon" href={getPublicBaseImagesUrl('logo.svg')} />
+                <script type="application/ld+json">
+                    {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Hotel",
+                        "name": "${data?.hotel.name || ''}",
+                        "description": "${hotelDescription}",
+                        "image": "${hotelImage}",
+                        "url": "${process.env.NEXT_PUBLIC_SITE_URL + router.asPath}",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "${data?.locations.ru.address || ''}"
+                        },
+                        "aggregateRating": {
+                            "@type": "AggregateRating",
+                            "ratingValue": "${data?.hotel.rating || 0}",
+                            "reviewCount": "50"
+                        }
+                    }
+                    `}
+                </script>
             </Head>
 
             <YMInitializer

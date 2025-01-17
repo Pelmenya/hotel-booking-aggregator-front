@@ -17,7 +17,7 @@ export default function Hotel({ id }: { id: string }) {
     const hotelTitle = data ? (i18n.language === 'ru' ? data.hotel.name : data.hotel.name_en) : '';
 
     return (
-        <Layout title={`На-День.рф ~ ${hotelTitle}`}>
+        <Layout title={`На-День.рф ~ ${hotelTitle}`} data={data}>
             <HotelPage data={data || null} />
             {isDev && <DataJson data={data} />}
         </Layout>
