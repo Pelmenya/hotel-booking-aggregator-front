@@ -57,7 +57,7 @@ export const HotelHead = ({ data, hotelAddress }: THotelHeadProps) => {
             <div className="flex flex-col gap-1">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                     <div className="flex flex-col gap-2">
-                        <h1>
+                        <h1 className="font-black text-2xl md:text-2xl lg:text-4xl max-w-[800px]">
                             {hotelName}
                         </h1>
                         <p className="text-primary">{hotelAddress}</p>
