@@ -37,7 +37,7 @@ export const ContentUsers = () => {
                                                                     .avatars[0]
                                                                     ? getImageUrl(
                                                                         user
-                                                                            ?.avatars[0]
+                                                                            ?.avatars[0], 'server'
                                                                     )
                                                                     : getPublicBaseImagesUrl(
                                                                         String(
