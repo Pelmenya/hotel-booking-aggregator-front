@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 export const Avatar = () => {
     const { t } = useTranslation('form')
     const { user } = useAppSelector(getUserState);
-    const picture =  user?.avatars?.length ? getImageUrl(user.avatars[0]) : null;
+    const picture =  user?.avatars?.length ? getImageUrl(user.avatars[0], 'server') : null;
     
     const dispatch = useAppDispatch();
 

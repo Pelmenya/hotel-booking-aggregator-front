@@ -22,7 +22,7 @@ export const UserInfo = () => {
                         <div className="rounded-full">
                             <picture>
                                 <img
-                                    src={getImageUrl(user?.avatars[0])}
+                                    src={getImageUrl(user?.avatars[0], 'server')}
                                     alt={user?.name}
                                 />
                             </picture>

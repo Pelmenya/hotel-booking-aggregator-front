@@ -30,7 +30,7 @@ export const MenuDropdown = ({ user }: TUserProps) => {
                         <picture>
                             <img
                                 className="h-8 w-8 rounded-full"
-                                src={getImageUrl(user.avatars[0])}
+                                src={getImageUrl(user.avatars[0], 'server')}
                                 alt={user?.name}
                             />
                         </picture>
