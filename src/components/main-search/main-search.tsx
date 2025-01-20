@@ -5,11 +5,12 @@ import { useInView } from 'react-intersection-observer';
 import { THotelResData } from '@/types/t-hotel-res-data';
 import { Loading } from '../loading/loading';
 import { useTranslation } from 'react-i18next';
+import { getRandomDistrict } from './get-random-district';
 
 export const MainSearch = () => {
     const { t } = useTranslation('form');
-    const [inputValue, setInputValue] = useState('Анапа'); // Новый стейт для ввода
-    const [qString, setQString] = useState('Анапа'); // Стейт для запроса
+    const [inputValue, setInputValue] = useState(getRandomDistrict()); // Новый стейт для ввода
+    const [qString, setQString] = useState(getRandomDistrict()); // Стейт для запроса
     const [hotels, setHotels] = useState<THotelResData[]>([]);
     const [page, setPage] = useState(0);
     const [hasMore, setHasMore] = useState(true);
