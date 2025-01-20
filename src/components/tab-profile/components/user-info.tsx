@@ -3,12 +3,12 @@ import { getUserState } from '@/redux/selectors/user';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-import { getImageUrl } from 'utils/getImageUrl';
-import { getRole } from 'utils/getRole';
+import { getImageUrl } from 'utils/get-image-url';
+import { getRole } from 'utils/get-role';
 import { Confirm } from './confirm';
 import { FullnessProfile } from './fullness-profile/fullness-profile';
 import EditIcon from '@/icons/edit.svg';
-import { getGender } from 'utils/getGender';
+import { getGender } from 'utils/get-gender';
 
 export const UserInfo = () => {
     const { t, i18n } = useTranslation('form');

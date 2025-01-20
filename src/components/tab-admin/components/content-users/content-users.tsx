@@ -1,10 +1,10 @@
 import { useGetAdminUsersQuery } from '@/redux/api/admin-api';
-import { generateRandomInteger } from 'utils/generateRandomInteger';
-import { getImageUrl } from 'utils/getImageUrl';
-import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
+import { generateRandomInteger } from 'utils/generate-random-integer';
+import { getImageUrl } from 'utils/get-image-url';
+import { getPublicBaseImagesUrl } from 'utils/get-public-base-images-url';
 import cn from 'classnames';
 import { max, min } from './constants';
-import { getRole } from 'utils/getRole';
+import { getRole } from 'utils/get-role';
 
 export const ContentUsers = () => {
     const { data } = useGetAdminUsersQuery('');

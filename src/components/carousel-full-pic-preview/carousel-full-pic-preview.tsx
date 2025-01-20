@@ -1,4 +1,4 @@
-import { getImageUrl } from 'utils/getImageUrl';
+import { getImageUrl } from 'utils/get-image-url';
 import cn from 'classnames';
 
 import styles from './carousel-full-pic-preview.module.css';

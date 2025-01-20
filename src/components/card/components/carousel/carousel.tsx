@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
-import { getImageUrl } from 'utils/getImageUrl';
+import { getImageUrl } from 'utils/get-image-url';
 import styles from './carousel.module.css';
 import { TImage } from '@/types/t-hotel-res-data';
 

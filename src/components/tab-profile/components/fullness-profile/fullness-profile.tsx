@@ -1,5 +1,5 @@
 import { CSSProperties, useMemo } from 'react';
-import { getFullnessProfile } from 'utils/getFullnessProfile';
+import { getFullnessProfile } from 'utils/get-fullness-profile';
 import CrownIcon from '@/icons/crown.svg';
 import { TUser } from '@/types/t-user';
 import { TNullable } from '@/types/t-nullable';

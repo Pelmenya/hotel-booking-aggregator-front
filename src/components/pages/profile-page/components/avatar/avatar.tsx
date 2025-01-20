@@ -11,7 +11,7 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { setUser } from '@/redux/slices/user-slice';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getUserState } from '@/redux/selectors/user';
-import { getImageUrl } from 'utils/getImageUrl';
+import { getImageUrl } from 'utils/get-image-url';
 import { TUser } from '@/types/t-user';
 import { useTranslation } from 'react-i18next';
 

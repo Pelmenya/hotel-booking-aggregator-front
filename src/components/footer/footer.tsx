@@ -1,4 +1,4 @@
-import { getYear } from 'utils/getYear';
+import { getYear } from 'utils/get-year';
 import { Logo } from '../logo/logo';
 import Link from 'next/link';
 import VKIcon from '@/icons/social/vk.svg';

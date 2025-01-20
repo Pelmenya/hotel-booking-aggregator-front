@@ -11,7 +11,7 @@ import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { Map } from '@/components/map/map';
-import { transformCoordinates } from 'utils/transformCoordinates';
+import { transformCoordinates } from 'utils/transform-coordinates';
 import { useTranslation } from 'react-i18next';
 
 export const HotelCreateForm = () => {

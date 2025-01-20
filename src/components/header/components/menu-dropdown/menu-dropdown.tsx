@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 import { MenuLink } from './components/menu-link';
 import { menuLinksLogin, menuLinksLogout } from './constants';
 import { TUserProps } from '@/types/t-user-props';
-import { getImageUrl } from 'utils/getImageUrl';
+import { getImageUrl } from 'utils/get-image-url';
 import ProfileIcon from '@/icons/profile-icon.svg';
 import { setUndefinedUserSettings } from '@/redux/slices/user-settings-slice';
 import { useTranslation } from 'react-i18next';

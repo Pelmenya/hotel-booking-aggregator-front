@@ -13,10 +13,10 @@ import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { SubmitBtn } from '../components/submit-btn/submit-btn';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { usePutAdminHotelsMutation } from '@/redux/api/admin-api';
-import { getImageUrl } from 'utils/getImageUrl';
-import { getBaseImageUrl } from 'utils/getBaseImageUrl';
+import { getImageUrl } from 'utils/get-image-url';
+import { getBaseImageUrl } from 'utils/get-base-image-url';
 import { TPicture } from '@/types/t-picture';
-import { transformCoordinates } from 'utils/transformCoordinates';
+import { transformCoordinates } from 'utils/transform-coordinates';
 import { Map } from '@/components/map/map';
 import { useTranslation } from 'react-i18next';
 

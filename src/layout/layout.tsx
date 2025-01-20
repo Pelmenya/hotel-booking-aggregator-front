@@ -5,10 +5,10 @@ import { Footer } from '@/components/footer/footer';
 import Router, { useRouter } from 'next/router';
 import ym from 'react-yandex-metrika';
 import { YMInitializer } from 'react-yandex-metrika';
-import { getPublicBaseImagesUrl } from 'utils/getPublicBaseImagesUrl';
+import { getPublicBaseImagesUrl } from 'utils/get-public-base-images-url';
 import Script from 'next/script';
 import { THotelResData } from '@/types/t-hotel-res-data';
-import { getImageUrl } from 'utils/getImageUrl';
+import { getImageUrl } from 'utils/get-image-url';
 
 Router.events.on('routeChangeComplete', (url: string) => {
     if (typeof window !== 'undefined') {

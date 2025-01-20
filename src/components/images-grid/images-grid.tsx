@@ -1,4 +1,4 @@
-import { getImageUrl } from 'utils/getImageUrl';
+import { getImageUrl } from 'utils/get-image-url';
 import cn from 'classnames';
 import styles from './images-grid.module.css';
 import { TImage } from '@/types/t-hotel-res-data';
