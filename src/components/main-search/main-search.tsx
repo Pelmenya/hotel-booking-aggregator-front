@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { THotelResData } from '@/types/t-hotel-res-data';
 import { Loading } from '../loading/loading';
 import { useTranslation } from 'react-i18next';
-import { getRandomDistrict } from './get-random-district';
+import { getRandomDistrict } from '../../../utils/get-random-district';
 
 export const MainSearch = () => {
     const { t } = useTranslation('form');

@@ -9,6 +9,7 @@ import { confirmApi } from '../api/confirm-api';
 import { userSlice } from '../slices/user-slice';
 import { userSettingsSlice } from '../slices/user-settings-slice';
 import { hotelsApi } from '../api/hotels-api';
+import { addressApi } from '../api/address-api';
 
 
 
@@ -25,6 +26,7 @@ export const store = configureStore({
         [adminApi.reducerPath]: adminApi.reducer,
         [confirmApi.reducerPath]: confirmApi.reducer,
         [hotelsApi.reducerPath]: hotelsApi.reducer,
+        [addressApi.reducerPath]: addressApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([
         ...middlewares, 
@@ -34,6 +36,7 @@ export const store = configureStore({
         adminApi.middleware,
         confirmApi.middleware,
         hotelsApi.middleware,
+        addressApi.middleware,
     ]),
     devTools: true,
 });

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { HotelEditForm } from '@/components/forms/hotel-edit-form/hotel-edit-form';
 import { TabMenu } from '@/components/tab/components/tab-menu/tab-menu';
 import { TabMenuLink } from '@/components/tab/components/tab-menu/components/tab-menu-link/tab-menu-link';
+import AddressSearch from '@/components/address-search/address-search';
 
 export const ContentHotels = () => {
     const router = useRouter();
@@ -18,24 +19,25 @@ export const ContentHotels = () => {
                         href="/admin/hotels"
                         active={!isEdit && !isDelete}
                         text="Добавить"
-                        icon='add'
+                        icon="add"
                     />
                     <TabMenuLink
                         href="/admin/hotels/edit"
                         active={isEdit}
                         text="Редактировать"
-                        icon='edit'
+                        icon="edit"
                     />
                     <TabMenuLink
                         href="/admin/hotels/delete"
                         active={isDelete}
                         text="Удалить"
                         disabled={true}
-                        icon='delete'
+                        icon="delete"
                     />
                 </TabMenu>
             </div>
             <div className="col-span-4 bg-base-100 px-4 py-4 rounded-md">
+                <AddressSearch />
                 {!isEdit && !isDelete && <HotelCreateForm />}
                 {isEdit && <HotelEditForm />}
             </div>

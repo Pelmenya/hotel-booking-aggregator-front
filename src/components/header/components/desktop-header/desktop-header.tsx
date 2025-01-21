@@ -41,6 +41,18 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                         <p className="hidden md:block">{t('admin')}</p>
                     </Link>
                 )}
+                {user?.role === 'admin' && user?.emailIsConfirm && user?.phoneIsConfirm && (
+                    <Link
+                        href="/admin/hotels"
+                        className={cn('btn btn-sm', {
+                            ['btn-primary']: isAdminPage,
+                        })}
+                    >
+                        <AdminIcon />
+                        <p className="hidden md:block">{t('HEADER_RENT_BTN', 'Rent')}</p>
+                    </Link>
+                )}
+
             </div>
         </div>
     );
