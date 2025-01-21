@@ -1,6 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
+export type TSuggestion = {
+    machine: string;
+    sign: string;
+    value: string;
+    zip: string;
+};
+
+export type TSuggestionAddressResponseData = {
+    query: string;
+    requestProcessTime: number;
+    suggestions: TSuggestion[];
+};
+
 export const addressApi = createApi({
     reducerPath: 'addressApi',
     baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/proxy' }),
@@ -10,7 +23,7 @@ export const addressApi = createApi({
         }
     },
     endpoints: (builder) => ({
-        getAddressSuggestions: builder.query({
+        getAddressSuggestions: builder.query<TSuggestionAddressResponseData, string>({
             query: (q: string) => ({
                 url: `suggest/address?q=${q}`,
                 method: 'GET',

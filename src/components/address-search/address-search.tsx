@@ -59,9 +59,9 @@ export default function AddressSearch() {
                     )}
                     {suggestions.length > 0 && (
                         <Combobox.Options className="absolute z-10 bg-base-100 border border-primary rounded-md shadow-lg max-h-60 mt-1 w-full overflow-auto">
-                            {suggestions.map((suggestion, index) => (
+                            {suggestions.map((suggestion) => (
                                 <Combobox.Option
-                                    key={index}
+                                    key={suggestion.sign}
                                     value={suggestion.value}
                                     className="cursor-pointer select-none relative py-2 pl-3 pr-4 hover:bg-blue-100"
                                 >
