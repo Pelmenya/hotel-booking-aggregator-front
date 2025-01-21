@@ -5,7 +5,7 @@ export const addressApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'http://ahunter.ru/site/' }),
     endpoints: (builder) => ({
         getAddressSuggestions: builder.query({
-            query: (query) => `suggest/address?output=json&query=${encodeURIComponent(query)}`,
+            query: (query) => `suggest/address?addresslim=5;output=json|pretty;query=${encodeURIComponent(query)}`,
             // Вы можете добавить transformResponse для обработки ответа, если это необходимо
         }),
     }),
