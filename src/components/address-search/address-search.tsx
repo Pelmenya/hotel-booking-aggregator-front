@@ -8,9 +8,7 @@ export default function AddressSearch() {
     const [query, setQuery] = useState('');
     const [isFocused, setIsFocused] = useState(false);
 
-    const { data } = useGetAddressSuggestionsQuery(query, {
-        skip: query.length < 3,
-    });
+    const { data } = useGetAddressSuggestionsQuery(query);
 
     const suggestions = data?.suggestions || [];
 
@@ -46,7 +44,8 @@ export default function AddressSearch() {
                                 'absolute left-3 text-sm transition-all duration-100 ease-in-out pointer-events-none',
                                 {
                                     'top-3 text-xs': query,
-                                    'top-1/2 transform -translate-y-1/2 peer-focus:top-3 peer-focus:text-xs': query != '' || !query || !isFocused,
+                                    'top-1/2 transform -translate-y-1/2 peer-focus:top-3 peer-focus:text-xs':
+                                        query != '' || !query || !isFocused,
                                 }
                             )}
                         >
@@ -55,9 +54,7 @@ export default function AddressSearch() {
                     </div>
                     {query && suggestions.length === 0 && (
                         <Combobox.Options className="absolute z-10 bg-base-100 border border-primary rounded-md shadow-lg max-h-60 mt-1 w-full overflow-auto">
-                            <div className="p-2">
-                                Нет подходящей подсказки
-                            </div>
+                            <div className="p-2">Нет подходящей подсказки</div>
                         </Combobox.Options>
                     )}
                     {suggestions.length > 0 && (
@@ -66,15 +63,15 @@ export default function AddressSearch() {
                                 <Combobox.Option
                                     key={index}
                                     value={suggestion.value}
-                                    className="cursor-pointer select-none relative py-2 pl-10 pr-4 hover:bg-blue-100"
+                                    className="cursor-pointer select-none relative py-2 pl-3 pr-4 hover:bg-blue-100"
                                 >
                                     {({ active }) => (
                                         <span
-                                            className={`block truncate ${
+                                            className={`block ${
                                                 active
                                                     ? 'font-medium'
                                                     : 'font-normal'
-                                            }`}
+                                            } whitespace-normal break-words`}
                                         >
                                             {suggestion.value}
                                         </span>
