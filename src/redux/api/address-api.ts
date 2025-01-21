@@ -1,11 +1,21 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { HYDRATE } from 'next-redux-wrapper';
 
 export const addressApi = createApi({
     reducerPath: 'addressApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://ahunter.ru/site/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/proxy' }),
+    extractRehydrationInfo(action, { reducerPath }) {
+        if (action.type === HYDRATE) {
+            return action.payload[reducerPath];
+        }
+    },
     endpoints: (builder) => ({
         getAddressSuggestions: builder.query({
-            query: (query) => `suggest/address?addresslim=5;output=json|pretty;query=${encodeURIComponent(query)}`,
+            query: (q: string) => ({
+                url: `suggest/address?q=${q}`,
+                method: 'GET',
+                credentials: 'include'     // обязательно для проставления cookie
+            }),
             // Вы можете добавить transformResponse для обработки ответа, если это необходимо
         }),
     }),
