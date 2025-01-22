@@ -99,7 +99,7 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
                 className="btn btn-sm flex gap-2"
             >
                 <ConfirmIcon />
-                Подтвердить
+                {t('CAPTION_SUBMIT_BTN_CONFIRM', 'Подтвердить')}
             </button>
             <Modal
                 isOpen={isOpenConfirmModal}
