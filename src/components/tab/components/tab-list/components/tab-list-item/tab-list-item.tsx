@@ -16,6 +16,6 @@ export const TabListItem = ({
         <TabListHeadLink href={href} active={active}>
             {tab}
         </TabListHeadLink>
-        {active && <TabListBody>{children}</TabListBody>}
+        <TabListBody>{children}</TabListBody>
     </>
 );
