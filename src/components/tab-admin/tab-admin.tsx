@@ -8,10 +8,10 @@ import { TabListItem } from '../tab/components/tab-list/components/tab-list-item
 export const TabAdmin = () => {
     const router = useRouter();
     const paths = router.pathname.split('/');
-    const isHotelRooms = paths.includes('hotel-rooms');
+    //    const isHotelRooms = paths.includes('hotel-rooms');
     const isHotels = paths.includes('hotels');
     const isUsers = paths.includes('users');
-    const isCalendar = paths.includes('calendar');
+    //  const isCalendar = paths.includes('calendar');
 
     return (
         <Tab>
