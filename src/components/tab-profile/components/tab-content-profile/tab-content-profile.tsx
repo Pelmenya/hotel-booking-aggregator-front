@@ -10,7 +10,6 @@ import { Avatar } from '@/components/pages/profile-page/components/avatar/avatar
 import { UpdateUserForm } from '@/components/forms/update-user-form/update-user-form';
 import { UpdatePasswordForm } from '@/components/forms/update-password-form/update-password-form';
 import { TabContent } from '@/components/tab/components/tab-content/tab-content';
-import { TabMenuWrapper } from '@/components/tab/components/tab-menu/components/tab-menu-wrapper/tab-menu-wrapper';
 import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
 import { useTranslation } from 'react-i18next';
 import { setUndefinedUserSettings } from '@/redux/slices/user-settings-slice';
@@ -53,34 +52,32 @@ export const TabContentProfile = () => {
 
     return (
         <TabContent>
-            <TabMenuWrapper>
-                <TabMenu>
-                    <TabMenuLink
-                        href="/profile"
-                        active={isProfile}
-                        text={t('TAB_MENU_LINK_ACCOUNT', 'Личный кабинет')}
-                        icon="account"
-                    />
-                    <TabMenuLink
-                        href="/profile/edit"
-                        active={isProfileEdit}
-                        text={t('TAB_MENU_LINK_EDIT_DATA', 'Изменить данные')}
-                        icon="identification"
-                    />
-                    <TabMenuLink
-                        href="/profile/password"
-                        active={isPasswordChange}
-                        text={t('TAB_MENU_LINK_SECURE', 'Изменить пароль')}
-                        icon="secure"
-                    />
-                    <TabMenuLink
-                        active={false}
-                        text={t('TAB_MENU_LINK_LOGOUT', 'Выйти')}
-                        icon="logout"
-                        handlerOnClick={handleLogout}
-                    />
-                </TabMenu>
-            </TabMenuWrapper>
+            <TabMenu>
+                <TabMenuLink
+                    href="/profile"
+                    active={isProfile}
+                    text={t('TAB_MENU_LINK_ACCOUNT', 'Личный кабинет')}
+                    icon="account"
+                />
+                <TabMenuLink
+                    href="/profile/edit"
+                    active={isProfileEdit}
+                    text={t('TAB_MENU_LINK_EDIT_DATA', 'Изменить данные')}
+                    icon="identification"
+                />
+                <TabMenuLink
+                    href="/profile/password"
+                    active={isPasswordChange}
+                    text={t('TAB_MENU_LINK_SECURE', 'Изменить пароль')}
+                    icon="secure"
+                />
+                <TabMenuLink
+                    active={false}
+                    text={t('TAB_MENU_LINK_LOGOUT', 'Выйти')}
+                    icon="logout"
+                    handlerOnClick={handleLogout}
+                />
+            </TabMenu>
             <TabContentMain>
                 {isProfile && <UserInfo />}
                 {isProfileEdit && (

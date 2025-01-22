@@ -36,9 +36,10 @@ export const TabMenuLink = ({
         {!disabled && href ? (
             <Link
                 href={href}
-                className={cn('btn join-item justify-start', {
+                className={cn('btn join-item flex justify-start tooltip tooltip-bottom sm:tooltip-right', {
                     ['btn-active']: active,
                 })}
+                data-tip={text}
             >
                 {icon === 'edit' && <EditIcon />}
                 {icon === 'add' && <AddIcon />}
@@ -47,15 +48,16 @@ export const TabMenuLink = ({
                 {icon === 'secure' && <SecureIcon />}
                 {icon === 'identification' && <IdentificationIcon />}
                 {icon === 'logout' && <LogoutIcon />}
-                {text}
+                <span className='hidden md:block'>{text}</span>
             </Link>
         ) : (
             <button
                 onClick={handlerOnClick}
                 disabled={disabled}
-                className={cn('btn join-item justify-start', {
+                className={cn('btn join-item flex justify-start tooltip tooltip-right', {
                     ['btn-active']: active,
                 })}
+                data-tip={text}
             >
                 {icon === 'edit' && <EditIcon />}
                 {icon === 'add' && <AddIcon />}
@@ -64,7 +66,7 @@ export const TabMenuLink = ({
                 {icon === 'secure' && <SecureIcon />}
                 {icon === 'identification' && <IdentificationIcon />}
                 {icon === 'logout' && <LogoutIcon />}
-                {text}
+                <span className='hidden md:block'>{text}</span>
             </button>
         )}
     </>
