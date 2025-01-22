@@ -34,7 +34,13 @@ export const UpdatePasswordForm = () => {
             const res = await updatePassword(
                 data as TUpdatePasswordDto
             ).unwrap();
-            if (res.success) toast.success(t('TOAST_SUCCESS_PASSWORD_UPDATED','Пароль пользователя обновлен'));
+            if (res.success)
+                toast.success(
+                    t(
+                        'TOAST_SUCCESS_PASSWORD_UPDATED',
+                        'Пароль пользователя обновлен'
+                    )
+                );
         }
     };
 
@@ -43,7 +49,9 @@ export const UpdatePasswordForm = () => {
             maxWidth="max-w-lg"
             title={
                 <div className="flex items-center justify-center gap-2 w-full">
-                    <span>{t('TITLE_FORM_PASSWORD_CHANGE', 'Смена пароля')}</span>
+                    <span>
+                        {t('TITLE_FORM_PASSWORD_CHANGE', 'Смена пароля')}
+                    </span>
                     <button
                         className="text-primary cursor-pointer"
                         onClick={() => {
@@ -62,39 +70,46 @@ export const UpdatePasswordForm = () => {
             name="updatePassword"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <Input
-                type={typeInput}
-                id="OldPassword"
-                placeholder="Old Password"
-                label={t('LABEL_INPUT_OLD_PASSWORD', 'Старый пароль')}
-                name="oldPassword"
-                error={!!errors.oldPassword}
-                control={control}
-            />
-            <Input
-                type={typeInput}
-                id="NewPassword"
-                placeholder="NewPassword"
-                label={t('LABEL_INPUT_NEW_PASSWORD', 'Новый пароль')}
-                name="newPassword"
-                error={!!errors.password}
-                control={control}
-            />
-            <Input
-                type={typeInput}
-                id="confirmPassword"
-                placeholder="ConfirmPassword"
-                label={t('LABEL_INPUT_CONFIRM_NEW_PASSWORD', 'Повторите новый пароль')}
-                name="confirmPassword"
-                error={!!errors.confirmPassword}
-                control={control}
-            />
-            <SubmitBtn
-                text={t('CAPTION_SUBMIT_BTN_SAVE','Сохранить')}
-                isLoading={isLoading}
-                isError={isError}
-                error={error as TError}
-            />
+            <div className="flex flex-col w-full">
+                <div className="grid grid-cols-1 gap-4">
+                    <Input
+                        type={typeInput}
+                        id="OldPassword"
+                        placeholder="Old Password"
+                        label={t('LABEL_INPUT_OLD_PASSWORD', 'Старый пароль')}
+                        name="oldPassword"
+                        error={!!errors.oldPassword}
+                        control={control}
+                    />
+                    <Input
+                        type={typeInput}
+                        id="NewPassword"
+                        placeholder="NewPassword"
+                        label={t('LABEL_INPUT_NEW_PASSWORD', 'Новый пароль')}
+                        name="newPassword"
+                        error={!!errors.password}
+                        control={control}
+                    />
+                    <Input
+                        type={typeInput}
+                        id="confirmPassword"
+                        placeholder="ConfirmPassword"
+                        label={t(
+                            'LABEL_INPUT_CONFIRM_NEW_PASSWORD',
+                            'Повторите новый пароль'
+                        )}
+                        name="confirmPassword"
+                        error={!!errors.confirmPassword}
+                        control={control}
+                    />
+                    <SubmitBtn
+                        text={t('CAPTION_SUBMIT_BTN_SAVE', 'Сохранить')}
+                        isLoading={isLoading}
+                        isError={isError}
+                        error={error as TError}
+                    />
+                </div>
+            </div>
         </FormWrapper>
     );
 };
