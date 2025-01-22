@@ -5,7 +5,7 @@ export const TabListBody = ({ children }: TBaseProps) => (
         role="tabpanel"
         className="tab-content bg-base-100 border-base-300 rounded-box p-4 w-full"
     >
-        <div className="flex min-h-[calc(100vh_-_11rem)] w-full">
+        <div className="flex min-h-[calc(100vh_-_11rem)] w-full md:h-[calc(100vh_-_11rem)]">
             {children}
         </div>
     </div>
