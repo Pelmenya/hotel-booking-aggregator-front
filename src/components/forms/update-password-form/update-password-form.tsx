@@ -70,43 +70,45 @@ export const UpdatePasswordForm = () => {
             name="updatePassword"
             onSubmit={handleSubmit(onSubmit)}
         >
-            <div className='flex flex-col gap-4 w-full'>
-                <Input
-                    type={typeInput}
-                    id="OldPassword"
-                    placeholder="Old Password"
-                    label={t('LABEL_INPUT_OLD_PASSWORD', 'Старый пароль')}
-                    name="oldPassword"
-                    error={!!errors.oldPassword}
-                    control={control}
-                />
-                <Input
-                    type={typeInput}
-                    id="NewPassword"
-                    placeholder="NewPassword"
-                    label={t('LABEL_INPUT_NEW_PASSWORD', 'Новый пароль')}
-                    name="newPassword"
-                    error={!!errors.password}
-                    control={control}
-                />
-                <Input
-                    type={typeInput}
-                    id="confirmPassword"
-                    placeholder="ConfirmPassword"
-                    label={t(
-                        'LABEL_INPUT_CONFIRM_NEW_PASSWORD',
-                        'Повторите новый пароль'
-                    )}
-                    name="confirmPassword"
-                    error={!!errors.confirmPassword}
-                    control={control}
-                />
-                <SubmitBtn
-                    text={t('CAPTION_SUBMIT_BTN_SAVE', 'Сохранить')}
-                    isLoading={isLoading}
-                    isError={isError}
-                    error={error as TError}
-                />
+            <div className="flex flex-col w-full">
+                <div className="grid grid-cols-1 gap-4">
+                    <Input
+                        type={typeInput}
+                        id="OldPassword"
+                        placeholder="Old Password"
+                        label={t('LABEL_INPUT_OLD_PASSWORD', 'Старый пароль')}
+                        name="oldPassword"
+                        error={!!errors.oldPassword}
+                        control={control}
+                    />
+                    <Input
+                        type={typeInput}
+                        id="NewPassword"
+                        placeholder="NewPassword"
+                        label={t('LABEL_INPUT_NEW_PASSWORD', 'Новый пароль')}
+                        name="newPassword"
+                        error={!!errors.password}
+                        control={control}
+                    />
+                    <Input
+                        type={typeInput}
+                        id="confirmPassword"
+                        placeholder="ConfirmPassword"
+                        label={t(
+                            'LABEL_INPUT_CONFIRM_NEW_PASSWORD',
+                            'Повторите новый пароль'
+                        )}
+                        name="confirmPassword"
+                        error={!!errors.confirmPassword}
+                        control={control}
+                    />
+                    <SubmitBtn
+                        text={t('CAPTION_SUBMIT_BTN_SAVE', 'Сохранить')}
+                        isLoading={isLoading}
+                        isError={isError}
+                        error={error as TError}
+                    />
+                </div>
             </div>
         </FormWrapper>
     );
