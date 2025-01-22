@@ -52,7 +52,7 @@ export const Confirm = ({ user, channel }: TConfirmProps) => {
     };
 
     return (
-        <div className="flex w-full py-2 justify-between text-error items-center">
+        <div className="flex flex-col gap-2 sm:flex-row w-full py-2 justify-between text-error items-center">
             {channel === 'EMAIL' ? (
                 <>
                     <p>
