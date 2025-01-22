@@ -95,7 +95,7 @@ export const Layout = ({ title, data, children }: ILayoutProps) => {
                 }}
             />
             <Header />
-            <main className="container mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <main className="container mx-auto max-w-7xl w-[100vw] px-2 sm:px-6 lg:px-8">
                 <div className="w-full min-h-main">{children}</div>
             </main>
             <Footer />
