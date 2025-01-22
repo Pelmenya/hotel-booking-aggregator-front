@@ -23,7 +23,7 @@ export type ILayoutProps = TBaseProps & {
 
 export const Layout = ({ title, data, children }: ILayoutProps) => {
     const router = useRouter();
-    const hotelDescription = data ? data.abouts.ru.descriptions.map(desc => desc.paragraph).join(' ') : 'Сайт для аренды на день';
+    const hotelDescription = data ? data.abouts?.ru?.descriptions.map(desc => desc.paragraph).join(' ') : 'Сайт для аренды на день';
     const hotelImage = data?.images.length ? getImageUrl(data.images[0].path) : getPublicBaseImagesUrl('og-img.png');
 
     return (
