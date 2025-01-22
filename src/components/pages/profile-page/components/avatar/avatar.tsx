@@ -107,7 +107,7 @@ export const Avatar = () => {
                         id="avatars"
                         name="avatars"
                         className="hidden"
-                        accept="image/*"
+                        accept="image/jpeg,image/png,image/gif"
                     />
                     <button className="btn btn-primary w-full">{t('CAPTION_SUBMIT_BTN_CHANGE','Поменять')}</button>
                 </form>
