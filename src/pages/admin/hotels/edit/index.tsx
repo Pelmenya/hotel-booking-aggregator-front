@@ -1,6 +1,6 @@
 import { TabAdmin } from '@/components/tab-admin/tab-admin';
 import { Layout } from '@/layout/layout';
-import { getCommonHotels, getRunningQueriesThunk } from '@/redux/api/common-api';
+import { getAmenities, getRunningQueriesThunk } from '@/redux/api/amenities-api';
 import { wrapper } from '@/redux/store/store';
 
 
@@ -13,7 +13,7 @@ export default function HotelsEditPage() {
 }
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
-    store.dispatch(getCommonHotels.initiate(''));
+    store.dispatch(getAmenities.initiate('ALL'));
 
     await Promise.all(store.dispatch(getRunningQueriesThunk()));
 

@@ -3,8 +3,10 @@ import { Combobox } from '@headlessui/react';
 import _ from 'lodash';
 import { useGetAddressSuggestionsQuery } from '@/redux/api/address-api';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 export default function AddressSearch() {
+    const { t } = useTranslation('form')
     const [query, setQuery] = useState('');
     const [isFocused, setIsFocused] = useState(false);
 
@@ -49,12 +51,12 @@ export default function AddressSearch() {
                                 }
                             )}
                         >
-                            Введите адрес
+                            {t('LABEL_INPUT_ADDRESS')}
                         </span>
                     </div>
                     {query && suggestions.length === 0 && (
                         <Combobox.Options className="absolute z-10 bg-base-100 border border-primary rounded-md shadow-lg max-h-60 mt-1 w-full overflow-auto">
-                            <div className="p-2">Нет подходящей подсказки</div>
+                            <div className="p-2">{t('NOT_COMBOBOX_OPTIONS', 'Нет подходящей подсказки')}</div>
                         </Combobox.Options>
                     )}
                     {suggestions.length > 0 && (

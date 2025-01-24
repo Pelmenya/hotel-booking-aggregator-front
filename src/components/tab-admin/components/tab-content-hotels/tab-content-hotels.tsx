@@ -37,9 +37,9 @@ export const TabContentHotels = () => {
                 />
             </TabMenu>
             <TabContentMain>
-                <AddressSearch />
                 {!isEdit && !isDelete && <HotelCreateForm />}
                 {isEdit && <HotelEditForm />}
+                <AddressSearch />
             </TabContentMain>
         </TabContent>
     );
