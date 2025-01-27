@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { useGetRealEstateQuery } from '@/redux/api/real-estate-api';
+import cn from 'classnames'; // Импортируем classnames
 
 export const RealEstateChange = () => {
     const { t, i18n } = useTranslation('form');
@@ -26,48 +27,54 @@ export const RealEstateChange = () => {
     };
 
     return (
-        <>
-            <ul className="join">
-                {categories?.map((category) => (
-                    <li
-                        key={category.id}
-                        className={`join-item btn btn-lg flex gap-2 ${
-                            selectedCategory === category.id ? 'btn-active' : ''
-                        }`}
-                        onClick={() => handleCategorySelect(category.id)}
-                    >
-                        <span>{category.name}</span>
-                        <span className="text-2xl text-primary">
-                            <FontAwesomeIcon icon={Icons[category.icon]} />
-                        </span>
-                    </li>
-                ))}
-            </ul>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div className="w-full lg:col-span-1">
+                <ul className="join join-vertical pt-4 space-y-2 w-full">
+                    {categories?.map((category) => (
+                        <li
+                            key={category.id}
+                            className={cn(
+                                'join-item btn btn-lg flex gap-2 items-center justify-between w-full',
+                                {
+                                    'btn-active': selectedCategory === category.id,
+                                }
+                            )}
+                            onClick={() => handleCategorySelect(category.id)}
+                        >
+                            <div className="flex gap-2 items-center">
+                                <span className="text-2xl text-primary">
+                                    <FontAwesomeIcon icon={Icons[category.icon]} />
+                                </span>
+                                <span>{category.name}</span>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
 
-            <div className="p-4 w-full">
-                <div className="mt-4">
-                    {selectedCategory !== null && categories && (
-                        <ul className="grid w-full grid-cols-2 md:grid-cols-3 gap-4">
-                            {categories
-                                .find(
-                                    (category) =>
-                                        category.id === selectedCategory
-                                )
-                                ?.subcategories?.map((subcategory) => (
-                                    <li
-                                        key={subcategory.id}
-                                        className={`btn flex gap-2 items-center ${
-                                            selectedSubcategory ===
-                                            subcategory.id
-                                                ? 'btn-active'
-                                                : ''
-                                        }`}
-                                        onClick={() =>
-                                            handleSubcategorySelect(
-                                                subcategory.id
-                                            )
+            <div className="w-full lg:col-span-3 mt-4">
+                {selectedCategory !== null && categories && (
+                    <ul className="grid w-full grid-cols-1 xl:grid-cols-2 gap-4">
+                        {categories
+                            .find(
+                                (category) => category.id === selectedCategory
+                            )
+                            ?.subcategories?.map((subcategory) => (
+                                <li
+                                    key={subcategory.id}
+                                    className={cn(
+                                        'btn flex justify-between items-center w-full',
+                                        {
+                                            'btn-active':
+                                                selectedSubcategory ===
+                                                subcategory.id,
                                         }
-                                    >
+                                    )}
+                                    onClick={() =>
+                                        handleSubcategorySelect(subcategory.id)
+                                    }
+                                >
+                                    <div className="flex items-center gap-2">
                                         <input
                                             type="radio"
                                             checked={
@@ -79,21 +86,20 @@ export const RealEstateChange = () => {
                                                     subcategory.id
                                                 )
                                             }
-                                            className="radio radio-primary"
+                                            className="radio radio-sm radio-primary"
                                         />
                                         <span>{subcategory.name}</span>
-                                        <span>{subcategory.icon}</span>
-                                        <span className="text-primary">
-                                            <FontAwesomeIcon
-                                                icon={Icons[subcategory.icon]}
-                                            />
-                                        </span>
-                                    </li>
-                                ))}
-                        </ul>
-                    )}
-                </div>
+                                    </div>
+                                    <span className="text-primary">
+                                        <FontAwesomeIcon
+                                            icon={Icons[subcategory.icon]}
+                                        />
+                                    </span>
+                                </li>
+                            ))}
+                    </ul>
+                )}
             </div>
-        </>
+        </div>
     );
 };
