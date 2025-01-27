@@ -13,19 +13,11 @@ import { schemaHotelForm } from '../schemas/yup.schemas';
 import { Map } from '@/components/map/map';
 import { transformCoordinates } from 'utils/transform-coordinates';
 import { useTranslation } from 'react-i18next';
-import { useGetAmenitiesQuery } from '@/redux/api/amenities-api';
-import { useGetRealEstateQuery } from '@/redux/api/real-estate-api';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as Icons from '@fortawesome/free-solid-svg-icons'
 
 export const HotelCreateForm = () => {
     const { t } = useTranslation('form');
 
-    const { data: amenities } = useGetAmenitiesQuery('ALL');
-    const { data: realEstateCategories } = useGetRealEstateQuery('ALL');
 
-    console.log({ amenities, realEstateCategories});
-    
     const [coordinates, setCoordinates] = useState<TNullable<string>>(null);
 
     const [postAdminHotels, { isLoading, isError, error }] =
@@ -76,15 +68,6 @@ export const HotelCreateForm = () => {
 
     return (
         <>
-            <ul className="steps">
-                <li className="step step-primary">Register</li>
-                <li className="step step-primary">Choose plan</li>
-                <li className="step">Purchase</li>
-                <li className="step">Receive Product</li>
-
-
-            </ul>
-            <FontAwesomeIcon icon={Icons['faConciergeBell']} />
             <FormWrapper
                 title={t('TITLE_FORM_CREATE_HOTEL', 'Добавление отеля')}
                 onSubmit={handleSubmit(onSubmit)}

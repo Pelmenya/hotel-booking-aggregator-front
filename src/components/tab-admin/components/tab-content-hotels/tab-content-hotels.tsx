@@ -6,6 +6,7 @@ import { TabMenuLink } from '@/components/tab/components/tab-menu/components/tab
 import AddressSearch from '@/components/address-search/address-search';
 import { TabContent } from '@/components/tab/components/tab-content/tab-content';
 import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
+import { RealEstateChange } from './components/real-estate-change';
 
 export const TabContentHotels = () => {
     const router = useRouter();
@@ -37,9 +38,26 @@ export const TabContentHotels = () => {
                 />
             </TabMenu>
             <TabContentMain>
-                {!isEdit && !isDelete && <HotelCreateForm />}
+                {!isEdit && !isDelete && (
+                    <div className='flex flex-col items-center gap-6'>
+                        {' '}
+                        <div>
+                            <ul className="steps">
+                                <li className="step step-primary">Register</li>
+                                <li className="step step-primary">
+                                    Choose plan
+                                </li>
+                                <li className="step">Purchase</li>
+                                <li className="step">Receive Product</li>
+                            </ul>
+                        </div>
+                        <RealEstateChange />
+                        <AddressSearch />
+                        {/* <HotelCreateForm /> */}
+                    </div>
+                )}
+
                 {isEdit && <HotelEditForm />}
-                <AddressSearch />
             </TabContentMain>
         </TabContent>
     );
