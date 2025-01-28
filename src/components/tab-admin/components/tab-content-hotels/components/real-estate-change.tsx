@@ -89,7 +89,9 @@ export const RealEstateChange = () => {
                                             }
                                             className="radio radio-sm radio-primary"
                                         />
-                                        <span className='whitespace no-wrap'>{subcategory.name}</span>
+                                        <span className="block lg:max-w-[220px] overflow-hidden whitespace-nowrap" style={{ textOverflow: 'ellipsis' }}>
+                                            {subcategory.name}
+                                        </span>
                                     </div>
                                     <span className="text-primary">
                                         <FontAwesomeIcon
