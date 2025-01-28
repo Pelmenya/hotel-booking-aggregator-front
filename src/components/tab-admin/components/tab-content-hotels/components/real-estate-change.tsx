@@ -27,34 +27,35 @@ export const RealEstateChange = () => {
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-            <div className="w-full lg:col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 w-full">
+            <div className="w-full lg:col-span-2">
                 <ul className="join join-vertical pt-4 space-y-2 w-full">
                     {categories?.map((category) => (
                         <li
                             key={category.id}
                             className={cn(
-                                'join-item btn btn-lg flex gap-2 items-center justify-between w-full',
+                                'join-item btn btn-lg grid grid-cols-6 w-full ',
                                 {
-                                    'btn-active': selectedCategory === category.id,
+                                    'btn-active':
+                                        selectedCategory === category.id,
                                 }
                             )}
                             onClick={() => handleCategorySelect(category.id)}
                         >
-                            <div className="flex gap-2 items-center">
-                                <span className="text-2xl text-primary">
-                                    <FontAwesomeIcon icon={Icons[category.icon]} />
-                                </span>
-                                <span>{category.name}</span>
-                            </div>
+                            <span className="text-xl text-primary">
+                                <FontAwesomeIcon icon={Icons[category.icon]} />
+                            </span>
+                            <span className="block w-full col-span-5 flex">
+                                {category.name}
+                            </span>
                         </li>
                     ))}
                 </ul>
             </div>
 
-            <div className="w-full lg:col-span-3 mt-4">
+            <div className="w-full lg:col-span-5 mt-4">
                 {selectedCategory !== null && categories && (
-                    <ul className="grid w-full grid-cols-1 xl:grid-cols-2 gap-4">
+                    <ul className="grid w-full grid-cols-1 lg:grid-cols-2 gap-4">
                         {categories
                             .find(
                                 (category) => category.id === selectedCategory
@@ -88,7 +89,7 @@ export const RealEstateChange = () => {
                                             }
                                             className="radio radio-sm radio-primary"
                                         />
-                                        <span>{subcategory.name}</span>
+                                        <span className='whitespace no-wrap'>{subcategory.name}</span>
                                     </div>
                                     <span className="text-primary">
                                         <FontAwesomeIcon

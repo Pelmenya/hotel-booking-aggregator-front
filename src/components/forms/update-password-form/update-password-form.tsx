@@ -12,13 +12,12 @@ import { useUpdatePasswordMutation } from '@/redux/api/auth-api';
 import { TUpdatePasswordDto } from '@/types/t-update-password-dto';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
 
 export const UpdatePasswordForm = () => {
     const { t } = useTranslation('form');
-
     const [typeInput, setTypeInput] = useState<IInputProps['type']>('password');
-    const [updatePassword, { isLoading, isError, error }] =
-        useUpdatePasswordMutation();
+    const [updatePassword, { isLoading, isError, error }] = useUpdatePasswordMutation();
 
     const {
         handleSubmit,
@@ -31,18 +30,20 @@ export const UpdatePasswordForm = () => {
 
     const onSubmit = async (data: FieldValues) => {
         if (data) {
-            const res = await updatePassword(
-                data as TUpdatePasswordDto
-            ).unwrap();
-            if (res.success)
-                toast.success(
-                    t(
-                        'TOAST_SUCCESS_PASSWORD_UPDATED',
-                        'Пароль пользователя обновлен'
-                    )
-                );
+            try {
+                const res = await updatePassword(data as TUpdatePasswordDto).unwrap();
+                if (res.success)
+                    toast.success(
+                        t('TOAST_SUCCESS_PASSWORD_UPDATED', 'Пароль пользователя обновлен')
+                    );
+            } catch (err) {
+                // Обработка ошибок
+            }
         }
     };
+
+    // Генерация уникального суффикса для id
+    const uniqueSuffix = _.uniqueId();
 
     return (
         <FormWrapper
@@ -53,17 +54,13 @@ export const UpdatePasswordForm = () => {
                         {t('TITLE_FORM_PASSWORD_CHANGE', 'Смена пароля')}
                     </span>
                     <button
+                        type="button" // Добавьте type="button", чтобы предотвратить отправку формы при нажатии
                         className="text-primary cursor-pointer"
                         onClick={() => {
-                            if (typeInput === 'password') setTypeInput('text');
-                            else setTypeInput('password');
+                            setTypeInput(prevType => (prevType === 'password' ? 'text' : 'password'));
                         }}
                     >
-                        {typeInput === 'password' ? (
-                            <EyeIcon />
-                        ) : (
-                            <EyeSlashIcon />
-                        )}
+                        {typeInput === 'password' ? <EyeIcon /> : <EyeSlashIcon />}
                     </button>
                 </div>
             }
@@ -73,7 +70,7 @@ export const UpdatePasswordForm = () => {
             <div className="flex flex-col w-full gap-4">
                 <Input
                     type={typeInput}
-                    id="OldPassword"
+                    id={`OldPassword-${uniqueSuffix}`}
                     placeholder="Old Password"
                     label={t('LABEL_INPUT_OLD_PASSWORD', 'Старый пароль')}
                     name="oldPassword"
@@ -82,21 +79,18 @@ export const UpdatePasswordForm = () => {
                 />
                 <Input
                     type={typeInput}
-                    id="NewPassword"
-                    placeholder="NewPassword"
+                    id={`NewPassword-${uniqueSuffix}`}
+                    placeholder="New Password"
                     label={t('LABEL_INPUT_NEW_PASSWORD', 'Новый пароль')}
                     name="newPassword"
-                    error={!!errors.password}
+                    error={!!errors.newPassword}
                     control={control}
                 />
                 <Input
                     type={typeInput}
-                    id="confirmPassword"
-                    placeholder="ConfirmPassword"
-                    label={t(
-                        'LABEL_INPUT_CONFIRM_NEW_PASSWORD',
-                        'Повторите новый пароль'
-                    )}
+                    id={`ConfirmPassword-${uniqueSuffix}`}
+                    placeholder="Confirm Password"
+                    label={t('LABEL_INPUT_CONFIRM_NEW_PASSWORD', 'Повторите новый пароль')}
                     name="confirmPassword"
                     error={!!errors.confirmPassword}
                     control={control}

@@ -39,7 +39,7 @@ export const TabContentHotels = () => {
             </TabMenu>
             <TabContentMain>
                 {!isEdit && !isDelete && (
-                    <div className='flex flex-col items-center gap-6'>
+                    <div className='flex flex-col items-center gap-6 w-full'>
                         {' '}
                         <div>
                             <ul className="steps">
