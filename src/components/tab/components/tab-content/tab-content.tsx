@@ -1,5 +1,10 @@
 import { TBaseProps } from '@/types/t-base-props';
+import cn from 'classnames';
 
-export const TabContent = ({ children }: TBaseProps) => (
-    <div className="flex flex-col md:flex-row gap-4 h-full w-full">{children}</div>
+export type TTabContentProps = TBaseProps & {
+    isMdRow?: boolean; 
+}
+
+export const TabContent = ({ children, isMdRow = true }: TTabContentProps) => (
+    <div className={cn('flex flex-col gap-4 h-full w-full', {['md:flex-row']: isMdRow})}>{children}</div>
 );

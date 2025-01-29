@@ -51,8 +51,8 @@ export const TabContentProfile = () => {
     }, [postLogout, dispatch]);
 
     return (
-        <TabContent>
-            <TabMenu>
+        <TabContent isMdRow={true}>
+            <TabMenu isMdRow={true}>
                 <TabMenuLink
                     href="/profile"
                     active={isProfile}

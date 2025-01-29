@@ -6,13 +6,14 @@ import DeleteIcon from '@/icons/delete.svg';
 import IdentificationIcon from '@/icons/identification.svg';
 import SecureIcon from '@/icons/shield-check.svg';
 import LogoutIcon from '@/icons/logout-icon.svg';
-import AccountIcon from '@/icons/account.svg'
+import AccountIcon from '@/icons/account.svg';
 
 export type TMenuTabLinkProps = {
     href?: string;
     active: boolean;
     text: string;
     disabled?: boolean;
+    tooltip?: 'bottom' | 'right' | 'left' | 'top';
     handlerOnClick?: () => void;
     icon:
         | 'edit'
@@ -27,6 +28,7 @@ export type TMenuTabLinkProps = {
 export const TabMenuLink = ({
     href,
     active,
+    tooltip,
     text,
     icon,
     disabled = false,
@@ -36,8 +38,9 @@ export const TabMenuLink = ({
         {!disabled && href ? (
             <Link
                 href={href}
-                className={cn('btn join-item flex justify-start tooltip tooltip-bottom sm:tooltip-right', {
-                    ['btn-active']: active,
+                className={cn('btn join-item flex justify-start', {
+                    'btn-active': active,
+                    [`tooltip tooltip-${tooltip}`]: tooltip,
                 })}
                 data-tip={text}
             >
@@ -48,14 +51,15 @@ export const TabMenuLink = ({
                 {icon === 'secure' && <SecureIcon />}
                 {icon === 'identification' && <IdentificationIcon />}
                 {icon === 'logout' && <LogoutIcon />}
-                <span className='hidden md:block'>{text}</span>
+                <span className="hidden md:block">{text}</span>
             </Link>
         ) : (
             <button
                 onClick={handlerOnClick}
                 disabled={disabled}
-                className={cn('btn join-item flex justify-start tooltip tooltip-right', {
-                    ['btn-active']: active,
+                className={cn('btn join-item flex justify-start', {
+                    'btn-active': active,
+                    [`tooltip tooltip-${tooltip}`]: tooltip,
                 })}
                 data-tip={text}
             >
@@ -66,7 +70,7 @@ export const TabMenuLink = ({
                 {icon === 'secure' && <SecureIcon />}
                 {icon === 'identification' && <IdentificationIcon />}
                 {icon === 'logout' && <LogoutIcon />}
-                <span className='hidden md:block'>{text}</span>
+                <span className="hidden md:block">{text}</span>
             </button>
         )}
     </>

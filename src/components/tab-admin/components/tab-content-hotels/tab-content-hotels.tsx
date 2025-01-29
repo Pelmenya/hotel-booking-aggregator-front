@@ -1,4 +1,3 @@
-import { HotelCreateForm } from '@/components/forms/hotel-create-form/hotel-create-form';
 import { useRouter } from 'next/router';
 import { HotelEditForm } from '@/components/forms/hotel-edit-form/hotel-edit-form';
 import { TabMenu } from '@/components/tab/components/tab-menu/tab-menu';
@@ -15,42 +14,41 @@ export const TabContentHotels = () => {
     const isDelete = paths.includes('delete');
 
     return (
-        <TabContent>
-            <TabMenu>
-                <TabMenuLink
-                    href="/admin/hotels"
-                    active={!isEdit && !isDelete}
-                    text="Добавить"
-                    icon="add"
-                />
-                <TabMenuLink
-                    href="/admin/hotels/edit"
-                    active={isEdit}
-                    text="Редактировать"
-                    icon="edit"
-                />
-                <TabMenuLink
-                    href="/admin/hotels/delete"
-                    active={isDelete}
-                    text="Удалить"
-                    disabled={true}
-                    icon="delete"
-                />
-            </TabMenu>
+        <TabContent isMdRow={false}>
+            <div className='flex items-center flex-wrap gap-4 justify-between w-full'>
+                <TabMenu isMdRow={false}>
+                    <TabMenuLink
+                        href="/admin/hotels"
+                        active={!isEdit && !isDelete}
+                        tooltip="bottom"
+                        text="Добавить"
+                        icon="add"
+                    />
+                    <TabMenuLink
+                        href="/admin/hotels"
+                        active={isEdit}
+                        tooltip="bottom"
+                        text="Редактировать"
+                        icon="edit"
+                    />
+                    <TabMenuLink
+                        href="/admin/hotels"
+                        tooltip="bottom"
+                        active={isDelete}
+                        text="Архив"
+                        icon="delete"
+                    />
+                </TabMenu>
+                <ul className="steps">
+                    <li className="step step-primary">Register</li>
+                    <li className="step step-primary">Choose plan</li>
+                    <li className="step">Purchase</li>
+                    <li className="step">Receive Product</li>
+                </ul>
+            </div>
             <TabContentMain>
                 {!isEdit && !isDelete && (
-                    <div className='flex flex-col items-center gap-6 w-full'>
-                        {' '}
-                        <div>
-                            <ul className="steps">
-                                <li className="step step-primary">Register</li>
-                                <li className="step step-primary">
-                                    Choose plan
-                                </li>
-                                <li className="step">Purchase</li>
-                                <li className="step">Receive Product</li>
-                            </ul>
-                        </div>
+                    <div className="flex flex-col items-center gap-6 w-full">
                         <RealEstateChange />
                         <AddressSearch />
                         {/* <HotelCreateForm /> */}

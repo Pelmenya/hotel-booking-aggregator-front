@@ -89,7 +89,7 @@ export const RealEstateChange = () => {
                                             }
                                             className="radio radio-sm radio-primary"
                                         />
-                                        <span className="block lg:max-w-[220px] overflow-hidden whitespace-nowrap" style={{ textOverflow: 'ellipsis' }}>
+                                        <span className="block">
                                             {subcategory.name}
                                         </span>
                                     </div>
