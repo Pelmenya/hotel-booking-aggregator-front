@@ -33,6 +33,7 @@ export const RealEstateChange = () => {
                     {categories?.map((category) => (
                         <li
                             key={category.id}
+                            tabIndex={0}
                             className={cn(
                                 'join-item btn btn-lg grid grid-cols-6 w-full ',
                                 {
@@ -55,7 +56,7 @@ export const RealEstateChange = () => {
 
             <div className="w-full lg:col-span-5 mt-4">
                 {selectedCategory !== null && categories && (
-                    <ul className="grid w-full grid-cols-1 lg:grid-cols-2 gap-4">
+                    <ul className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {categories
                             .find(
                                 (category) => category.id === selectedCategory
@@ -63,6 +64,7 @@ export const RealEstateChange = () => {
                             ?.subcategories?.map((subcategory) => (
                                 <li
                                     key={subcategory.id}
+                                    tabIndex={0}
                                     className={cn(
                                         'btn flex justify-between items-center w-full',
                                         {
@@ -89,7 +91,7 @@ export const RealEstateChange = () => {
                                             }
                                             className="radio radio-sm radio-primary"
                                         />
-                                        <span className="block">
+                                        <span className="block leading-4 lg:max-w-[160px] whitespace-nowrap overflow-hidden" style={{ textOverflow: 'ellipsis' }}>
                                             {subcategory.name}
                                         </span>
                                     </div>
