@@ -38,7 +38,7 @@ export const TabMenuLink = ({
         {!disabled && href ? (
             <Link
                 href={href}
-                className={cn('btn join-item flex justify-start', {
+                className={cn('btn join-item flex justify-start md:min-w-[150px]', {
                     'btn-active': active,
                     [`tooltip tooltip-${tooltip}`]: tooltip,
                 })}

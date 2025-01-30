@@ -6,6 +6,7 @@ import AddressSearch from '@/components/address-search/address-search';
 import { TabContent } from '@/components/tab/components/tab-content/tab-content';
 import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
 import { RealEstateChange } from './components/real-estate-change';
+import { Steps } from './components/steps';
 
 export const TabContentHotels = () => {
     const router = useRouter();
@@ -15,7 +16,7 @@ export const TabContentHotels = () => {
 
     return (
         <TabContent isMdRow={false}>
-            <div className='flex items-center flex-wrap gap-4 justify-between w-full'>
+            <div className="flex items-center flex-wrap gap-4 w-full">
                 <TabMenu isMdRow={false}>
                     <TabMenuLink
                         href="/admin/hotels"
@@ -39,19 +40,14 @@ export const TabContentHotels = () => {
                         icon="delete"
                     />
                 </TabMenu>
-                <ul className="steps text-sm">
-                    <li className="step step-primary">Тип</li>
-                    <li className="step">Гео</li>
-                    <li className="step">Главные удобства</li>
-                    <li className="step">Удобства</li>
-                    <li className="step">Политики</li>
-                </ul>
+                <Steps />
             </div>
             <TabContentMain>
                 {!isEdit && !isDelete && (
-                    <div className="flex flex-col items-center gap-6 w-full">
+                    <div className="border border-base-300 bg-base-100 rounded-box pt-0 px-4 pb-8 flex flex-col items-center gap-6 w-full">
                         <RealEstateChange />
                         <AddressSearch />
+                        <button className='btn btn-primary w-full max-w-md'>Далее</button>
                         {/* <HotelCreateForm /> */}
                     </div>
                 )}

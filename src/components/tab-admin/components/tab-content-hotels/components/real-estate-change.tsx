@@ -27,7 +27,7 @@ export const RealEstateChange = () => {
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-4 w-full flex-auto md:min-h-[390px]">
             <div className="w-full lg:col-span-2">
                 <ul className="join join-vertical pt-4 space-y-2 w-full">
                     {categories?.map((category) => (
@@ -91,7 +91,7 @@ export const RealEstateChange = () => {
                                             }
                                             className="radio radio-sm radio-primary"
                                         />
-                                        <span className="block leading-4 lg:max-w-[160px] whitespace-nowrap overflow-hidden" style={{ textOverflow: 'ellipsis' }}>
+                                        <span className="block leading-4 max-w-[160px] sm:max-w-none lg:max-w-[160px] whitespace-nowrap overflow-hidden" style={{ textOverflow: 'ellipsis' }}>
                                             {subcategory.name}
                                         </span>
                                     </div>

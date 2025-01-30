@@ -12,6 +12,7 @@ import { hotelsApi } from '../api/hotels-api';
 import { addressApi } from '../api/address-api';
 import { amenitiesApi } from '../api/amenities-api';
 import { realEstateApi } from '../api/real-estate-api';
+import { createHotelSlice } from '../slices/create-hotel-slice';
 
 
 
@@ -21,6 +22,7 @@ const middlewares = isDev && typeof window === 'object' ? [logger] : [];
 export const store = configureStore({
     reducer: {
         [userSlice.name]: userSlice.reducer,
+        [createHotelSlice.name]: createHotelSlice.reducer,
         [userSettingsSlice.name]: userSettingsSlice.reducer,
         [authApi.reducerPath]: authApi.reducer,
         [commonApi.reducerPath]: commonApi.reducer,
