@@ -2,7 +2,7 @@ import AddressSearch from '@/components/address-search/address-search';
 import { HotelCreateForm } from '@/components/forms/hotel-create-form/hotel-create-form';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getCreateHotelStateStep } from '@/redux/selectors/create-hotel-selector';
-import { RealEstateChange } from './real-estate-change';
+import { RealEstateChange } from './real-estate-change/real-estate-change';
 import { StepsNav } from './steps-nav';
 
 export const CreateHotelMain = () => {
