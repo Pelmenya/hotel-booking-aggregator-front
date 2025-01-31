@@ -7,8 +7,10 @@ import { TabContent } from '@/components/tab/components/tab-content/tab-content'
 import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
 import { RealEstateChange } from './components/real-estate-change';
 import { Steps } from './components/steps';
+import { HotelCreateForm } from '@/components/forms/hotel-create-form/hotel-create-form';
+import { StepsNav } from './components/steps-nav';
 
-export const TabContentHotels = () => {
+export const TabContentCreateHotel = () => {
     const router = useRouter();
     const paths = router.asPath.split('/');
     const isEdit = paths.includes('edit');
@@ -44,12 +46,15 @@ export const TabContentHotels = () => {
             </div>
             <TabContentMain>
                 {!isEdit && !isDelete && (
-                    <div className="border border-base-300 bg-base-100 rounded-box pt-0 px-4 pb-8 flex flex-col items-center gap-6 w-full">
-                        <RealEstateChange />
+                    <>
+                        <div className="border border-base-300 bg-base-100 rounded-box pt-0 px-4 pb-8 flex flex-col items-center gap-6 w-full">
+                            <RealEstateChange />
+                            <StepsNav />
+                            {/* <HotelCreateForm /> */}
+                        </div>
+                        <HotelCreateForm />
                         <AddressSearch />
-                        <button className='btn btn-primary w-full max-w-md'>Далее</button>
-                        {/* <HotelCreateForm /> */}
-                    </div>
+                    </>
                 )}
 
                 {isEdit && <HotelEditForm />}

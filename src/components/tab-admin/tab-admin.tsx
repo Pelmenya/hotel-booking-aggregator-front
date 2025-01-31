@@ -1,4 +1,4 @@
-import { TabContentHotels } from './components/tab-content-hotels/tab-content-hotels';
+import { TabContentCreateHotel } from './components/tab-content-create-hotel/tab-content-create-hotel';
 import { useRouter } from 'next/router';
 import { Tab } from '../tab/tab';
 import { ContentUsers } from './components/content-users/content-users';
@@ -17,7 +17,7 @@ export const TabAdmin = () => {
         <Tab>
             <TabList>
                 <TabListItem href="/admin/hotels" active={isHotels} tab="Жильё">
-                    <TabContentHotels />
+                    <TabContentCreateHotel />
                 </TabListItem>
                 <TabListItem
                     href="/admin/users"

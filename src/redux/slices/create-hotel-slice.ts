@@ -1,13 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
 
+export type TStep = 1 | 2 | 3 | 4 | 5;
+    
+
 export type TCreateHotelState = {
-    step: 1 | 2 | 3 | 4 | 5
+    step: TStep
+    steps: TStep[];
 }
 
 const initialState: TCreateHotelState = {
     step: 1,
+    steps: [],
 };
 
 export const createHotelSlice = createSlice({
@@ -15,7 +20,7 @@ export const createHotelSlice = createSlice({
 
     reducers: {
         
-        setStep(state, action) {
+        setStep(state, action:PayloadAction<TStep>) {
             state.step = action.payload;
         },
 

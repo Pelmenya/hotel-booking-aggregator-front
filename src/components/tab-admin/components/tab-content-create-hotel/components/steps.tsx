@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getCreateHotelStateStep } from '@/redux/selectors/create-hotel-selector';
-import { setStep } from '@/redux/slices/create-hotel-slice';
+import { setStep, TStep } from '@/redux/slices/create-hotel-slice';
 import cn from 'classnames';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ export const Steps = () => {
 
     const handleOnClickStep = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
-            dispatch(setStep(event.currentTarget.id));
+            dispatch(setStep(Number(event.currentTarget.id) as TStep));
         },
         [dispatch]
     );
