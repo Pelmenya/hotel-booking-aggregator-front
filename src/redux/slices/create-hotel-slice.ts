@@ -4,31 +4,38 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 export type TStep = 1 | 2 | 3 | 4 | 5;
     
-
 export type TCreateHotelState = {
-    step: TStep
+    step: TStep;
     steps: TStep[];
-}
+    selectedCategory: number | null;
+    selectedSubcategory: number | null;
+};
 
 const initialState: TCreateHotelState = {
     step: 1,
     steps: [],
+    selectedCategory: null,
+    selectedSubcategory: null,
 };
 
 export const createHotelSlice = createSlice({
-    name: 'createHotel', initialState,
-
+    name: 'createHotel',
+    initialState,
     reducers: {
-        
-        setStep(state, action:PayloadAction<TStep>) {
+        setStep(state, action: PayloadAction<TStep>) {
             state.step = action.payload;
         },
-
         setInitialState(state) {
-            state.step  = 1;
+            state.step = 1;
+            state.selectedCategory = null;
+            state.selectedSubcategory = null;
         },
-
-        // Special reducer for hydrating the state. Special case for next-redux-wrapper 
+        saveSelectedCategory(state, action: PayloadAction<number | null>) {
+            state.selectedCategory = action.payload;
+        },
+        saveSelectedSubcategory(state, action: PayloadAction<number | null>) {
+            state.selectedSubcategory = action.payload;
+        },
         [HYDRATE]: (state, action) => {
             return {
                 ...state,
@@ -36,8 +43,6 @@ export const createHotelSlice = createSlice({
             };
         },
     },
+});
 
-},
-);
-
-export const { setStep, setInitialState } = createHotelSlice.actions;
+export const { setStep, setInitialState, saveSelectedCategory, saveSelectedSubcategory } = createHotelSlice.actions;

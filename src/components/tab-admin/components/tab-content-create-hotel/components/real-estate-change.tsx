@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as Icons from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { useGetRealEstateQuery } from '@/redux/api/real-estate-api';
-import cn from 'classnames'; // Импортируем classnames
+import cn from 'classnames';
+import { saveSelectedCategory, saveSelectedSubcategory } from '@/redux/slices/create-hotel-slice';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
 
 export const RealEstateChange = () => {
     const { t, i18n } = useTranslation('form');
     const { data: realEstateCategories } = useGetRealEstateQuery('ALL');
-    const [selectedCategory, setSelectedCategory] = useState(null);
-    const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+    const dispatch = useAppDispatch();
+
+    // Получение начальных значений из Redux
+    const selectedCategoryFromRedux = useAppSelector((state) => state.createHotel.selectedCategory);
+    const selectedSubcategoryFromRedux = useAppSelector((state) => state.createHotel.selectedSubcategory);
+
+    // Локальное состояние
+    const [selectedCategory, setSelectedCategory] = useState(selectedCategoryFromRedux);
+    const [selectedSubcategory, setSelectedSubcategory] = useState(selectedSubcategoryFromRedux);
 
     // Получение категорий на основе текущего языка
-    const categories =
-        i18n.language === 'ru'
-            ? realEstateCategories?.ru
-            : realEstateCategories?.en;
+    const categories = i18n.language === 'ru' ? realEstateCategories?.ru : realEstateCategories?.en;
+
+    useEffect(() => {
+        // Сохранение выбора в Redux при изменении локального состояния
+        dispatch(saveSelectedCategory(selectedCategory));
+        dispatch(saveSelectedSubcategory(selectedSubcategory));
+    }, [selectedCategory, selectedSubcategory, dispatch]);
 
     const handleCategorySelect = (categoryId) => {
         setSelectedCategory(categoryId);
@@ -35,11 +48,8 @@ export const RealEstateChange = () => {
                             key={category.id}
                             tabIndex={0}
                             className={cn(
-                                'join-item btn btn-lg grid grid-cols-6 w-full ',
-                                {
-                                    'btn-active':
-                                        selectedCategory === category.id,
-                                }
+                                'join-item btn btn-lg grid grid-cols-6 w-full',
+                                { 'btn-active': selectedCategory === category.id }
                             )}
                             onClick={() => handleCategorySelect(category.id)}
                         >
@@ -58,47 +68,33 @@ export const RealEstateChange = () => {
                 {selectedCategory !== null && categories && (
                     <ul className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {categories
-                            .find(
-                                (category) => category.id === selectedCategory
-                            )
+                            .find((category) => category.id === selectedCategory)
                             ?.subcategories?.map((subcategory) => (
                                 <li
                                     key={subcategory.id}
                                     tabIndex={0}
                                     className={cn(
                                         'btn flex justify-between items-center w-full',
-                                        {
-                                            'btn-active':
-                                                selectedSubcategory ===
-                                                subcategory.id,
-                                        }
+                                        { 'btn-active': selectedSubcategory === subcategory.id }
                                     )}
-                                    onClick={() =>
-                                        handleSubcategorySelect(subcategory.id)
-                                    }
+                                    onClick={() => handleSubcategorySelect(subcategory.id)}
                                 >
                                     <div className="flex items-center gap-2">
                                         <input
                                             type="radio"
-                                            checked={
-                                                selectedSubcategory ===
-                                                subcategory.id
-                                            }
-                                            onChange={() =>
-                                                handleSubcategorySelect(
-                                                    subcategory.id
-                                                )
-                                            }
+                                            checked={selectedSubcategory === subcategory.id}
+                                            onChange={() => handleSubcategorySelect(subcategory.id)}
                                             className="radio radio-sm radio-primary"
                                         />
-                                        <span className="block leading-4 max-w-[160px] sm:max-w-none lg:max-w-[160px] whitespace-nowrap overflow-hidden" style={{ textOverflow: 'ellipsis' }}>
+                                        <span
+                                            className="block leading-4 max-w-[160px] sm:max-w-none lg:max-w-[160px] whitespace-nowrap overflow-hidden"
+                                            style={{ textOverflow: 'ellipsis' }}
+                                        >
                                             {subcategory.name}
                                         </span>
                                     </div>
                                     <span className="text-primary">
-                                        <FontAwesomeIcon
-                                            icon={Icons[subcategory.icon]}
-                                        />
+                                        <FontAwesomeIcon icon={Icons[subcategory.icon]} />
                                     </span>
                                 </li>
                             ))}

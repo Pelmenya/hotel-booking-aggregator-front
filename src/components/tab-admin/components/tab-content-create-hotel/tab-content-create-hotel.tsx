@@ -2,13 +2,10 @@ import { useRouter } from 'next/router';
 import { HotelEditForm } from '@/components/forms/hotel-edit-form/hotel-edit-form';
 import { TabMenu } from '@/components/tab/components/tab-menu/tab-menu';
 import { TabMenuLink } from '@/components/tab/components/tab-menu/components/tab-menu-link/tab-menu-link';
-import AddressSearch from '@/components/address-search/address-search';
 import { TabContent } from '@/components/tab/components/tab-content/tab-content';
 import { TabContentMain } from '@/components/tab/components/tab-content/tab-content-main/tab-content-main';
-import { RealEstateChange } from './components/real-estate-change';
 import { Steps } from './components/steps';
-import { HotelCreateForm } from '@/components/forms/hotel-create-form/hotel-create-form';
-import { StepsNav } from './components/steps-nav';
+import { CreateHotelMain } from './components/create-hotel-main';
 
 export const TabContentCreateHotel = () => {
     const router = useRouter();
@@ -46,17 +43,8 @@ export const TabContentCreateHotel = () => {
             </div>
             <TabContentMain>
                 {!isEdit && !isDelete && (
-                    <>
-                        <div className="border border-base-300 bg-base-100 rounded-box pt-0 px-4 pb-8 flex flex-col items-center gap-6 w-full">
-                            <RealEstateChange />
-                            <StepsNav />
-                            {/* <HotelCreateForm /> */}
-                        </div>
-                        <HotelCreateForm />
-                        <AddressSearch />
-                    </>
+                    <CreateHotelMain />
                 )}
-
                 {isEdit && <HotelEditForm />}
             </TabContentMain>
         </TabContent>
