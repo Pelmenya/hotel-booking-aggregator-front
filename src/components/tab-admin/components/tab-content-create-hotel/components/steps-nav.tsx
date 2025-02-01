@@ -2,11 +2,14 @@ import React from 'react';
 import { setStep, TStep } from '@/redux/slices/create-hotel-slice';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
-import { getCreateHotelStateStep } from '@/redux/selectors/create-hotel-selector';
+import { getCreateHotelStateSelectedSubcategory, getCreateHotelStateStep } from '@/redux/selectors/create-hotel-selector';
 
 export const StepsNav = () => {
     const dispatch = useAppDispatch();
     const currentStep = useAppSelector(getCreateHotelStateStep);
+    const selectedSubcategoryFromRedux = useAppSelector(
+        getCreateHotelStateSelectedSubcategory
+    );
 
     const handlePrev = () => {
         if (currentStep > 1) {
@@ -23,14 +26,16 @@ export const StepsNav = () => {
     return (
         <div className="join grid grid-cols-2">
             <button
-                disabled={currentStep === 1}
+                disabled={
+                    currentStep === 1 
+                }
                 onClick={handlePrev}
                 className="join-item btn btn-primary btn-outline"
             >
                 Previous step
             </button>
             <button
-                disabled={currentStep === 5}
+                disabled={currentStep === 5 || !selectedSubcategoryFromRedux}
                 onClick={handleNext}
                 className="join-item btn btn-primary btn-outline"
             >

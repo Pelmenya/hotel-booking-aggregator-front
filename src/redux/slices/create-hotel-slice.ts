@@ -1,3 +1,4 @@
+import { TNullable } from '@/types/t-nullable';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
@@ -7,8 +8,9 @@ export type TStep = 1 | 2 | 3 | 4 | 5;
 export type TCreateHotelState = {
     step: TStep;
     steps: TStep[];
-    selectedCategory: number | null;
-    selectedSubcategory: number | null;
+    selectedCategory: TNullable<number>;
+    selectedSubcategory: TNullable<number>;
+    realEstateType: TNullable<string>;
 };
 
 const initialState: TCreateHotelState = {
@@ -16,6 +18,7 @@ const initialState: TCreateHotelState = {
     steps: [],
     selectedCategory: null,
     selectedSubcategory: null,
+    realEstateType: null
 };
 
 export const createHotelSlice = createSlice({
@@ -30,11 +33,14 @@ export const createHotelSlice = createSlice({
             state.selectedCategory = null;
             state.selectedSubcategory = null;
         },
-        saveSelectedCategory(state, action: PayloadAction<number | null>) {
+        saveSelectedCategory(state, action: PayloadAction<TNullable<number>>) {
             state.selectedCategory = action.payload;
         },
-        saveSelectedSubcategory(state, action: PayloadAction<number | null>) {
+        saveSelectedSubcategory(state, action: PayloadAction<TNullable<number>>) {
             state.selectedSubcategory = action.payload;
+        },
+        saveSelectedRealEstateType(state, action: PayloadAction<TNullable<string>>) {
+            state.realEstateType = action.payload;
         },
         [HYDRATE]: (state, action) => {
             return {
@@ -45,4 +51,4 @@ export const createHotelSlice = createSlice({
     },
 });
 
-export const { setStep, setInitialState, saveSelectedCategory, saveSelectedSubcategory } = createHotelSlice.actions;
+export const { setStep, setInitialState, saveSelectedCategory, saveSelectedSubcategory, saveSelectedRealEstateType } = createHotelSlice.actions;

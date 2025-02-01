@@ -4,25 +4,30 @@ import {
     TRealEstateCategories,
     useGetRealEstateQuery,
 } from '@/redux/api/real-estate-api';
-import { useSelector, useDispatch } from 'react-redux';
 import {
-    setStep,
     saveSelectedCategory,
+    saveSelectedRealEstateType,
     saveSelectedSubcategory,
 } from '@/redux/slices/create-hotel-slice';
 import { RealEstateCategoryList } from './components/real-estate-category-list';
 import { RealEstateSubcategoryList } from './components/real-estate-subcategory-list';
+import {
+    getCreateHotelStateSelectedCategory,
+    getCreateHotelStateSelectedSubcategory,
+} from '@/redux/selectors/create-hotel-selector';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
 
 export const RealEstateChange: React.FC = () => {
-    const { t, i18n } = useTranslation('form');
+    const { i18n } = useTranslation('form');
     const { data: realEstateCategories } = useGetRealEstateQuery('ALL');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const selectedCategoryFromRedux = useSelector(
-        (state: any) => state.createHotel.selectedCategory
+    const selectedCategoryFromRedux = useAppSelector(
+        getCreateHotelStateSelectedCategory
     );
-    const selectedSubcategoryFromRedux = useSelector(
-        (state: any) => state.createHotel.selectedSubcategory
+    const selectedSubcategoryFromRedux = useAppSelector(
+        getCreateHotelStateSelectedSubcategory
     );
 
     const [selectedCategory, setSelectedCategory] = useState<number | null>(
@@ -40,7 +45,13 @@ export const RealEstateChange: React.FC = () => {
     useEffect(() => {
         dispatch(saveSelectedCategory(selectedCategory));
         dispatch(saveSelectedSubcategory(selectedSubcategory));
-    }, [selectedCategory, selectedSubcategory, dispatch]);
+        const category = categories?.find(cat => cat.id === selectedCategory);
+        if (category) {
+            const subcategory =  category.subcategories.find(subcategory => subcategory.id === selectedSubcategory)
+            if (subcategory) {dispatch(saveSelectedRealEstateType(subcategory.name))}
+        }
+        
+    }, [selectedCategory, selectedSubcategory, categories, dispatch]);
 
     const handleCategorySelect = (categoryId: number) => {
         setSelectedCategory(categoryId);

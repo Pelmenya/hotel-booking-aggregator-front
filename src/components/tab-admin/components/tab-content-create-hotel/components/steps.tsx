@@ -1,6 +1,9 @@
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
-import { getCreateHotelStateStep } from '@/redux/selectors/create-hotel-selector';
+import {
+    getCreateHotelStateSelectedSubcategory,
+    getCreateHotelStateStep,
+} from '@/redux/selectors/create-hotel-selector';
 import { setStep, TStep } from '@/redux/slices/create-hotel-slice';
 import cn from 'classnames';
 import { useCallback } from 'react';
@@ -18,12 +21,17 @@ export const Steps = () => {
     const { i18n } = useTranslation('common');
     const dispatch = useAppDispatch();
     const currentStep = useAppSelector(getCreateHotelStateStep);
+    const selectedSubcategoryFromRedux = useAppSelector(
+        getCreateHotelStateSelectedSubcategory
+    );
 
     const handleOnClickStep = useCallback(
         (event: React.MouseEvent<HTMLLIElement>) => {
-            dispatch(setStep(Number(event.currentTarget.id) as TStep));
+            if (selectedSubcategoryFromRedux) {
+                dispatch(setStep(Number(event.currentTarget.id) as TStep));
+            }
         },
-        [dispatch]
+        [dispatch, selectedSubcategoryFromRedux]
     );
 
     return (

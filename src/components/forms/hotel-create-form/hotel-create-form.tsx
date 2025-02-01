@@ -13,10 +13,16 @@ import { schemaHotelForm } from '../schemas/yup.schemas';
 import { Map } from '@/components/map/map';
 import { transformCoordinates } from 'utils/transform-coordinates';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '@/hooks/use-app-selector';
+import { getCreateHotelStateRealEatateType } from '@/redux/selectors/create-hotel-selector';
 
 export const HotelCreateForm = () => {
     const { t } = useTranslation('form');
 
+    const selectedRealEstateTypeFromRedux = useAppSelector(
+        getCreateHotelStateRealEatateType
+
+    );
 
     const [coordinates, setCoordinates] = useState<TNullable<string>>(null);
 
@@ -69,7 +75,7 @@ export const HotelCreateForm = () => {
     return (
         <>
             <FormWrapper
-                title={t('TITLE_FORM_CREATE_HOTEL', 'Добавление отеля')}
+                title={selectedRealEstateTypeFromRedux}
                 onSubmit={handleSubmit(onSubmit)}
                 name="addHotel"
                 className="py-0"
