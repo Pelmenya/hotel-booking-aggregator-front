@@ -4,13 +4,13 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 
 export type TStep = 1 | 2 | 3 | 4 | 5;
-    
+
 export type TCreateHotelState = {
     step: TStep;
     steps: TStep[];
     selectedCategory: TNullable<number>;
     selectedSubcategory: TNullable<number>;
-    realEstateType: TNullable<string>;
+    realEstateType: TNullable<{ ru: string; en: string }>;
 };
 
 const initialState: TCreateHotelState = {
@@ -39,7 +39,7 @@ export const createHotelSlice = createSlice({
         saveSelectedSubcategory(state, action: PayloadAction<TNullable<number>>) {
             state.selectedSubcategory = action.payload;
         },
-        saveSelectedRealEstateType(state, action: PayloadAction<TNullable<string>>) {
+        saveSelectedRealEstateType(state, action: PayloadAction<TNullable<{ ru: string; en: string }>>) {
             state.realEstateType = action.payload;
         },
         [HYDRATE]: (state, action) => {

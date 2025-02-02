@@ -17,11 +17,10 @@ import { useAppSelector } from '@/hooks/use-app-selector';
 import { getCreateHotelStateRealEatateType } from '@/redux/selectors/create-hotel-selector';
 
 export const HotelCreateForm = () => {
-    const { t } = useTranslation('form');
+    const { t, i18n } = useTranslation('form');
 
     const selectedRealEstateTypeFromRedux = useAppSelector(
         getCreateHotelStateRealEatateType
-
     );
 
     const [coordinates, setCoordinates] = useState<TNullable<string>>(null);
@@ -75,7 +74,11 @@ export const HotelCreateForm = () => {
     return (
         <>
             <FormWrapper
-                title={selectedRealEstateTypeFromRedux}
+                title={
+                    i18n.language === 'ru'
+                        ? selectedRealEstateTypeFromRedux?.ru
+                        : selectedRealEstateTypeFromRedux?.en
+                }
                 onSubmit={handleSubmit(onSubmit)}
                 name="addHotel"
                 className="py-0"

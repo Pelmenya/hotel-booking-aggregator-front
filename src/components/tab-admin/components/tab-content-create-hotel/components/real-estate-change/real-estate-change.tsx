@@ -45,13 +45,38 @@ export const RealEstateChange: React.FC = () => {
     useEffect(() => {
         dispatch(saveSelectedCategory(selectedCategory));
         dispatch(saveSelectedSubcategory(selectedSubcategory));
-        const category = categories?.find(cat => cat.id === selectedCategory);
-        if (category) {
-            const subcategory =  category.subcategories.find(subcategory => subcategory.id === selectedSubcategory)
-            if (subcategory) {dispatch(saveSelectedRealEstateType(subcategory.name))}
+        const categoryRu = realEstateCategories?.ru?.find(
+            (category) => category.id  === (i18n.language === 'en' ? Number(selectedCategory) - 1: selectedCategory)
+        );
+        const categoryEn = realEstateCategories?.en?.find(
+            (category) => category.id  === (i18n.language === 'ru' ? Number(selectedCategory) + 1: selectedCategory)
+        );
+
+        if (categoryRu && categoryEn) {
+            const subcategoryRu = categoryRu.subcategories.find(
+                (subcategory) => subcategory.id  === (i18n.language === 'en' ? Number(selectedSubcategory) - 1: selectedSubcategory)
+            );
+            const subcategoryEn = categoryEn.subcategories.find(
+                (subcategory) => subcategory.id  === (i18n.language === 'ru' ? Number(selectedSubcategory) + 1: selectedSubcategory)
+            );
+
+            if (subcategoryEn && subcategoryRu) {
+                dispatch(
+                    saveSelectedRealEstateType({
+                        ru: subcategoryRu.name,
+                        en: subcategoryEn.name,
+                    })
+                );
+            }
         }
-        
-    }, [selectedCategory, selectedSubcategory, categories, dispatch]);
+    }, [
+        selectedCategory,
+        selectedSubcategory,
+        categories,
+        dispatch,
+        realEstateCategories,
+        i18n,
+    ]);
 
     const handleCategorySelect = (categoryId: number) => {
         setSelectedCategory(categoryId);
