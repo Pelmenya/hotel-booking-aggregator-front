@@ -65,13 +65,13 @@ export default function AddressSearch() {
                                 <Combobox.Option
                                     key={suggestion.sign}
                                     value={suggestion.value}
-                                    className="cursor-pointer select-none relative py-2 pl-3 pr-4 hover:bg-blue-100"
+                                    className="cursor-pointer select-none relative hover:bg-blue-100"
                                 >
                                     {({ active }) => (
                                         <span
-                                            className={`block ${
+                                            className={`block py-2 pl-3 pr-4 ${
                                                 active
-                                                    ? 'font-medium'
+                                                    ? 'font-bold bg-blue-100'
                                                     : 'font-normal'
                                             } whitespace-normal break-words`}
                                         >
