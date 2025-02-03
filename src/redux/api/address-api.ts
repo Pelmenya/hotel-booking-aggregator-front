@@ -14,6 +14,16 @@ export type TSuggestionAddressResponseData = {
     suggestions: TSuggestion[];
 };
 
+export type TPoint = {
+    latitude: number;
+    longitude: number;
+
+}
+
+export type TCoordinatesResData = {
+    coordinates: TPoint;
+};
+
 export const addressApi = createApi({
     reducerPath: 'addressApi',
     baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_API_URL + '/proxy' }),
@@ -31,7 +41,14 @@ export const addressApi = createApi({
             }),
             // Вы можете добавить transformResponse для обработки ответа, если это необходимо
         }),
+        getCoordinates: builder.query<TCoordinatesResData, string>({
+            query: (address: string) => ({
+                url: `geocode?address=${encodeURIComponent(address)}`,
+                method: 'GET',
+                credentials: 'include'
+            }),
+        }),
     }),
 });
 
-export const { useGetAddressSuggestionsQuery } = addressApi;
+export const { useGetAddressSuggestionsQuery, useGetCoordinatesQuery } = addressApi;

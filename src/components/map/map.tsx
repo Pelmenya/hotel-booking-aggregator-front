@@ -1,15 +1,19 @@
 import { YMaps, Map as MapComponent, Placemark } from '@pbe/react-yandex-maps';
 
 export type MapProps = {
-    coordinates: number[];
+    coordinates: number[] | null;
 };
 
 export const Map = ({ coordinates }: MapProps) => {
+    console.log(coordinates);
+    if (!coordinates) {
+        return null; // Или отображайте индикатор загрузки
+    }
     
     return (
         <YMaps
             query={{
-                apikey: process.env.NEXT_PUBLIC_YM_API_KEY
+                apikey: process.env.NEXT_PUBLIC_YM_API_KEY,
             }}
         >
             <div className='border border-base-300 bg-base-100 rounded-box p-4'>

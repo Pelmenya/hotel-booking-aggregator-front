@@ -15,6 +15,7 @@ import { transformCoordinates } from 'utils/transform-coordinates';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getCreateHotelStateRealEatateType } from '@/redux/selectors/create-hotel-selector';
+import { AddressSearchWithMap } from '@/components/address-search-with-map/address-search-with-map';
 
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
@@ -83,6 +84,7 @@ export const HotelCreateForm = () => {
                 name="addHotel"
                 className="py-0"
             >
+                <AddressSearchWithMap />
                 <Input
                     type="text"
                     id="HotelTitle"
