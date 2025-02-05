@@ -1,18 +1,18 @@
 import { useDispatch } from 'react-redux';
-import { 
-    setHotelTitle, 
-    setHotelDescription, 
-    setHotelCoordinates, 
+import {
+    setHotelTitle,
+    setHotelDescription,
+    setHotelCoordinates,
     setHotelPictures,
-    setHotelFiles
+    setHotelFiles,
 } from '@/redux/slices/create-hotel-slice';
-import { 
-    getHotelTitle, 
-    getHotelDescription, 
-    getHotelCoordinates, 
+import {
+    getHotelTitle,
+    getHotelDescription,
+    getHotelCoordinates,
     getHotelPictures,
     getHotelFiles,
-    getCreateHotelStateRealEstateType
+    getCreateHotelStateRealEstateType,
 } from '@/redux/selectors/create-hotel-selector';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { useForm } from 'react-hook-form';
@@ -32,7 +32,9 @@ export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
     const dispatch = useDispatch();
 
-    const selectedRealEstateTypeFromRedux = useAppSelector(getCreateHotelStateRealEstateType);
+    const selectedRealEstateTypeFromRedux = useAppSelector(
+        getCreateHotelStateRealEstateType
+    );
     const hotelTitleFromRedux = useAppSelector(getHotelTitle);
     const hotelDescriptionFromRedux = useAppSelector(getHotelDescription);
     const hotelCoordinatesFromRedux = useAppSelector(getHotelCoordinates);
@@ -44,19 +46,26 @@ export const HotelCreateForm = () => {
         getValues,
         watch,
         formState: { errors },
+        reset,
     } = useForm({
         resolver: yupResolver(schemaHotelForm),
         reValidateMode: 'onChange',
+
     });
 
-    const title = watch('title'); // отслеживаем изменения в поле 'title'
+    const title = watch('title');
 
     useEffect(() => {
-        if (title) {
+        if (title || title === '') 
             dispatch(setHotelTitle(title));
-        }
-    }, [title, dispatch]); // вызываем useEffect при изменении title
+    }, [title, dispatch]);
 
+    // Используйте useEffect для обновления значений формы, если они изменяются в Redux
+    useEffect(() => {
+        reset({
+            title: hotelTitleFromRedux,
+        });
+    }, [hotelTitleFromRedux, hotelDescriptionFromRedux, reset]);
 
     const handlerOnChangePictures = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -72,9 +81,11 @@ export const HotelCreateForm = () => {
     return (
         <>
             <FormWrapper
-                title={
-                    `${i18n.language === 'ru' ? selectedRealEstateTypeFromRedux?.ru : selectedRealEstateTypeFromRedux?.en} ${hotelTitleFromRedux || ''}`
-                }
+                title={`${
+                    i18n.language === 'ru'
+                        ? selectedRealEstateTypeFromRedux?.ru
+                        : selectedRealEstateTypeFromRedux?.en
+                } ${hotelTitleFromRedux || ''}`}
                 name="addHotel"
                 className="py-0"
                 onSubmit={() => {}}
@@ -88,27 +99,9 @@ export const HotelCreateForm = () => {
                     error={!!errors.title}
                     control={control}
                 />
-                <Input
-                    type="text"
-                    id="HotelСoordinates"
-                    placeholder="Координаты"
-                    label={t('LABEL_INPUT_COORDINATES', 'Координаты')}
-                    name="coordinates"
-                    error={!!errors.coordinates}
-                    control={control}
-                    onChange={() => dispatch(setHotelCoordinates(getValues('coordinates')))}
-                />
+
                 <AddressSearchWithMap />
-                <Input
-                    type="textarea"
-                    id="HotelDescription"
-                    placeholder="Описание"
-                    label={t('LABEL_INPUT_HOTEL_DESCRIPTION', 'Описание отеля')}
-                    name="description"
-                    error={!!errors.description}
-                    control={control}
-                    onChange={() => dispatch(setHotelDescription(getValues('description')))}
-                />
+
                 <InputFile
                     name="images"
                     control={control}
@@ -121,7 +114,11 @@ export const HotelCreateForm = () => {
             </FormWrapper>
             {hotelCoordinatesFromRedux && (
                 <div className="mb-8">
-                    <Map coordinates={transformCoordinates(hotelCoordinatesFromRedux)} />
+                    <Map
+                        coordinates={transformCoordinates(
+                            hotelCoordinatesFromRedux
+                        )}
+                    />
                 </div>
             )}
             {hotelPicturesFromRedux ? (

@@ -14,7 +14,7 @@ export const AddressSearchWithMap = () => {
     const { t } = useTranslation('form');
     const [query, setQuery] = useState('');
     const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
-    const [coordinates, setCoordinates] = useState<TPoint| null>(null);
+    const [coordinates, setCoordinates] = useState<TPoint | null>(null);
 
     const { data: suggestionsData } = useGetAddressSuggestionsQuery(query);
     const { data: coordinatesData } = useGetCoordinatesQuery(
@@ -31,7 +31,6 @@ export const AddressSearchWithMap = () => {
     useEffect(() => {
         if (coordinatesData?.coordinates) {
             setCoordinates(coordinatesData.coordinates);
-
         }
     }, [coordinatesData]);
 
@@ -52,7 +51,7 @@ export const AddressSearchWithMap = () => {
     );
 
     return (
-        <div className="w-full max-w-md mx-auto">
+        <div className="w-full max-w-lg mx-auto">
             <div className="relative container">
                 <Combobox value={query} onChange={handleSelect}>
                     <div className={labelClasses}>
@@ -111,9 +110,15 @@ export const AddressSearchWithMap = () => {
             </div>
             {coordinates && (
                 <div className="mt-4">
-                    <Map coordinates={[coordinates.latitude, coordinates.longitude]} />
+                    <Map
+                        coordinates={[
+                            coordinates.latitude,
+                            coordinates.longitude,
+                        ]}
+                    />
+                    <p className='mt-2'>Координаты: {coordinates.latitude + ', ' +  coordinates.longitude}</p>
                 </div>
             )}
         </div>
     );
-}
+};
