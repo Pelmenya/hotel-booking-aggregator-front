@@ -1,4 +1,3 @@
-import { DataJson } from '@/components/data-json/data-json';
 import { HotelPage } from '@/components/pages/hotel-page/hotel-page';
 import { Layout } from '@/layout/layout';
 import {
@@ -17,7 +16,6 @@ export default function Hotel({ id }: { id: string }) {
     return (
         <Layout title={`На-День.рф ~ ${hotelTitle}`} data={data}>
             <HotelPage data={data || null} />
-            <DataJson data={data} />
         </Layout>
     );
 }
