@@ -11,17 +11,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaHotelForm } from '../schemas/yup.schemas';
 import { Input } from '../components/input/input';
-import { InputFile } from '../components/input-file/input-file';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
-import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { useTranslation } from 'react-i18next';
 import { AddressSearchWithMap } from '@/components/address-search-with-map/address-search-with-map';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
     const dispatch = useDispatch();
-    const [hotelPictures, setHotelPictures] = useState<string[]>([]);
 
     const selectedRealEstateTypeFromRedux = useAppSelector(
         getCreateHotelStateRealEstateType
@@ -49,16 +46,6 @@ export const HotelCreateForm = () => {
             title: hotelTitleFromRedux,
         });
     }, [hotelTitleFromRedux, reset]);
-
-    const handlerOnChangePictures = (e: ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        if (files) {
-            const paths = Array.from(files).map((file) =>
-                URL.createObjectURL(file)
-            );
-            setHotelPictures(paths);
-        }
-    };
 
     return (
         <>
