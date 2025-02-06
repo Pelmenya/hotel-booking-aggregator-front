@@ -14,7 +14,7 @@ import { Input } from '../components/input/input';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { useTranslation } from 'react-i18next';
 import { AddressSearchWithMap } from '@/components/address-search-with-map/address-search-with-map';
-import { ChangeEvent, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
