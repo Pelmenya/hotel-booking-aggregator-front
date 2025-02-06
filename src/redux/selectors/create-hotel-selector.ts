@@ -6,6 +6,5 @@ export const getCreateHotelStateSelectedSubcategory  = (state: TAppState) => sta
 export const getCreateHotelStateRealEstateType  = (state: TAppState) => state.createHotel.realEstateType;
 export const getHotelTitle = (state: TAppState) => state.createHotel.hotelTitle;
 export const getHotelDescription = (state: TAppState) => state.createHotel.hotelDescription;
+export const getHotelAddress = (state: TAppState) => state.createHotel.hotelAddress;
 export const getHotelCoordinates = (state: TAppState) => state.createHotel.hotelCoordinates;
-export const getHotelPictures = (state: TAppState) => state.createHotel.hotelPictures;
-export const getHotelFiles = (state: TAppState) => state.createHotel.hotelFiles;

@@ -1,28 +1,29 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Combobox } from '@headlessui/react';
 import _ from 'lodash';
-import {
-    TPoint,
-    useGetAddressSuggestionsQuery,
-    useGetCoordinatesQuery,
-} from '@/redux/api/address-api';
+import { useGetAddressSuggestionsQuery, useGetCoordinatesQuery } from '@/redux/api/address-api';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { Map } from '../map/map';
+import { setHotelAddress, setHotelCoordinates } from '@/redux/slices/create-hotel-slice';
+import { getHotelAddress, getHotelCoordinates } from '@/redux/selectors/create-hotel-selector';
+import { useAppDispatch } from '@/hooks/use-app-dispatch';
+import { useAppSelector } from '@/hooks/use-app-selector';
 
 export const AddressSearchWithMap = () => {
+    const dispatch = useAppDispatch();
+    const hotelAddressFromRedux = useAppSelector(getHotelAddress);
+    const hotelCoordinatesFromRedux = useAppSelector(getHotelCoordinates);
+
     const { t } = useTranslation('form');
-    const [query, setQuery] = useState('');
-    const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
-    const [coordinates, setCoordinates] = useState<TPoint | null>(null);
+    const [query, setQuery] = useState(hotelAddressFromRedux || '');
+    const [selectedAddress, setSelectedAddress] = useState<string | null>(hotelAddressFromRedux);
+    const [coordinates, setCoordinates] = useState(hotelCoordinatesFromRedux);
 
     const { data: suggestionsData } = useGetAddressSuggestionsQuery(query);
-    const { data: coordinatesData } = useGetCoordinatesQuery(
-        selectedAddress || '',
-        {
-            skip: !selectedAddress,
-        }
-    );
+    const { data: coordinatesData } = useGetCoordinatesQuery(selectedAddress || '', {
+        skip: !selectedAddress,
+    });
 
     const suggestions = suggestionsData?.suggestions || [];
 
@@ -31,8 +32,17 @@ export const AddressSearchWithMap = () => {
     useEffect(() => {
         if (coordinatesData?.coordinates) {
             setCoordinates(coordinatesData.coordinates);
+            // Обновление координат в Redux
+            dispatch(setHotelCoordinates(coordinatesData.coordinates));
         }
-    }, [coordinatesData]);
+    }, [coordinatesData, dispatch]);
+
+    useEffect(() => {
+        // Обновление состояния адреса в Redux
+        if (selectedAddress !== hotelAddressFromRedux) {
+            dispatch(setHotelAddress(selectedAddress));
+        }
+    }, [selectedAddress, hotelAddressFromRedux, dispatch]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         debouncedSetQuery(event.target.value);
@@ -66,7 +76,7 @@ export const AddressSearchWithMap = () => {
                                 {
                                     'top-3 text-xs': query,
                                     'top-1/2 transform -translate-y-1/2 peer-focus:top-3 peer-focus:text-xs':
-                                        query != '' || !query,
+                                        query !== '' || !query,
                                 }
                             )}
                         >
@@ -76,10 +86,7 @@ export const AddressSearchWithMap = () => {
                     {query && suggestions.length === 0 && (
                         <Combobox.Options className="absolute z-10 bg-base-100 border border-primary rounded-md shadow-lg max-h-60 mt-1 w-full overflow-auto">
                             <div className="p-2">
-                                {t(
-                                    'NOT_COMBOBOX_OPTIONS',
-                                    'Нет подходящей подсказки'
-                                )}
+                                {t('NOT_COMBOBOX_OPTIONS', 'Нет подходящей подсказки')}
                             </div>
                         </Combobox.Options>
                     )}
@@ -109,14 +116,9 @@ export const AddressSearchWithMap = () => {
                 </Combobox>
             </div>
             {coordinates && (
-                <div className="mt-4">
-                    <Map
-                        coordinates={[
-                            coordinates.latitude,
-                            coordinates.longitude,
-                        ]}
-                    />
-                    <p className='mt-2'>Координаты: {coordinates.latitude + ', ' +  coordinates.longitude}</p>
+                <div className="grid w-full mt-4">
+                    <Map coordinates={[coordinates.latitude, coordinates.longitude]} />
+                    <p className='mt-2'>Координаты: {coordinates.latitude + ', ' + coordinates.longitude}</p>
                 </div>
             )}
         </div>

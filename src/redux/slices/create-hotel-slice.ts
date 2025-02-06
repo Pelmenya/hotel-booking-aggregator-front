@@ -1,6 +1,7 @@
 import { TNullable } from '@/types/t-nullable';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
+import { TPoint } from '../api/address-api';
 
 export type TStep = 1 | 2 | 3 | 4 | 5;
 
@@ -11,10 +12,9 @@ export type TCreateHotelState = {
     selectedSubcategory: TNullable<number>;
     realEstateType: TNullable<{ ru: string; en: string }>;
     hotelTitle: TNullable<string>;
+    hotelAddress: TNullable<string>;
     hotelDescription: TNullable<string>;
-    hotelCoordinates: TNullable<string>;
-    hotelPictures: TNullable<string[]>;
-    hotelFiles: TNullable<FileList>;
+    hotelCoordinates: TNullable<TPoint>;
 };
 
 const initialState: TCreateHotelState = {
@@ -24,10 +24,9 @@ const initialState: TCreateHotelState = {
     selectedSubcategory: null,
     realEstateType: null,
     hotelTitle: null,
+    hotelAddress: null,
     hotelDescription: null,
     hotelCoordinates: null,
-    hotelPictures: null,
-    hotelFiles: null
 };
 
 export const createHotelSlice = createSlice({
@@ -43,10 +42,9 @@ export const createHotelSlice = createSlice({
             state.selectedSubcategory = null;
             state.realEstateType = null;
             state.hotelTitle = null;
+            state.hotelAddress = null;
             state.hotelDescription = null;
             state.hotelCoordinates = null;
-            state.hotelPictures = null;
-            state.hotelFiles = null;
         },
         saveSelectedCategory(state, action: PayloadAction<TNullable<number>>) {
             state.selectedCategory = action.payload;
@@ -63,14 +61,11 @@ export const createHotelSlice = createSlice({
         setHotelDescription(state, action: PayloadAction<TNullable<string>>) {
             state.hotelDescription = action.payload;
         },
-        setHotelCoordinates(state, action: PayloadAction<TNullable<string>>) {
+        setHotelAddress(state, action: PayloadAction<TNullable<string>>) {
+            state.hotelAddress = action.payload;
+        },
+        setHotelCoordinates(state, action: PayloadAction<TNullable<TPoint>>) {
             state.hotelCoordinates = action.payload;
-        },
-        setHotelPictures(state, action: PayloadAction<TNullable<string[]>>) {
-            state.hotelPictures = action.payload;
-        },
-        setHotelFiles(state, action: PayloadAction<TNullable<FileList>>) {
-            state.hotelFiles = action.payload;
         },
         [HYDRATE]: (state, action) => {
             return {
@@ -88,8 +83,7 @@ export const {
     saveSelectedSubcategory, 
     saveSelectedRealEstateType,
     setHotelTitle,
+    setHotelAddress,
     setHotelDescription,
     setHotelCoordinates,
-    setHotelPictures,
-    setHotelFiles
 } = createHotelSlice.actions;

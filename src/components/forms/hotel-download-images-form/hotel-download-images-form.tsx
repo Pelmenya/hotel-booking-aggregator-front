@@ -1,7 +1,3 @@
-import { useDispatch } from 'react-redux';
-import {
-    setHotelTitle,
-} from '@/redux/slices/create-hotel-slice';
 import {
     getHotelTitle,
     getCreateHotelStateRealEstateType,
@@ -10,17 +6,15 @@ import { useAppSelector } from '@/hooks/use-app-selector';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaHotelForm } from '../schemas/yup.schemas';
-import { Input } from '../components/input/input';
 import { InputFile } from '../components/input-file/input-file';
 import { FormWrapper } from '../components/form-wrapper/form-wrapper';
 import { PicturesGrid } from '../components/pictures-grid/pictures-grid';
 import { useTranslation } from 'react-i18next';
-import { AddressSearchWithMap } from '@/components/address-search-with-map/address-search-with-map';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
-export const HotelCreateForm = () => {
+export const HotelDownloadImagesForm = () => {
     const { t, i18n } = useTranslation('form');
-    const dispatch = useDispatch();
+
     const [hotelPictures, setHotelPictures] = useState<string[]>([]);
 
     const selectedRealEstateTypeFromRedux = useAppSelector(
@@ -30,25 +24,10 @@ export const HotelCreateForm = () => {
 
     const {
         control,
-        watch,
-        formState: { errors },
-        reset,
     } = useForm({
         resolver: yupResolver(schemaHotelForm),
         reValidateMode: 'onChange',
     });
-
-    const title = watch('title');
-
-    useEffect(() => {
-        if (title || title === '') dispatch(setHotelTitle(title));
-    }, [title, dispatch]);
-
-    useEffect(() => {
-        reset({
-            title: hotelTitleFromRedux,
-        });
-    }, [hotelTitleFromRedux, reset]);
 
     const handlerOnChangePictures = (e: ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -73,18 +52,31 @@ export const HotelCreateForm = () => {
                 maxWidth='max-w-lg'
                 onSubmit={() => {}}
             >
-                <Input
-                    type="text"
-                    id="HotelTitle"
-                    placeholder="Название отеля"
-                    label={t('LABEL_INPUT_HOTEL_NAME', 'Название отеля')}
-                    name="title"
-                    error={!!errors.title}
-                    control={control}
-                />
-
-                <AddressSearchWithMap />
+                <div className="flex flex-col gap-2">
+                    <p className="text-sm">
+                        {t('FORM_ACTION_DOWNLOAD_PHOTO', 'Загрузить фото')}
+                    </p>
+                    <InputFile
+                        name="images"
+                        control={control}
+                        handlerOnChange={handlerOnChangePictures}
+                        multiple={true}
+                        accept="image/*"
+                        id="HotelImages"
+                        placeholder="Фото отеля"
+                    />
+                </div>
             </FormWrapper>
+            {hotelPictures ? (
+                <PicturesGrid
+                    pictures={hotelPictures.map((item) => ({
+                        url: item,
+                        checked: false,
+                    }))}
+                />
+            ) : (
+                <></>
+            )}
         </>
     );
 };

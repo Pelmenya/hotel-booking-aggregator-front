@@ -25,6 +25,7 @@
   "ERROR_INPUT_TITLE": "The hotel name must be at least 2 characters",
   "ERROR_MESSAGE_EMAIL_NOT_CONFIRM": "The mail has not been confirmed",
   "ERROR_MESSAGE_PHONE_NOT_CONFIRM": "The phone number is not confirmed",
+  "FORM_ACTION_DOWNLOAD_PHOTO": "Upload photos",
   "LABEL_CONFIRM_EMAIL": "Enter code",
   "LABEL_CONFIRM_SMS": "Enter code",
   "LABEL_COORDINATES": "Coordinates",

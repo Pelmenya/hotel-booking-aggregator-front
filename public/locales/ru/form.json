@@ -25,6 +25,7 @@
   "ERROR_INPUT_TITLE": "Название отеля не меньше 2 символов",
   "ERROR_MESSAGE_EMAIL_NOT_CONFIRM": "Почта не подтверждена",
   "ERROR_MESSAGE_PHONE_NOT_CONFIRM": "Телефон не подтвержден",
+  "FORM_ACTION_DOWNLOAD_PHOTO": "Загрузить фотографии",
   "LABEL_FORM_LINK_ALREDY_REGISTER": "Уже зарегистрированы?",
   "LABEL_FORM_LINK_NEW_USER": "Вы — новый пользователь?",
   "LABEL_INPUT_ADDRESS": "Адрес",

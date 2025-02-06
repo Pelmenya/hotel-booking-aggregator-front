@@ -3,8 +3,10 @@ import { setStep, TStep } from '@/redux/slices/create-hotel-slice';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getCreateHotelStateSelectedSubcategory, getCreateHotelStateStep } from '@/redux/selectors/create-hotel-selector';
+import { useTranslation } from 'react-i18next';
 
 export const StepsNav = () => {
+    const { t } = useTranslation('common');
     const dispatch = useAppDispatch();
     const currentStep = useAppSelector(getCreateHotelStateStep);
     const selectedSubcategoryFromRedux = useAppSelector(
@@ -32,14 +34,15 @@ export const StepsNav = () => {
                 onClick={handlePrev}
                 className="join-item btn btn-primary btn-outline"
             >
-                Previous step
+                {t('PREV_STEP_BTN', 'Предыдущий шаг')}
             </button>
             <button
                 disabled={currentStep === 5 || !selectedSubcategoryFromRedux}
                 onClick={handleNext}
                 className="join-item btn btn-primary btn-outline"
             >
-                Next step
+                {t('NEXT_STEP_BTN', 'Следующий шаг')}
+                
             </button>
         </div>
     );

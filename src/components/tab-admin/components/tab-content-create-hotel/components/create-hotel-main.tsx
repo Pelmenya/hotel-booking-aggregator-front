@@ -1,6 +1,7 @@
+import { HotelCreateForm } from '@/components/forms/hotel-create-form/hotel-create-form';
+import { HotelDownloadImagesForm } from '@/components/forms/hotel-download-images-form/hotel-download-images-form';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { getCreateHotelStateStep } from '@/redux/selectors/create-hotel-selector';
-import { RealEstateMainData } from './real-eatate-main-data/real-estate-main-data';
 import { RealEstateChange } from './real-estate-change/real-estate-change';
 import { StepsNav } from './steps-nav';
 
@@ -10,10 +11,10 @@ export const CreateHotelMain = () => {
     return (
         <div className="border border-base-300 bg-base-100 rounded-box pt-0 px-4 pb-8 flex flex-col items-center gap-6 w-full">
             {step === 1 && <RealEstateChange />}
-            {step === 2 && <RealEstateMainData />}
+            {step === 2 && <HotelCreateForm />}
             {step === 3 && <div>Шаг 3</div>}
             {step === 4 && <div>Шаг 4</div>}
-            {step === 5 && <div>Шаг 5</div>}
+            {step === 5 && <HotelDownloadImagesForm />}
             <StepsNav />
         </div>
     );
