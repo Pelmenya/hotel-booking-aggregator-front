@@ -15,6 +15,8 @@ export type TCreateHotelState = {
     hotelAddress: TNullable<string>;
     hotelDescription: TNullable<string>;
     hotelCoordinates: TNullable<TPoint>;
+    selectedAmenitiesCategory: TNullable<string>;
+    selectedAmenities: string[];
 };
 
 const initialState: TCreateHotelState = {
@@ -27,6 +29,8 @@ const initialState: TCreateHotelState = {
     hotelAddress: null,
     hotelDescription: null,
     hotelCoordinates: null,
+    selectedAmenitiesCategory: null,
+    selectedAmenities: [],
 };
 
 export const createHotelSlice = createSlice({
@@ -67,6 +71,19 @@ export const createHotelSlice = createSlice({
         setHotelCoordinates(state, action: PayloadAction<TNullable<TPoint>>) {
             state.hotelCoordinates = action.payload;
         },
+        setSelectedAmenitiesCategory(state, action: PayloadAction<TNullable<string>>) {
+            state.selectedAmenitiesCategory = action.payload;
+        },
+        toggleAmenity(state, action: PayloadAction<string>) {
+            const amenity = action.payload;
+            if (state.selectedAmenities.includes(amenity)) {
+                state.selectedAmenities = state.selectedAmenities.filter(
+                    (a) => a !== amenity
+                );
+            } else {
+                state.selectedAmenities.push(amenity);
+            }
+        },
         [HYDRATE]: (state, action) => {
             return {
                 ...state,
@@ -76,14 +93,16 @@ export const createHotelSlice = createSlice({
     },
 });
 
-export const { 
-    setStep, 
-    setInitialState, 
-    saveSelectedCategory, 
-    saveSelectedSubcategory, 
+export const {
+    setStep,
+    setInitialState,
+    saveSelectedCategory,
+    saveSelectedSubcategory,
     saveSelectedRealEstateType,
     setHotelTitle,
     setHotelAddress,
     setHotelDescription,
     setHotelCoordinates,
+    setSelectedAmenitiesCategory,
+    toggleAmenity,
 } = createHotelSlice.actions;

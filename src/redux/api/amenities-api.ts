@@ -1,17 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 
+export type TAmenityCategory = {
+    title: string;
+    amenities: string[];
+};
 
 export type TAmenityViewRes = {
-    ru: {
-        title: string;
-        amenities: string[];
-    };
-    en: {
-        title: string;
-        amenities: string[];
-    };
-};
+    ru: TAmenityCategory;
+    en: TAmenityCategory;
+}[];
 
 export const amenitiesApi = createApi({
     reducerPath: 'amenitiesApi',

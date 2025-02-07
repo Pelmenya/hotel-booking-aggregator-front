@@ -12,8 +12,8 @@ import { useTranslation } from 'react-i18next';
 const steps = [
     { idx: 1, name: 'Тип', nameEn: 'Type' },
     { idx: 2, name: 'Главное', nameEn: 'Main' },
-    { idx: 3, name: 'Гео', nameEn: 'Geo' },
-    { idx: 4, name: 'Удобства', nameEn: 'Amenities' },
+    { idx: 3, name: 'Удобства', nameEn: 'Amenities' },
+    { idx: 4, name: 'Гео', nameEn: 'Geo' },
     { idx: 5, name: 'Политики', nameEn: 'Policies' },
 ];
 
