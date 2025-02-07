@@ -20,25 +20,28 @@ export const RealEstateAmenitiesSubcategoryList: React.FC<
                 className={cn('btn flex justify-between items-center w-full', {
                     'btn-active': selectedSubcategories.includes(subcategory),
                 })}
-                onClick={() => onSubcategorySelect(subcategory)}
+                onClick={() => {
+                    onSubcategorySelect(subcategory);
+                }}
             >
-                <div className="flex items-center gap-2">
-                    <input
-                        type="checkbox"
-                        checked={selectedSubcategories.includes(subcategory)}
-                        onChange={() => onSubcategorySelect(subcategory)}
-                        className="checkbox checkbox-sm checkbox-primary"
-                    />
-                    <span
-                        className="block leading-4 max-w-[160px] sm:max-w-none lg:max-w-[290px] whitespace-nowrap overflow-hidden"
-                        style={{ textOverflow: 'ellipsis' }}
-                    >
-                        {subcategory}
+                <div className="flex items-center justify-between gap-4 w-full">
+                    <div className="flex items-center gap-4">
+                        <input
+                            type="checkbox"
+                            checked={selectedSubcategories.includes(
+                                subcategory
+                            )}
+                            className="checkbox checkbox-primary checkbox-sm"
+                            readOnly
+                        />
+                        <div className="text-left leading-4 max-w-[250px] sm:max-w-none lg:max-w-[250px] break-words">
+                            {subcategory}
+                        </div>
+                    </div>
+                    <span className="text-primary">
+                        <FontAwesomeIcon icon={getIconByAmenity(subcategory)} />
                     </span>
                 </div>
-                <span className="text-primary">
-                    <FontAwesomeIcon icon={getIconByAmenity(subcategory)} />
-                </span>
             </li>
         ))}
     </ul>
