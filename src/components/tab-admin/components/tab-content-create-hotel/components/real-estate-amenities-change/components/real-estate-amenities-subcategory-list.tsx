@@ -12,12 +12,12 @@ type RealEstateSubcategoryListProps = {
 export const RealEstateAmenitiesSubcategoryList: React.FC<
     RealEstateSubcategoryListProps
 > = ({ subcategories, selectedSubcategories, onSubcategorySelect }) => (
-    <ul className="grid w-full grid-cols-1 md:grid-cols-2 gap-4">
+    <ul className="grid w-full grid-cols-1 md:grid-cols-2 lg:md:grid-cols-3 gap-4 mt-4">
         {subcategories.map((subcategory) => (
             <li
                 key={subcategory}
                 tabIndex={0}
-                className={cn('btn flex justify-between items-center w-full', {
+                className={cn('btn btn-lg text-sm flex justify-between items-center w-full', {
                     'btn-active': selectedSubcategories.includes(subcategory),
                 })}
                 onClick={() => {
@@ -38,7 +38,7 @@ export const RealEstateAmenitiesSubcategoryList: React.FC<
                             {subcategory}
                         </div>
                     </div>
-                    <span className="text-primary">
+                    <span className="text-primary text-lg">
                         <FontAwesomeIcon icon={getIconByAmenity(subcategory)} />
                     </span>
                 </div>
