@@ -34,6 +34,7 @@ export const schemaHotelForm = yup
     })
     .required();
 
+
 export const schemaUpdateProfileForm = yup
     .object().shape({
         name: yup.string().min(2).required(),

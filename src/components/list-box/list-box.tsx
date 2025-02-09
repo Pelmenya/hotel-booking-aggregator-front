@@ -52,7 +52,7 @@ export const ListBox = ({
                     </span>
                     <Listbox.Button className="text-left h-full relative w-full block overflow-hidden rounded-md border border-gray-200 px-3 pt-5 pb-1 shadow-sm hover:border-primary hover:ring-1 hover:ring-primary">
                         {selected ? (
-                            <span className="absolute left-3 top-4 text-sm">
+                            <span className="absolute left-3 top-5 text-sm">
                                 {selected}
                             </span>
                         ) : (
