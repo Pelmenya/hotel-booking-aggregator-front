@@ -16,23 +16,23 @@ export const Counter: React.FC<TCounterProps> = ({
     name,
 }) => {
     return (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
             <Controller
                 name={name}
                 control={control}
                 render={({ field: { onChange, value } }) => (
                     <>
                         <button
-                            className="btn btn-circle btn-sm  btn-outline btn-primary"
+                            className="btn btn-circle btn-sm btn-outline btn-primary"
                             type="button"
                             onClick={() =>
-                                onChange(Math.max(0, (value || 0) - 1))
+                                onChange(Math.max(0, (parseInt(value) || 0) - 1))
                             }
                         >
                             -
                         </button>
                         <Input
-                            type="digital"
+                            type="counter"
                             id={`ID-${name}`}
                             placeholder={label}
                             label={label}
@@ -41,20 +41,18 @@ export const Counter: React.FC<TCounterProps> = ({
                             control={control}
                             value={value || 0}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                                const inputValue = e.target.value;
-                                if (/^\d*$/.test(inputValue)) {
-                                    onChange(
-                                        inputValue === ''
-                                            ? 0
-                                            : parseInt(inputValue, 10)
-                                    );
-                                }
+                                let inputValue = e.target.value;
+                                onChange(
+                                    inputValue === ''
+                                        ? 0
+                                        : parseInt(inputValue, 10)
+                                );
                             }}
                         />
                         <button
-                            className="btn btn-circle btn-sm  btn-outline btn-primary"
+                            className="btn btn-circle btn-sm btn-outline btn-primary"
                             type="button"
-                            onClick={() => onChange((value || 0) + 1)}
+                            onClick={() => onChange((parseInt(value) || 0) + 1)}
                         >
                             +
                         </button>

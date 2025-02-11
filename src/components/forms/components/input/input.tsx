@@ -52,7 +52,8 @@ export interface IInputProps
         | 'tel'
         | 'textarea'
         | 'date'
-        | 'digital';
+        | 'digital'
+        | 'counter';
     placeholder: string;
     hidden?: boolean;
     label: string;
@@ -236,7 +237,27 @@ export const Input = ({
                         )}
                     </>
                 );
-
+            case 'counter':
+                return (
+                    <input
+                        ref={ref}
+                        type="text"
+                        id={id}
+                        placeholder={placeholder}
+                        className={cn(commonClasses, 'pr-8')} // Добавление правого отступа для размещения текста "м2"
+                        onChange={(e) => {
+                            let value = e.target.value;
+                            // Удаляем все, кроме цифр
+                            value = value.replace(/\D/g, '');
+                            onChange(value);
+                        }}
+                        onBlur={onBlur}
+                        value={value || ''}
+                        autoComplete={autoComplete}
+                        disabled={disabled}
+                        inputMode="decimal"
+                    />
+                );
             default:
                 return (
                     <input
