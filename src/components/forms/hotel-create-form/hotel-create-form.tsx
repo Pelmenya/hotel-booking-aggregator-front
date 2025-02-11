@@ -16,6 +16,8 @@ import { AddressSearchWithMap } from '@/components/address-search-with-map/addre
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { ListBox } from '@/components/list-box/list-box';
+import { getNumbersFabric } from './constants';
+import { Counter } from '../components/counter/counter';
 
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
@@ -78,25 +80,66 @@ export const HotelCreateForm = () => {
 
                 <AddressSearchWithMap />
                 {Number(selectedRealEstateCategoryFrom) > 2 && (
-                    <div className="grid grid-cols-2 gap-2">
-                        <Input
-                            type="digital"
-                            id="HotelArea"
-                            placeholder="Площадь"
-                            label={t('LABEL_INPUT_HOTEL_AREA', 'Площадь')}
-                            name="area"
-                            error={!!errors.title}
-                            control={control}
-                            onChange={(e) => {console.log(e.target.value)}}
-                        />
-                        <ListBox
-                            id="HotelFloor"
-                            label="Этаж"
-                            handlerSetItem={() => {}}
-                            items={['1', '2', '3']}
-                            activeIdx={null}
-                        />
-                    </div>
+                    <>
+                        <div className="grid grid-cols-2 gap-2">
+                            <Input
+                                type="digital"
+                                id="HotelArea"
+                                placeholder="Площадь"
+                                label={t('LABEL_INPUT_HOTEL_AREA', 'Площадь')}
+                                name="area"
+                                error={!!errors.title}
+                                control={control}
+                                onChange={(e) => {
+                                    console.log(e.target.value);
+                                }}
+                            />
+                            <ListBox
+                                id="HotelFloor"
+                                label={t('LABEL_INPUT_HOTEL_FLOOR', 'Этаж')}
+                                handlerSetItem={() => {}}
+                                items={getNumbersFabric(100)}
+                                activeIdx={null}
+                            />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                            <Counter
+                                control={control}
+                                name="countRooms"
+                                label="Комнаты"
+                                error={false}
+                            />
+                            <Counter
+                                control={control}
+                                name="countBeds"
+                                label="Кровати"
+                                error={false}
+                            />
+
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                            <ListBox
+                                id="HotelRooms"
+                                label={t(
+                                    'LABEL_INPUT_HOTEL_ROOMS',
+                                    'Кол-во комнат'
+                                )}
+                                handlerSetItem={() => {}}
+                                items={getNumbersFabric(100)}
+                                activeIdx={null}
+                            />
+                            <ListBox
+                                id="HotelBeds"
+                                label={t(
+                                    'LABEL_INPUT_HOTEL_BEDS',
+                                    'Спальных мест'
+                                )}
+                                handlerSetItem={() => {}}
+                                items={getNumbersFabric(100)}
+                                activeIdx={null}
+                            />
+                        </div>
+                    </>
                 )}
             </FormWrapper>
         </>

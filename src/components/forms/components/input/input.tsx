@@ -11,34 +11,38 @@ import 'react-datepicker/dist/react-datepicker.css';
 registerLocale('en', enUS);
 registerLocale('ru', ru);
 
+export type TNameInput =
+    | 'name'
+    | 'password'
+    | 'newPassword'
+    | 'oldPassword'
+    | 'confirmPassword'
+    | 'email'
+    | 'contactPhone'
+    | 'role'
+    | 'token'
+    | 'title'
+    | 'images'
+    | 'description'
+    | 'avatars'
+    | 'coordinates'
+    | 'code'
+    | 'codeSms'
+    | 'gender'
+    | 'address'
+    | 'company'
+    | 'birthday'
+    | 'area'
+    | 'countRooms'
+    | 'countBeds';
+
 export interface IInputProps
     extends DetailedHTMLProps<
         InputHTMLAttributes<HTMLInputElement>,
         HTMLInputElement
     > {
     id: string;
-    name:
-        | 'name'
-        | 'password'
-        | 'newPassword'
-        | 'oldPassword'
-        | 'confirmPassword'
-        | 'email'
-        | 'contactPhone'
-        | 'role'
-        | 'token'
-        | 'title'
-        | 'images'
-        | 'description'
-        | 'avatars'
-        | 'coordinates'
-        | 'code'
-        | 'codeSms'
-        | 'gender'
-        | 'address'
-        | 'company'
-        | 'birthday'
-        | 'area';
+    name: TNameInput;
     error: boolean;
     control: Control<FieldValues, any> | undefined;
     type:
@@ -216,18 +220,20 @@ export const Input = ({
                             disabled={disabled}
                             inputMode="decimal"
                         />
-                        <span className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
-                            {i18n.language === 'ru' ? 'м' : 'm'}
-                            <span
-                                style={{
-                                    fontSize: '0.6em',
-                                    position: 'relative',
-                                    top: '-0.2em',
-                                }}
-                            >
-                                2
+                        {name === 'area' && (
+                            <span className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                                {i18n.language === 'ru' ? 'м' : 'm'}
+                                <span
+                                    style={{
+                                        fontSize: '0.6em',
+                                        position: 'relative',
+                                        top: '-0.3em',
+                                    }}
+                                >
+                                    2
+                                </span>
                             </span>
-                        </span>
+                        )}
                     </>
                 );
 

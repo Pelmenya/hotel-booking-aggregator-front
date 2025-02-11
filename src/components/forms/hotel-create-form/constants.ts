@@ -1,0 +1,1 @@
+export const getNumbersFabric = (length: number) => [...Array.from({ length }, (_, i) => String(i + 1))];
