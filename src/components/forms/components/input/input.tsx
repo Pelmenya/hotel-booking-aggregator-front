@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, FocusEvent} from 'react';
+import React, { useState, useRef, useMemo, FocusEvent } from 'react';
 import cn from 'classnames';
 import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { Control, FieldValues, Controller } from 'react-hook-form';
@@ -37,10 +37,18 @@ export interface IInputProps
         | 'gender'
         | 'address'
         | 'company'
-        | 'birthday';
+        | 'birthday'
+        | 'area';
     error: boolean;
     control: Control<FieldValues, any> | undefined;
-    type: 'text' | 'password' | 'email' | 'tel' | 'textarea' | 'date';
+    type:
+        | 'text'
+        | 'password'
+        | 'email'
+        | 'tel'
+        | 'textarea'
+        | 'date'
+        | 'digital';
     placeholder: string;
     hidden?: boolean;
     label: string;
@@ -67,7 +75,8 @@ const errorMessages = {
     address: 'ERROR_INPUT_ADDRESS',
     gender: 'ERROR_INPUT_GENDER',
     default: 'ERROR_INPUT_REQUIRED_FIELD',
-    birthday: 'ERROR_INPUT_BIRTHDAY'
+    birthday: 'ERROR_INPUT_BIRTHDAY',
+    area: 'ERROR_INPUT_NUMBER',
 };
 
 export const Input = ({
@@ -87,19 +96,21 @@ export const Input = ({
     const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
     const datePickerRef = useRef<DatePicker>(null);
 
-    const commonClasses = useMemo(() => 
-        'peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm', 
-    []
+    const commonClasses = useMemo(
+        () =>
+            'peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm',
+        []
     );
 
-    const labelClasses = useMemo(() => 
-        cn(
-            'relative block overflow-hidden rounded-lg border border-gray-200 px-3 pt-3 shadow-sm w-full transition duration-300 ease-in-out',
-            error
-                ? 'focus-within:border-error focus-within:ring-1 focus-within:ring-error'
-                : 'focus-within:border-primary focus-within:ring-1 focus-within:ring-primary'
-        ), 
-    [error]
+    const labelClasses = useMemo(
+        () =>
+            cn(
+                'relative block overflow-hidden rounded-lg border border-gray-200 px-3 pt-3 shadow-sm w-full transition duration-300 ease-in-out',
+                error
+                    ? 'focus-within:border-error focus-within:ring-1 focus-within:ring-error'
+                    : 'focus-within:border-primary focus-within:ring-1 focus-within:ring-primary'
+            ),
+        [error]
     );
 
     const handleFocus = () => {
@@ -143,7 +154,11 @@ export const Input = ({
                     <DatePicker
                         ref={datePickerRef}
                         id={id}
-                        selected={value && isValid(new Date(value)) ? new Date(value) : null}
+                        selected={
+                            value && isValid(new Date(value))
+                                ? new Date(value)
+                                : null
+                        }
                         onChange={(date) => onChange(date)}
                         onBlur={onBlur}
                         placeholderText={placeholder}
@@ -167,13 +182,55 @@ export const Input = ({
                         className={commonClasses + ' react-datepicker'}
                         onChange={onChange}
                         onBlur={onBlur}
-                        value={value && isValid(new Date(value)) ? format(new Date(value), 'dd-MM-yyyy') : value || ''}
+                        value={
+                            value && isValid(new Date(value))
+                                ? format(new Date(value), 'dd-MM-yyyy')
+                                : value || ''
+                        }
                         disabled={disabled}
                         autoComplete={autoComplete}
                         inputMode="numeric"
                         maxLength={10} // Ограничение максимальной длины ввода
                     />
                 );
+            case 'digital':
+                return (
+                    <>
+                        <input
+                            ref={ref}
+                            type="text"
+                            id={id}
+                            placeholder={placeholder}
+                            className={cn(commonClasses, 'pr-8')} // Добавление правого отступа для размещения текста "м2"
+                            onChange={(e) => {
+                                let value = e.target.value;
+                                value = value.replace(',', '.');
+                                const numericValue = value.match(/^\d*\.?\d*$/)
+                                    ? value
+                                    : value.slice(0, -1);
+                                onChange(numericValue);
+                            }}
+                            onBlur={onBlur}
+                            value={value || ''}
+                            autoComplete={autoComplete}
+                            disabled={disabled}
+                            inputMode="decimal"
+                        />
+                        <span className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center">
+                            {i18n.language === 'ru' ? 'м' : 'm'}
+                            <span
+                                style={{
+                                    fontSize: '0.6em',
+                                    position: 'relative',
+                                    top: '-0.2em',
+                                }}
+                            >
+                                2
+                            </span>
+                        </span>
+                    </>
+                );
+
             default:
                 return (
                     <input
@@ -197,7 +254,9 @@ export const Input = ({
             name={name}
             control={control}
             render={({ field: { onChange, onBlur, value, ref } }) => (
-                <div className={cn('relative', hidden && 'hidden', 'container')}>
+                <div
+                    className={cn('relative', hidden && 'hidden', 'container')}
+                >
                     <label
                         htmlFor={id}
                         className={labelClasses}

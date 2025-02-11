@@ -78,16 +78,16 @@ export const HotelCreateForm = () => {
 
                 <AddressSearchWithMap />
                 {Number(selectedRealEstateCategoryFrom) > 2 && (
-                    
-                    <div className='grid grid-cols-2 gap-2'>
+                    <div className="grid grid-cols-2 gap-2">
                         <Input
-                            type="text"
+                            type="digital"
                             id="HotelArea"
                             placeholder="Площадь"
                             label={t('LABEL_INPUT_HOTEL_AREA', 'Площадь')}
-                            name="codeSms"
+                            name="area"
                             error={!!errors.title}
                             control={control}
+                            onChange={(e) => {console.log(e.target.value)}}
                         />
                         <ListBox
                             id="HotelFloor"
