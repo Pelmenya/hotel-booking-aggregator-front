@@ -1,5 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Control, Controller, FieldValues } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Импорт компонента FontAwesome
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'; // Импорт нужных иконок
 import { Input, TNameInput } from '../input/input';
 
 export type TCounterProps = {
@@ -29,7 +31,7 @@ export const Counter: React.FC<TCounterProps> = ({
                                 onChange(Math.max(0, (parseInt(value) || 0) - 1))
                             }
                         >
-                            -
+                            <FontAwesomeIcon icon={faMinus} /> 
                         </button>
                         <Input
                             type="counter"
@@ -54,7 +56,7 @@ export const Counter: React.FC<TCounterProps> = ({
                             type="button"
                             onClick={() => onChange((parseInt(value) || 0) + 1)}
                         >
-                            +
+                            <FontAwesomeIcon icon={faPlus} />
                         </button>
                     </>
                 )}
