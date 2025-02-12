@@ -5,6 +5,12 @@ import { TPoint } from '../api/address-api';
 
 export type TStep = 1 | 2 | 3 | 4 | 5;
 
+export type TBedSelection = {
+    id: string;
+    type: string;
+    count: number;
+};
+
 export type TCreateHotelState = {
     step: TStep;
     steps: TStep[];
@@ -17,6 +23,7 @@ export type TCreateHotelState = {
     hotelCoordinates: TNullable<TPoint>;
     selectedAmenitiesCategory: TNullable<string>;
     selectedAmenities: string[];
+    bedSelections: TBedSelection[];
 };
 
 const initialState: TCreateHotelState = {
@@ -31,6 +38,7 @@ const initialState: TCreateHotelState = {
     hotelCoordinates: null,
     selectedAmenitiesCategory: null,
     selectedAmenities: [],
+    bedSelections: [],
 };
 
 export const createHotelSlice = createSlice({
@@ -84,6 +92,18 @@ export const createHotelSlice = createSlice({
                 state.selectedAmenities.push(amenity);
             }
         },
+        addBedSelection(state, action: PayloadAction<TBedSelection>) {
+            state.bedSelections.push(action.payload);
+        },
+        updateBedSelection(state, action: PayloadAction<TBedSelection>) {
+            const index = state.bedSelections.findIndex(bed => bed.id === action.payload.id);
+            if (index !== -1) {
+                state.bedSelections[index].count = action.payload.count;
+            }
+        },
+        removeBedSelection(state, action: PayloadAction<string>) {
+            state.bedSelections = state.bedSelections.filter(bed => bed.id !== action.payload);
+        },
         [HYDRATE]: (state, action) => {
             return {
                 ...state,
@@ -105,4 +125,7 @@ export const {
     setHotelCoordinates,
     setSelectedAmenitiesCategory,
     toggleAmenity,
+    addBedSelection,
+    updateBedSelection,
+    removeBedSelection,
 } = createHotelSlice.actions;
