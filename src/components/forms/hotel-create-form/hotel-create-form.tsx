@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { setHotelTitle } from '@/redux/slices/create-hotel-slice';
 import {
     getHotelTitle,
@@ -18,6 +17,22 @@ import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { ListBox } from '@/components/list-box/list-box';
 import { getNumbersFabric } from './constants';
 import { Counter } from '../components/counter/counter';
+
+const bedTypes = [
+    { type: 'Односпальная кровать', size: '90x200 см', persons: 1 },
+    { type: 'Двуспальная кровать', size: '140x200 см', persons: 2 },
+    { type: 'Двуспальный диван-кровать', size: '160x200 см', persons: 2 },
+    { type: 'Двуспальная широкая (king-size)', size: '180x200 см', persons: 2 },
+    {
+        type: 'Особо широкая двуспальная (super-king-size)',
+        size: '200x200 см',
+        persons: 2,
+    },
+    { type: 'Двухъярусная кровать', size: '90x200 см', persons: 1 },
+    { type: 'Диван-кровать', size: '160x200 см', persons: 2 },
+    { type: 'Полутороспальная кровать', size: '120x200 см', persons: 1 },
+    { type: 'Кресло-кровать', size: '80x200 см', persons: 1 },
+];
 
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
@@ -101,6 +116,33 @@ export const HotelCreateForm = () => {
                                 items={getNumbersFabric(100)}
                                 activeIdx={null}
                             />
+                            <ListBox
+                                id="HotelKitchen"
+                                label={t('LABEL_INPUT_HOTEL_KITCHEN', 'Кухня')}
+                                handlerSetItem={() => {}}
+                                items={[
+                                    'Нет кухни',
+                                    'Отдельная кухня',
+                                    'Кухонная зона',
+                                    'Кухня-столовая',
+                                ]}
+                                activeIdx={null}
+                            />
+                            <ListBox
+                                id="HotelCondition"
+                                label={t(
+                                    'LABEL_INPUT_HOTEL_CONDITION',
+                                    'Состояние'
+                                )}
+                                handlerSetItem={() => {}}
+                                items={[
+                                    'Без ремонта',
+                                    'Косметический ремонт',
+                                    'Евро ремонт',
+                                    'Дизайнерский ремонт',
+                                ]}
+                                activeIdx={null}
+                            />
                         </div>
                         <div className="grid grid-cols-2 gap-2">
                             <Counter
@@ -111,11 +153,23 @@ export const HotelCreateForm = () => {
                             />
                             <Counter
                                 control={control}
-                                name="countBeds"
-                                label="Кровати"
+                                name="countGuests"
+                                label="Максимально гостей"
                                 error={false}
                             />
-
+                        </div>
+                        <div className="grid grid-cols-1 gap-2">
+                            <ListBox
+                                id="HotelBeds"
+                                label={t(
+                                    'LABEL_INPUT_HOTEL_BEDS',
+                                    'Спальное место'
+                                )}
+                                handlerSetItem={() => {}}
+                                items={bedTypes.map(bed => bed.type)}
+                                activeIdx={null}
+                                tooltips={bedTypes.map(bed => `Размер: ${bed.size}, Кол-во человек: ${bed.persons}`)}
+                            />
                         </div>
                         <div className="grid grid-cols-2 gap-2">
                             <ListBox

@@ -34,7 +34,8 @@ export type TNameInput =
     | 'birthday'
     | 'area'
     | 'countRooms'
-    | 'countBeds';
+    | 'countBeds'
+    | 'countGuests';
 
 export interface IInputProps
     extends DetailedHTMLProps<
