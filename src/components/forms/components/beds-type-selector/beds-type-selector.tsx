@@ -19,12 +19,18 @@ export const BedsTypeSelector = () => {
         (state: TAppState) => state.createHotel.bedSelections
     );
 
+    const totalBeds = useAppSelector(
+        (state: TAppState) => state.createHotel.totalBeds
+    );
+
     const [newBedType, setNewBedType] = useState<string | null>(null);
 
     const handleSelectExisting = useCallback(
-        (selected: string | null, bed: { id: string, type: string }) => {
+        (selected: string | null, bed: { id: string; type: string }) => {
             if (selected && selected !== bed.type) {
-                dispatch(updateBedSelection({ id: bed.id, type: selected, count: 1 }));
+                dispatch(
+                    updateBedSelection({ id: bed.id, type: selected, count: 1 })
+                );
                 dispatch(removeBedSelection(bed.id));
             }
         },
@@ -36,9 +42,18 @@ export const BedsTypeSelector = () => {
     }, []);
 
     const handleCountChange = useCallback(
-        (bed: { id: string, type: string, count: number }, newCount: number) => {
+        (
+            bed: { id: string; type: string; count: number },
+            newCount: number
+        ) => {
             if (newCount > 0) {
-                dispatch(updateBedSelection({ id: bed.id, type: bed.type, count: newCount }));
+                dispatch(
+                    updateBedSelection({
+                        id: bed.id,
+                        type: bed.type,
+                        count: newCount,
+                    })
+                );
             } else {
                 dispatch(removeBedSelection(bed.id));
             }
@@ -46,19 +61,21 @@ export const BedsTypeSelector = () => {
         [dispatch]
     );
 
-    const addNewBedSelection = useCallback(
-        (e: React.MouseEvent) => {
-            e.preventDefault();
-            if (
-                newBedType &&
-                !bedSelections.some((bed) => bed.type === newBedType)
-            ) {
-                dispatch(addBedSelection({ id: _.uniqueId(), type: newBedType, count: 1 }));
-                setNewBedType(null);
-            }
-        },
-        [dispatch, newBedType, bedSelections]
-    );
+    const addNewBedSelection = useCallback(() => {
+        if (
+            newBedType &&
+            !bedSelections.some((bed) => bed.type === newBedType)
+        ) {
+            dispatch(
+                addBedSelection({
+                    id: _.uniqueId(),
+                    type: newBedType,
+                    count: 1,
+                })
+            );
+            setNewBedType(null);
+        }
+    }, [dispatch, newBedType, bedSelections]);
 
     const availableBedTypes = bedTypes.filter(
         (b) => !bedSelections.some((bed) => bed.type === b.type)
@@ -67,7 +84,10 @@ export const BedsTypeSelector = () => {
     return (
         <div className="grid grid-cols-12 gap-4">
             {bedSelections.map((bed) => (
-                <div key={bed.id} className="col-span-12 grid grid-cols-12 gap-2">
+                <div
+                    key={bed.id}
+                    className="col-span-12 grid grid-cols-12 gap-2"
+                >
                     <div className="col-span-10">
                         <ListBox
                             id={`bedType-${bed.id}`}
@@ -117,7 +137,9 @@ export const BedsTypeSelector = () => {
                     handlerSetItem={handleNewTypeChange}
                     activeIdx={
                         newBedType
-                            ? availableBedTypes.findIndex((b) => b.type === newBedType)
+                            ? availableBedTypes.findIndex(
+                                (b) => b.type === newBedType
+                            )
                             : null
                     }
                     tooltips={availableBedTypes.map(
@@ -136,6 +158,10 @@ export const BedsTypeSelector = () => {
                     </button>
                 </div>
             )}
+
+            <div className="col-span-12">
+                Спальных мест: <span>{totalBeds}</span>
+            </div>
         </div>
     );
 };

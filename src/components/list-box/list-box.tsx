@@ -43,8 +43,13 @@ export const ListBox = ({
         handlerSetItem(selected);
     }, [selected, handlerSetItem]);
 
+    if (items.length < 1) return null;
+
     return (
-        <div className="w-full h-full min-h-[46px] max-h-[46px]">
+        <div
+            tabIndex={0}
+            className="w-full h-full min-h-[46px] max-h-[46px]"
+        >
             <Listbox
                 value={selected}
                 onChange={(value) => {
@@ -100,7 +105,14 @@ export const ListBox = ({
                                     data-tip={tooltips ? tooltips[itemIdx] : ''}
                                 >
                                     {({ selected }) => (
-                                        <div className='tooltip tooltip-bottom w-full text-left' data-tip={tooltips ? tooltips[itemIdx] : null}>
+                                        <div
+                                            className="tooltip tooltip-bottom w-full text-left"
+                                            data-tip={
+                                                tooltips
+                                                    ? tooltips[itemIdx]
+                                                    : null
+                                            }
+                                        >
                                             <span
                                                 className={`block truncate ${
                                                     selected

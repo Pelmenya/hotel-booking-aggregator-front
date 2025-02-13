@@ -19,8 +19,6 @@ import { getNumbersFabric } from './constants';
 import { Counter } from '../components/counter/counter';
 import { BedsTypeSelector } from '../components/beds-type-selector/beds-type-selector';
 
-
-
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
     const dispatch = useAppDispatch();
@@ -70,6 +68,8 @@ export const HotelCreateForm = () => {
                 maxWidth="max-w-lg"
                 onSubmit={() => {}}
             >
+                <div className="divider">Основное</div>
+
                 <Input
                     type="text"
                     id="HotelTitle"
@@ -81,8 +81,10 @@ export const HotelCreateForm = () => {
                 />
 
                 <AddressSearchWithMap />
+
                 {Number(selectedRealEstateCategoryFrom) > 2 && (
                     <>
+
                         <div className="grid grid-cols-2 gap-2">
                             <Input
                                 type="digital"
@@ -103,6 +105,9 @@ export const HotelCreateForm = () => {
                                 items={getNumbersFabric(100)}
                                 activeIdx={null}
                             />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
                             <ListBox
                                 id="HotelKitchen"
                                 label={t('LABEL_INPUT_HOTEL_KITCHEN', 'Кухня')}
@@ -131,6 +136,7 @@ export const HotelCreateForm = () => {
                                 activeIdx={null}
                             />
                         </div>
+                        <div className="divider">Гости</div>
                         <div className="grid grid-cols-2 gap-2">
                             <Counter
                                 control={control}
@@ -147,28 +153,6 @@ export const HotelCreateForm = () => {
                         </div>
                         <div className="grid grid-cols-1 gap-2">
                             <BedsTypeSelector />
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                            <ListBox
-                                id="HotelRooms"
-                                label={t(
-                                    'LABEL_INPUT_HOTEL_ROOMS',
-                                    'Кол-во комнат'
-                                )}
-                                handlerSetItem={() => {}}
-                                items={getNumbersFabric(100)}
-                                activeIdx={null}
-                            />
-                            <ListBox
-                                id="HotelBeds"
-                                label={t(
-                                    'LABEL_INPUT_HOTEL_BEDS',
-                                    'Спальных мест'
-                                )}
-                                handlerSetItem={() => {}}
-                                items={getNumbersFabric(100)}
-                                activeIdx={null}
-                            />
                         </div>
                     </>
                 )}

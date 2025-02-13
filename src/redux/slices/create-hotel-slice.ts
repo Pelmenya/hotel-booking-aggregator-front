@@ -1,3 +1,4 @@
+import { bedTypes } from '@/components/forms/components/beds-type-selector/constants';
 import { TNullable } from '@/types/t-nullable';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
@@ -24,6 +25,7 @@ export type TCreateHotelState = {
     selectedAmenitiesCategory: TNullable<string>;
     selectedAmenities: string[];
     bedSelections: TBedSelection[];
+    totalBeds: number;
 };
 
 const initialState: TCreateHotelState = {
@@ -39,6 +41,14 @@ const initialState: TCreateHotelState = {
     selectedAmenitiesCategory: null,
     selectedAmenities: [],
     bedSelections: [],
+    totalBeds: 0,
+};
+
+const calculateTotalBeds = (bedSelections: TBedSelection[]) => {
+    return bedSelections.reduce((total, bed) => {
+        const bedType = bedTypes.find(b => b.type === bed.type);
+        return total + (bedType ? bed.count * bedType.persons : 0);
+    }, 0);
 };
 
 export const createHotelSlice = createSlice({
@@ -94,15 +104,19 @@ export const createHotelSlice = createSlice({
         },
         addBedSelection(state, action: PayloadAction<TBedSelection>) {
             state.bedSelections.push(action.payload);
+            state.totalBeds = calculateTotalBeds(state.bedSelections);
         },
         updateBedSelection(state, action: PayloadAction<TBedSelection>) {
             const index = state.bedSelections.findIndex(bed => bed.id === action.payload.id);
             if (index !== -1) {
                 state.bedSelections[index].count = action.payload.count;
+                state.totalBeds = calculateTotalBeds(state.bedSelections);
             }
+
         },
         removeBedSelection(state, action: PayloadAction<string>) {
             state.bedSelections = state.bedSelections.filter(bed => bed.id !== action.payload);
+            state.totalBeds = calculateTotalBeds(state.bedSelections);
         },
         [HYDRATE]: (state, action) => {
             return {
