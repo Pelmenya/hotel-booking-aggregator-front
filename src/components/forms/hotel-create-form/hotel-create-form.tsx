@@ -1,4 +1,5 @@
 import {
+    setCondition,
     setCountGuests,
     setCountRooms,
     setHotelArea,
@@ -11,8 +12,6 @@ import {
     getHotelTitle,
     getCreateHotelStateRealEstateType,
     getCreateHotelStateSelectedCategory,
-    getHotelAddress,
-    getHotelCoordinates,
     getHotelCondition,
     getHotelArea,
     getHotelFloor,
@@ -31,10 +30,9 @@ import { AddressSearchWithMap } from '@/components/address-search-with-map/addre
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { ListBox } from '@/components/list-box/list-box';
-import { getNumbersFabric } from './constants';
+import { conditionTypes, getNumbersFabric, kitchenTypes } from './constants';
 import { Counter } from '../components/counter/counter';
 import { BedsTypeSelector } from '../components/beds-type-selector/beds-type-selector';
-import { TNullable } from '@/types/t-nullable';
 
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
@@ -68,11 +66,10 @@ export const HotelCreateForm = () => {
 
     const title = watch('title');
     const area = watch('area');
-    const floor = watch('floor');
-    const kitchenType = watch('kitchenType');
-    const condition = watch('condition');
     const countRooms = watch('countRooms');
     const countGuests = watch('countGuests');
+
+    const kitchenType = watch('kitchenType');
 
     useEffect(() => {
         if (title !== undefined) dispatch(setHotelTitle(title));
@@ -82,17 +79,11 @@ export const HotelCreateForm = () => {
         if (area !== undefined) dispatch(setHotelArea(area));
     }, [area, dispatch]);
 
-    useEffect(() => {
-        if (floor !== undefined) dispatch(setHotelFloor(floor));
-    }, [floor, dispatch]);
+
 
     useEffect(() => {
         if (kitchenType !== undefined) dispatch(setKitchenType(kitchenType));
     }, [kitchenType, dispatch]);
-
-    useEffect(() => {
-        if (condition !== undefined) dispatch(setHotelCondition(condition));
-    }, [condition, dispatch]);
 
     useEffect(() => {
         if (countRooms !== undefined) dispatch(setCountRooms(countRooms));
@@ -114,16 +105,15 @@ export const HotelCreateForm = () => {
             // другие поля
         });
     }, [
-        hotelTitleFromRedux, 
-        hotelAreaFromRedux, 
+        hotelTitleFromRedux,
+        hotelAreaFromRedux,
         hotelFloorFromRedux,
         hotelKitchenTypeFromRedux,
         hotelConditionFromRedux,
         hotelCountRoomsFromRedux,
         hotelCountGuestsFromRedux,
-        reset
+        reset,
     ]);
-    
 
     useEffect(() => {
         if (title || title === '') dispatch(setHotelTitle(title));
@@ -175,7 +165,7 @@ export const HotelCreateForm = () => {
                                 id="HotelFloor"
                                 label={t('LABEL_INPUT_HOTEL_FLOOR', 'Этаж')}
                                 handlerSetItem={(value) => {
-                                    //dispatch(setHotelFloor(Number(value)));
+                                    dispatch(setHotelFloor(Number(value) - 1));
                                 }}
                                 items={getNumbersFabric(100)}
                                 activeIdx={hotelFloorFromRedux}
@@ -186,14 +176,9 @@ export const HotelCreateForm = () => {
                             <ListBox
                                 id="HotelKitchen"
                                 label={t('LABEL_INPUT_HOTEL_KITCHEN', 'Кухня')}
-                                handlerSetItem={() => {}}
-                                items={[
-                                    'Нет кухни',
-                                    'Отдельная кухня',
-                                    'Кухонная зона',
-                                    'Кухня-столовая',
-                                ]}
-                                activeIdx={null}
+                                handlerSetItem={(value) => dispatch(setKitchenType(value))}
+                                items={kitchenTypes}
+                                activeIdx={kitchenTypes.findIndex(kitchen => kitchen === hotelKitchenTypeFromRedux)}
                             />
                             <ListBox
                                 id="HotelCondition"
@@ -201,14 +186,9 @@ export const HotelCreateForm = () => {
                                     'LABEL_INPUT_HOTEL_CONDITION',
                                     'Состояние'
                                 )}
-                                handlerSetItem={() => {}}
-                                items={[
-                                    'Без ремонта',
-                                    'Косметический ремонт',
-                                    'Евро ремонт',
-                                    'Дизайнерский ремонт',
-                                ]}
-                                activeIdx={null}
+                                handlerSetItem={(value) => dispatch(setHotelCondition(value))}
+                                items={conditionTypes}
+                                activeIdx={conditionTypes.findIndex(condition => condition === hotelConditionFromRedux)}
                             />
                         </div>
                         <div className="divider divider-info p-4">Гости</div>
