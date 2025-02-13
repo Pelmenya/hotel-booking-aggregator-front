@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 
+
 export const PATTERNS = {
     'PATTERN_PHONE': '^(|(\\+7|8)\\s?(\\(\\d{3}\\)|\\d{3})\\s?[\\-]?\\d{3}[\\-]?\\d{2}[\\-]?\\d{2})$', // пусто или телефон
     'PATTERN_EMAIL': '^[A-Za-z]((\\.|-)?[A-Za-z0-9]+)+@[A-Za-z0-9](-?[A-Za-z0-9]+)+(\\.[A-Za-z]{2,})+$',
@@ -9,6 +10,13 @@ export const PATTERNS = {
 }
 
 export const regExpEmptyString = /''/i;
+
+export const schemaHotelForm = yup.object().shape({
+    title: yup.string().required('Название отеля обязательно'),
+    area: yup.number().required('Площадь обязательна').positive('Площадь должна быть положительной'),
+    countRooms: yup.number().required('Количество комнат обязательно').positive('Должно быть больше нуля'),
+    countGuests: yup.number().required('Количество гостей обязательно').positive('Должно быть больше нуля'),
+});
 
 export const schemaRegisterForm = yup
     .object().shape({
@@ -25,15 +33,6 @@ export const schemaLoginForm = yup
         password: yup.string().min(6).required(),
     })
     .required();
-
-export const schemaHotelForm = yup
-    .object({
-        title: yup.string().min(2).required(),
-        description: yup.string().min(2).required(),
-        coordinates: yup.string().matches(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)
-    })
-    .required();
-
 
 export const schemaUpdateProfileForm = yup
     .object().shape({

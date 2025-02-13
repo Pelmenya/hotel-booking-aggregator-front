@@ -1,8 +1,24 @@
-import { setHotelTitle } from '@/redux/slices/create-hotel-slice';
+import {
+    setCountGuests,
+    setCountRooms,
+    setHotelArea,
+    setHotelCondition,
+    setHotelFloor,
+    setHotelTitle,
+    setKitchenType,
+} from '@/redux/slices/create-hotel-slice';
 import {
     getHotelTitle,
     getCreateHotelStateRealEstateType,
     getCreateHotelStateSelectedCategory,
+    getHotelAddress,
+    getHotelCoordinates,
+    getHotelCondition,
+    getHotelArea,
+    getHotelFloor,
+    getHotelKitchenType,
+    getHotelCountRooms,
+    getHotelCountGuests,
 } from '@/redux/selectors/create-hotel-selector';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { useForm } from 'react-hook-form';
@@ -18,6 +34,7 @@ import { ListBox } from '@/components/list-box/list-box';
 import { getNumbersFabric } from './constants';
 import { Counter } from '../components/counter/counter';
 import { BedsTypeSelector } from '../components/beds-type-selector/beds-type-selector';
+import { TNullable } from '@/types/t-nullable';
 
 export const HotelCreateForm = () => {
     const { t, i18n } = useTranslation('form');
@@ -32,6 +49,12 @@ export const HotelCreateForm = () => {
     );
 
     const hotelTitleFromRedux = useAppSelector(getHotelTitle);
+    const hotelConditionFromRedux = useAppSelector(getHotelCondition);
+    const hotelAreaFromRedux = useAppSelector(getHotelArea);
+    const hotelFloorFromRedux = useAppSelector(getHotelFloor);
+    const hotelKitchenTypeFromRedux = useAppSelector(getHotelKitchenType);
+    const hotelCountRoomsFromRedux = useAppSelector(getHotelCountRooms);
+    const hotelCountGuestsFromRedux = useAppSelector(getHotelCountGuests);
 
     const {
         control,
@@ -44,16 +67,67 @@ export const HotelCreateForm = () => {
     });
 
     const title = watch('title');
+    const area = watch('area');
+    const floor = watch('floor');
+    const kitchenType = watch('kitchenType');
+    const condition = watch('condition');
+    const countRooms = watch('countRooms');
+    const countGuests = watch('countGuests');
 
     useEffect(() => {
-        if (title || title === '') dispatch(setHotelTitle(title));
+        if (title !== undefined) dispatch(setHotelTitle(title));
     }, [title, dispatch]);
+
+    useEffect(() => {
+        if (area !== undefined) dispatch(setHotelArea(area));
+    }, [area, dispatch]);
+
+    useEffect(() => {
+        if (floor !== undefined) dispatch(setHotelFloor(floor));
+    }, [floor, dispatch]);
+
+    useEffect(() => {
+        if (kitchenType !== undefined) dispatch(setKitchenType(kitchenType));
+    }, [kitchenType, dispatch]);
+
+    useEffect(() => {
+        if (condition !== undefined) dispatch(setHotelCondition(condition));
+    }, [condition, dispatch]);
+
+    useEffect(() => {
+        if (countRooms !== undefined) dispatch(setCountRooms(countRooms));
+    }, [countRooms, dispatch]);
+
+    useEffect(() => {
+        if (countGuests !== undefined) dispatch(setCountGuests(countGuests));
+    }, [countGuests, dispatch]);
 
     useEffect(() => {
         reset({
             title: hotelTitleFromRedux,
+            area: hotelAreaFromRedux,
+            floor: hotelFloorFromRedux,
+            kitchenType: hotelKitchenTypeFromRedux,
+            condition: hotelConditionFromRedux,
+            countRooms: hotelCountRoomsFromRedux,
+            countGuests: hotelCountGuestsFromRedux,
+            // другие поля
         });
-    }, [hotelTitleFromRedux, reset]);
+    }, [
+        hotelTitleFromRedux, 
+        hotelAreaFromRedux, 
+        hotelFloorFromRedux,
+        hotelKitchenTypeFromRedux,
+        hotelConditionFromRedux,
+        hotelCountRoomsFromRedux,
+        hotelCountGuestsFromRedux,
+        reset
+    ]);
+    
+
+    useEffect(() => {
+        if (title || title === '') dispatch(setHotelTitle(title));
+    }, [title, dispatch]);
 
     return (
         <>
@@ -68,7 +142,7 @@ export const HotelCreateForm = () => {
                 maxWidth="max-w-lg"
                 onSubmit={() => {}}
             >
-                <div className="divider">Основное</div>
+                <div className="divider divider-info p-4">Основное</div>
 
                 <Input
                     type="text"
@@ -84,7 +158,6 @@ export const HotelCreateForm = () => {
 
                 {Number(selectedRealEstateCategoryFrom) > 2 && (
                     <>
-
                         <div className="grid grid-cols-2 gap-2">
                             <Input
                                 type="digital"
@@ -101,9 +174,11 @@ export const HotelCreateForm = () => {
                             <ListBox
                                 id="HotelFloor"
                                 label={t('LABEL_INPUT_HOTEL_FLOOR', 'Этаж')}
-                                handlerSetItem={() => {}}
+                                handlerSetItem={(value) => {
+                                    //dispatch(setHotelFloor(Number(value)));
+                                }}
                                 items={getNumbersFabric(100)}
-                                activeIdx={null}
+                                activeIdx={hotelFloorFromRedux}
                             />
                         </div>
 
@@ -136,7 +211,7 @@ export const HotelCreateForm = () => {
                                 activeIdx={null}
                             />
                         </div>
-                        <div className="divider">Гости</div>
+                        <div className="divider divider-info p-4">Гости</div>
                         <div className="grid grid-cols-2 gap-2">
                             <Counter
                                 control={control}

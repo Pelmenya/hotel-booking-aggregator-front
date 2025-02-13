@@ -5,7 +5,6 @@ export type MapProps = {
 };
 
 export const Map = ({ coordinates }: MapProps) => {
-    console.log(coordinates);
     if (!coordinates) {
         return null; // Или отображайте индикатор загрузки
     }
