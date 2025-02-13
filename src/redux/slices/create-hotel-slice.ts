@@ -113,9 +113,6 @@ export const createHotelSlice = createSlice({
         setKitchenType(state, action: PayloadAction<string>) {
             state.kitchenType = action.payload;
         },
-        setCondition(state, action: PayloadAction<string>) {
-            state.hotelCondition = action.payload;
-        },
         setSelectedAmenitiesCategory(state, action: PayloadAction<TNullable<string>>) {
             state.selectedAmenitiesCategory = action.payload;
         },
@@ -168,7 +165,6 @@ export const {
     addBedSelection,
     updateBedSelection,
     removeBedSelection,
-    setCondition,
     setCountGuests,
     setCountRooms, 
     setKitchenType,

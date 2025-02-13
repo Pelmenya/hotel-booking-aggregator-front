@@ -1,5 +1,4 @@
 import {
-    setCondition,
     setCountGuests,
     setCountRooms,
     setHotelArea,
