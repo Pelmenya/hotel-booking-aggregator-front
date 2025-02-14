@@ -23,7 +23,8 @@ export const MobileNav = ({ isOpen, user }: TMobileHeaderProps) => {
                     className={cn(
                         'text-base hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium',
                         {
-                            ['bg-info-content text-neutral-content']: isMainPage,
+                            ['bg-info-content text-neutral-content']:
+                                isMainPage,
                         }
                     )}
                     aria-current="page"
@@ -36,7 +37,22 @@ export const MobileNav = ({ isOpen, user }: TMobileHeaderProps) => {
                         className={cn(
                             'text-base hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium',
                             {
-                                ['bg-info-content text-neutral-content']: isAdminPage,
+                                ['bg-info-content text-neutral-content']:
+                                    isAdminPage,
+                            }
+                        )}
+                    >
+                        {t('admin')}
+                    </Link>
+                )}
+                {user?.role !== 'admin' && (
+                    <Link
+                        href="/admin/hotels"
+                        className={cn(
+                            'text-base hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium',
+                            {
+                                ['bg-info-content text-neutral-content']:
+                                    isAdminPage,
                             }
                         )}
                     >

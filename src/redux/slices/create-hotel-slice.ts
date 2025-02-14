@@ -14,7 +14,6 @@ export type TBedSelection = {
 
 export type TCreateHotelState = {
     step: TStep;
-    steps: TStep[];
     selectedCategory: TNullable<number>;
     selectedSubcategory: TNullable<number>;
     realEstateType: TNullable<{ ru: string; en: string }>;
@@ -35,7 +34,6 @@ export type TCreateHotelState = {
 
 const initialState: TCreateHotelState = {
     step: 1,
-    steps: [],
     selectedCategory: null,
     selectedSubcategory: null,
     realEstateType: null,

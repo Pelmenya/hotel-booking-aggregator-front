@@ -41,7 +41,7 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                         <p className="hidden md:block">{t('admin')}</p>
                     </Link>
                 )}
-                {user?.role === 'admin' && user?.emailIsConfirm && user?.phoneIsConfirm && (
+                {user?.role !== 'admin' && (
                     <Link
                         href="/admin/hotels"
                         className={cn('btn btn-sm', {
@@ -52,7 +52,6 @@ export const DesktopHeader = ({ user }: TUserProps) => {
                         <p className="hidden md:block">{t('HEADER_RENT_BTN', 'Rent')}</p>
                     </Link>
                 )}
-
             </div>
         </div>
     );
