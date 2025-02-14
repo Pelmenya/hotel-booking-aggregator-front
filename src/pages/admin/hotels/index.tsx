@@ -15,7 +15,7 @@ export default function HotelsPage() {
 }
 
 export async function getStaticProps() {
-    const roles:TRole[] = ['admin'];
+    const roles:TRole[] = ['admin', 'client', 'manager'];
 
     store.dispatch(getAmenities.initiate('ALL'));
     store.dispatch(getRealEstate.initiate('ALL'));
