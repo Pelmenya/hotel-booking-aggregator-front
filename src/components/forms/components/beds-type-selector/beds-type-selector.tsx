@@ -37,10 +37,6 @@ export const BedsTypeSelector = () => {
         [dispatch]
     );
 
-    const handleNewTypeChange = useCallback((type: string | null) => {
-        setNewBedType(type);
-    }, []);
-
     const handleCountChange = useCallback(
         (
             bed: { id: string; type: string; count: number },
@@ -76,6 +72,12 @@ export const BedsTypeSelector = () => {
             setNewBedType(null);
         }
     }, [dispatch, newBedType, bedSelections]);
+
+    const handleNewTypeChange = useCallback((type: string | null) => {
+        setNewBedType(type);
+        addNewBedSelection();
+    }, [addNewBedSelection]);
+
 
     const availableBedTypes = bedTypes.filter(
         (b) => !bedSelections.some((bed) => bed.type === b.type)
@@ -147,18 +149,6 @@ export const BedsTypeSelector = () => {
                     )}
                 />
             </div>
-            {newBedType && (
-                <div className="col-span-1 flex items-center justify-end">
-                    <button
-                        className="btn btn-circle btn-sm btn-outline btn-primary"
-                        type="button"
-                        onClick={addNewBedSelection}
-                    >
-                        <FontAwesomeIcon icon={faPlus} />
-                    </button>
-                </div>
-            )}
-
             <div className="col-span-12">
                 Спальных мест: <span>{totalBeds}</span>
             </div>
