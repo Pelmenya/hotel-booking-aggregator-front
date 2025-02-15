@@ -29,7 +29,12 @@ import { AddressSearchWithMap } from '@/components/address-search-with-map/addre
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/use-app-dispatch';
 import { ListBox } from '@/components/list-box/list-box';
-import { conditionTypes, getNumbersFabric, kitchenTypes } from './constants';
+import {
+    bathRoomTypes,
+    conditionTypes,
+    getNumbersFabric,
+    kitchenTypes,
+} from './constants';
 import { Counter } from '../components/counter/counter';
 import { BedsTypeSelector } from '../components/beds-type-selector/beds-type-selector';
 
@@ -77,8 +82,6 @@ export const HotelCreateForm = () => {
     useEffect(() => {
         if (area !== undefined) dispatch(setHotelArea(area));
     }, [area, dispatch]);
-
-
 
     useEffect(() => {
         if (kitchenType !== undefined) dispatch(setKitchenType(kitchenType));
@@ -161,6 +164,23 @@ export const HotelCreateForm = () => {
                                 }}
                             />
                             <ListBox
+                                id="HotelCondition"
+                                label={t(
+                                    'LABEL_INPUT_HOTEL_CONDITION',
+                                    'Состояние'
+                                )}
+                                handlerSetItem={(value) =>
+                                    dispatch(setHotelCondition(value))
+                                }
+                                items={conditionTypes}
+                                activeIdx={conditionTypes.findIndex(
+                                    (condition) =>
+                                        condition === hotelConditionFromRedux
+                                )}
+                            />
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                            <ListBox
                                 id="HotelFloor"
                                 label={t('LABEL_INPUT_HOTEL_FLOOR', 'Этаж')}
                                 handlerSetItem={(value) => {
@@ -169,28 +189,43 @@ export const HotelCreateForm = () => {
                                 items={getNumbersFabric(100)}
                                 activeIdx={hotelFloorFromRedux}
                             />
+                            <ListBox
+                                id="HotelFloor"
+                                label={t('LABEL_INPUT_HOTEL_FLOORS', 'Всего этажей')}
+                                handlerSetItem={(value) => {
+                                    dispatch(setHotelFloor(Number(value) - 1));
+                                }}
+                                items={getNumbersFabric(100)}
+                                activeIdx={hotelFloorFromRedux}
+                            />
                         </div>
-
                         <div className="grid grid-cols-2 gap-2">
                             <ListBox
                                 id="HotelKitchen"
                                 label={t('LABEL_INPUT_HOTEL_KITCHEN', 'Кухня')}
-                                handlerSetItem={(value) => dispatch(setKitchenType(value))}
+                                handlerSetItem={(value) =>
+                                    dispatch(setKitchenType(value))
+                                }
                                 items={kitchenTypes}
-                                activeIdx={kitchenTypes.findIndex(kitchen => kitchen === hotelKitchenTypeFromRedux)}
+                                activeIdx={kitchenTypes.findIndex(
+                                    (kitchen) =>
+                                        kitchen === hotelKitchenTypeFromRedux
+                                )}
                             />
                             <ListBox
-                                id="HotelCondition"
+                                id="HotelBath"
                                 label={t(
-                                    'LABEL_INPUT_HOTEL_CONDITION',
-                                    'Состояние'
+                                    'LABEL_INPUT_HOTEL_BATH_ROOM',
+                                    'Санузел'
                                 )}
-                                handlerSetItem={(value) => dispatch(setHotelCondition(value))}
-                                items={conditionTypes}
-                                activeIdx={conditionTypes.findIndex(condition => condition === hotelConditionFromRedux)}
+                                handlerSetItem={() => {}}
+                                items={bathRoomTypes}
+                                activeIdx={null}
                             />
                         </div>
-                        <div className="divider divider-info p-4">Гости</div>
+                        <div className="divider divider-info p-4">
+                            Для гостей
+                        </div>
                         <div className="grid grid-cols-2 gap-2">
                             <Counter
                                 control={control}
