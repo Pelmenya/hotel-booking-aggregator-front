@@ -4,6 +4,7 @@ import {
     setHotelArea,
     setHotelCondition,
     setHotelFloor,
+    setHotelFloors,
     setHotelTitle,
     setKitchenType,
 } from '@/redux/slices/create-hotel-slice';
@@ -17,6 +18,7 @@ import {
     getHotelKitchenType,
     getHotelCountRooms,
     getHotelCountGuests,
+    getHotelFloors,
 } from '@/redux/selectors/create-hotel-selector';
 import { useAppSelector } from '@/hooks/use-app-selector';
 import { useForm } from 'react-hook-form';
@@ -54,6 +56,8 @@ export const HotelCreateForm = () => {
     const hotelConditionFromRedux = useAppSelector(getHotelCondition);
     const hotelAreaFromRedux = useAppSelector(getHotelArea);
     const hotelFloorFromRedux = useAppSelector(getHotelFloor);
+
+    const hotelFloorsFromRedux = useAppSelector(getHotelFloors);
     const hotelKitchenTypeFromRedux = useAppSelector(getHotelKitchenType);
     const hotelCountRoomsFromRedux = useAppSelector(getHotelCountRooms);
     const hotelCountGuestsFromRedux = useAppSelector(getHotelCountGuests);
@@ -100,6 +104,7 @@ export const HotelCreateForm = () => {
             title: hotelTitleFromRedux,
             area: hotelAreaFromRedux,
             floor: hotelFloorFromRedux,
+            floors: hotelFloorsFromRedux,
             kitchenType: hotelKitchenTypeFromRedux,
             condition: hotelConditionFromRedux,
             countRooms: hotelCountRoomsFromRedux,
@@ -114,6 +119,7 @@ export const HotelCreateForm = () => {
         hotelConditionFromRedux,
         hotelCountRoomsFromRedux,
         hotelCountGuestsFromRedux,
+        hotelFloorsFromRedux,
         reset,
     ]);
 
@@ -190,13 +196,13 @@ export const HotelCreateForm = () => {
                                 activeIdx={hotelFloorFromRedux}
                             />
                             <ListBox
-                                id="HotelFloor"
+                                id="HotelFloors"
                                 label={t('LABEL_INPUT_HOTEL_FLOORS', 'Всего этажей')}
                                 handlerSetItem={(value) => {
-                                    dispatch(setHotelFloor(Number(value) - 1));
+                                    dispatch(setHotelFloors(Number(value) - 1));
                                 }}
                                 items={getNumbersFabric(100)}
-                                activeIdx={hotelFloorFromRedux}
+                                activeIdx={hotelFloorsFromRedux}
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-2">

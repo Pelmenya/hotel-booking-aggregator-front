@@ -9,6 +9,7 @@ export const getHotelAddress = (state: TAppState) => state.createHotel.hotelAddr
 export const getHotelCondition = (state: TAppState) => state.createHotel.hotelCondition;
 export const getHotelArea = (state: TAppState) => state.createHotel.hotelArea;
 export const getHotelFloor = (state: TAppState) => state.createHotel.hotelFloor;
+export const getHotelFloors = (state: TAppState) => state.createHotel.hotelFloors;
 export const getHotelCoordinates = (state: TAppState) => state.createHotel.hotelCoordinates;
 export const getHotelSelectedAmenitiesCategory = (state: TAppState) => state.createHotel.selectedAmenitiesCategory;
 export const getHotelSelectedAmenities = (state: TAppState) => state.createHotel.selectedAmenities;

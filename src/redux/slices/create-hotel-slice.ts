@@ -23,6 +23,7 @@ export type TCreateHotelState = {
     hotelCondition: TNullable<string>,
     hotelArea: TNullable<number>,
     hotelFloor: TNullable<number>, 
+    hotelFloors: TNullable<number>, 
     selectedAmenitiesCategory: TNullable<string>;
     selectedAmenities: string[];
     bedSelections: TBedSelection[];
@@ -42,6 +43,7 @@ const initialState: TCreateHotelState = {
     hotelCoordinates: null,
     hotelArea: null,
     hotelFloor: null,
+    hotelFloors: null,
     selectedAmenitiesCategory: null,
     selectedAmenities: [],
     bedSelections: [],
@@ -95,6 +97,9 @@ export const createHotelSlice = createSlice({
         },
         setHotelFloor(state, action: PayloadAction<TNullable<number>>) {
             state.hotelFloor = action.payload;
+        },
+        setHotelFloors(state, action: PayloadAction<TNullable<number>>) {
+            state.hotelFloors = action.payload;
         },
         setHotelArea(state, action: PayloadAction<TNullable<number>>) {
             state.hotelArea = action.payload;
@@ -169,4 +174,5 @@ export const {
     setHotelArea,
     setHotelFloor,
     setHotelCondition,
+    setHotelFloors,
 } = createHotelSlice.actions;
